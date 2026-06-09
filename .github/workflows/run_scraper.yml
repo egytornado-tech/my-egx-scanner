@@ -9,21 +9,16 @@ jobs:
   build-and-run:
     runs-on: ubuntu-latest
 
-    # إجبار البيئة على استخدام جافا سكريبت الحديثة لتفادي خطأ منصة جيت هاب ديبكيشن
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
-    # 1. تحديث الأكشن لنسخة v4 المتوافقة مع نود 24
+    # 1. سحب كود المستودع بنجاح
     - name: Checkout Repository Code
       uses: actions/checkout@v4
 
-    # 2. تحديث أكشن البايثون لنسخة v5 الحديثة
+    # 2. إعداد البايثون بدون تفعيل الـ Cache التلقائي لتفادي الخطأ
     - name: Setup Dynamic Python Environment
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
-        cache: 'pip'
 
     # 3. تثبيت المكتبات المطلوبة للتعامل مع الجداول والويب
     - name: Install Critical Dependencies
@@ -31,7 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests pandas lxml html5lib
 
-    # 4. تشغيل السكرابر الآمن الذي قمنا بحمايته
+    # 4. تشغيل السكرابر الآمن
     - name: Execute Smart Scraper Engine
       run: python scraper.py
 
