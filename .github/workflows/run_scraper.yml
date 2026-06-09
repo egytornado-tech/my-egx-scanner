@@ -1,19 +1,25 @@
 name: EGX Live Automation Engine
 
 on:
-  workflow_dispatch:      # يسمح لك بالضغط على زر Run Workflow في أي وقت أثناء الجلسة للتحديث الفوري
+  workflow_dispatch:      # يسمح لك بالتشغيل اليدوي الفوري في أي وقت
   schedule:
     - cron: '*/5 7-12 * * 0-4' # فحص آلي مجدول كل 5 دقائق كاحتياطي أثناء الجلسة
+
+env:
+  # فرض بيئة التشغيل الحديثة لمنع التحذيرات والتوقف المستقبلي
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
     steps:
+    # ترقية الـ Checkout إلى v4 المتوافقة تماماً مع Node 24
     - name: Copy Repository Files
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
+    # ترقية الـ Setup-Python إلى v5 المتوافقة تماماً مع Node 24
     - name: Initialize Python Environment
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
@@ -30,5 +36,5 @@ jobs:
         git config --global user.name "EGX Automated Bot"
         git config --global user.email "bot@egx-radar.com"
         git add egx_market_data.json
-        git commit -m "تحديث السيولة الحية كل 30 ثانية" || exit 0
-        git push
+        # الكود مؤمن هنا: إذا لم تكن هناك تغييرات في الداتا لا يفشل السكريبت
+        git diff-index --quiet HEAD || (git commit -m "تحديث السيولة الحية كل 30 ثانية" && git push)
