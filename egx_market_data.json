@@ -1,13 +1,35 @@
 {
     "COMI": {
-        "name": "البنك التجاري الدولي - مصر",
+        "name": "التجاري الدولي",
         "ticker": "COMI",
         "price": 0.0,
         "volume": 0,
-        "dynamic_avg_vol": 1000000,
+        "dynamic_avg_vol": 1,
         "volume_x": "0X",
         "signal": "💤 السوق مغلق حالياً — بانتظار بدء الجلسة",
         "history": [],
-        "last_update": "14:21:37"
+        "last_update": "14:27:47"
+    },
+    "FWRY": {
+        "name": "فوري",
+        "ticker": "FWRY",
+        "price": 0.0,
+        "volume": 0,
+        "dynamic_avg_vol": 1,
+        "volume_x": "0X",
+        "signal": "💤 السوق مغلق حالياً — بانتظار بدء الجلسة",
+        "history": [],
+        "last_update": "14:27:47"
+    },
+    "TMGH": {
+        "name": "طلعت مصطفى",
+        "ticker": "TMGH",
+        "price": 0.0,
+        "volume": 0,
+        "dynamic_avg_vol": 1,
+        "volume_x": "0X",
+        "signal": "💤 السوق مغلق حالياً — بانتظار بدء الجلسة",
+        "history": [],
+        "last_update": "14:27:47"
     }
 }
