@@ -12,10 +12,7 @@
         .timeframe-container { display: flex; gap: 8px; margin: 10px 0; }
         .tf-btn { background: #21262d; border: 1px solid var(--border); color: #fff; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; }
         .tf-btn.active { background: #1f6feb; border-color: #58a6ff; }
-        
-        /* تحديد أبعاد صندوق الشارت بشكل صارم لمنع اللون الأبيض */
         #chart-wrapper { width: 100%; height: 350px; background: #151b23; border-radius: 6px; overflow: hidden; margin-top: 15px; border: 1px solid var(--border); }
-        
         table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
         th, td { padding: 12px 8px; text-align: right; border-bottom: 1px solid var(--border); }
         th { background: #161b22; color: #8b949e; }
@@ -28,7 +25,7 @@
 
     <div class="card">
         <h2>📡 كاشف التجميع المطور</h2>
-        <p style="color: #8b949e; font-size: 0.85rem;">البورصة المصرية — EGX • Money Flow & Volatility Compression Pro</p>
+        <p id="update-timer" style="color: #8b949e; font-size: 0.85rem;">جاري الاتصال بقاعدة البيانات اللحظية...</p>
         
         <div class="timeframe-container">
             <button class="tf-btn" onclick="changeTimeframe('15', this)">15د</button>
@@ -62,7 +59,7 @@
                 </tr>
             </thead>
             <tbody id="signalsTableBody">
-                <tr><td colspan="5" style="text-align:center; color:#8b949e;">جاري قراءة ملف البيانات واستخراج الإشارات...</td></tr>
+                <tr><td colspan="5" style="text-align:center; color:#8b949e;">جاري جلب ملف البيانات المحدث...</td></tr>
             </tbody>
         </table>
     </div>
@@ -71,7 +68,6 @@
         let currentInterval = "30";
         let globalData = {};
 
-        // جلب الحاضن وتحديد الطول والعرض ديناميكياً بدقة لمنع الاختفاء
         const container = document.getElementById('chart-wrapper');
         const chart = LightweightCharts.createChart(container, {
             width: container.clientWidth || 800,
@@ -83,90 +79,49 @@
         
         const candleSeries = chart.addCandlestickSeries({ upColor: '#2ea043', downColor: '#f85149' });
 
-        // جعل حجم الشارت مرناً عند تغيير حجم الشاشة
-        window.addEventListener('resize', () => {
-            chart.resize(container.clientWidth, 350);
-        });
+        window.addEventListener('resize', () => { chart.resize(container.clientWidth, 350); });
 
+        // الدالة المعدلة بكسر الكاش الصارم (Anti-Cache Force)
         async function fetchMarketJson() {
             try {
-                // استخدام المسار النسبي الصحيح للـ GitHub Pages مع منع الكاش
-                const response = await fetch('./egx_market_data.json?cache=' + Date.now());
-                if (!response.ok) return;
+                // إجبار المتصفح على طلب الملف من السيرفر مباشرة وليس من الذاكرة المؤقتة عبر تذييل الوقت اللحظي بالملي ثانية
+                const timestamp = new Date().getTime();
+                const response = await fetch('egx_market_data.json?v=' + timestamp);
+                
+                if (!response.ok) {
+                    throw new Error("ملف JSON غير موجود أو لم يتم إنشاؤه بعد");
+                }
                 
                 globalData = await response.json();
+                
                 if (globalData && Object.keys(globalData).length > 0) {
                     renderTable();
                     renderActiveChart();
+                    
+                    // تحديث توقيت القراءة بالواجهة للتأكد من المزامنة
+                    const firstTicker = Object.keys(globalData)[0];
+                    document.getElementById('update-timer').innerText = `البورصة المصرية — آخر تحديث آلي للسيرفر: ${globalData[firstTicker].last_update || 'نشط'}`;
                 }
             } catch(e) {
                 console.error("خطأ قراءة البيانات:", e);
+                document.getElementById('signalsTableBody').innerHTML = `<tr><td colspan="5" style="text-align:center; color:#f85149;">⚠️ فشل قراءة الملف: ${e.message}</td></tr>`;
             }
         }
 
-       function renderTable() {
-    const tbody = document.getElementById('signalsTableBody');
-    if (!tbody) return;
-    tbody.innerHTML = '';
-    
-    // فحص إذا كان الـ JSON يحتوي على بيانات فعلاً
-    if (!globalData || Object.keys(globalData).length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#8b949e;">لا توجد بيانات متاحة حالياً من السيرفر.</td></tr>';
-        return;
-    }
-    
-    Object.keys(globalData).forEach(ticker => {
-        const stock = globalData[ticker];
-        const tr = document.createElement('tr');
-        
-        const isGreen = stock.signal.includes('🟢') || stock.signal.includes('تجمع');
-        const isRed = stock.signal.includes('🔴') || stock.signal.includes('تصريف');
-        const badgeStyle = isGreen ? 'green-badge' : (isRed ? 'red-badge' : '');
+        function renderTable() {
+            const tbody = document.getElementById('signalsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            
+            Object.keys(globalData).forEach(ticker => {
+                const stock = globalData[ticker];
+                const tr = document.createElement('tr');
+                
+                const isGreen = stock.signal.includes('🟢') || stock.signal.includes('تجمع');
+                const isRed = stock.signal.includes('🔴') || stock.signal.includes('تصريف');
+                const badgeStyle = isGreen ? 'green-badge' : (isRed ? 'red-badge' : '');
 
-        tr.innerHTML = `
-            <td><b>${stock.ticker}</b><br><span style="color:#8b949e; font-size:0.75rem;">${stock.name}</span></td>
-            <td>${stock.price}</td>
-            <td>${stock.dynamic_avg_vol ? stock.dynamic_avg_vol.toLocaleString() : '0'}</td>
-            <td><span style="color:#58a6ff; font-weight:bold;">${stock.volume_x}</span></td>
-            <td><span class="badge ${badgeStyle}">${stock.signal}</span></td>
-        `;
-        tbody.appendChild(tr);
-    });
-}
-
-       function renderActiveChart() {
-    const selectedTicker = document.getElementById('tickerSelector').value;
-    
-    if (globalData && globalData[selectedTicker]) {
-        const stock = globalData[selectedTicker];
-        
-        // التحقق: إذا كانت مصفوفة الشموع موجودة وبها بيانات حقيقية
-        if (stock.history && stock.history.length > 0) {
-            candleSeries.setData(stock.history);
-            chart.timeScale().fitContent();
-        } else {
-            // حيلة ذكية: إذا كان السوق مغلقاً والمصفوفة فارغة، نغذي الشارت بشمعة وهمية واحدة عند سعر الصفر
-            // لمنع المكتبة من الانهيار وإجبارها على رسم الخلفية والشبكة الفنية بشكل أنيق
-            const todayStr = new Date().toISOString().slice(0, 10);
-            candleSeries.setData([
-                { time: todayStr, open: 0, high: 0, low: 0, close: 0 }
-            ]);
-            chart.timeScale().fitContent();
-        }
-    }
-}
-        function changeTimeframe(tf, btnElement) {
-            currentInterval = tf;
-            document.querySelectorAll('.tf-btn').forEach(b => b.classList.remove('active'));
-            btnElement.classList.add('active');
-            fetchMarketJson();
-        }
-
-        // بدء التشغيل الفوري والآمن
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchMarketJson();
-            setInterval(fetchMarketJson, 5000); // تحديث الواجهة تلقائياً كل 5 ثوانٍ
-        });
-    </script>
-</body>
-</html>
+                tr.innerHTML = `
+                    <td><b>${stock.ticker || ticker}</b><br><span style="color:#8b949e; font-size:0.75rem;">${stock.name}</span></td>
+                    <td>${stock.price} ج.م</td>
+                    <td>${stock.dynamic_avg_vol ? stock.dynamic
