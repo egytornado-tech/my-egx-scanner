@@ -104,29 +104,35 @@
             }
         }
 
-        function renderTable() {
-            const tbody = document.getElementById('signalsTableBody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-            
-            Object.keys(globalData).forEach(ticker => {
-                const stock = globalData[ticker];
-                const tr = document.createElement('tr');
-                
-                const isGreen = stock.signal.includes('🟢') || stock.signal.includes('تجمع');
-                const isRed = stock.signal.includes('🔴') || stock.signal.includes('تصريف');
-                const badgeStyle = isGreen ? 'green-badge' : (isRed ? 'red-badge' : '');
+       function renderTable() {
+    const tbody = document.getElementById('signalsTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    
+    // فحص إذا كان الـ JSON يحتوي على بيانات فعلاً
+    if (!globalData || Object.keys(globalData).length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#8b949e;">لا توجد بيانات متاحة حالياً من السيرفر.</td></tr>';
+        return;
+    }
+    
+    Object.keys(globalData).forEach(ticker => {
+        const stock = globalData[ticker];
+        const tr = document.createElement('tr');
+        
+        const isGreen = stock.signal.includes('🟢') || stock.signal.includes('تجمع');
+        const isRed = stock.signal.includes('🔴') || stock.signal.includes('تصريف');
+        const badgeStyle = isGreen ? 'green-badge' : (isRed ? 'red-badge' : '');
 
-                tr.innerHTML = `
-                    <td><b>${stock.ticker}</b><br><span style="color:#8b949e; font-size:0.75rem;">${stock.name}</span></td>
-                    <td>${stock.price}</td>
-                    <td>${stock.dynamic_avg_vol ? stock.dynamic_avg_vol.toLocaleString() : '0'}</td>
-                    <td><span style="color:#58a6ff; font-weight:bold;">${stock.volume_x}</span></td>
-                    <td><span class="badge ${badgeStyle}">${stock.signal}</span></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
+        tr.innerHTML = `
+            <td><b>${stock.ticker}</b><br><span style="color:#8b949e; font-size:0.75rem;">${stock.name}</span></td>
+            <td>${stock.price}</td>
+            <td>${stock.dynamic_avg_vol ? stock.dynamic_avg_vol.toLocaleString() : '0'}</td>
+            <td><span style="color:#58a6ff; font-weight:bold;">${stock.volume_x}</span></td>
+            <td><span class="badge ${badgeStyle}">${stock.signal}</span></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
 
        function renderActiveChart() {
     const selectedTicker = document.getElementById('tickerSelector').value;
