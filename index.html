@@ -105,12 +105,17 @@
         }
 
         function renderActiveChart() {
-            const selectedTicker = document.getElementById('tickerSelector').value;
-            if (globalData[selectedTicker] && globalData[selectedTicker].history) {
-                // دمج وعرض شموع الأيام/الفترات السابقة القادمة بدقة من تريدنج فيو
-                candleSeries.setData(globalData[selectedTicker].history);
-            }
-        }
+    const selectedTicker = document.getElementById('tickerSelector').value;
+    
+    // التحقق من وجود السهم ووجود بيانات تاريخية مرافقة له لتجنب الشاشة البيضاء
+    if (globalData && globalData[selectedTicker] && globalData[selectedTicker].history && globalData[selectedTicker].history.length > 0) {
+        candleSeries.setData(globalData[selectedTicker].history);
+        chart.timeScale().fitContent(); // لضبط أبعاد الشارت تلقائياً ليملأ المربع بالكامل
+    } else {
+        // إذا كانت البيانات جاري سحبها من السكرابر، نظف الشارت مؤقتاً لحين وصولها
+        candleSeries.setData([]);
+    }
+}
 
         function changeTimeframe(tf, btnElement) {
             currentInterval = tf;
