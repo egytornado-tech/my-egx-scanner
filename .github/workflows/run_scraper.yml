@@ -1,23 +1,24 @@
 name: EGX Live Automation Engine
 
 on:
-  workflow_dispatch:      # يسمح لك بالتشغيل اليدوي الفوري في أي وقت
+  workflow_dispatch:      # للتشغيل اليدوي الفوري
   schedule:
-    - cron: '*/5 7-12 * * 0-4' # فحص آلي مجدول كل 5 دقائق كاحتياطي أثناء الجلسة
-
-env:
-  # فرض بيئة التشغيل الحديثة لمنع التحذيرات والتوقف المستقبلي
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    - cron: '*/5 7-12 * * 0-4' # فحص آلي مجدول كل 5 دقائق أثناء الجلسة
 
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
+    
+    # إعطاء صلاحيات الكتابة للسيرفر مباشرة من داخل الكود لتفادي خطأ 128
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
-    # ترقية الـ Checkout إلى v4 المتوافقة تماماً مع Node 24
     - name: Copy Repository Files
       uses: actions/checkout@v4
 
-    # ترقية الـ Setup-Python إلى v5 المتوافقة تماماً مع Node 24
     - name: Initialize Python Environment
       uses: actions/setup-python@v5
       with:
@@ -33,8 +34,14 @@ jobs:
 
     - name: Push Live JSON Data to GitHub Pages
       run: |
-        git config --global user.name "EGX Automated Bot"
-        git config --global user.email "bot@egx-radar.com"
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        
+        # حيلة ذكية: تأكيد وجود الملف حتى لو فشل السكرابر في كتابته بسبب إغلاق السيرفر
+        if [ ! -f egx_market_data.json ]; then
+          echo "{}" > egx_market_data.json
+        fi
+        
         git add egx_market_data.json
-        # الكود مؤمن هنا: إذا لم تكن هناك تغييرات في الداتا لا يفشل السكريبت
-        git diff-index --quiet HEAD || (git commit -m "تحديث السيولة الحية كل 30 ثانية" && git push)
+        git commit -m "تحديث السيولة الحية كل 30 ثانية" || exit 0
+        git push origin main
