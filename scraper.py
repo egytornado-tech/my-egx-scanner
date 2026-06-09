@@ -136,8 +136,7 @@ def process_market_data(timeframe="30"):
         print(f"Error updating frames: {e}")
 
 if __name__ == "__main__":
-    # السكريبت يقوم بعمل مسح وتحديث مستمر في الخلفية
-    for _ in range(60):
-        # افتراضيًا يبدأ بفريم الـ 30 دقيقة ويمكن لواجهة المستخدم إرسال بارامترات لتغييره
-        process_market_data(timeframe="30")
-        time.sleep(30)
+    # تشغيل المسح لمرة واحدة سريعة ودقيقة ثم إنهاء السكريبت ليقوم السيرفر بحفظ البيانات فوراً
+    print("🚀 بدء سحب البيانات وحسابات TradingView التاريخية...")
+    process_market_data(timeframe="30")
+    print("✅ تم التحديث وحفظ البيانات بنجاح!")
