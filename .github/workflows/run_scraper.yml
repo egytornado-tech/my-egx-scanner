@@ -1,47 +1,44 @@
 name: EGX Live Automation Engine
 
 on:
-  workflow_dispatch:      # للتشغيل اليدوي الفوري
+  workflow_dispatch: # للتشغيل اليدوي بنجاح
   schedule:
-    - cron: '*/5 7-12 * * 0-4' # فحص آلي مجدول كل 5 دقائق أثناء الجلسة
+    - cron: '*/30 * * * *' # التكرار الآلي الخاص بك
 
 jobs:
   build-and-run:
     runs-on: ubuntu-latest
-    
-    # إعطاء صلاحيات الكتابة للسيرفر مباشرة من داخل الكود لتفادي خطأ 128
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
+
+    # إجبار البيئة على استخدام جافا سكريبت الحديثة لتفادي خطأ منصة جيت هاب ديبكيشن
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
-    - name: Copy Repository Files
+    # 1. تحديث الأكشن لنسخة v4 المتوافقة مع نود 24
+    - name: Checkout Repository Code
       uses: actions/checkout@v4
 
-    - name: Initialize Python Environment
+    # 2. تحديث أكشن البايثون لنسخة v5 الحديثة
+    - name: Setup Dynamic Python Environment
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
+        cache: 'pip'
 
-    - name: Install Data Analysis Libraries
+    # 3. تثبيت المكتبات المطلوبة للتعامل مع الجداول والويب
+    - name: Install Critical Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install requests pandas lxml html5lib
 
+    # 4. تشغيل السكرابر الآمن الذي قمنا بحمايته
     - name: Execute Smart Scraper Engine
       run: python scraper.py
 
-    - name: Push Live JSON Data to GitHub Pages
+    # 5. رفع ملف الـ JSON للمستودع وتحديث الموقع تلقائياً
+    - name: Commit and Push Updated EGX Json
       run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        
-        # حيلة ذكية: تأكيد وجود الملف حتى لو فشل السكرابر في كتابته بسبب إغلاق السيرفر
-        if [ ! -f egx_market_data.json ]; then
-          echo "{}" > egx_market_data.json
-        fi
-        
+        git config --local user.email "actions@github.com"
+        git config --local user.name "github-actions[bot]"
         git add egx_market_data.json
-        git commit -m "تحديث السيولة الحية كل 30 ثانية" || exit 0
-        git push origin main
+        git diff --quiet && git diff --staged --quiet || (git commit -m "تحديث السيولة الحية كل 30 ثانية" && git push)
