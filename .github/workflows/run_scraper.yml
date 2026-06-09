@@ -1,9 +1,9 @@
 name: EGX Live Automation Engine
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:      # يسمح لك بالضغط على زر Run Workflow في أي وقت أثناء الجلسة للتحديث الفوري
   schedule:
-    - cron: '*/30 7-12 * * 0-4'
+    - cron: '*/5 7-12 * * 0-4' # فحص آلي مجدول كل 5 دقائق كاحتياطي أثناء الجلسة
 
 jobs:
   build-and-run:
@@ -30,5 +30,5 @@ jobs:
         git config --global user.name "EGX Automated Bot"
         git config --global user.email "bot@egx-radar.com"
         git add egx_market_data.json
-        git commit -m "تحديث حسابات المتطابقات التاريخية لـ TradingView وحجم الـ X" || exit 0
+        git commit -m "تحديث السيولة الحية كل 30 ثانية" || exit 0
         git push
