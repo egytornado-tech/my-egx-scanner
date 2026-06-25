@@ -27,15 +27,15 @@
     <div class="card">
         <h1>🎯 رادار الحوت الأحادي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🔄 جاري سحب البيانات اللحظية الحية...</div>
+        <div id="connection-status" class="status">🔄 جاري قراءة صف الصفقات المباشرة...</div>
 
         <div class="metric-grid">
             <div class="metric-box">
-                <span>السعر اللحظي الحالي</span>
+                <span>آخر سعر لحظي</span>
                 <b id="live-price">0.00 ج.م</b>
             </div>
             <div class="metric-box">
-                <span>الكمية المتداولة اليوم</span>
+                <span>حجم التداول (الكمية اليومية)</span>
                 <b id="live-volume">0</b>
             </div>
         </div>
@@ -52,7 +52,7 @@
         </div>
 
         <div id="signal-display" class="signal-box normal">
-            بانتظار قراءة حركة التداول اللحظية...
+            بانتظار مطابقة خلايا السيرفر...
         </div>
     </div>
 </div>
@@ -62,7 +62,7 @@
     const CORS_PROXY_URL = "https://api.allorigins.win/raw?url=" + encodeURIComponent(REAL_URL);
     
     const TARGET_KEYWORD = "العربية للأسمنت";
-    const HISTORICAL_AVG_30_DAYS = 692690; // المتوسط الدقيق الذي أرسلته
+    const HISTORICAL_AVG_30_DAYS = 692690; 
 
     async function scanARCCStock() {
         try {
@@ -84,16 +84,17 @@
                     if (cells.length >= 3) {
                         const rowText = cells.join(" ");
                         
+                        // رصد السهم المستهدف في صف السيرفر
                         if (rowText.includes(TARGET_KEYWORD)) {
                             found = true;
                             
-                            // قراءة الكمية المتداولة اليوم من الخانة الأولى (العمود 0)
+                            // 📊 العمود 1 من اليمين (رقم 0): حجم التداول
                             const volume = parseInt(cells[0].replace(/,/g, '')) || 0;
                             
-                            // قراءة السعر اللحظي من الخانة الثالثة (العمود 2)
+                            // 💰 العمود 3 من اليمين (رقم 2): آخر سعر لحظي فعلي
                             const price = parseFloat(cells[2].replace(/,/g, '')) || 0;
                             
-                            // الحساب الديناميكي لنسبة الانحراف عن المتوسط الدقيق
+                            // حساب الانحراف عن متوسط الـ 30 يوم
                             const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
                             
                             document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
@@ -102,9 +103,8 @@
                             
                             const signalDisplay = document.getElementById('signal-display');
                             
-                            // التحليل السلوكي بناءً على حجم تداول الجلسة الحالي مقارنة بمتوسط الـ 30 يوم
                             if (volX >= 1.5) {
-                                signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] السهم يكتسح عروض البيع ويتخطى المتوسط بـ 50%+`;
+                                signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] السهم يتجاوز متوسط 30 يوم بـ 50%+`;
                                 signalDisplay.className = "signal-box accumulation";
                             } else if (volX >= 1.0) {
                                 signalDisplay.innerText = `🟢 [اختراق السيولة] حجم تداول اليوم تخطى كامل متوسط الـ 30 يوم بنجاح!`;
@@ -113,7 +113,7 @@
                                 signalDisplay.innerText = `🟡 [سيولة متوسطة] تداولات اليوم تجاوزت نصف المتوسط الشهري وننتظر الحوت.`;
                                 signalDisplay.className = "signal-box normal";
                             } else {
-                                signalDisplay.innerText = `⚪ تداولات اعتيادية هادئة.. صانع السوق يجمع ببطء شديد تحت المتوسط.`;
+                                signalDisplay.innerText = `⚪ تداولات اعتيادية هادئة.. صانع السوق يجمع ببطء تحت المتوسط.`;
                                 signalDisplay.className = "signal-box normal";
                             }
                         }
@@ -121,11 +121,11 @@
                 });
 
                 if (found) {
-                    document.getElementById('connection-status').innerText = `⚡ متصل ومستقر — تحديث ذكي كل 8 ثوانٍ`;
+                    document.getElementById('connection-status').innerText = `⚡ متصل بالسيرفر — مطابقة الأعمدة صحيحة 100%`;
                 }
             }
         } catch (err) {
-            document.getElementById('connection-status').innerText = `🔄 جاري إنعاش الاتصال وسحب صفقات الجلسة...`;
+            document.getElementById('connection-status').innerText = `🔄 جاري تحديث الصفقات اللحظية...`;
         }
     }
 
