@@ -84,11 +84,11 @@
                     if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
                         found = true;
                         
-                        // 📊 حجم التداول (الكمية الكبيرة اليومية) هو العمود الأخير تماماً برمجياً في الـ HTML
-                        const volume = parseInt(cells[cells.length - 1].replace(/,/g, '')) || 0;
-                        
-                        // 💰 آخر سعر لحظي حقيقي هو العمود الثالث من نهاية السطر برمجياً
+                        // 💰 آخر سعر: مضبوط وشغال على العمود التالت من النهاية
                         const price = parseFloat(cells[cells.length - 3].replace(/,/g, '')) || 0;
+                        
+                        // 📊 الحجم المستهدف: الخلية الملاصقة للاسم من اليسار (فهرس 1 برمجياً من اليسار)
+                        const volume = parseInt(cells[1].replace(/,/g, '')) || 0;
                         
                         const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
                         
