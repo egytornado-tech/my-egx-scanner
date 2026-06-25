@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار العربية للأسمنت اللحظي</title>
+    <title>🎯 رادار العربية للأسمنت الحصري (ARCC)</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; }
+        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 10px; margin: 0; text-align: center; }
         .container { max-width: 100%; margin: auto; }
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        h1 { font-size: 1.4rem; color: #fff; margin-bottom: 5px; }
+        h1 { font-size: 1.5rem; color: #fff; margin-bottom: 2px; }
+        .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 15px; }
         .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 15px; }
         .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 12px; border-radius: 8px; }
-        .metric-box span { display: block; font-size: 0.8rem; color: #8b949e; }
+        .metric-box span { display: block; font-size: 0.8rem; color: #8b949e; margin-bottom: 4px; }
         .metric-box b { font-size: 1.3rem; color: #fff; }
         .signal-box { padding: 15px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; border: 1px solid var(--border); margin-top: 10px; }
         .accumulation { background: rgba(46, 160, 67, 0.15); color: #58a6ff; border-color: var(--green); }
         .normal { background: #21262d; color: var(--text); }
-        .config-select { width: 100%; padding: 12px; background: #21262d; color: #fff; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -26,65 +26,48 @@
 <div class="container">
     <div class="card">
         <h1>🎯 رادار الحوت الأحادي</h1>
-        <div id="connection-status" class="status">🔄 جاري اختراق جدار الحماية وسحب البيانات...</div>
-        
-        <select id="stockSelector" class="config-select" onchange="resetAndScan()">
-            <option value="العربية للأسمنت|ARCC|400000">العربية للأسمنت (ARCC)</option>
-            <option value="التجاري|COMI|500000">البنك التجاري الدولي (COMI)</option>
-            <option value="فوري|FWRY|1200000">فوري للمدفوعات (FWRY)</option>
-            <option value="طلعت|TMGH|800000">مجموعة طلعت مصطفى (TMGH)</option>
-        </select>
+        <div class="stock-title">العربية للأسمنت (ARCC)</div>
+        <div id="connection-status" class="status">🔄 جاري سحب البيانات اللحظية الحية...</div>
 
         <div class="metric-grid">
             <div class="metric-box">
-                <span>السعر اللحظي</span>
+                <span>السعر اللحظي الحالي</span>
                 <b id="live-price">0.00 ج.م</b>
             </div>
             <div class="metric-box">
-                <span>الحجم اللحظي بالسيرفر</span>
+                <span>الكمية المتداولة اليوم</span>
                 <b id="live-volume">0</b>
             </div>
         </div>
 
-        <div class="metric-box" style="width: calc(100% - 24px); margin-bottom: 15px;">
-            <span>مضاعف تدفق السيولة (Volume X)</span>
-            <b id="volume-multiplier" style="color: var(--blue);">0.00X</b>
+        <div class="metric-grid">
+            <div class="metric-box">
+                <span>متوسط 30 يوم الدقيق</span>
+                <b id="avg-30days" style="color: var(--orange);">692,690</b>
+            </div>
+            <div class="metric-box">
+                <span>مضاعف السيولة (Volume X)</span>
+                <b id="volume-multiplier" style="color: var(--blue);">0.00X</b>
+            </div>
         </div>
 
         <div id="signal-display" class="signal-box normal">
-            بانتظار قراءة أولى الصفقات...
+            بانتظار قراءة حركة التداول اللحظية...
         </div>
     </div>
 </div>
 
 <script>
-    // تمرير الرابط المحلي الحقيقي عبر البروكسي لكسر حماية CORS في متصفح الأندرويد
     const REAL_URL = "http://41.33.162.236/egs4/";
     const CORS_PROXY_URL = "https://api.allorigins.win/raw?url=" + encodeURIComponent(REAL_URL);
     
-    // إعداد التنبيه الصوتي الحاد
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    function playAlertSound() {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(850, audioCtx.currentTime); 
-        gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.25);
-    }
+    const TARGET_KEYWORD = "العربية للأسمنت";
+    const HISTORICAL_AVG_30_DAYS = 692690; // المتوسط الدقيق الذي أرسلته
 
-    async function scanSingleStockDirectly() {
+    async function scanARCCStock() {
         try {
-            const selector = document.getElementById('stockSelector').value;
-            const [keyword, ticker, avgVolStr] = selector.split('|');
-            const historicalAvgVol = parseInt(avgVolStr);
-
-            // جلب البيانات بدون حظر وبطريقة آمنة تماماً
-            const res = await fetch(CORS_PROXY_URL);
-            if (!res.ok) throw new Error("فشل الاتصال الخارجي بالبروكسي");
+            const res = await fetch(CORS_PROXY_URL + "&cacheBust=" + new Date().getTime());
+            if (!res.ok) throw new Error("تأخر الاستجابة");
             const htmlText = await res.text();
             
             const parser = new DOMParser();
@@ -97,17 +80,21 @@
 
                 rows.forEach(row => {
                     const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
-                    if (cells.length >= 7) {
+                    
+                    if (cells.length >= 3) {
                         const rowText = cells.join(" ");
                         
-                        // الفرز بالاسم المكتوب في الخانة (العربية للأسمنت)
-                        if (rowText.includes(keyword)) {
+                        if (rowText.includes(TARGET_KEYWORD)) {
                             found = true;
-                            const price = parseFloat(cells[2].replace(/,/g, '')) || 0;
-                            const volume = parseInt(cells[6].replace(/,/g, '')) || 0;
                             
-                            // معادلة التحليل السلوكي للسيولة
-                            const volX = (volume / historicalAvgVol).toFixed(2);
+                            // قراءة الكمية المتداولة اليوم من الخانة الأولى (العمود 0)
+                            const volume = parseInt(cells[0].replace(/,/g, '')) || 0;
+                            
+                            // قراءة السعر اللحظي من الخانة الثالثة (العمود 2)
+                            const price = parseFloat(cells[2].replace(/,/g, '')) || 0;
+                            
+                            // الحساب الديناميكي لنسبة الانحراف عن المتوسط الدقيق
+                            const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
                             
                             document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
                             document.getElementById('live-volume').innerText = volume.toLocaleString();
@@ -115,16 +102,18 @@
                             
                             const signalDisplay = document.getElementById('signal-display');
                             
-                            // شروط الرصد السلوكي والتجميع الصارم البالغ 58% فما فوق
+                            // التحليل السلوكي بناءً على حجم تداول الجلسة الحالي مقارنة بمتوسط الـ 30 يوم
                             if (volX >= 1.5) {
-                                signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] صانع سوق يكتسح عروض ${ticker}!`;
+                                signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] السهم يكتسح عروض البيع ويتخطى المتوسط بـ 50%+`;
                                 signalDisplay.className = "signal-box accumulation";
-                                playAlertSound(); // صوت الإنذار
                             } else if (volX >= 1.0) {
-                                signalDisplay.innerText = `🟢 سيولة تجميعية هادئة تمتص البائعين في ${ticker}.`;
+                                signalDisplay.innerText = `🟢 [اختراق السيولة] حجم تداول اليوم تخطى كامل متوسط الـ 30 يوم بنجاح!`;
                                 signalDisplay.className = "signal-box accumulation";
+                            } else if (volX >= 0.5) {
+                                signalDisplay.innerText = `🟡 [سيولة متوسطة] تداولات اليوم تجاوزت نصف المتوسط الشهري وننتظر الحوت.`;
+                                signalDisplay.className = "signal-box normal";
                             } else {
-                                signalDisplay.innerText = `⚪ تداولات اعتيادية لجمهور الأفراد.. انتظر دخول السيولة.`;
+                                signalDisplay.innerText = `⚪ تداولات اعتيادية هادئة.. صانع السوق يجمع ببطء شديد تحت المتوسط.`;
                                 signalDisplay.className = "signal-box normal";
                             }
                         }
@@ -132,29 +121,16 @@
                 });
 
                 if (found) {
-                    document.getElementById('connection-status').innerText = `⚡ متصل بالسيرفر ومرتبط بلحظة التنفيذ الحالية...`;
-                } else {
-                    document.getElementById('connection-status').innerText = `⚠️ السهم غير متواجد حالياً في واجهة السيرفر`;
+                    document.getElementById('connection-status').innerText = `⚡ متصل ومستقر — تحديث ذكي كل 8 ثوانٍ`;
                 }
             }
         } catch (err) {
-            document.getElementById('connection-status').innerText = `❌ خطأ في فك حظر CORS أو توقف السيرفر مؤقتاً`;
-            console.error(err);
+            document.getElementById('connection-status').innerText = `🔄 جاري إنعاش الاتصال وسحب صفقات الجلسة...`;
         }
     }
 
-    function resetAndScan() {
-        document.getElementById('live-price').innerText = "0.00 ج.م";
-        document.getElementById('live-volume').innerText = "0";
-        document.getElementById('volume-multiplier').innerText = "0.00X";
-        document.getElementById('signal-display').innerText = "جاري الفحص السلوكي الجديد...";
-        document.getElementById('signal-display').className = "signal-box normal";
-        scanSingleStockDirectly();
-    }
-
-    // تكرار الفحص اللحظي الفوري كل ثانيتين من متصفح الموبايل
-    setInterval(scanSingleStockDirectly, 2000);
-    scanSingleStockDirectly();
+    setInterval(scanARCCStock, 8000);
+    scanARCCStock();
 </script>
 </body>
 </html>
