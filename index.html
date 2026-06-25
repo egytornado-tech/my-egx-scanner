@@ -11,12 +11,7 @@
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         h1 { font-size: 1.5rem; color: #fff; margin-bottom: 2px; }
         .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
-        
-        .status-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 8px; margin-bottom: 15px; font-size: 0.85rem; }
-        .status-text { color: var(--blue); font-weight: bold; margin-bottom: 4px; }
-        .progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; width: 80%; margin: 5px auto 0 auto; }
-        .progress-fill { height: 100%; background: var(--blue); width: 0%; transition: width 0.3s ease; }
-        
+        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 15px; font-weight: bold; }
         .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 12px; border-radius: 8px; }
         .metric-box span { display: block; font-size: 0.8rem; color: #8b949e; margin-bottom: 4px; }
@@ -32,13 +27,7 @@
     <div class="card">
         <h1>🎯 رادار الحوت الأحادي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        
-        <div class="status-container">
-            <div id="connection-status" class="status-text">🔄 تهيئة بيئة جلب البيانات اللحظية...</div>
-            <div class="progress-bar">
-                <div id="progress-fill" class="progress-fill"></div>
-            </div>
-        </div>
+        <div id="connection-status" class="status">🔄 جاري الاتصال المباشر بالسيرفر...</div>
 
         <div class="metric-grid">
             <div class="metric-box">
@@ -46,7 +35,7 @@
                 <b id="live-price">0.00 ج.م</b>
             </div>
             <div class="metric-box">
-                <span>حجم التداول (الكمية اليومية)</span>
+                <span>حجم التداول اليومي</span>
                 <b id="live-volume">0</b>
             </div>
         </div>
@@ -63,110 +52,82 @@
         </div>
 
         <div id="signal-display" class="signal-box normal">
-            بانتظار مزامنة خلايا السيرفر...
+            بانتظار قراءة صفقات السيرفر الفورية...
         </div>
     </div>
 </div>
 
 <script>
-    const TARGET_SERVER = "http://41.33.162.236/egs4/";
-    // مصفوفة بروكسيات متبادلة لتفادي انقطاع الاتصال وسرعة الاستجابة
-    const PROXIES = [
-        (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}&cacheBust=${Date.now()}`,
-        (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`
-    ];
-    let currentProxyIndex = 0;
-
+    const REAL_URL = "http://41.33.162.236/egs4/";
+    // استخدام بروكسي بديل مستقر وسريع جداً لتفادي مشاكل الـ CORS تماماً
+    const CORS_PROXY_URL = "https://corsproxy.io/?" + encodeURIComponent(REAL_URL);
+    
     const TARGET_KEYWORD = "العربية للأسمنت";
     const HISTORICAL_AVG_30_DAYS = 692690; 
 
-    function updateProgress(stepName, percent, color = '#58a6ff') {
-        const textEl = document.getElementById('connection-status');
-        const fillEl = document.getElementById('progress-fill');
-        if (textEl) { textEl.innerText = stepName; textEl.style.color = color; }
-        if (fillEl) { fillEl.style.width = percent + "%"; fillEl.style.background = color; }
-    }
-
     async function scanARCCStock() {
         try {
-            updateProgress("📡 المرحلة 1/4: جاري إرسال طلب جلب الجدول الحقيقي...", 25);
-            
-            const urlWithCache = TARGET_SERVER + "?t=" + Date.now();
-            const proxyUrl = PROXIES[currentProxyIndex](urlWithCache);
-
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 4000);
-
-            const res = await fetch(proxyUrl, { signal: controller.signal });
-            clearTimeout(timeoutId);
-
-            if (!res.ok) throw new Error("فشل الاستجابة");
-            
-            updateProgress("📥 المرحلة 2/4: تم استلام محتوى HTML وجاري التحليل البنيوي...", 50);
+            const res = await fetch(CORS_PROXY_URL + (CORS_PROXY_URL.includes('?') ? '&' : '?') + "cacheBust=" + Date.now());
+            if (!res.ok) throw new Error("تأخر السيرفر");
             const htmlText = await res.text();
             
-            updateProgress("🔍 المرحلة 3/4: جاري فحص الأعمدة المحددة ومطابقة السهم...", 75);
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlText, 'text/html');
             const table = doc.querySelector('table');
             
-            if (!table) throw new Error("جدول البيانات غير متوفر");
+            if (table) {
+                const rows = table.querySelectorAll('tr');
+                let found = false;
 
-            const rows = Array.from(table.querySelectorAll('tr'));
-            let found = false;
-
-            // تحديد مواقع العناوين الحقيقية من رأس الجدول لضمان دقة الخلية المطلوبة
-            let volIdx = 0;   // حجم_التداول (العمود الأول من اليمين)
-            let priceIdx = 2; // آخر_سعر (العمود الثالث من اليمين)
-
-            // فحص صفوف الجدول لمطابقة البيانات الحية
-            rows.forEach(row => {
-                const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
-                if (cells.length > 3 && cells.join(" ").includes(TARGET_KEYWORD)) {
-                    found = true;
+                rows.forEach(row => {
+                    const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
                     
-                    // استخراج القيم بناءً على الفهرسة المحددة بدقة
-                    const volume = parseInt(cells[volIdx].replace(/,/g, '')) || 0;
-                    const price = parseFloat(cells[priceIdx].replace(/,/g, '')) || 0;
-                    const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
-                    
-                    // تحديث واجهة المستخدم فوراً
-                    document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
-                    document.getElementById('live-volume').innerText = volume.toLocaleString();
-                    document.getElementById('volume-multiplier').innerText = volX + "X";
-                    
-                    const signalDisplay = document.getElementById('signal-display');
-                    if (volX >= 1.5) {
-                        signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] السهم يتجاوز متوسط 30 يوم بـ 50%+`;
-                        signalDisplay.className = "signal-box accumulation";
-                    } else if (volX >= 1.0) {
-                        signalDisplay.innerText = `🟢 [اختراق السيولة] حجم تداول اليوم تخطى كامل متوسط الـ 30 يوم بنجاح!`;
-                        signalDisplay.className = "signal-box accumulation";
-                    } else if (volX >= 0.5) {
-                        signalDisplay.innerText = `🟡 [سيولة متوسطة] تداولات اليوم تجاوزت نصف المتوسط الشهري وننتظر الحوت.`;
-                        signalDisplay.className = "signal-box normal";
-                    } else {
-                        signalDisplay.innerText = `⚪ تداولات اعتيادية هادئة.. صانع السوق يجمع ببطء تحت المتوسط.`;
-                        signalDisplay.className = "signal-box normal";
+                    if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
+                        found = true;
+                        
+                        // 💰 آخر سعر لحظي حقيقي هو العمود الثالث برمجياً (فهرس 2)
+                        const price = parseFloat(cells[2].replace(/,/g, '')) || 0;
+                        
+                        // 📊 حجم التداول (الكمية الكبيرة) هو العمود الأخير تماماً برمجياً في السطر
+                        const volume = parseInt(cells[cells.length - 1].replace(/,/g, '')) || 0;
+                        
+                        const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
+                        
+                        document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
+                        document.getElementById('live-volume').innerText = volume.toLocaleString();
+                        document.getElementById('volume-multiplier').innerText = volX + "X";
+                        
+                        const signalDisplay = document.getElementById('signal-display');
+                        
+                        if (volX >= 1.5) {
+                            signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] السهم يتجاوز متوسط 30 يوم بـ 50%+`;
+                            signalDisplay.className = "signal-box accumulation";
+                        } else if (volX >= 1.0) {
+                            signalDisplay.innerText = `🟢 [اختراق السيولة] حجم تداول اليوم تخطى كامل متوسط الـ 30 يوم بنجاح!`;
+                            signalDisplay.className = "signal-box accumulation";
+                        } else if (volX >= 0.5) {
+                            signalDisplay.innerText = `🟡 [سيولة متوسطة] تداولات اليوم تجاوزت نصف المتوسط الشهري وننتظر الحوت.`;
+                            signalDisplay.className = "signal-box normal";
+                        } else {
+                            signalDisplay.innerText = `⚪ تداولات اعتيادية هادئة.. صانع السوق يجمع ببطء تحت المتوسط.`;
+                            signalDisplay.className = "signal-box normal";
+                        }
                     }
+                });
+
+                if (found) {
+                    document.getElementById('connection-status').innerText = `⚡ متصل بالسيرفر — القراءات مطابقة ومحدثة لحظياً`;
+                    document.getElementById('connection-status').style.color = "#2ea043";
                 }
-            });
-
-            if (found) {
-                updateProgress("⚡ المرحلة 4/4: تم التحديث المباشر بنجاح 100%", 100, '#2ea043');
-            } else {
-                updateProgress("⚠️ لم يتم العثور على اسم الشركة في بث الجلسة الحالي", 100, '#f0883e');
             }
-
         } catch (err) {
-            // التبديل التلقائي للبروكسي الآخر عند حدوث أي مشكلة في الشبكة لضمان استمرارية الاتصال
-            currentProxyIndex = (currentProxyIndex + 1) % PROXIES.length;
-            updateProgress(`🔄 جاري تبديل قنوات الاتصال وإعادة المحاولة التلقائية...`, 10, '#f0883e');
+            document.getElementById('connection-status').innerText = `🔄 جاري إعادة المحاولة والتحديث تلقائياً...`;
+            document.getElementById('connection-status').style.color = "#f0883e";
         }
     }
 
-    // تكرار الفحص السريع كل 5 ثوانٍ
-    setInterval(scanARCCStock, 5000);
+    // تحديث سريع وآمن كل 4 ثوانٍ فقط
+    setInterval(scanARCCStock, 4000);
     scanARCCStock();
 </script>
 </body>
