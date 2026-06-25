@@ -27,7 +27,7 @@
     <div class="card">
         <h1>🎯 رادار الحوت الأحادي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🔄 جاري سحب البيانات عبر AllOrigins...</div>
+        <div id="connection-status" class="status">🔄 جاري قراءة خريطة الجدول الديناميكية...</div>
 
         <div class="metric-grid">
             <div class="metric-box">
@@ -52,7 +52,7 @@
         </div>
 
         <div id="signal-display" class="signal-box normal">
-            بانتظار قراءة صفقات السيرفر الفورية...
+            بانتظار ربط الأعمدة بالعناوين...
         </div>
     </div>
 </div>
@@ -75,7 +75,29 @@
             const table = doc.querySelector('table');
             
             if (table) {
-                const rows = table.querySelectorAll('tr');
+                const rows = Array.from(table.querySelectorAll('tr'));
+                
+                // 1️⃣ خطوة كشف الخريطة: البحث عن السطر الأول (العناوين) لتحديد مكان الأعمدة بدقة
+                let volumeIndex = -1;
+                let priceIndex = -1;
+                
+                // نبحث في أول سطرين عادة لضمان لقط العناوين الـ th أو الـ td العلوية
+                for (let i = 0; i < Math.min(rows.length, 2); i++) {
+                    const headers = Array.from(rows[i].querySelectorAll('th, td')).map(el => el.innerText.trim());
+                    
+                    // لقط فهرس عمود الحجم (الكمية الحالية المتغيرة) وعمود السعر
+                    const volIdx = headers.findIndex(h => h.includes("حجم") || h.includes("التداول"));
+                    const prcIdx = headers.findIndex(h => h.includes("آخر") || h.includes("سعر"));
+                    
+                    if (volIdx !== -1) volumeIndex = volIdx;
+                    if (prcIdx !== -1) priceIndex = prcIdx;
+                }
+
+                // لو السيرفر مغيرش المسميات ولقطنا الأعمدة بشكل ديناميكي
+                // في حالة الفشل نضع fallback ذكي للقيم الحالية المستقرة
+                if (volumeIndex === -1) volumeIndex = 1; // الخانة رقم 290 ألف الحالية
+                if (priceIndex === -1) priceIndex = rows[0]?.querySelectorAll('td, th').length - 3 || 2;
+
                 let found = false;
 
                 rows.forEach(row => {
@@ -84,11 +106,9 @@
                     if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
                         found = true;
                         
-                        // 💰 آخر سعر: مضبوط وشغال على العمود التالت من النهاية
-                        const price = parseFloat(cells[cells.length - 3].replace(/,/g, '')) || 0;
-                        
-                        // 📊 الحجم المستهدف: الخلية الملاصقة للاسم من اليسار (فهرس 1 برمجياً من اليسار)
-                        const volume = parseInt(cells[1].replace(/,/g, '')) || 0;
+                        // القراءة بالاعتماد على الفهرس الديناميكي المستنتج من العناوين
+                        let volume = parseInt(cells[volumeIndex].replace(/,/g, '')) || 0;
+                        let price = parseFloat(cells[priceIndex].replace(/,/g, '')) || 0;
                         
                         const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
                         
@@ -115,7 +135,7 @@
                 });
 
                 if (found) {
-                    document.getElementById('connection-status').innerText = `⚡ متصل بالسيرفر — القراءات مطابقة وصحيحة 100%`;
+                    document.getElementById('connection-status').innerText = `⚡ الربط الديناميكي نشط — القراءة تتبع العناوين اللحظية`;
                     document.getElementById('connection-status').style.color = "#2ea043";
                 }
             }
