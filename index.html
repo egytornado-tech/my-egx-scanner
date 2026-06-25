@@ -27,7 +27,7 @@
     <div class="card">
         <h1>🎯 رادار الحوت الأحادي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🔄 جاري الاتصال المباشر بالسيرفر...</div>
+        <div id="connection-status" class="status">🔄 جاري سحب البيانات عبر AllOrigins...</div>
 
         <div class="metric-grid">
             <div class="metric-box">
@@ -59,15 +59,14 @@
 
 <script>
     const REAL_URL = "http://41.33.162.236/egs4/";
-    // استخدام بروكسي بديل مستقر وسريع جداً لتفادي مشاكل الـ CORS تماماً
-    const CORS_PROXY_URL = "https://corsproxy.io/?" + encodeURIComponent(REAL_URL);
+    const CORS_PROXY_URL = "https://api.allorigins.win/raw?url=" + encodeURIComponent(REAL_URL);
     
     const TARGET_KEYWORD = "العربية للأسمنت";
     const HISTORICAL_AVG_30_DAYS = 692690; 
 
     async function scanARCCStock() {
         try {
-            const res = await fetch(CORS_PROXY_URL + (CORS_PROXY_URL.includes('?') ? '&' : '?') + "cacheBust=" + Date.now());
+            const res = await fetch(CORS_PROXY_URL + "&cacheBust=" + Date.now());
             if (!res.ok) throw new Error("تأخر السيرفر");
             const htmlText = await res.text();
             
@@ -85,11 +84,11 @@
                     if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
                         found = true;
                         
-                        // 💰 آخر سعر لحظي حقيقي هو العمود الثالث برمجياً (فهرس 2)
-                        const price = parseFloat(cells[2].replace(/,/g, '')) || 0;
+                        // 📊 حجم التداول اليومي الفعلي = أول عمود من اليسار (فهرس 0)
+                        const volume = parseInt(cells[0].replace(/,/g, '')) || 0;
                         
-                        // 📊 حجم التداول (الكمية الكبيرة) هو العمود الأخير تماماً برمجياً في السطر
-                        const volume = parseInt(cells[cells.length - 1].replace(/,/g, '')) || 0;
+                        // 💰 آخر سعر لحظي حقيقي = العمود الخامس من اليسار (فهرس 4)
+                        const price = parseFloat(cells[4].replace(/,/g, '')) || 0;
                         
                         const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
                         
@@ -116,18 +115,18 @@
                 });
 
                 if (found) {
-                    document.getElementById('connection-status').innerText = `⚡ متصل بالسيرفر — القراءات مطابقة ومحدثة لحظياً`;
+                    document.getElementById('connection-status').innerText = `⚡ متصل بالسيرفر — القراءات دقيقة ومحدثة`;
                     document.getElementById('connection-status').style.color = "#2ea043";
                 }
             }
         } catch (err) {
-            document.getElementById('connection-status').innerText = `🔄 جاري إعادة المحاولة والتحديث تلقائياً...`;
+            document.getElementById('connection-status').innerText = `🔄 جاري التحديث اللحظي المباشر...`;
             document.getElementById('connection-status').style.color = "#f0883e";
         }
     }
 
-    // تحديث سريع وآمن كل 4 ثوانٍ فقط
-    setInterval(scanARCCStock, 4000);
+    // التحديث التلقائي كل 5 ثوانٍ
+    setInterval(scanARCCStock, 5000);
     scanARCCStock();
 </script>
 </body>
