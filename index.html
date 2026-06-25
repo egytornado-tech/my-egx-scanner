@@ -12,7 +12,6 @@
         h1 { font-size: 1.5rem; color: #fff; margin-bottom: 2px; }
         .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
         
-        /* تصميم نظام مراحل الاتصال المتطور */
         .status-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 8px; margin-bottom: 15px; font-size: 0.85rem; }
         .status-text { color: var(--blue); font-weight: bold; margin-bottom: 4px; }
         .progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; width: 80%; margin: 5px auto 0 auto; }
@@ -35,7 +34,7 @@
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
         
         <div class="status-container">
-            <div id="connection-status" class="status-text">🔄 تهيئة بيئة الفحص اللحظي...</div>
+            <div id="connection-status" class="status-text">🔄 تهيئة الفحص اللحظي الرقمي...</div>
             <div class="progress-bar">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
@@ -43,11 +42,11 @@
 
         <div class="metric-grid">
             <div class="metric-box">
-                <span>آخر سعر لحظي</span>
+                <span>آخر سعر لحظي حقيقي</span>
                 <b id="live-price">0.00 ج.م</b>
             </div>
             <div class="metric-box">
-                <span>حجم التداول (الكمية اليومية)</span>
+                <span>حجم التداول الفعلي اليوم</span>
                 <b id="live-volume">0</b>
             </div>
         </div>
@@ -64,7 +63,7 @@
         </div>
 
         <div id="signal-display" class="signal-box normal">
-            بانتظار بدء الاتصال التلقائي بالسيرفر المحلي...
+            بانتظار مطابقة خلايا صانع السوق...
         </div>
     </div>
 </div>
@@ -87,87 +86,96 @@
 
     async function scanARCCStock() {
         try {
-            // ⏳ المرحلة 1: إرسال الطلب للبروكسي والسيرفر
-            updateProgress("📡 المرحلة 1/4: جاري إرسال الطلب واستدعاء السيرفر...", 25);
+            updateProgress("📡 المرحلة 1/4: جاري استدعاء صفقات السيرفر الحالي...", 25);
             
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 6000); // مهلة اتصال قصيرة لسرعة الاستجابة
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
 
             const res = await fetch(CORS_PROXY_URL + "&cacheBust=" + new Date().getTime(), { signal: controller.signal });
             clearTimeout(timeoutId);
 
-            if (!res.ok) throw new Error("تأخر في استجابة خادم الوسيط");
+            if (!res.ok) throw new Error("تأخر استجابة");
             
-            // ⏳ المرحلة 2: استقبال وفك تشفير الـ HTML المرتجع
-            updateProgress("📥 المرحلة 2/4: تم استلام البيانات، جاري فك شفرة الجدول...", 50);
+            updateProgress("📥 المرحلة 2/4: فك تشفير مصفوفة البيانات...", 50);
             const htmlText = await res.text();
             
-            // ⏳ المرحلة 3: استخراج وفلترة جدول السيرفر
-            updateProgress("🔍 المرحلة 3/4: جاري تصفية الجدول واقتناص صف الشركة...", 75);
+            updateProgress("🔍 المرحلة 3/4: مسح ديناميكي لمواقع العناوين...", 75);
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlText, 'text/html');
             const table = doc.querySelector('table');
             
             if (table) {
-                const rows = table.querySelectorAll('tr');
+                const rows = Array.from(table.querySelectorAll('tr'));
+                if (rows.length < 2) return;
+
+                // 🌟 كشف ديناميكي لمؤشرات الأعمدة بناءً على نص العنوان الصريح بسيرفرك
+                let volumeIndex = -1;
+                let priceIndex = -1;
+
+                // فحص أول صفين للبحث عن العناوين الحقيقية (حجم_التداول و آخر_سعر)
+                for (let i = 0; i < Math.min(rows.length, 3); i++) {
+                    const cellTexts = Array.from(rows[i].querySelectorAll('td')).map(td => td.innerText.trim());
+                    
+                    const vIdx = cellTexts.findIndex(txt => txt.includes("حجم_التداول"));
+                    const pIdx = cellTexts.findIndex(txt => txt.includes("آخر_سعر"));
+                    
+                    if (vIdx !== -1) volumeIndex = vIdx;
+                    if (pIdx !== -1) priceIndex = pIdx;
+                }
+
+                // خطة احتياطية صارمة بناءً على التحليل البرمجي المعكوس لصور الشاشة إذا فشل الكشف التلقائي
+                if (volumeIndex === -1) volumeIndex = rows[0].querySelectorAll('td').length - 1; // آخر عمود برمجياً في الـ HTML
+                if (priceIndex === -1) priceIndex = rows[0].querySelectorAll('td').length - 3;  // العمود الثالث من النهاية
+
                 let found = false;
 
                 rows.forEach(row => {
                     const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
+                    const rowText = cells.join(" ");
                     
-                    if (cells.length >= 3) {
-                        const rowText = cells.join(" ");
+                    if (rowText.includes(TARGET_KEYWORD) && cells.length > Math.max(volumeIndex, priceIndex)) {
+                        found = true;
                         
-                        if (rowText.includes(TARGET_KEYWORD)) {
-                            found = true;
-                            
-                            // 📊 الخانة الأولى تماماً (رقم 0): حجم التداول
-                            const volume = parseInt(cells[0].replace(/,/g, '')) || 0;
-                            
-                            // 💰 الخانة الثالثة تماماً (رقم 2): تم تصحيحها لـ آخر سعر لحظي
-                            const price = parseFloat(cells[2].replace(/,/g, '')) || 0;
-                            
-                            const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
-                            
-                            // ⏳ المرحلة 4: ضخ البيانات وتحديث الشاشة فوراً
-                            document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
-                            document.getElementById('live-volume').innerText = volume.toLocaleString();
-                            document.getElementById('volume-multiplier').innerText = volX + "X";
-                            
-                            const signalDisplay = document.getElementById('signal-display');
-                            
-                            if (volX >= 1.5) {
-                                signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] السهم يتجاوز متوسط 30 يوم بـ 50%+`;
-                                signalDisplay.className = "signal-box accumulation";
-                            } else if (volX >= 1.0) {
-                                signalDisplay.innerText = `🟢 [اختراق السيولة] حجم تداول اليوم تخطى كامل متوسط الـ 30 يوم بنجاح!`;
-                                signalDisplay.className = "signal-box accumulation";
-                            } else if (volX >= 0.5) {
-                                signalDisplay.innerText = `🟡 [سيولة متوسطة] تداولات اليوم تجاوزت نصف المتوسط الشهري وننتظر الحوت.`;
-                                signalDisplay.className = "signal-box normal";
-                            } else {
-                                signalDisplay.innerText = `⚪ تداولات اعتيادية هادئة.. صانع السوق يجمع ببطء تحت المتوسط.`;
-                                signalDisplay.className = "signal-box normal";
-                            }
+                        // 📊 اقتناص حجم التداول والآخر سعر بناءً على المؤشرات المؤكدة
+                        const volume = parseInt(cells[volumeIndex].replace(/,/g, '')) || 0;
+                        const price = parseFloat(cells[priceIndex].replace(/,/g, '')) || 0;
+                        
+                        const volX = (volume / HISTORICAL_AVG_30_DAYS).toFixed(2);
+                        
+                        document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
+                        document.getElementById('live-volume').innerText = volume.toLocaleString();
+                        document.getElementById('volume-multiplier').innerText = volX + "X";
+                        
+                        const signalDisplay = document.getElementById('signal-display');
+                        
+                        if (volX >= 1.5) {
+                            signalDisplay.innerText = `🚨 🔥 [تجميع مؤسسي عنيف] السهم يتجاوز متوسط 30 يوم بـ 50%+`;
+                            signalDisplay.className = "signal-box accumulation";
+                        } else if (volX >= 1.0) {
+                            signalDisplay.innerText = `🟢 [اختراق السيولة] حجم تداول اليوم تخطى كامل متوسط الـ 30 يوم بنجاح!`;
+                            signalDisplay.className = "signal-box accumulation";
+                        } else if (volX >= 0.5) {
+                            signalDisplay.innerText = `🟡 [سيولة متوسطة] تداولات اليوم تجاوزت نصف المتوسط الشهري وننتظر الحوت.`;
+                            signalDisplay.className = "signal-box normal";
+                        } else {
+                            signalDisplay.innerText = `⚪ تداولات اعتيادية هادئة.. صانع السوق يجمع ببطء تحت المتوسط.`;
+                            signalDisplay.className = "signal-box normal";
                         }
                     }
                 });
 
                 if (found) {
-                    updateProgress("⚡ المرحلة 4/4: متصل الآن والمزامنة كاملة 100%", 100, '#2ea043');
+                    updateProgress("⚡ المرحلة 4/4: متصل والمطابقة الديناميكية ناجحة 100%", 100, '#2ea043');
                 } else {
-                    updateProgress("⚠️ السهم غير متواجد حالياً بجدول بث السيرفر", 100, '#f0883e');
+                    updateProgress("⚠️ السهم غير متواجد حالياً في نافذة البث المباشر", 100, '#f0883e');
                 }
-            } else {
-                throw new Error("لم يتم العثور على جدول متاح");
             }
         } catch (err) {
-            updateProgress(`🔄 مشكلة شبكة: جاري إعادة المحاولة الفورية...`, 10, '#f0883e');
+            updateProgress(`🔄 جاري إعادة الاتصال الفوري بالسيرفر...`, 10, '#f0883e');
         }
     }
 
-    // تسريع وتيرة التحديث إلى كل 5 ثوانٍ فقط بدلاً من 8 ثوانٍ بفضل فك الكاش الخفيف
-    setInterval(scanARCCStock, 5000);
+    setInterval(scanARCCStock, 4000); // تحديث سريع وآمن كل 4 ثوانٍ
     scanARCCStock();
 </script>
 </body>
