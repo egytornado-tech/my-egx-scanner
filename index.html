@@ -27,7 +27,7 @@
     <div class="card">
         <h1>🎯 رادار الحوت الأحادي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🔄 جاري قراءة خريطة الجدول الديناميكية...</div>
+        <div id="connection-status" class="status">🔄 جاري فحص خطوط الاتصال الاحتياطية...</div>
 
         <div class="metric-grid">
             <div class="metric-box">
@@ -52,24 +52,35 @@
         </div>
 
         <div id="signal-display" class="signal-box normal">
-            بانتظار ربط الأعمدة بالعناوين...
+            بانتظار استقرار البروكسي والربط...
         </div>
     </div>
 </div>
 
 <script>
     const REAL_URL = "http://41.33.162.236/egs4/";
-    const CORS_PROXY_URL = "https://api.allorigins.win/raw?url=" + encodeURIComponent(REAL_URL);
     
+    // قائمة السيرفرات البديلة لتفادي الحظر المفاجئ
+    const PROXIES = [
+        "https://api.allorigins.win/raw?url=",
+        "https://corsproxy.io/?"
+    ];
+    let currentProxyIndex = 0;
+
     const TARGET_KEYWORD = "العربية للأسمنت";
     const HISTORICAL_AVG_30_DAYS = 692690; 
 
     async function scanARCCStock() {
         try {
-            const res = await fetch(CORS_PROXY_URL + "&cacheBust=" + Date.now());
-            if (!res.ok) throw new Error("تأخر السيرفر");
-            const htmlText = await res.text();
+            // بناء رابط الطلب بالبروكسي الحالي مع كسر الكاش
+            let proxyUrl = PROXIES[currentProxyIndex] + encodeURIComponent(REAL_URL);
+            if (currentProxyIndex === 0) proxyUrl += "&cacheBust=" + Date.now();
+            else proxyUrl += "&_cb=" + Date.now();
+
+            const res = await fetch(proxyUrl);
+            if (!res.ok) throw new Error("السيرفر الحالي لا يستجيب");
             
+            const htmlText = await res.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlText, 'text/html');
             const table = doc.querySelector('table');
@@ -77,15 +88,12 @@
             if (table) {
                 const rows = Array.from(table.querySelectorAll('tr'));
                 
-                // 1️⃣ خطوة كشف الخريطة: البحث عن السطر الأول (العناوين) لتحديد مكان الأعمدة بدقة
                 let volumeIndex = -1;
                 let priceIndex = -1;
                 
-                // نبحث في أول سطرين عادة لضمان لقط العناوين الـ th أو الـ td العلوية
+                // قراءة عناوين الجدول بشكل ديناميكي كامل
                 for (let i = 0; i < Math.min(rows.length, 2); i++) {
                     const headers = Array.from(rows[i].querySelectorAll('th, td')).map(el => el.innerText.trim());
-                    
-                    // لقط فهرس عمود الحجم (الكمية الحالية المتغيرة) وعمود السعر
                     const volIdx = headers.findIndex(h => h.includes("حجم") || h.includes("التداول"));
                     const prcIdx = headers.findIndex(h => h.includes("آخر") || h.includes("سعر"));
                     
@@ -93,9 +101,8 @@
                     if (prcIdx !== -1) priceIndex = prcIdx;
                 }
 
-                // لو السيرفر مغيرش المسميات ولقطنا الأعمدة بشكل ديناميكي
-                // في حالة الفشل نضع fallback ذكي للقيم الحالية المستقرة
-                if (volumeIndex === -1) volumeIndex = 1; // الخانة رقم 290 ألف الحالية
+                // قيم احتياطية ثابتة ومؤمنة في حال فشل لقط العنوان
+                if (volumeIndex === -1) volumeIndex = 1; 
                 if (priceIndex === -1) priceIndex = rows[0]?.querySelectorAll('td, th').length - 3 || 2;
 
                 let found = false;
@@ -106,7 +113,6 @@
                     if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
                         found = true;
                         
-                        // القراءة بالاعتماد على الفهرس الديناميكي المستنتج من العناوين
                         let volume = parseInt(cells[volumeIndex].replace(/,/g, '')) || 0;
                         let price = parseFloat(cells[priceIndex].replace(/,/g, '')) || 0;
                         
@@ -135,17 +141,21 @@
                 });
 
                 if (found) {
-                    document.getElementById('connection-status').innerText = `⚡ الربط الديناميكي نشط — القراءة تتبع العناوين اللحظية`;
+                    const activeProxyName = currentProxyIndex === 0 ? "AllOrigins" : "CorsProxy";
+                    document.getElementById('connection-status').innerText = `⚡ متصل مستقر عبر (${activeProxyName}) — البيانات ديناميكية ومؤمنة`;
                     document.getElementById('connection-status').style.color = "#2ea043";
                 }
             }
         } catch (err) {
-            document.getElementById('connection-status').innerText = `🔄 جاري التحديث اللحظي المباشر...`;
+            // 🔄 في حال حدوث خطأ اتصال، يتم التبديل التلقائي والسلس للبروكسي البديل في المحاولة القادمة
+            currentProxyIndex = (currentProxyIndex + 1) % PROXIES.length;
+            document.getElementById('connection-status').innerText = `🔄 جاري تحويل مسار الاتصال لتفادي الحظر...`;
             document.getElementById('connection-status').style.color = "#f0883e";
         }
     }
 
-    setInterval(scanARCCStock, 5000);
+    // التحديث كل 10 ثوانٍ لحماية الـ IP الخاص بك من الحظر
+    setInterval(scanARCCStock, 10000);
     scanARCCStock();
 </script>
 </body>
