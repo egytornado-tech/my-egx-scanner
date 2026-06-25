@@ -11,7 +11,7 @@
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         h1 { font-size: 1.5rem; color: #fff; margin-bottom: 2px; }
         .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
-        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 15px; font-weight: bold; }
+        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 15px; font-weight: bold; transition: all 0.3s ease; }
         .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 12px; border-radius: 8px; }
         .metric-box span { display: block; font-size: 0.8rem; color: #8b949e; margin-bottom: 4px; }
@@ -25,9 +25,9 @@
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار الحوت الأحادي</h1>
+        <h1>🎯 رادار الحوت الحصين</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🔄 جاري فحص خطوط الاتصال الاحتياطية...</div>
+        <div id="connection-status" class="status">🔄 جاري تشغيل مصفوفة الدفاع وبدء الاتصال...</div>
 
         <div class="metric-grid">
             <div class="metric-box">
@@ -52,35 +52,68 @@
         </div>
 
         <div id="signal-display" class="signal-box normal">
-            بانتظار استقرار البروكسي والربط...
+            بانتظار تهيئة أول خط اتصال بروكسي مستقر...
         </div>
     </div>
 </div>
 
 <script>
     const REAL_URL = "http://41.33.162.236/egs4/";
-    
-    // قائمة السيرفرات البديلة لتفادي الحظر المفاجئ
-    const PROXIES = [
-        "https://api.allorigins.win/raw?url=",
-        "https://corsproxy.io/?"
-    ];
-    let currentProxyIndex = 0;
-
     const TARGET_KEYWORD = "العربية للأسمنت";
     const HISTORICAL_AVG_30_DAYS = 692690; 
 
+    // 🌐 مصفوفة الـ 10 بدائل الذكية لتخطي الـ CORS والحظر اللحظي
+    const CORS_PROXIES = [
+        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+        url => `https://thingproxy.freeboard.io/fetch/${url}`,
+        url => `https://api.codetabs.com/v1/proxy/?url=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.org/?${encodeURIComponent(url)}`,
+        url => `https://proxy.cors.sh/${url}`,
+        url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`, // يحتاج معالجة JSON
+        url => `https://whateverorigin.org/get?url=${encodeURIComponent(url)}`, // يحتاج معالجة JSON
+        url => `https://cors-json.vercel.app/?url=${encodeURIComponent(url)}`,   // يحتاج معالجة JSON
+        url => `https://cors-anywhere.herokuapp.com/${url}`                     // يتطلب تفعيل الديمو أول مرة
+    ];
+
+    let activeProxyIndex = 0;
+
+    // دالة الجلب الذكية التي تلف على البدائل تلقائياً عند حدوث خطأ
+    async function fetchHTMLWithSmartFallback() {
+        for (let i = 0; i < CORS_PROXIES.length; i++) {
+            let currentIndex = (activeProxyIndex + i) % CORS_PROXIES.length;
+            try {
+                // كسر الكاش لضمان جلب صفقات جديدة
+                const cacheBuster = "cb_radar=" + Date.now();
+                const targetWithCache = REAL_URL + (REAL_URL.includes('?') ? '&' : '?') + cacheBuster;
+                
+                const finalProxyUrl = CORS_PROXIES[currentIndex](targetWithCache);
+                
+                const res = await fetch(finalProxyUrl);
+                if (!res.ok) throw new Error("سيرفر محظور أو متوقف");
+
+                // تحديث مؤشر البروكسي الثابت لتسريع الطلب القادم
+                activeProxyIndex = currentIndex;
+
+                // إذا كان البروكسي يعيد كائن JSON (مثل ऑल أوريجنز جيت) نخرج الـ String منه
+                if (finalProxyUrl.includes('/get?') || finalProxyUrl.includes('cors-json')) {
+                    const jsonData = await res.json();
+                    return jsonData.contents || jsonData.html || "";
+                }
+                
+                return await res.text();
+            } catch (err) {
+                console.warn(`الخط رقم ${currentIndex + 1} واجه مشكلة.. جاري تخطيه للخط التالي.`);
+            }
+        }
+        throw new Error("جميع البروكسيات الـ 10 مشغولة حالياً");
+    }
+
     async function scanARCCStock() {
         try {
-            // بناء رابط الطلب بالبروكسي الحالي مع كسر الكاش
-            let proxyUrl = PROXIES[currentProxyIndex] + encodeURIComponent(REAL_URL);
-            if (currentProxyIndex === 0) proxyUrl += "&cacheBust=" + Date.now();
-            else proxyUrl += "&_cb=" + Date.now();
+            const htmlText = await fetchHTMLWithSmartFallback();
+            if (!htmlText) return;
 
-            const res = await fetch(proxyUrl);
-            if (!res.ok) throw new Error("السيرفر الحالي لا يستجيب");
-            
-            const htmlText = await res.text();
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlText, 'text/html');
             const table = doc.querySelector('table');
@@ -91,7 +124,7 @@
                 let volumeIndex = -1;
                 let priceIndex = -1;
                 
-                // قراءة عناوين الجدول بشكل ديناميكي كامل
+                // 🗺️ قراءة ديناميكية لعناوين الجدول لضمان دقة الخانات من دقيقة الافتتاح
                 for (let i = 0; i < Math.min(rows.length, 2); i++) {
                     const headers = Array.from(rows[i].querySelectorAll('th, td')).map(el => el.innerText.trim());
                     const volIdx = headers.findIndex(h => h.includes("حجم") || h.includes("التداول"));
@@ -101,7 +134,7 @@
                     if (prcIdx !== -1) priceIndex = prcIdx;
                 }
 
-                // قيم احتياطية ثابتة ومؤمنة في حال فشل لقط العنوان
+                // قيم أمان افتراضية في حال عدم قراءة العناوين لسبب ما
                 if (volumeIndex === -1) volumeIndex = 1; 
                 if (priceIndex === -1) priceIndex = rows[0]?.querySelectorAll('td, th').length - 3 || 2;
 
@@ -113,6 +146,7 @@
                     if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
                         found = true;
                         
+                        // سحب القيم بالاعتماد على الفهرس المربوط ديناميكياً بالعناوين
                         let volume = parseInt(cells[volumeIndex].replace(/,/g, '')) || 0;
                         let price = parseFloat(cells[priceIndex].replace(/,/g, '')) || 0;
                         
@@ -141,20 +175,17 @@
                 });
 
                 if (found) {
-                    const activeProxyName = currentProxyIndex === 0 ? "AllOrigins" : "CorsProxy";
-                    document.getElementById('connection-status').innerText = `⚡ متصل مستقر عبر (${activeProxyName}) — البيانات ديناميكية ومؤمنة`;
+                    document.getElementById('connection-status').innerText = `⚡ الرادار نشط ومؤمن تلقائياً (البروكسي الحالي: ${activeProxyIndex + 1}/10)`;
                     document.getElementById('connection-status').style.color = "#2ea043";
                 }
             }
         } catch (err) {
-            // 🔄 في حال حدوث خطأ اتصال، يتم التبديل التلقائي والسلس للبروكسي البديل في المحاولة القادمة
-            currentProxyIndex = (currentProxyIndex + 1) % PROXIES.length;
-            document.getElementById('connection-status').innerText = `🔄 جاري تحويل مسار الاتصال لتفادي الحظر...`;
+            document.getElementById('connection-status').innerText = `🔄 جاري تحويل مسار البروكسي وفحص الخطوط البديلة...`;
             document.getElementById('connection-status').style.color = "#f0883e";
         }
     }
 
-    // التحديث كل 10 ثوانٍ لحماية الـ IP الخاص بك من الحظر
+    // تحديث كل 10 ثوانٍ لضمان استقرار قنوات الاتصال طوال وقت الجلسة
     setInterval(scanARCCStock, 10000);
     scanARCCStock();
 </script>
