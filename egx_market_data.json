@@ -8,7 +8,7 @@
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "MFPC": {
         "name": "موبكو (سيرفر حقيقي)",
@@ -19,29 +19,29 @@
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "SWDY": {
         "name": "السويدى (سيرفر حقيقي)",
         "ticker": "SWDY",
-        "price": 86.97,
+        "price": 86.96,
         "volume": 89,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "TMGH": {
         "name": "طلعت (سيرفر حقيقي)",
         "ticker": "TMGH",
-        "price": 95.67,
+        "price": 95.86,
         "volume": 96,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "JUFO": {
         "name": "جهينة (سيرفر حقيقي)",
@@ -52,7 +52,7 @@
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "AMOC": {
         "name": "أموك (سيرفر حقيقي)",
@@ -63,7 +63,7 @@
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "FWRY": {
         "name": "فوري (سيرفر حقيقي)",
@@ -74,18 +74,18 @@
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "BTFH": {
         "name": "بلتون (سيرفر حقيقي)",
         "ticker": "BTFH",
-        "price": 3.02,
+        "price": 3.03,
         "volume": 3,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     },
     "PHDC": {
         "name": "بالم هيلز (سيرفر حقيقي)",
@@ -96,6 +96,6 @@
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "11:15:11"
+        "last_update": "13:36:00"
     }
 }
