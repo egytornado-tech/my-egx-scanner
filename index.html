@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار العربية للأسمنت المتكامل للموبايل والـ VPS</title>
+    <title>🎯 رادار العربية للأسمنت المستقر للموبايل</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --purple: #8a2be2; --red: #da3633; }
@@ -23,36 +23,38 @@
         .accumulation { background: rgba(46, 160, 67, 0.15); color: #58a6ff; border-color: var(--green); }
         .normal { background: #21262d; color: var(--text); }
         
-        /* شريط تدفق السيولة اللحظي */
         .tape-bar-container { background: var(--border); border-radius: 6px; height: 18px; margin-top: 8px; overflow: hidden; display: flex; }
         .buy-bar { background: var(--green); height: 100%; transition: width 0.5s ease; color: #fff; font-size: 0.7rem; font-weight: bold; line-height: 18px; }
         .sell-bar { background: var(--red); height: 100%; transition: width 0.5s ease; color: #fff; font-size: 0.7rem; font-weight: bold; line-height: 18px; }
+        
+        /* حاوية نافذة تداول تريدينج فيو الحية */
+        .tv-widget-container { width: 100%; height: 140px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار التحليل الزمني وتدفق السيولة الذكي</h1>
+        <h1>🎯 رادار التحليل الزمني وتدفق السيولة اللحظي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🚀 جاري الاتصال المزدوج والمزامنة الرقمية...</div>
+        <div id="connection-status" class="status" style="color: var(--orange);">⏳ جاري فحص استجابة السيرفر المحلي...</div>
         <div id="last-update" class="timestamp">آخر جلب للبيانات: --:--:--</div>
 
         <div class="metric-grid">
-            <div class="metric-box"><span>آخر سعر لحظي</span><b id="live-price">0.00 ج.م</b></div>
-            <div class="metric-box"><span>متوسط الـ 30 جلسة (TradingView)</span><b id="dyn-avg-volume" style="color: var(--purple);">جاري السحب...</b></div>
+            <div class="metric-box"><span>آخر سعر تداول (EGS4)</span><b id="live-price">0.00 ج.م</b></div>
+            <div class="metric-box"><span>مستهدف الـ 30 جلسة المعتمد</span><b id="dyn-avg-volume" style="color: var(--purple);">692,690 سهم</b></div>
         </div>
 
         <div class="metric-grid">
-            <div class="metric-box"><span>الحجم الفعلي الحالي</span><b id="live-volume">0</b></div>
-            <div class="metric-box"><span>المستهدف التاريخي الآن</span><b id="target-volume-now" style="color: var(--orange);">0</b></div>
+            <div class="metric-box"><span>الحجم الحالي الفعلي</span><b id="live-volume">0</b></div>
+            <div class="metric-box"><span>المستهدف التاريخي الموازي والآن</span><b id="target-volume-now" style="color: var(--orange);">0</b></div>
         </div>
 
         <div class="metric-box" style="margin-bottom: 10px;">
             <span style="font-weight: bold;">📊 تفكيك السيولة (أعلى طلب 🆚 أقل عرض)</span>
             <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 5px;">
-                <span style="color: var(--green);">🟢 تنفيذ بسعر العرض أو أعلى (شراء): <b id="buy-pct">50%</b></span>
-                <span style="color: var(--red);">🔴 تنفيذ بسعر الطلب أو أقل (بيع): <b id="sell-pct">50%</b></span>
+                <span style="color: var(--green);">🟢 تنفيذ بسعر العرض أو أعلى: <b id="buy-pct">50%</b></span>
+                <span style="color: var(--red);">🔴 تنفيذ بسعر الطلب أو أقل: <b id="sell-pct">50%</b></span>
             </div>
             <div class="tape-bar-container">
                 <div id="buy-bar-id" class="buy-bar" style="width: 50%;"></div>
@@ -60,10 +62,17 @@
             </div>
         </div>
 
-        <div id="signal-display" class="signal-box normal">بانتظار جلب صفقات الجلسة وتدفق السيولة...</div>
+        <div id="signal-display" class="signal-box normal">بانتظار تدفق أولى صفقات الجلسة...</div>
 
         <div class="chart-container">
             <canvas id="volumeChart"></canvas>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 10px;">
+        <span style="font-size: 0.8rem; font-weight: bold; color: var(--blue); display: block; margin-bottom: 8px;">📈 نافذة مراقبة اتجاه السهم والمؤشرات الفنية (TradingView)</span>
+        <div class="tv-widget-container">
+            <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?ticker=EGX%3AARCC&theme=dark&style=1&loop=false&internals=false&noTimeScale=false&symboledit=false&saveimage=false&locale=ar" style="width: 100%; height: 100%; border: none;" scrolling="no"></iframe>
         </div>
     </div>
 </div>
@@ -73,11 +82,10 @@
     const TARGET_KEYWORD = "العربية للأسمنت";
     const SESSION_TOTAL_MINUTES = 270;
     
-    const STORAGE_KEY_DATA = "arcc_radar_v8_history";
-    const STORAGE_KEY_DATE = "arcc_radar_v8_date";
-    const STORAGE_KEY_TAPE = "arcc_radar_v8_tape";
+    const STORAGE_KEY_DATA = "arcc_mobi_v9_history";
+    const STORAGE_KEY_DATE = "arcc_mobi_v9_date";
+    const STORAGE_KEY_TAPE = "arcc_mobi_v9_tape";
 
-    // تصفير وتنظيف يومي ذاتي للذاكرة الدائمة للموبايل قبل الجلسة بدقيقتين تلقائياً
     const todayStr = new Date().toDateString();
     if (localStorage.getItem(STORAGE_KEY_DATE) !== todayStr) {
         localStorage.removeItem(STORAGE_KEY_DATA);
@@ -88,7 +96,6 @@
     let liveDatasetData = localStorage.getItem(STORAGE_KEY_DATA) ? JSON.parse(localStorage.getItem(STORAGE_KEY_DATA)) : new Array(SESSION_TOTAL_MINUTES).fill(null);
     let tapeData = localStorage.getItem(STORAGE_KEY_TAPE) ? JSON.parse(localStorage.getItem(STORAGE_KEY_TAPE)) : { buyVolume: 0, sellVolume: 0, lastTotalVolume: 0 };
 
-    // تهيئة المحور الزمني التصحيحي للشارت
     let chartLabels = [];
     for (let m = 1; m <= SESSION_TOTAL_MINUTES; m++) chartLabels.push(`د ${m}`);
     let targetDatasetData = new Array(SESSION_TOTAL_MINUTES).fill(null);
@@ -99,8 +106,8 @@
         data: {
             labels: chartLabels,
             datasets: [
-                { label: 'الحجم الفعلي المتراكم', data: liveDatasetData, borderColor: '#58a6ff', backgroundColor: 'rgba(88, 166, 255, 0.05)', borderWidth: 2.5, pointRadius: 0, spanGaps: true },
-                { label: 'المتوسط الزمني المستهدف (TV)', data: targetDatasetData, borderColor: '#f0883e', borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 }
+                { label: 'الحجم الفعلي المتراكم التراكمي', data: liveDatasetData, borderColor: '#58a6ff', backgroundColor: 'rgba(88, 166, 255, 0.05)', borderWidth: 2.5, pointRadius: 0, spanGaps: true },
+                { label: 'المتوسط الزمني المستهدف اليومي', data: targetDatasetData, borderColor: '#f0883e', borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 }
             ]
         },
         options: {
@@ -114,37 +121,10 @@
         }
     });
 
-    // 📡 جلب متوسط حجم تداول 30 يوم من خوادم TradingView مباشرة
-    let globalHistoricalAvg = 692690; // خط دفاع احتياطي صلب للموبايل
+    // القيمة المستقرة المحدثة والجاهزة
+    let globalHistoricalAvg = 692690;
 
-    async function fetchTradingViewAverage() {
-        try {
-            const response = await fetch("https://scanner.tradingview.com/egypt/scan", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    "symbols": { "tickers": ["EGX:ARCC"], "query": { "types": [] } },
-                    "columns": ["average_volume_30d"]
-                })
-            });
-
-            if (response.ok) {
-                const result = await response.json();
-                if (result.data && result.data[0] && result.data[0].d) {
-                    globalHistoricalAvg = Math.floor(parseFloat(result.data[0].d[0])) || 692690;
-                    console.log("🎯 تم تحديث المتوسط التاريخي من TradingView آلياً:", globalHistoricalAvg);
-                }
-            }
-        } catch (e) {
-            console.log("⚠️ حماية الموبايل منعت الاتصال بـ TV - تم الانتقال الفوري للمتوسط الاحتياطي المحدث.");
-        }
-        
-        // الأسطر التالية تنفذ دائماً لضمان عدم توقف الشاشة وتحررها فوراً على الموبايل
-        document.getElementById('dyn-avg-volume').innerText = globalHistoricalAvg.toLocaleString() + " سهم";
-        updateTargetChartLine();
-    }
-
-    function updateTargetChartLine() {
+    function initTargetChartLine() {
         let avgVolumePerMinute = globalHistoricalAvg / SESSION_TOTAL_MINUTES;
         for (let m = 1; m <= SESSION_TOTAL_MINUTES; m++) {
             targetDatasetData[m - 1] = Math.floor(m * avgVolumePerMinute);
@@ -184,11 +164,10 @@
             const htmlText = await fetchSmartData();
             if (!htmlText) return;
 
-            // تحديث حالة الاتصال بنجاح على شاشة الموبايل فوراً
-            document.getElementById('connection-status').innerText = `⚡ سحب مباشر متزامن زمنياً — كل 5 ثوانٍ`;
+            document.getElementById('connection-status').innerText = `🟢 متصل ومتابع لحظياً بدقة التحديث الفوري`;
             document.getElementById('connection-status').style.color = "#2ea043";
-
             document.getElementById('last-update').innerText = `آخر جلب: ${new Date().toLocaleTimeString('ar-EG')}`;
+            
             const doc = new DOMParser().parseFromString(htmlText, 'text/html');
             const table = doc.querySelector('table');
             
@@ -217,18 +196,15 @@
                         let minutesElapsed = getSessionMinutesElapsed() || 1;
                         let targetVolumeNow = Math.floor(minutesElapsed * avgVolumePerMinute);
 
-                        // ⚡ محرك المقارنة الصارم لتدفق السيولة (Tape Reading) بناءً على التغير في الكمية والأسعار
+                        // المقارنة الصارمة لتدفق السيولة اللحظية
                         if (tapeData.lastTotalVolume > 0 && volume > tapeData.lastTotalVolume) {
                             let deltaVolume = volume - tapeData.lastTotalVolume;
                             
                             if (price >= bestAsk) {
-                                // السهم التهم أقل عرض متاح أو أعلى -> سيولة شراء ماركت صاعدة
                                 tapeData.buyVolume += deltaVolume;
                             } else if (price <= bestBid) {
-                                // السهم تراجع وضُرب في أعلى طلب متاح أو أقل -> سيولة بيع ماركت هابطة
                                 tapeData.sellVolume += deltaVolume;
                             } else {
-                                // تنفيذ بين الأسعار (تقسيم بالتساوي)
                                 tapeData.buyVolume += deltaVolume / 2;
                                 tapeData.sellVolume += deltaVolume / 2;
                             }
@@ -236,7 +212,6 @@
                         tapeData.lastTotalVolume = volume;
                         localStorage.setItem(STORAGE_KEY_TAPE, JSON.stringify(tapeData));
 
-                        // حساب وعرض نسب شريط السيولة
                         let totalCalculated = (tapeData.buyVolume + tapeData.sellVolume) || 1;
                         let buyPct = ((tapeData.buyVolume / totalCalculated) * 100).toFixed(1);
                         let sellPct = (100 - buyPct).toFixed(1);
@@ -251,7 +226,6 @@
                         document.getElementById('live-volume').innerText = volume.toLocaleString();
                         document.getElementById('target-volume-now').innerText = targetVolumeNow.toLocaleString();
 
-                        // حفظ وتحديث منحنى الشارت الفعلي المتراكم دقيقة بدقيقة بالتوازي
                         if (minutesElapsed <= SESSION_TOTAL_MINUTES) {
                             liveDatasetData[minutesElapsed - 1] = volume;
                             for (let k = 0; k < minutesElapsed - 1; k++) {
@@ -263,30 +237,28 @@
                             volumeChart.update('none');
                         }
 
-                        // صياغة اتخاذ القرار والتنبيهات
                         const signalDisplay = document.getElementById('signal-display');
-                        let biasText = parseFloat(buyPct) > 53 ? "🔥 [اكتساح شرائي واختراق عروض]" : (parseFloat(buyPct) < 47 ? "⚠️ [ضغط بيعي وتسييل طلبات]" : "⚖️ [توازن قوى البائع والمشتري]");
+                        let biasText = parseFloat(buyPct) > 53 ? "🔥 [اكتساح شرائي واختراق عروض]" : (parseFloat(buyPct) < 47 ? "⚠️ [ضغط بيعي وتسييل طلبات]" : "⚖️ [توازن قوى]");
                         
                         if (parseFloat(timeRatio) >= 120) {
-                            signalDisplay.innerText = `🚨 تجميع زمني خارق بمعدل ${timeRatio}% | التقييم اللحظي: ${biasText}`;
+                            signalDisplay.innerText = `🚨 تجميع زمني خارق بمعدل ${timeRatio}% | التقييم: ${biasText}`;
                             signalDisplay.className = "signal-box accumulation";
                         } else {
-                            signalDisplay.innerText = `⚪ أداء زمني طبيعي للجلسة بمعدل ${timeRatio}% | التقييم اللحظي: ${biasText}`;
+                            signalDisplay.innerText = `⚪ أداء زمني طبيعي للجلسة بمعدل ${timeRatio}% | التقييم: ${biasText}`;
                             signalDisplay.className = "signal-box normal";
                         }
                     }
                 });
             }
         } catch (err) { 
-            // في حالة فشل البروكسيات مؤقتاً لا نجعل الشاشة تعلق بل نظهر تنبيه خفيف
-            document.getElementById('connection-status').innerText = `⚠️ جاري إعادة محاولة الاتصال بالسيرفر...`;
+            document.getElementById('connection-status').innerText = `⚠️ جاري تحديث جلب البيانات المحتجبة...`;
             document.getElementById('connection-status').style.color = "#f0883e";
             activeProxyIndex = -1; 
         }
     }
 
-    // الإقلاع والمزامنة الدورية الفورية
-    fetchTradingViewAverage();
+    // تشغيل فوري وبناء خط الشارت
+    initTargetChartLine();
     setInterval(scanARCCStock, 5000);
     scanARCCStock();
 </script>
