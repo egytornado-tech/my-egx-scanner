@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار العربية للأسمنت المتكامل (EGS4 + TradingView)</title>
+    <title>🎯 رادار العربية للأسمنت المتكامل للموبايل والـ VPS</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --purple: #8a2be2; --red: #da3633; }
@@ -23,7 +23,7 @@
         .accumulation { background: rgba(46, 160, 67, 0.15); color: #58a6ff; border-color: var(--green); }
         .normal { background: #21262d; color: var(--text); }
         
-        /* شريط تدفق السيولة */
+        /* شريط تدفق السيولة اللحظي */
         .tape-bar-container { background: var(--border); border-radius: 6px; height: 18px; margin-top: 8px; overflow: hidden; display: flex; }
         .buy-bar { background: var(--green); height: 100%; transition: width 0.5s ease; color: #fff; font-size: 0.7rem; font-weight: bold; line-height: 18px; }
         .sell-bar { background: var(--red); height: 100%; transition: width 0.5s ease; color: #fff; font-size: 0.7rem; font-weight: bold; line-height: 18px; }
@@ -40,7 +40,7 @@
 
         <div class="metric-grid">
             <div class="metric-box"><span>آخر سعر لحظي</span><b id="live-price">0.00 ج.م</b></div>
-            <div class="metric-box"><span>متوسط الـ 30 جلسة (TradingView)</span><b id="dyn-avg-volume" style="color: var(--purple);">جاري السحب اللحظي...</b></div>
+            <div class="metric-box"><span>متوسط الـ 30 جلسة (TradingView)</span><b id="dyn-avg-volume" style="color: var(--purple);">جاري السحب...</b></div>
         </div>
 
         <div class="metric-grid">
@@ -73,9 +73,9 @@
     const TARGET_KEYWORD = "العربية للأسمنت";
     const SESSION_TOTAL_MINUTES = 270;
     
-    const STORAGE_KEY_DATA = "arcc_radar_v7_history";
-    const STORAGE_KEY_DATE = "arcc_radar_v7_date";
-    const STORAGE_KEY_TAPE = "arcc_radar_v7_tape";
+    const STORAGE_KEY_DATA = "arcc_radar_v8_history";
+    const STORAGE_KEY_DATE = "arcc_radar_v8_date";
+    const STORAGE_KEY_TAPE = "arcc_radar_v8_tape";
 
     // تصفير وتنظيف يومي ذاتي للذاكرة الدائمة للموبايل قبل الجلسة بدقيقتين تلقائياً
     const todayStr = new Date().toDateString();
@@ -114,13 +114,14 @@
         }
     });
 
-    // 📡 جلب متوسط حجم تداول 30 يوم من خوادمTradingView مباشرة عبر الـ Scan API
-    let globalHistoricalAvg = 692690; // خط دفاع احتياطي
+    // 📡 جلب متوسط حجم تداول 30 يوم من خوادم TradingView مباشرة
+    let globalHistoricalAvg = 692690; // خط دفاع احتياطي صلب للموبايل
 
     async function fetchTradingViewAverage() {
         try {
             const response = await fetch("https://scanner.tradingview.com/egypt/scan", {
                 method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     "symbols": { "tickers": ["EGX:ARCC"], "query": { "types": [] } },
                     "columns": ["average_volume_30d"]
@@ -131,17 +132,16 @@
                 const result = await response.json();
                 if (result.data && result.data[0] && result.data[0].d) {
                     globalHistoricalAvg = Math.floor(parseFloat(result.data[0].d[0])) || 692690;
-                    document.getElementById('dyn-avg-volume').innerText = globalHistoricalAvg.toLocaleString() + " سهم";
                     console.log("🎯 تم تحديث المتوسط التاريخي من TradingView آلياً:", globalHistoricalAvg);
-                    // تحديث المنحنى والمستهدف بناءً على الرقم الجديد فوراً
-                    updateTargetChartLine();
                 }
             }
         } catch (e) {
-            console.log("⚠️ تم استخدام المتوسط الاحتياطي نتيجة حماية الـ CORS للمتصفح.");
-            document.getElementById('dyn-avg-volume').innerText = globalHistoricalAvg.toLocaleString() + " سهم (احتياطي)";
-            updateTargetChartLine();
+            console.log("⚠️ حماية الموبايل منعت الاتصال بـ TV - تم الانتقال الفوري للمتوسط الاحتياطي المحدث.");
         }
+        
+        // الأسطر التالية تنفذ دائماً لضمان عدم توقف الشاشة وتحررها فوراً على الموبايل
+        document.getElementById('dyn-avg-volume').innerText = globalHistoricalAvg.toLocaleString() + " سهم";
+        updateTargetChartLine();
     }
 
     function updateTargetChartLine() {
@@ -183,6 +183,10 @@
         try {
             const htmlText = await fetchSmartData();
             if (!htmlText) return;
+
+            // تحديث حالة الاتصال بنجاح على شاشة الموبايل فوراً
+            document.getElementById('connection-status').innerText = `⚡ سحب مباشر متزامن زمنياً — كل 5 ثوانٍ`;
+            document.getElementById('connection-status').style.color = "#2ea043";
 
             document.getElementById('last-update').innerText = `آخر جلب: ${new Date().toLocaleTimeString('ar-EG')}`;
             const doc = new DOMParser().parseFromString(htmlText, 'text/html');
@@ -265,4 +269,26 @@
                         
                         if (parseFloat(timeRatio) >= 120) {
                             signalDisplay.innerText = `🚨 تجميع زمني خارق بمعدل ${timeRatio}% | التقييم اللحظي: ${biasText}`;
-                            signalDisplay.
+                            signalDisplay.className = "signal-box accumulation";
+                        } else {
+                            signalDisplay.innerText = `⚪ أداء زمني طبيعي للجلسة بمعدل ${timeRatio}% | التقييم اللحظي: ${biasText}`;
+                            signalDisplay.className = "signal-box normal";
+                        }
+                    }
+                });
+            }
+        } catch (err) { 
+            // في حالة فشل البروكسيات مؤقتاً لا نجعل الشاشة تعلق بل نظهر تنبيه خفيف
+            document.getElementById('connection-status').innerText = `⚠️ جاري إعادة محاولة الاتصال بالسيرفر...`;
+            document.getElementById('connection-status').style.color = "#f0883e";
+            activeProxyIndex = -1; 
+        }
+    }
+
+    // الإقلاع والمزامنة الدورية الفورية
+    fetchTradingViewAverage();
+    setInterval(scanARCCStock, 5000);
+    scanARCCStock();
+</script>
+</body>
+</html>
