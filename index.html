@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار العربية للأسمنت المستقر للموبايل</title>
+    <title>🎯 رادار العربية للأسمنت المتكامل (EGS4 + Mubasher)</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --purple: #8a2be2; --red: #da3633; }
@@ -26,35 +26,32 @@
         .tape-bar-container { background: var(--border); border-radius: 6px; height: 18px; margin-top: 8px; overflow: hidden; display: flex; }
         .buy-bar { background: var(--green); height: 100%; transition: width 0.5s ease; color: #fff; font-size: 0.7rem; font-weight: bold; line-height: 18px; }
         .sell-bar { background: var(--red); height: 100%; transition: width 0.5s ease; color: #fff; font-size: 0.7rem; font-weight: bold; line-height: 18px; }
-        
-        /* حاوية نافذة تداول تريدينج فيو الحية */
-        .tv-widget-container { width: 100%; height: 140px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار التحليل الزمني وتدفق السيولة اللحظي</h1>
+        <h1>🎯 رادار التحليل الزمني وتدفق السيولة الذكي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status" style="color: var(--orange);">⏳ جاري فحص استجابة السيرفر المحلي...</div>
+        <div id="connection-status" class="status">🚀 جاري جلب المتوسط الشهري المحدث من مباشر...</div>
         <div id="last-update" class="timestamp">آخر جلب للبيانات: --:--:--</div>
 
         <div class="metric-grid">
-            <div class="metric-box"><span>آخر سعر تداول (EGS4)</span><b id="live-price">0.00 ج.م</b></div>
-            <div class="metric-box"><span>مستهدف الـ 30 جلسة المعتمد</span><b id="dyn-avg-volume" style="color: var(--purple);">692,690 سهم</b></div>
+            <div class="metric-box"><span>آخر سعر لحظي (EGS4)</span><b id="live-price">0.00 ج.م</b></div>
+            <div class="metric-box"><span>المتوسط الشهري (Mubasher)</span><b id="dyn-avg-volume" style="color: var(--purple);">جاري السحب...</b></div>
         </div>
 
         <div class="metric-grid">
             <div class="metric-box"><span>الحجم الحالي الفعلي</span><b id="live-volume">0</b></div>
-            <div class="metric-box"><span>المستهدف التاريخي الموازي والآن</span><b id="target-volume-now" style="color: var(--orange);">0</b></div>
+            <div class="metric-box"><span>المستهدف التاريخي الآن</span><b id="target-volume-now" style="color: var(--orange);">0</b></div>
         </div>
 
         <div class="metric-box" style="margin-bottom: 10px;">
             <span style="font-weight: bold;">📊 تفكيك السيولة (أعلى طلب 🆚 أقل عرض)</span>
             <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 5px;">
-                <span style="color: var(--green);">🟢 تنفيذ بسعر العرض أو أعلى: <b id="buy-pct">50%</b></span>
-                <span style="color: var(--red);">🔴 تنفيذ بسعر الطلب أو أقل: <b id="sell-pct">50%</b></span>
+                <span style="color: var(--green);">🟢 تنفيذ بسعر العرض أو أعلى (شراء): <b id="buy-pct">50%</b></span>
+                <span style="color: var(--red);">🔴 تنفيذ بسعر الطلب أو أقل (بيع): <b id="sell-pct">50%</b></span>
             </div>
             <div class="tape-bar-container">
                 <div id="buy-bar-id" class="buy-bar" style="width: 50%;"></div>
@@ -62,29 +59,23 @@
             </div>
         </div>
 
-        <div id="signal-display" class="signal-box normal">بانتظار تدفق أولى صفقات الجلسة...</div>
+        <div id="signal-display" class="signal-box normal">بانتظار جلب صفقات الجلسة وتدفق السيولة...</div>
 
         <div class="chart-container">
             <canvas id="volumeChart"></canvas>
         </div>
     </div>
-
-    <div class="card" style="padding: 10px;">
-        <span style="font-size: 0.8rem; font-weight: bold; color: var(--blue); display: block; margin-bottom: 8px;">📈 نافذة مراقبة اتجاه السهم والمؤشرات الفنية (TradingView)</span>
-        <div class="tv-widget-container">
-            <iframe src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?ticker=EGX%3AARCC&theme=dark&style=1&loop=false&internals=false&noTimeScale=false&symboledit=false&saveimage=false&locale=ar" style="width: 100%; height: 100%; border: none;" scrolling="no"></iframe>
-        </div>
-    </div>
 </div>
 
 <script>
-    const REAL_URL = "http://41.33.162.236/egs4/";
+    const EGS4_URL = "http://41.33.162.236/egs4/";
+    const MUBASHER_URL = "https://www.mubasher.info/markets/EGX/stocks/ARCC/volume-statistics";
     const TARGET_KEYWORD = "العربية للأسمنت";
     const SESSION_TOTAL_MINUTES = 270;
     
-    const STORAGE_KEY_DATA = "arcc_mobi_v9_history";
-    const STORAGE_KEY_DATE = "arcc_mobi_v9_date";
-    const STORAGE_KEY_TAPE = "arcc_mobi_v9_tape";
+    const STORAGE_KEY_DATA = "arcc_mub_v10_history";
+    const STORAGE_KEY_DATE = "arcc_mub_v10_date";
+    const STORAGE_KEY_TAPE = "arcc_mub_v10_tape";
 
     const todayStr = new Date().toDateString();
     if (localStorage.getItem(STORAGE_KEY_DATE) !== todayStr) {
@@ -106,8 +97,8 @@
         data: {
             labels: chartLabels,
             datasets: [
-                { label: 'الحجم الفعلي المتراكم التراكمي', data: liveDatasetData, borderColor: '#58a6ff', backgroundColor: 'rgba(88, 166, 255, 0.05)', borderWidth: 2.5, pointRadius: 0, spanGaps: true },
-                { label: 'المتوسط الزمني المستهدف اليومي', data: targetDatasetData, borderColor: '#f0883e', borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 }
+                { label: 'الحجم الفعلي المتراكم', data: liveDatasetData, borderColor: '#58a6ff', backgroundColor: 'rgba(88, 166, 255, 0.05)', borderWidth: 2.5, pointRadius: 0, spanGaps: true },
+                { label: 'المتوسط المستهدف (مباشر)', data: targetDatasetData, borderColor: '#f0883e', borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 }
             ]
         },
         options: {
@@ -121,10 +112,55 @@
         }
     });
 
-    // القيمة المستقرة المحدثة والجاهزة
-    let globalHistoricalAvg = 692690;
+    let globalHistoricalAvg = 692690; // احتياطي أمان صلب
 
-    function initTargetChartLine() {
+    const CORS_PROXIES = [
+        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.io/?${encodeURIComponent(url)}`
+    ];
+    let activeProxyIndex = 0;
+
+    async function fetchFromProxy(url) {
+        for (let i = 0; i < CORS_PROXIES.length; i++) {
+            let idx = (activeProxyIndex + i) % CORS_PROXIES.length;
+            try {
+                const res = await fetch(CORS_PROXIES[idx](url + "?cb=" + Date.now()));
+                if (res.ok) { activeProxyIndex = idx; return await res.text(); }
+            } catch (e) {}
+        }
+        return null;
+    }
+
+    // 📡 سحب وتحليل متوسط الـ 30 يوم من كود HTML الخاص بـ مباشر
+    async function fetchMubasherAverage() {
+        try {
+            const htmlText = await fetchFromProxy(MUBASHER_URL);
+            if (htmlText) {
+                const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+                // البحث في جداول مباشر عن خانة المتوسط الشهري/30 يوم
+                const cells = Array.from(doc.querySelectorAll('td, th, span'));
+                for (let cell of cells) {
+                    let text = cell.innerText.trim();
+                    if (text.includes("شهري") || text.includes("30 يوم") || text.includes("Monthly")) {
+                        let row = cell.parentElement;
+                        let numbers = Array.from(row.querySelectorAll('td')).map(td => parseInt(td.innerText.replace(/,/g, '')));
+                        let validNumber = numbers.find(n => n > 10000); // لقط رقم الحجم الكبير
+                        if (validNumber) {
+                            globalHistoricalAvg = validNumber;
+                            console.log("🎯 تم التقاط المتوسط من مباشر:", globalHistoricalAvg);
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.log("⚠️ تم استخدام الحجم الاحتياطي.");
+        }
+        document.getElementById('dyn-avg-volume').innerText = globalHistoricalAvg.toLocaleString() + " سهم";
+        updateTargetChartLine();
+    }
+
+    function updateTargetChartLine() {
         let avgVolumePerMinute = globalHistoricalAvg / SESSION_TOTAL_MINUTES;
         for (let m = 1; m <= SESSION_TOTAL_MINUTES; m++) {
             targetDatasetData[m - 1] = Math.floor(m * avgVolumePerMinute);
@@ -141,30 +177,12 @@
         return Math.floor((now - start) / 1000 / 60);
     }
 
-    const CORS_PROXIES = [
-        url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-        url => `https://corsproxy.io/?${encodeURIComponent(url)}`
-    ];
-    let activeProxyIndex = -1;
-
-    async function fetchSmartData() {
-        const targetWithCache = REAL_URL + "?cb=" + Date.now();
-        if (activeProxyIndex === -1) {
-            try { const res = await fetch(targetWithCache); if (res.ok) return await res.text(); } catch (e) { activeProxyIndex = 0; }
-        }
-        for (let i = 0; i < CORS_PROXIES.length; i++) {
-            let idx = (activeProxyIndex + i) % CORS_PROXIES.length;
-            try { const res = await fetch(CORS_PROXIES[idx](targetWithCache)); if (res.ok) { activeProxyIndex = idx; return await res.text(); } } catch (e) {}
-        }
-        throw new Error();
-    }
-
     async function scanARCCStock() {
         try {
-            const htmlText = await fetchSmartData();
+            const htmlText = await fetchFromProxy(EGS4_URL);
             if (!htmlText) return;
 
-            document.getElementById('connection-status').innerText = `🟢 متصل ومتابع لحظياً بدقة التحديث الفوري`;
+            document.getElementById('connection-status').innerText = `🟢 متصل بالرادار المزدوج (EGS4 + مباشر) وايراد الداتا مستمر`;
             document.getElementById('connection-status').style.color = "#2ea043";
             document.getElementById('last-update').innerText = `آخر جلب: ${new Date().toLocaleTimeString('ar-EG')}`;
             
@@ -196,7 +214,7 @@
                         let minutesElapsed = getSessionMinutesElapsed() || 1;
                         let targetVolumeNow = Math.floor(minutesElapsed * avgVolumePerMinute);
 
-                        // المقارنة الصارمة لتدفق السيولة اللحظية
+                        // محرك الشريط الصارم لتفكيك السيولة اللحظية
                         if (tapeData.lastTotalVolume > 0 && volume > tapeData.lastTotalVolume) {
                             let deltaVolume = volume - tapeData.lastTotalVolume;
                             
@@ -253,12 +271,11 @@
         } catch (err) { 
             document.getElementById('connection-status').innerText = `⚠️ جاري تحديث جلب البيانات المحتجبة...`;
             document.getElementById('connection-status').style.color = "#f0883e";
-            activeProxyIndex = -1; 
         }
     }
 
-    // تشغيل فوري وبناء خط الشارت
-    initTargetChartLine();
+    // الإقلاع والمزامنة الذكية
+    fetchMubasherAverage();
     setInterval(scanARCCStock, 5000);
     scanARCCStock();
 </script>
