@@ -2,100 +2,100 @@
     "COMI": {
         "name": "التجاري (سيرفر حقيقي)",
         "ticker": "COMI",
-        "price": 13.24,
+        "price": 12.82,
         "volume": 13,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "MFPC": {
         "name": "موبكو (سيرفر حقيقي)",
         "ticker": "MFPC",
-        "price": 34.48,
+        "price": 34.3,
         "volume": 35,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "SWDY": {
         "name": "السويدى (سيرفر حقيقي)",
         "ticker": "SWDY",
-        "price": 85.58,
+        "price": 85.54,
         "volume": 87,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "TMGH": {
         "name": "طلعت (سيرفر حقيقي)",
         "ticker": "TMGH",
-        "price": 94.69,
+        "price": 93.6,
         "volume": 96,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "JUFO": {
         "name": "جهينة (سيرفر حقيقي)",
         "ticker": "JUFO",
-        "price": 30.0,
+        "price": 29.72,
         "volume": 30,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "AMOC": {
         "name": "أموك (سيرفر حقيقي)",
         "ticker": "AMOC",
-        "price": 7.5,
+        "price": 7.43,
         "volume": 7,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "FWRY": {
         "name": "فوري (سيرفر حقيقي)",
         "ticker": "FWRY",
-        "price": 18.4,
+        "price": 18.35,
         "volume": 18,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "BTFH": {
         "name": "بلتون (سيرفر حقيقي)",
         "ticker": "BTFH",
-        "price": 2.99,
+        "price": 3.0,
         "volume": 3,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     },
     "PHDC": {
         "name": "بالم هيلز (سيرفر حقيقي)",
         "ticker": "PHDC",
-        "price": 14.59,
+        "price": 14.65,
         "volume": 15,
         "dynamic_avg_vol": 1000000,
         "volume_x": "1X",
         "signal": "🟢 جاري التحديث اللحظي من السيرفر",
         "history": [],
-        "last_update": "10:40:41"
+        "last_update": "12:16:03"
     }
 }
