@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار عمق السوق الاستباقي - Thndr API</title>
+    <title>🎯 رادار التدفق المالي اللحظي - ARCC</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; }
@@ -13,21 +13,16 @@
         h1 { font-size: 1.2rem; color: #fff; margin-bottom: 2px; }
         .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
         
-        /* 📊 مؤشر جدار الحماية الخماسي */
+        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 10px; font-weight: bold; }
+
+        /* 📊 مؤشر جدار السيولة الاستباقي */
         .pressure-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 15px; }
         .pressure-title { font-size: 0.85rem; color: #fff; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between;}
         .pressure-bar-bg { background: #30363d; border-radius: 4px; height: 14px; overflow: hidden; display: flex; }
         .pressure-bid { background: var(--green); height: 100%; transition: width 0.4s ease; }
         .pressure-ask { background: var(--red); height: 100%; transition: width 0.4s ease; }
 
-        /* 📋 جدول عمق السوق المدمج */
-        .depth-table { width: 100%; margin-top: 10px; font-size: 0.8rem; border-collapse: collapse; background: #21262d; border-radius: 6px; overflow: hidden; }
-        .depth-table th { background: #30363d; color: #8b949e; padding: 6px; font-weight: normal; }
-        .depth-table td { padding: 6px; border-bottom: 1px solid var(--border); }
-        .bid-side { color: #58a6ff; text-align: right; }
-        .ask-side { color: #f0883e; text-align: left; }
-
-        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; margin-top: 10px; }
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 10px; border-radius: 8px; }
         .metric-box span { display: block; font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; }
         .metric-box b { font-size: 1.1rem; color: #fff; }
@@ -43,12 +38,13 @@
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار عمق السوق الخماسي الاستباقي (Thndr Feed)</h1>
+        <h1>🎯 رادار التدفق المالي المباشر (EGS4 Engine)</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
+        <div id="connection-status" class="status">🚀 جاري الاتصال بالسيرفر اللحظي...</div>
         
         <div class="pressure-container">
             <div class="pressure-title">
-                <span>⚡ ميزان سيولة عمق السوق التراكمي (5 المستويات كاملة)</span>
+                <span>⚡ ميزان سيولة العنق (أفضل طلب ضد أفضل عرض)</span>
                 <span id="pressure-pct" style="color: var(--green);">50%</span>
             </div>
             <div class="pressure-bar-bg">
@@ -56,37 +52,28 @@
                 <div id="pressure-ask-bar" class="pressure-ask" style="width: 50%;"></div>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8b949e; margin-top: 6px;">
-                <span>إجمالي الـ 5 طلبات: <b id="total-bid-vol" style="color:#fff;">0</b></span>
-                <span>إجمالي الـ 5 عروض: <b id="total-ask-vol" style="color:#fff;">0</b></span>
+                <span>حجم الطلب الحالي: <b id="lbl-bid-vol" style="color:#fff;">0</b></span>
+                <span>حجم العرض الحالي: <b id="lbl-ask-vol" style="color:#fff;">0</b></span>
             </div>
         </div>
 
-        <table class="depth-table">
-            <thead>
-                <tr>
-                    <th style="text-align: right;">حجم الطلب</th>
-                    <th style="text-align: right;">سعر الطلب</th>
-                    <th style="text-align: left;">سعر العرض</th>
-                    <th style="text-align: left;">حجم العرض</th>
-                </tr>
-            </thead>
-            <tbody id="orderbook-rows">
-                <tr><td colspan="4" style="color:#8b949e;">جاري سحب مستويات العمق من ثندر...</td></tr>
-            </tbody>
-        </table>
+        <div class="metric-grid">
+            <div class="metric-box"><span>أفضل سعر طلب</span><b id="best-bid-price" style="color: var(--green);">0.00</b></div>
+            <div class="metric-box"><span>أفضل سعر عرض</span><b id="best-ask-price" style="color: var(--red);">0.00</b></div>
+        </div>
 
         <div class="metric-grid">
             <div class="metric-box"><span>آخر سعر تنفيذ</span><b id="live-price">0.00 ج.م</b></div>
-            <div class="metric-box"><span>التغير اللحظي</span><b id="live-change">0.00%</b></div>
+            <div class="metric-box"><span>الحجم الإجمالي المنفذ</span><b id="live-volume">0</b></div>
         </div>
 
-        <div id="signal-display" class="signal-box alert-normal">بانتظار تدفق كتل السيولة المخفية...</div>
+        <div id="signal-display" class="signal-box alert-normal">بانتظار قراءة حركة كتل السيولة...</div>
     </div>
 </div>
 
 <script>
-    // الرابط المباشر لـ API ثندر المفتوح الخاص بسهم العربية للأسمنت
-    const THNDR_API_URL = "https://api.thndr.app/v1/market-data/eg/stocks/ARCC/depth";
+    const EGS4_URL = "http://41.33.162.236/egs4/";
+    const TARGET_KEYWORD = "العربية للأسمنت";
     
     let proxyIndex = 0;
     const PROXIES = [
@@ -94,96 +81,93 @@
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
 
-    async function fetchFromThndr() {
+    async function fetchWithProxy(url) {
         for (let i = 0; i < PROXIES.length; i++) {
             let idx = (proxyIndex + i) % PROXIES.length;
             try {
-                let fullUrl = PROXIES[idx](THNDR_API_URL + '?cb=' + Date.now());
+                let fullUrl = PROXIES[idx](url + '?cb=' + Date.now());
                 const response = await fetch(fullUrl);
-                if (response.ok) {
-                    proxyIndex = idx;
-                    return await response.json();
-                }
+                if (response.ok) { proxyIndex = idx; return await response.text(); }
             } catch (e) {}
         }
         return null;
     }
 
-    async function updateRadarEngine() {
+    async function scanEngine() {
         try {
-            const data = await fetchFromThndr();
-            if (!data || !data.bids || !data.asks) return;
+            const htmlText = await fetchWithProxy(EGS4_URL);
+            if (!htmlText) return;
 
-            let bids = data.bids.slice(0, 5); // اقتناص أول 5 طلبات
-            let asks = data.asks.slice(0, 5); // اقتناص أول 5 عروض
+            document.getElementById('connection-status').innerText = `🟢 الرادار متصل ومحدث لحظياً عبر EGS4`;
+            document.getElementById('connection-status').style.color = "#2ea043";
 
-            let totalBidVolume = 0;
-            let totalAskVolume = 0;
-            let tableHtml = "";
+            const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+            const table = doc.querySelector('table');
+            if (!table) return;
 
-            // دمج وعرض الـ 5 مستويات في الجدول وحساب الحجم التراكمي
-            for (let i = 0; i < 5; i++) {
-                let bidVol = bids[i] ? bids[i].volume : 0;
-                let bidPrice = bids[i] ? bids[i].price : 0;
-                let askPrice = asks[i] ? asks[i].price : 0;
-                let askVol = asks[i] ? asks[i].volume : 0;
+            const rows = Array.from(table.querySelectorAll('tr'));
+            let volIdx = 1, prcIdx = 2, bidIdx = 3, askIdx = 4;
+            let bidVolIdx = 3, askVolIdx = 4;
 
-                totalBidVolume += bidVol;
-                totalAskVolume += askVol;
+            const headers = Array.from(rows[0]?.querySelectorAll('th, td') || []).map(el => el.innerText.trim());
+            headers.forEach((h, index) => {
+                if (h.includes("حجم") && h.includes("طلب")) bidVolIdx = index;
+                if (h.includes("حجم") && h.includes("عرض")) askVolIdx = index;
+                if (h.includes("طلب") && !h.includes("حجم")) bidIdx = index;
+                if (h.includes("عرض") && !h.includes("حجم")) askIdx = index;
+                if (h.includes("آخر") || h.includes("سعر")) prcIdx = index;
+                if (h.includes("التداول") || (h.includes("حجم") && !h.includes("طلب") && !h.includes("عرض"))) volIdx = index;
+            });
 
-                tableHtml += `
-                    <tr>
-                        <td class="bid-side">${bidVol > 0 ? bidVol.toLocaleString() : '-'}</td>
-                        <td class="bid-side" style="font-weight:bold; color:#fff;">${bidPrice > 0 ? bidPrice.toFixed(2) : '-'}</td>
-                        <td class="ask-side" style="font-weight:bold; color:#fff;">${askPrice > 0 ? askPrice.toFixed(2) : '-'}</td>
-                        <td class="ask-side">${askVol > 0 ? askVol.toLocaleString() : '-'}</td>
-                    </tr>
-                `;
+            for (let row of rows) {
+                const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
+                if (cells.length > 4 && cells.join(" ").includes(TARGET_KEYWORD)) {
+                    
+                    let volume = parseInt(cells[volIdx].replace(/,/g, '')) || 0;
+                    let price = parseFloat(cells[prcIdx].replace(/,/g, '')) || 0;
+                    let bestBid = parseFloat(cells[bidIdx].replace(/,/g, '')) || 0;
+                    let bestAsk = parseFloat(cells[askIdx].replace(/,/g, '')) || 0;
+                    
+                    let bidVolume = parseInt(cells[bidVolIdx]?.replace(/,/g, '')) || 0;
+                    let askVolume = parseInt(cells[askVolIdx]?.replace(/,/g, '')) || 0;
+
+                    let totalWallVolume = bidVolume + askVolume;
+                    let bidWallPressure = totalWallVolume > 0 ? ((bidVolume / totalWallVolume) * 100) : 50;
+
+                    // تحديث الواجهة
+                    document.getElementById('pressure-pct').innerText = bidWallPressure.toFixed(1) + "%";
+                    document.getElementById('pressure-bid-bar').style.width = bidWallPressure + "%";
+                    document.getElementById('pressure-ask-bar').style.width = (100 - bidWallPressure) + "%";
+                    
+                    document.getElementById('lbl-bid-vol').innerText = bidVolume.toLocaleString();
+                    document.getElementById('lbl-ask-vol').innerText = askVolume.toLocaleString();
+                    document.getElementById('best-bid-price').innerText = bestBid.toFixed(2);
+                    document.getElementById('best-ask-price').innerText = bestAsk.toFixed(2);
+                    document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
+                    document.getElementById('live-volume').innerText = volume.toLocaleString();
+
+                    // 🚨 التصفية الصارمة (إشارة الـ 58% للتجميع)
+                    const signalDisplay = document.getElementById('signal-display');
+                    if (bidWallPressure >= 58.0) {
+                        signalDisplay.innerText = `🔥 إنذار استباقي: تجميع قوي بنسبة ${bidWallPressure.toFixed(1)}%! طلبات كافية للاكتساح والدفع لأعلى.`;
+                        signalDisplay.className = "signal-box alert-accumulation";
+                    } else if (bidWallPressure <= 42.0) {
+                        signalDisplay.innerText = `⚠️ ضغط تصريفي: جدار العروض أثقل بنسبة ${(100 - bidWallPressure).toFixed(1)}%. حذر من التراجع.`;
+                        signalDisplay.className = "signal-box alert-normal";
+                        signalDisplay.style.borderColor = "var(--red)";
+                    } else {
+                        signalDisplay.innerText = `⚖️ استقرار: القوى متوازنة حالياً بانتظار دخول كتل سيولة جديدة.`;
+                        signalDisplay.className = "signal-box alert-normal";
+                        signalDisplay.style.borderColor = "var(--border)";
+                    }
+                    break;
+                }
             }
-            document.getElementById('orderbook-rows').innerHTML = tableHtml;
-
-            // ⚙️ الحساب الاستباقي الخماسي العالي الدقة
-            let totalDepthVolume = totalBidVolume + totalAskVolume;
-            let bidPressure = totalDepthVolume > 0 ? ((totalBidVolume / totalDepthVolume) * 100) : 50;
-
-            // تحديث واجهة ميزان القوة
-            document.getElementById('pressure-pct').innerText = bidPressure.toFixed(1) + "%";
-            document.getElementById('pressure-bid-bar').style.width = bidPressure + "%";
-            document.getElementById('pressure-ask-bar').style.width = (100 - bidPressure) + "%";
-            
-            document.getElementById('total-bid-vol').innerText = totalBidVolume.toLocaleString();
-            document.getElementById('total-ask-vol').innerText = totalAskVolume.toLocaleString();
-
-            // تحديث الأسعار اللحظية العامة من ثندر
-            if(data.lastPrice) {
-                document.getElementById('live-price').innerText = data.lastPrice.toFixed(2) + " ج.م";
-                document.getElementById('live-change').innerText = (data.changePercent || 0).toFixed(2) + "%";
-                document.getElementById('live-change').style.color = data.changePercent >= 0 ? "var(--green)" : "var(--red)";
-            }
-
-            // 🚨 تفعيل الفلتر الصارم الخاص بك (58% لتأكيد التجميع الاستباقي)
-            const signalDisplay = document.getElementById('signal-display');
-            if (bidPressure >= 58.0) {
-                signalDisplay.innerText = `🔥 تجميع خماسي استباقي خارق (${bidPressure.toFixed(1)}%)! الحيتان تبني جدران دعم سميكة في عمق الطلبات للاكتساح.`;
-                signalDisplay.className = "signal-box alert-accumulation";
-            } else if (bidPressure <= 42.0) {
-                signalDisplay.innerText = `⚠️ تصريف وضغط بيعي في العمق (${(100 - bidPressure).toFixed(1)}%)! جدران العروض أثقل وتمنع السهم من الصعود.`;
-                signalDisplay.className = "signal-box alert-normal";
-                signalDisplay.style.borderColor = "var(--red)";
-            } else {
-                signalDisplay.innerText = `⚖️ قوى العمق متوازنة حالياً (${bidPressure.toFixed(1)}% طلب مقابل ${(100 - bidPressure).toFixed(1)}% عرض).`;
-                signalDisplay.className = "signal-box alert-normal";
-                signalDisplay.style.borderColor = "var(--border)";
-            }
-
-        } catch (err) {
-            console.error("Thndr Depth Engine Error:", err);
-        }
+        } catch (err) { console.error(err); }
     }
 
-    // تشغيل وتحديث تلقائي كل 4 ثوانٍ لالتقاط أي أمر ضخم ينزل في العمق فوراً
-    setInterval(updateRadarEngine, 4000);
-    updateRadarEngine();
+    setInterval(scanEngine, 5000);
+    scanEngine();
 </script>
 </body>
 </html>
