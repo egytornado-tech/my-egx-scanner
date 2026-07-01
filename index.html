@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار العربية للأسمنت - التصفير الذكي للموبايل</title>
+    <title>🎯 رادار العربية للأسمنت - المزامنة المزدوجة</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --purple: #8a2be2; --red: #da3633; }
@@ -12,7 +12,14 @@
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         h1 { font-size: 1.3rem; color: #fff; margin-bottom: 2px; }
         .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 5px; }
-        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 10px; font-weight: bold; }
+        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 4px; font-weight: bold; }
+        
+        /* 🏷️ ستايل شارة مصدر البيانات الجديد */
+        .source-badge { display: inline-block; padding: 4px 10px; font-size: 0.75rem; border-radius: 20px; font-weight: bold; margin-bottom: 12px; border: 1px solid var(--border); }
+        .src-hermes { background: rgba(138, 43, 226, 0.15); color: #b388ff; border-color: var(--purple); }
+        .src-egs4 { background: rgba(88, 166, 255, 0.15); color: var(--blue); border-color: var(--blue); }
+        .src-unknown { background: #21262d; color: #8b949e; }
+
         .timestamp { font-size: 0.8rem; color: #8b949e; margin-bottom: 15px; }
         .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 10px; border-radius: 8px; }
@@ -32,13 +39,17 @@
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار التحليل الزمني وتفكيك أحجام السيولة</h1>
+        <h1>🎯 رادار التحليل الزمني والمحرك المزدوج للسيولة</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🚀 جاري الاستعداد وتصفير عدادات الجلسة...</div>
+        <div id="connection-status" class="status">🚀 جاري فحص قنوات الاتصال الذكية...</div>
+        
+        <!-- 📡 شارة توضيح مصدر الجلب الحالي للمستخدم -->
+        <div id="data-source-display" class="source-badge src-unknown">المصدر الحالي: جاري التحديد...</div>
+        
         <div id="last-update" class="timestamp">آخر جلب للبيانات: --:--:--</div>
 
         <div class="metric-grid">
-            <div class="metric-box"><span>آخر سعر لحظي (EGS4)</span><b id="live-price">0.00 ج.م</b></div>
+            <div class="metric-box"><span>آخر سعر لحظي</span><b id="live-price">0.00 ج.م</b></div>
             <div class="metric-box"><span>المتوسط الشهري (Mubasher)</span><b id="dyn-avg-volume" style="color: var(--purple);">جاري السحب...</b></div>
         </div>
 
@@ -47,8 +58,9 @@
             <div class="metric-box"><span>المستهدف التاريخي الآن</span><b id="target-volume-now" style="color: var(--orange);">0</b></div>
         </div>
 
+        <!-- 📊 كارت تصنيف الكميات والسيولة التراكمية المحاكية -->
         <div class="metric-box" style="margin-bottom: 10px; border-color: #444;">
-            <span style="font-weight: bold; color: #fff; font-size: 0.85rem;">📊 تصنيف كميات الأسهم المنفذة (مطابقة حتمية)</span>
+            <span style="font-weight: bold; color: #fff; font-size: 0.85rem;">📊 تصنيف كميات الأسهم المنفذة (مطابقة السلوك التراكمي)</span>
             
             <div style="display: flex; justify-content: space-between; margin-top: 8px;">
                 <div style="text-align: right;">
@@ -68,11 +80,11 @@
                 <div id="sell-bar-id" class="sell-bar" style="width: 50%;"></div>
             </div>
             <div style="font-size: 0.7rem; color: #8b949e; margin-top: 6px; text-align: center;">
-                مجموع التفكيك: <span id="checksum-total" style="color: #fff; font-weight: bold;">0</span> سهم (مطابق لـ EGS4)
+                مجموع التفكيك: <span id="checksum-total" style="color: #fff; font-weight: bold;">0</span> سهم
             </div>
         </div>
 
-        <div id="signal-display" class="signal-box normal">في انتظار انطلاق جلسة التداول (10:00 صباحاً)...</div>
+        <div id="signal-display" class="signal-box normal">بانتظار قراءة نبض التداولات الحية...</div>
 
         <div class="chart-container">
             <canvas id="volumeChart"></canvas>
@@ -81,16 +93,16 @@
 </div>
 
 <script>
-    const EGS4_URL = "http://41.33.162.236/egs4/";
     const MUBASHER_URL = "https://www.mubasher.info/markets/EGX/stocks/ARCC/volume-statistics";
+    const HERMES_FEED_URL = "https://www.efghermesone.com/Datafeed/GetDatafeedUrl";
+    const EGS4_URL = "http://41.33.162.236/egs4/";
     const TARGET_KEYWORD = "العربية للأسمنت";
     const SESSION_TOTAL_MINUTES = 270;
     
-    const STORAGE_KEY_DATA = "arcc_mub_v12_history";
-    const STORAGE_KEY_DATE = "arcc_mub_v12_date";
-    const STORAGE_KEY_TAPE = "arcc_mub_v12_tape";
+    const STORAGE_KEY_DATA = "arcc_dual_v1_history";
+    const STORAGE_KEY_DATE = "arcc_dual_v1_date";
+    const STORAGE_KEY_TAPE = "arcc_dual_v1_tape";
 
-    // تنظيف كلي للذاكرة في بداية اليوم الجديد
     const todayStr = new Date().toDateString();
     if (localStorage.getItem(STORAGE_KEY_DATE) !== todayStr) {
         localStorage.removeItem(STORAGE_KEY_DATA);
@@ -127,27 +139,28 @@
     });
 
     let globalHistoricalAvg = 692690;
-    let activeProxyIndex = 0;
-
-    const CORS_PROXIES = [
+    let proxyIndex = 0;
+    const PROXIES = [
         url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
 
-    async function fetchFromProxy(url) {
-        for (let i = 0; i < CORS_PROXIES.length; i++) {
-            let idx = (activeProxyIndex + i) % CORS_PROXIES.length;
+    async function fetchWithProxy(url, options = {}) {
+        let lastError = null;
+        for (let i = 0; i < PROXIES.length; i++) {
+            let idx = (proxyIndex + i) % PROXIES.length;
             try {
-                const res = await fetch(CORS_PROXIES[idx](url + "?cb=" + Date.now()));
-                if (res.ok) { activeProxyIndex = idx; return await res.text(); }
-            } catch (e) {}
+                let fullUrl = PROXIES[idx](url + (url.includes('?') ? '&' : '?') + 'cb=' + Date.now());
+                const response = await fetch(fullUrl, options);
+                if (response.ok) { proxyIndex = idx; return await response.text(); }
+            } catch (e) { lastError = e; }
         }
         return null;
     }
 
     async function fetchMubasherAverage() {
         try {
-            const htmlText = await fetchFromProxy(MUBASHER_URL);
+            const htmlText = await fetchWithProxy(MUBASHER_URL);
             if (htmlText) {
                 const doc = new DOMParser().parseFromString(htmlText, 'text/html');
                 const cells = Array.from(doc.querySelectorAll('td, th, span'));
@@ -174,147 +187,209 @@
         volumeChart.update('none');
     }
 
-    // 🕒 دالة حساب الدقائق المنقضية - معدلة للتصفير الصارم قبل الساعة 10:00 ص
     function getSessionMinutesElapsed() {
         const now = new Date();
         const start = new Date(); start.setHours(10, 0, 0, 0);
         const end = new Date(); end.setHours(14, 30, 0, 0);
-        
-        if (now < start) return 0; // حماية القفل: تصفير كامل قبل بدء الجلسة
+        if (now < start) return 0;
         if (now > end) return SESSION_TOTAL_MINUTES;
         return Math.floor((now - start) / 1000 / 60);
     }
 
-    async function scanARCCStock() {
+    // 🏎️ المحرك الذكي المزدوج للجلب والتنقيح
+    async function dualEngineDataScanner() {
+        let minutesElapsed = getSessionMinutesElapsed();
+        if (minutesElapsed === 0) {
+            document.getElementById('connection-status').innerText = `⏳ الرادار مستعد وفي انتظار بدء الجلسة (10:00 ص)`;
+            document.getElementById('connection-status').style.color = "#f0883e";
+            document.getElementById('data-source-display').innerText = "المصدر الحالي: الجلسة لم تبدأ";
+            document.getElementById('data-source-display').className = "source-badge src-unknown";
+            tapeData = { buyShares: 0, sellShares: 0, lastTotalVolume: 0 };
+            localStorage.setItem(STORAGE_KEY_TAPE, JSON.stringify(tapeData));
+            return;
+        }
+
+        let volume = 0, price = 0, highPrice = 0, lowPrice = 0, bestBid = 0, bestAsk = 0;
+        let fetchedSuccessfully = false;
+        let currentSource = "";
+
+        // 🟢 الطريقة الأولى: محاولة جلب البيانات الفورية من هيرميس (JSON المباشر)
         try {
-            const htmlText = await fetchFromProxy(EGS4_URL);
-            if (!htmlText) return;
+            const rawResponse = await fetchWithProxy(HERMES_FEED_URL, {
+                "headers": {
+                    "accept": "application/json, text/javascript, */*; q=0.01",
+                    "x-requested-with": "XMLHttpRequest",
+                    "Referer": "https://www.efghermesone.com/datafeed"
+                },
+                "body": null,
+                "method": "POST"
+            });
 
-            let minutesElapsed = getSessionMinutesElapsed();
-            
-            // في حالة ما قبل الجلسة: نظهر حالة الاستعداد ونبقي المؤشرات صفر
-            if (minutesElapsed === 0) {
-                document.getElementById('connection-status').innerText = `⏳ الرادار مستعد وفي انتظار ضربة البداية (10:00 ص)`;
-                document.getElementById('connection-status').style.color = "#f0883e";
-                document.getElementById('target-volume-now').innerText = "0";
-                document.getElementById('signal-display').innerText = "💤 السوق مغلق حالياً - بانتظار تداولات الجلسة الجديدة...";
-                document.getElementById('signal-display').className = "signal-box normal";
-                
-                // تصفير العدادات اللحظية احتياطياً قبل الافتتاح
-                tapeData = { buyShares: 0, sellShares: 0, lastTotalVolume: 0 };
-                localStorage.setItem(STORAGE_KEY_TAPE, JSON.stringify(tapeData));
-            } else {
-                document.getElementById('connection-status').innerText = `🟢 الرادار متصل لحظياً ومطابق الأحجام بنسبة 100%`;
-                document.getElementById('connection-status').style.color = "#2ea043";
+            if (rawResponse) {
+                const data = JSON.parse(rawResponse);
+                let arccStock = null;
+                if (Array.isArray(data)) {
+                    arccStock = data.find(s => s.Symbol === "ARCC" || s.Symbol === "ARCC.CA" || s.NameAR?.includes(TARGET_KEYWORD));
+                } else if (data.d && Array.isArray(data.d)) {
+                    arccStock = data.d.find(s => s.Symbol === "ARCC" || s.NameAR?.includes(TARGET_KEYWORD));
+                }
+
+                if (arccStock) {
+                    volume = arccStock.Volume || arccStock.Qty || 0; 
+                    price = arccStock.LastPrice || arccStock.Last || 0;
+                    highPrice = arccStock.High || price;
+                    lowPrice = arccStock.Low || price;
+                    bestBid = arccStock.Bid || 0;
+                    bestAsk = arccStock.Ask || 0;
+                    
+                    if (volume > 0) {
+                        fetchedSuccessfully = true;
+                        currentSource = "hermes";
+                    }
+                }
             }
+        } catch (e) {
+            console.log("قناة هيرميس مغلقة أو تم حظرها، الانتقال التلقائي لـ EGS4...");
+        }
 
-            document.getElementById('last-update').innerText = `آخر جلب: ${new Date().toLocaleTimeString('ar-EG')}`;
-            
-            const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-            const table = doc.querySelector('table');
-            
-            if (table) {
-                const rows = Array.from(table.querySelectorAll('tr'));
-                let volIdx = 1, prcIdx = 2, bidIdx = 3, askIdx = 4;
-                const headers = Array.from(rows[0]?.querySelectorAll('th, td') || []).map(el => el.innerText.trim());
-                
-                headers.forEach((h, index) => {
-                    if (h.includes("حجم") || h.includes("التداول")) volIdx = index;
-                    if (h.includes("آخر") || h.includes("سعر")) prcIdx = index;
-                    if (h.includes("طلب")) bidIdx = index;
-                    if (h.includes("عرض")) askIdx = index;
-                });
-
-                rows.forEach(row => {
-                    const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
-                    if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
+        // 🔵 الطريقة الثانية (الـ Fallback): جلب البيانات بالطريقة المعتادة (EGS4) لو فشلت الطريقة الأولى
+        if (!fetchedSuccessfully) {
+            try {
+                const htmlText = await fetchWithProxy(EGS4_URL);
+                if (htmlText) {
+                    const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+                    const table = doc.querySelector('table');
+                    if (table) {
+                        const rows = Array.from(table.querySelectorAll('tr'));
+                        let volIdx = 1, prcIdx = 2, bidIdx = 3, askIdx = 4, highIdx = 5, lowIdx = 6;
+                        const headers = Array.from(rows[0]?.querySelectorAll('th, td') || []).map(el => el.innerText.trim());
                         
-                        let volume = parseInt(cells[volIdx].replace(/,/g, '')) || 0;
-                        let price = parseFloat(cells[prcIdx].replace(/,/g, '')) || 0;
-                        let bestBid = parseFloat(cells[bidIdx].replace(/,/g, '')) || 0; 
-                        let bestAsk = parseFloat(cells[askIdx].replace(/,/g, '')) || 0; 
+                        headers.forEach((h, index) => {
+                            if (h.includes("حجم") || h.includes("التداول")) volIdx = index;
+                            if (h.includes("آخر") || h.includes("سعر")) prcIdx = index;
+                            if (h.includes("طلب")) bidIdx = index;
+                            if (h.includes("عرض")) askIdx = index;
+                            if (h.includes("أعلى") || h.includes("هاي")) highIdx = index;
+                            if (h.includes("أقل") || h.includes("لو")) lowIdx = index;
+                        });
 
-                        let avgVolumePerMinute = globalHistoricalAvg / SESSION_TOTAL_MINUTES;
-                        let currentMinutes = minutesElapsed || 1;
-                        let targetVolumeNow = minutesElapsed === 0 ? 0 : Math.floor(currentMinutes * avgVolumePerMinute);
-
-                        // الحساب اللحظي يبدأ فقط إذا بدأت الجلسة
-                        if (minutesElapsed > 0) {
-                            if (tapeData.lastTotalVolume > 0 && volume > tapeData.lastTotalVolume) {
-                                let deltaVolume = volume - tapeData.lastTotalVolume;
-                                let spread = bestAsk - bestBid;
-                                let buyWeight = 0.5;
+                        for (let row of rows) {
+                            const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
+                            if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
+                                volume = parseInt(cells[volIdx].replace(/,/g, '')) || 0;
+                                price = parseFloat(cells[prcIdx].replace(/,/g, '')) || 0;
+                                bestBid = parseFloat(cells[bidIdx].replace(/,/g, '')) || 0; 
+                                bestAsk = parseFloat(cells[askIdx].replace(/,/g, '')) || 0; 
+                                highPrice = parseFloat(cells[highIdx]?.replace(/,/g, '')) || price;
+                                lowPrice = parseFloat(cells[lowIdx]?.replace(/,/g, '')) || price;
                                 
-                                if (spread > 0) {
-                                    buyWeight = (price - bestBid) / spread;
-                                    if (buyWeight > 1) buyWeight = 1;
-                                    if (buyWeight < 0) buyWeight = 0;
+                                if (volume > 0) {
+                                    fetchedSuccessfully = true;
+                                    currentSource = "egs4";
+                                    break;
                                 }
-
-                                let allocatedBuy = Math.round(deltaVolume * buyWeight);
-                                let allocatedSell = deltaVolume - allocatedBuy;
-
-                                tapeData.buyShares += allocatedBuy;
-                                tapeData.sellShares += allocatedSell;
-                            } else if (tapeData.lastTotalVolume === 0 && volume > 0) {
-                                tapeData.buyShares = Math.round(volume * 0.5);
-                                tapeData.sellShares = volume - tapeData.buyShares;
-                            }
-                            tapeData.lastTotalVolume = volume;
-                            localStorage.setItem(STORAGE_KEY_TAPE, JSON.stringify(tapeData));
-                        }
-
-                        let checksumTotal = tapeData.buyShares + tapeData.sellShares;
-                        let buyPct = checksumTotal > 0 ? ((tapeData.buyShares / checksumTotal) * 100).toFixed(1) : "50.0";
-                        let sellPct = checksumTotal > 0 ? (100 - parseFloat(buyPct)).toFixed(1) : "50.0";
-
-                        document.getElementById('buy-shares-count').innerText = tapeData.buyShares.toLocaleString();
-                        document.getElementById('sell-shares-count').innerText = tapeData.sellShares.toLocaleString();
-                        document.getElementById('buy-pct-text').innerText = `(${buyPct}%)`;
-                        document.getElementById('sell-pct-text').innerText = `(${sellPct}%)`;
-                        
-                        document.getElementById('buy-bar-id').style.width = buyPct + "%";
-                        document.getElementById('sell-bar-id').style.width = sellPct + "%";
-                        document.getElementById('checksum-total').innerText = checksumTotal.toLocaleString();
-
-                        document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
-                        document.getElementById('live-volume').innerText = volume.toLocaleString();
-                        
-                        if (minutesElapsed > 0) {
-                            document.getElementById('target-volume-now').innerText = targetVolumeNow.toLocaleString();
-                            let timeRatio = ((volume / targetVolumeNow) * 100).toFixed(1);
-
-                            if (minutesElapsed <= SESSION_TOTAL_MINUTES) {
-                                liveDatasetData[minutesElapsed - 1] = volume;
-                                for (let k = 0; k < minutesElapsed - 1; k++) {
-                                    if (liveDatasetData[k] === null) liveDatasetData[k] = Math.floor((k + 1) * (volume / minutesElapsed));
-                                }
-                                localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(liveDatasetData));
-                                
-                                volumeChart.data.datasets[0].data = liveDatasetData;
-                                volumeChart.update('none');
-                            }
-
-                            const signalDisplay = document.getElementById('signal-display');
-                            let biasText = parseFloat(buyPct) > 53 ? "🔥 [اكتساح شرائي واختراق عروض]" : (parseFloat(buyPct) < 47 ? "⚠️ [ضغط بيعي وتسييل طلبات]" : "⚖️ [توازن قوى]");
-                            
-                            if (parseFloat(timeRatio) >= 120) {
-                                signalDisplay.innerText = `🚨 تجميع زمني خارق بمعدل ${timeRatio}% | التقييم: ${biasText}`;
-                                signalDisplay.className = "signal-box accumulation";
-                            } else {
-                                signalDisplay.innerText = `⚪ أداء زمني طبيعي للجلسة بمعدل ${timeRatio}% | التقييم: ${biasText}`;
-                                signalDisplay.className = "signal-box normal";
                             }
                         }
                     }
-                });
+                }
+            } catch (err) {
+                console.error("فشل المحرك المزدوج بالكامل في هذه اللقطة:", err);
             }
-        } catch (err) { }
+        }
+
+        // 🎛️ تحديث واجهة المستخدم بناءً على الطريقة التي تم بها الجلب بنجاح
+        if (fetchedSuccessfully) {
+            document.getElementById('connection-status').innerText = `🟢 الرادار متصل ويحدث البيانات حياً`;
+            document.getElementById('connection-status').style.color = "#2ea043";
+            document.getElementById('last-update').innerText = `آخر جلب: ${new Date().toLocaleTimeString('ar-EG')}`;
+
+            const sourceBadge = document.getElementById('data-source-display');
+            if (currentSource === "hermes") {
+                sourceBadge.innerText = "⚡ المصدر الحالي: هيرميس (JSON المباشر)";
+                sourceBadge.className = "source-badge src-hermes";
+            } else {
+                sourceBadge.innerText = "📡 المصدر الحالي: السيرفر المعتاد (EGS4)";
+                sourceBadge.className = "source-badge src-egs4";
+            }
+
+            // تفعيل محاكاة تدفق السيولة والـ Spread
+            if (tapeData.lastTotalVolume > 0 && volume > tapeData.lastTotalVolume) {
+                let deltaVolume = volume - tapeData.lastTotalVolume;
+                let spread = bestAsk - bestBid;
+                let buyWeight = 0.5;
+                
+                if (spread > 0) {
+                    buyWeight = (price - bestBid) / spread;
+                    if (buyWeight > 1) buyWeight = 1;
+                    if (buyWeight < 0) buyWeight = 0;
+                }
+                tapeData.buyShares += Math.round(deltaVolume * buyWeight);
+                tapeData.sellShares += (deltaVolume - Math.round(deltaVolume * buyWeight));
+            } else if (tapeData.lastTotalVolume === 0 && volume > 0 && tapeData.buyShares === 0) {
+                let dayRange = highPrice - lowPrice;
+                let simulatedBuyWeight = 0.3769; // المعايرة الافتراضية
+                if (dayRange > 0) {
+                    simulatedBuyWeight = (price - lowPrice) / dayRange;
+                    if (simulatedBuyWeight > 0.85) simulatedBuyWeight = 0.85;
+                    if (simulatedBuyWeight < 0.15) simulatedBuyWeight = 0.15;
+                }
+                tapeData.buyShares = Math.round(volume * simulatedBuyWeight);
+                tapeData.sellShares = volume - tapeData.buyShares;
+            }
+            
+            tapeData.lastTotalVolume = volume;
+            localStorage.setItem(STORAGE_KEY_TAPE, JSON.stringify(tapeData));
+
+            let checksumTotal = tapeData.buyShares + tapeData.sellShares;
+            let buyPct = checksumTotal > 0 ? ((tapeData.buyShares / checksumTotal) * 100).toFixed(1) : "50.0";
+            let sellPct = checksumTotal > 0 ? (100 - parseFloat(buyPct)).toFixed(1) : "50.0";
+
+            document.getElementById('buy-shares-count').innerText = tapeData.buyShares.toLocaleString();
+            document.getElementById('sell-shares-count').innerText = tapeData.sellShares.toLocaleString();
+            document.getElementById('buy-pct-text').innerText = `(${buyPct}%)`;
+            document.getElementById('sell-pct-text').innerText = `(${sellPct}%)`;
+            document.getElementById('buy-bar-id').style.width = buyPct + "%";
+            document.getElementById('sell-bar-id').style.width = sellPct + "%";
+            document.getElementById('checksum-total').innerText = checksumTotal.toLocaleString();
+
+            document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
+            document.getElementById('live-volume').innerText = volume.toLocaleString();
+            
+            let avgVolumePerMinute = globalHistoricalAvg / SESSION_TOTAL_MINUTES;
+            let currentMinutes = minutesElapsed || 1;
+            let targetVolumeNow = Math.floor(currentMinutes * avgVolumePerMinute);
+            document.getElementById('target-volume-now').innerText = targetVolumeNow.toLocaleString();
+
+            let timeRatio = ((volume / targetVolumeNow) * 100).toFixed(1);
+            if (minutesElapsed <= SESSION_TOTAL_MINUTES) {
+                liveDatasetData[minutesElapsed - 1] = volume;
+                for (let k = 0; k < minutesElapsed - 1; k++) {
+                    if (liveDatasetData[k] === null) liveDatasetData[k] = Math.floor((k + 1) * (volume / minutesElapsed));
+                }
+                localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(liveDatasetData));
+                volumeChart.data.datasets[0].data = liveDatasetData;
+                volumeChart.update('none');
+            }
+
+            const signalDisplay = document.getElementById('signal-display');
+            let biasText = parseFloat(buyPct) > 53 ? "🔥 [اكتساح شرائي واخرتاق عروض]" : (parseFloat(buyPct) < 47 ? "⚠️ [ضغط بيعي وتسييل طلبات]" : "⚖️ [توازن قوى]");
+            
+            if (parseFloat(timeRatio) >= 120) {
+                signalDisplay.innerText = `🚨 تجمع زمني خارق بمعدل ${timeRatio}% | التقييم: ${biasText}`;
+                signalDisplay.className = "signal-box accumulation";
+            } else {
+                signalDisplay.innerText = `⚪ أداء زمني طبيعي للجلسة بمعدل ${timeRatio}% | التقييم: ${biasText}`;
+                signalDisplay.className = "signal-box normal";
+            }
+        } else {
+            document.getElementById('connection-status').innerText = `⚠️ فشل الجلب مؤقتاً من المصدرين (محاولة إعادة الاتصال تلقائياً...)`;
+            document.getElementById('connection-status').style.color = "#da3633";
+        }
     }
 
     fetchMubasherAverage();
-    setInterval(scanARCCStock, 5000);
-    scanARCCStock();
+    setInterval(dualEngineDataScanner, 5000);
+    dualEngineDataScanner();
 </script>
 </body>
 </html>
