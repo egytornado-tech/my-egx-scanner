@@ -3,393 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار العربية للأسمنت - المزامنة المزدوجة</title>
+    <title>🎯 رادار عمق السوق الاستباقي - Thndr API</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --purple: #8a2be2; --red: #da3633; }
+        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 10px; margin: 0; text-align: center; }
-        .container { max-width: 600px; margin: auto; }
+        .container { max-width: 500px; margin: auto; }
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        h1 { font-size: 1.3rem; color: #fff; margin-bottom: 2px; }
-        .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 5px; }
-        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 4px; font-weight: bold; }
+        h1 { font-size: 1.2rem; color: #fff; margin-bottom: 2px; }
+        .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
         
-        /* 🏷️ ستايل شارة مصدر البيانات الجديد */
-        .source-badge { display: inline-block; padding: 4px 10px; font-size: 0.75rem; border-radius: 20px; font-weight: bold; margin-bottom: 12px; border: 1px solid var(--border); }
-        .src-hermes { background: rgba(138, 43, 226, 0.15); color: #b388ff; border-color: var(--purple); }
-        .src-egs4 { background: rgba(88, 166, 255, 0.15); color: var(--blue); border-color: var(--blue); }
-        .src-unknown { background: #21262d; color: #8b949e; }
+        /* 📊 مؤشر جدار الحماية الخماسي */
+        .pressure-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 15px; }
+        .pressure-title { font-size: 0.85rem; color: #fff; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between;}
+        .pressure-bar-bg { background: #30363d; border-radius: 4px; height: 14px; overflow: hidden; display: flex; }
+        .pressure-bid { background: var(--green); height: 100%; transition: width 0.4s ease; }
+        .pressure-ask { background: var(--red); height: 100%; transition: width 0.4s ease; }
 
-        .timestamp { font-size: 0.8rem; color: #8b949e; margin-bottom: 15px; }
-        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        /* 📋 جدول عمق السوق المدمج */
+        .depth-table { width: 100%; margin-top: 10px; font-size: 0.8rem; border-collapse: collapse; background: #21262d; border-radius: 6px; overflow: hidden; }
+        .depth-table th { background: #30363d; color: #8b949e; padding: 6px; font-weight: normal; }
+        .depth-table td { padding: 6px; border-bottom: 1px solid var(--border); }
+        .bid-side { color: #58a6ff; text-align: right; }
+        .ask-side { color: #f0883e; text-align: left; }
+
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; margin-top: 10px; }
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 10px; border-radius: 8px; }
         .metric-box span { display: block; font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; }
-        .metric-box b { font-size: 1.15rem; color: #fff; }
-        .chart-container { position: relative; width: 100%; height: 240px; margin-top: 15px; background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 5px; box-sizing: border-box; }
-        .signal-box { padding: 12px; border-radius: 8px; font-weight: bold; font-size: 0.95rem; border: 1px solid var(--border); margin-top: 10px; }
-        .accumulation { background: rgba(46, 160, 67, 0.15); color: #58a6ff; border-color: var(--green); }
-        .normal { background: #21262d; color: var(--text); }
+        .metric-box b { font-size: 1.1rem; color: #fff; }
         
-        .tape-bar-container { background: var(--border); border-radius: 6px; height: 20px; margin-top: 8px; overflow: hidden; display: flex; }
-        .buy-bar { background: var(--green); height: 100%; transition: width 0.3s ease; color: #fff; font-size: 0.75rem; font-weight: bold; line-height: 20px; }
-        .sell-bar { background: var(--red); height: 100%; transition: width 0.3s ease; color: #fff; font-size: 0.75rem; font-weight: bold; line-height: 20px; }
+        .signal-box { padding: 12px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); margin-top: 10px; }
+        .alert-accumulation { background: rgba(46, 160, 67, 0.2); color: #fff; border-color: var(--green); animation: pulse 2s infinite; }
+        .alert-normal { background: #21262d; color: var(--text); }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(46,160,67,0.4); } 70% { box-shadow: 0 0 0 8px rgba(46,160,67,0); } 100% { box-shadow: 0 0 0 0 rgba(46,160,67,0); } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار التحليل الزمني والمحرك المزدوج للسيولة</h1>
+        <h1>🎯 رادار عمق السوق الخماسي الاستباقي (Thndr Feed)</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🚀 جاري فحص قنوات الاتصال الذكية...</div>
         
-        <!-- 📡 شارة توضيح مصدر الجلب الحالي للمستخدم -->
-        <div id="data-source-display" class="source-badge src-unknown">المصدر الحالي: جاري التحديد...</div>
-        
-        <div id="last-update" class="timestamp">آخر جلب للبيانات: --:--:--</div>
+        <div class="pressure-container">
+            <div class="pressure-title">
+                <span>⚡ ميزان سيولة عمق السوق التراكمي (5 المستويات كاملة)</span>
+                <span id="pressure-pct" style="color: var(--green);">50%</span>
+            </div>
+            <div class="pressure-bar-bg">
+                <div id="pressure-bid-bar" class="pressure-bid" style="width: 50%;"></div>
+                <div id="pressure-ask-bar" class="pressure-ask" style="width: 50%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8b949e; margin-top: 6px;">
+                <span>إجمالي الـ 5 طلبات: <b id="total-bid-vol" style="color:#fff;">0</b></span>
+                <span>إجمالي الـ 5 عروض: <b id="total-ask-vol" style="color:#fff;">0</b></span>
+            </div>
+        </div>
+
+        <table class="depth-table">
+            <thead>
+                <tr>
+                    <th style="text-align: right;">حجم الطلب</th>
+                    <th style="text-align: right;">سعر الطلب</th>
+                    <th style="text-align: left;">سعر العرض</th>
+                    <th style="text-align: left;">حجم العرض</th>
+                </tr>
+            </thead>
+            <tbody id="orderbook-rows">
+                <tr><td colspan="4" style="color:#8b949e;">جاري سحب مستويات العمق من ثندر...</td></tr>
+            </tbody>
+        </table>
 
         <div class="metric-grid">
-            <div class="metric-box"><span>آخر سعر لحظي</span><b id="live-price">0.00 ج.م</b></div>
-            <div class="metric-box"><span>المتوسط الشهري (Mubasher)</span><b id="dyn-avg-volume" style="color: var(--purple);">جاري السحب...</b></div>
+            <div class="metric-box"><span>آخر سعر تنفيذ</span><b id="live-price">0.00 ج.م</b></div>
+            <div class="metric-box"><span>التغير اللحظي</span><b id="live-change">0.00%</b></div>
         </div>
 
-        <div class="metric-grid">
-            <div class="metric-box"><span>الحجم الحالي الفعلي</span><b id="live-volume">0</b></div>
-            <div class="metric-box"><span>المستهدف التاريخي الآن</span><b id="target-volume-now" style="color: var(--orange);">0</b></div>
-        </div>
-
-        <!-- 📊 كارت تصنيف الكميات والسيولة التراكمية المحاكية -->
-        <div class="metric-box" style="margin-bottom: 10px; border-color: #444;">
-            <span style="font-weight: bold; color: #fff; font-size: 0.85rem;">📊 تصنيف كميات الأسهم المنفذة (مطابقة السلوك التراكمي)</span>
-            
-            <div style="display: flex; justify-content: space-between; margin-top: 8px;">
-                <div style="text-align: right;">
-                    <span style="color: var(--green); font-size: 0.75rem;">🟢 تنفيذ شراء (ماركت):</span>
-                    <b id="buy-shares-count" style="font-size: 1.1rem; color: var(--green);">0</b> <small style="color:#8b949e; font-size:0.75rem;">سهم</small>
-                    <span id="buy-pct-text" style="color: var(--green); font-size: 0.8rem; display:block; font-weight:bold;">(0%)</span>
-                </div>
-                <div style="text-align: left;">
-                    <span style="color: var(--red); font-size: 0.75rem;">🔴 تنفيذ بيع (ماركت):</span>
-                    <b id="sell-shares-count" style="font-size: 1.1rem; color: var(--red);">0</b> <small style="color:#8b949e; font-size:0.75rem;">سهم</small>
-                    <span id="sell-pct-text" style="color: var(--red); font-size: 0.8rem; display:block; font-weight:bold;">(0%)</span>
-                </div>
-            </div>
-
-            <div class="tape-bar-container">
-                <div id="buy-bar-id" class="buy-bar" style="width: 50%;"></div>
-                <div id="sell-bar-id" class="sell-bar" style="width: 50%;"></div>
-            </div>
-            <div style="font-size: 0.7rem; color: #8b949e; margin-top: 6px; text-align: center;">
-                مجموع التفكيك: <span id="checksum-total" style="color: #fff; font-weight: bold;">0</span> سهم
-            </div>
-        </div>
-
-        <div id="signal-display" class="signal-box normal">بانتظار قراءة نبض التداولات الحية...</div>
-
-        <div class="chart-container">
-            <canvas id="volumeChart"></canvas>
-        </div>
+        <div id="signal-display" class="signal-box alert-normal">بانتظار تدفق كتل السيولة المخفية...</div>
     </div>
 </div>
 
 <script>
-    const MUBASHER_URL = "https://www.mubasher.info/markets/EGX/stocks/ARCC/volume-statistics";
-    const HERMES_FEED_URL = "https://www.efghermesone.com/Datafeed/GetDatafeedUrl";
-    const EGS4_URL = "http://41.33.162.236/egs4/";
-    const TARGET_KEYWORD = "العربية للأسمنت";
-    const SESSION_TOTAL_MINUTES = 270;
+    // الرابط المباشر لـ API ثندر المفتوح الخاص بسهم العربية للأسمنت
+    const THNDR_API_URL = "https://api.thndr.app/v1/market-data/eg/stocks/ARCC/depth";
     
-    const STORAGE_KEY_DATA = "arcc_dual_v1_history";
-    const STORAGE_KEY_DATE = "arcc_dual_v1_date";
-    const STORAGE_KEY_TAPE = "arcc_dual_v1_tape";
-
-    const todayStr = new Date().toDateString();
-    if (localStorage.getItem(STORAGE_KEY_DATE) !== todayStr) {
-        localStorage.removeItem(STORAGE_KEY_DATA);
-        localStorage.removeItem(STORAGE_KEY_TAPE);
-        localStorage.setItem(STORAGE_KEY_DATE, todayStr);
-    }
-
-    let liveDatasetData = localStorage.getItem(STORAGE_KEY_DATA) ? JSON.parse(localStorage.getItem(STORAGE_KEY_DATA)) : new Array(SESSION_TOTAL_MINUTES).fill(null);
-    let tapeData = localStorage.getItem(STORAGE_KEY_TAPE) ? JSON.parse(localStorage.getItem(STORAGE_KEY_TAPE)) : { buyShares: 0, sellShares: 0, lastTotalVolume: 0 };
-
-    let chartLabels = [];
-    for (let m = 1; m <= SESSION_TOTAL_MINUTES; m++) chartLabels.push(`د ${m}`);
-    let targetDatasetData = new Array(SESSION_TOTAL_MINUTES).fill(null);
-
-    const ctx = document.getElementById('volumeChart').getContext('2d');
-    const volumeChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: chartLabels,
-            datasets: [
-                { label: 'الحجم الفعلي المتراكم', data: liveDatasetData, borderColor: '#58a6ff', backgroundColor: 'rgba(88, 166, 255, 0.05)', borderWidth: 2.5, pointRadius: 0, spanGaps: true },
-                { label: 'المتوسط المستهدف (مباشر)', data: targetDatasetData, borderColor: '#f0883e', borderDash: [4, 4], borderWidth: 1.5, pointRadius: 0 }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { labels: { color: '#c9d1d9', font: { size: 9 } } } },
-            scales: {
-                x: { grid: { color: '#21262d' }, ticks: { color: '#8b949e', font: { size: 8 }, maxTicksLimit: 12 } },
-                y: { grid: { color: '#21262d' }, ticks: { color: '#8b949e', font: { size: 9 } } }
-            }
-        }
-    });
-
-    let globalHistoricalAvg = 692690;
     let proxyIndex = 0;
     const PROXIES = [
         url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
 
-    async function fetchWithProxy(url, options = {}) {
-        let lastError = null;
+    async function fetchFromThndr() {
         for (let i = 0; i < PROXIES.length; i++) {
             let idx = (proxyIndex + i) % PROXIES.length;
             try {
-                let fullUrl = PROXIES[idx](url + (url.includes('?') ? '&' : '?') + 'cb=' + Date.now());
-                const response = await fetch(fullUrl, options);
-                if (response.ok) { proxyIndex = idx; return await response.text(); }
-            } catch (e) { lastError = e; }
+                let fullUrl = PROXIES[idx](THNDR_API_URL + '?cb=' + Date.now());
+                const response = await fetch(fullUrl);
+                if (response.ok) {
+                    proxyIndex = idx;
+                    return await response.json();
+                }
+            } catch (e) {}
         }
         return null;
     }
 
-    async function fetchMubasherAverage() {
+    async function updateRadarEngine() {
         try {
-            const htmlText = await fetchWithProxy(MUBASHER_URL);
-            if (htmlText) {
-                const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-                const cells = Array.from(doc.querySelectorAll('td, th, span'));
-                for (let cell of cells) {
-                    let text = cell.innerText.trim();
-                    if (text.includes("شهري") || text.includes("30 يوم") || text.includes("Monthly")) {
-                        let row = cell.parentElement;
-                        let numbers = Array.from(row.querySelectorAll('td')).map(td => parseInt(td.innerText.replace(/,/g, '')));
-                        let validNumber = numbers.find(n => n > 10000);
-                        if (validNumber) { globalHistoricalAvg = validNumber; break; }
-                    }
-                }
+            const data = await fetchFromThndr();
+            if (!data || !data.bids || !data.asks) return;
+
+            let bids = data.bids.slice(0, 5); // اقتناص أول 5 طلبات
+            let asks = data.asks.slice(0, 5); // اقتناص أول 5 عروض
+
+            let totalBidVolume = 0;
+            let totalAskVolume = 0;
+            let tableHtml = "";
+
+            // دمج وعرض الـ 5 مستويات في الجدول وحساب الحجم التراكمي
+            for (let i = 0; i < 5; i++) {
+                let bidVol = bids[i] ? bids[i].volume : 0;
+                let bidPrice = bids[i] ? bids[i].price : 0;
+                let askPrice = asks[i] ? asks[i].price : 0;
+                let askVol = asks[i] ? asks[i].volume : 0;
+
+                totalBidVolume += bidVol;
+                totalAskVolume += askVol;
+
+                tableHtml += `
+                    <tr>
+                        <td class="bid-side">${bidVol > 0 ? bidVol.toLocaleString() : '-'}</td>
+                        <td class="bid-side" style="font-weight:bold; color:#fff;">${bidPrice > 0 ? bidPrice.toFixed(2) : '-'}</td>
+                        <td class="ask-side" style="font-weight:bold; color:#fff;">${askPrice > 0 ? askPrice.toFixed(2) : '-'}</td>
+                        <td class="ask-side">${askVol > 0 ? askVol.toLocaleString() : '-'}</td>
+                    </tr>
+                `;
             }
-        } catch (e) {}
-        document.getElementById('dyn-avg-volume').innerText = globalHistoricalAvg.toLocaleString() + " سهم";
-        updateTargetChartLine();
-    }
+            document.getElementById('orderbook-rows').innerHTML = tableHtml;
 
-    function updateTargetChartLine() {
-        let avgVolumePerMinute = globalHistoricalAvg / SESSION_TOTAL_MINUTES;
-        for (let m = 1; m <= SESSION_TOTAL_MINUTES; m++) {
-            targetDatasetData[m - 1] = Math.floor(m * avgVolumePerMinute);
-        }
-        volumeChart.update('none');
-    }
+            // ⚙️ الحساب الاستباقي الخماسي العالي الدقة
+            let totalDepthVolume = totalBidVolume + totalAskVolume;
+            let bidPressure = totalDepthVolume > 0 ? ((totalBidVolume / totalDepthVolume) * 100) : 50;
 
-    function getSessionMinutesElapsed() {
-        const now = new Date();
-        const start = new Date(); start.setHours(10, 0, 0, 0);
-        const end = new Date(); end.setHours(14, 30, 0, 0);
-        if (now < start) return 0;
-        if (now > end) return SESSION_TOTAL_MINUTES;
-        return Math.floor((now - start) / 1000 / 60);
-    }
-
-    // 🏎️ المحرك الذكي المزدوج للجلب والتنقيح
-    async function dualEngineDataScanner() {
-        let minutesElapsed = getSessionMinutesElapsed();
-        if (minutesElapsed === 0) {
-            document.getElementById('connection-status').innerText = `⏳ الرادار مستعد وفي انتظار بدء الجلسة (10:00 ص)`;
-            document.getElementById('connection-status').style.color = "#f0883e";
-            document.getElementById('data-source-display').innerText = "المصدر الحالي: الجلسة لم تبدأ";
-            document.getElementById('data-source-display').className = "source-badge src-unknown";
-            tapeData = { buyShares: 0, sellShares: 0, lastTotalVolume: 0 };
-            localStorage.setItem(STORAGE_KEY_TAPE, JSON.stringify(tapeData));
-            return;
-        }
-
-        let volume = 0, price = 0, highPrice = 0, lowPrice = 0, bestBid = 0, bestAsk = 0;
-        let fetchedSuccessfully = false;
-        let currentSource = "";
-
-        // 🟢 الطريقة الأولى: محاولة جلب البيانات الفورية من هيرميس (JSON المباشر)
-        try {
-            const rawResponse = await fetchWithProxy(HERMES_FEED_URL, {
-                "headers": {
-                    "accept": "application/json, text/javascript, */*; q=0.01",
-                    "x-requested-with": "XMLHttpRequest",
-                    "Referer": "https://www.efghermesone.com/datafeed"
-                },
-                "body": null,
-                "method": "POST"
-            });
-
-            if (rawResponse) {
-                const data = JSON.parse(rawResponse);
-                let arccStock = null;
-                if (Array.isArray(data)) {
-                    arccStock = data.find(s => s.Symbol === "ARCC" || s.Symbol === "ARCC.CA" || s.NameAR?.includes(TARGET_KEYWORD));
-                } else if (data.d && Array.isArray(data.d)) {
-                    arccStock = data.d.find(s => s.Symbol === "ARCC" || s.NameAR?.includes(TARGET_KEYWORD));
-                }
-
-                if (arccStock) {
-                    volume = arccStock.Volume || arccStock.Qty || 0; 
-                    price = arccStock.LastPrice || arccStock.Last || 0;
-                    highPrice = arccStock.High || price;
-                    lowPrice = arccStock.Low || price;
-                    bestBid = arccStock.Bid || 0;
-                    bestAsk = arccStock.Ask || 0;
-                    
-                    if (volume > 0) {
-                        fetchedSuccessfully = true;
-                        currentSource = "hermes";
-                    }
-                }
-            }
-        } catch (e) {
-            console.log("قناة هيرميس مغلقة أو تم حظرها، الانتقال التلقائي لـ EGS4...");
-        }
-
-        // 🔵 الطريقة الثانية (الـ Fallback): جلب البيانات بالطريقة المعتادة (EGS4) لو فشلت الطريقة الأولى
-        if (!fetchedSuccessfully) {
-            try {
-                const htmlText = await fetchWithProxy(EGS4_URL);
-                if (htmlText) {
-                    const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-                    const table = doc.querySelector('table');
-                    if (table) {
-                        const rows = Array.from(table.querySelectorAll('tr'));
-                        let volIdx = 1, prcIdx = 2, bidIdx = 3, askIdx = 4, highIdx = 5, lowIdx = 6;
-                        const headers = Array.from(rows[0]?.querySelectorAll('th, td') || []).map(el => el.innerText.trim());
-                        
-                        headers.forEach((h, index) => {
-                            if (h.includes("حجم") || h.includes("التداول")) volIdx = index;
-                            if (h.includes("آخر") || h.includes("سعر")) prcIdx = index;
-                            if (h.includes("طلب")) bidIdx = index;
-                            if (h.includes("عرض")) askIdx = index;
-                            if (h.includes("أعلى") || h.includes("هاي")) highIdx = index;
-                            if (h.includes("أقل") || h.includes("لو")) lowIdx = index;
-                        });
-
-                        for (let row of rows) {
-                            const cells = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
-                            if (cells.length > 5 && cells.join(" ").includes(TARGET_KEYWORD)) {
-                                volume = parseInt(cells[volIdx].replace(/,/g, '')) || 0;
-                                price = parseFloat(cells[prcIdx].replace(/,/g, '')) || 0;
-                                bestBid = parseFloat(cells[bidIdx].replace(/,/g, '')) || 0; 
-                                bestAsk = parseFloat(cells[askIdx].replace(/,/g, '')) || 0; 
-                                highPrice = parseFloat(cells[highIdx]?.replace(/,/g, '')) || price;
-                                lowPrice = parseFloat(cells[lowIdx]?.replace(/,/g, '')) || price;
-                                
-                                if (volume > 0) {
-                                    fetchedSuccessfully = true;
-                                    currentSource = "egs4";
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (err) {
-                console.error("فشل المحرك المزدوج بالكامل في هذه اللقطة:", err);
-            }
-        }
-
-        // 🎛️ تحديث واجهة المستخدم بناءً على الطريقة التي تم بها الجلب بنجاح
-        if (fetchedSuccessfully) {
-            document.getElementById('connection-status').innerText = `🟢 الرادار متصل ويحدث البيانات حياً`;
-            document.getElementById('connection-status').style.color = "#2ea043";
-            document.getElementById('last-update').innerText = `آخر جلب: ${new Date().toLocaleTimeString('ar-EG')}`;
-
-            const sourceBadge = document.getElementById('data-source-display');
-            if (currentSource === "hermes") {
-                sourceBadge.innerText = "⚡ المصدر الحالي: هيرميس (JSON المباشر)";
-                sourceBadge.className = "source-badge src-hermes";
-            } else {
-                sourceBadge.innerText = "📡 المصدر الحالي: السيرفر المعتاد (EGS4)";
-                sourceBadge.className = "source-badge src-egs4";
-            }
-
-            // تفعيل محاكاة تدفق السيولة والـ Spread
-            if (tapeData.lastTotalVolume > 0 && volume > tapeData.lastTotalVolume) {
-                let deltaVolume = volume - tapeData.lastTotalVolume;
-                let spread = bestAsk - bestBid;
-                let buyWeight = 0.5;
-                
-                if (spread > 0) {
-                    buyWeight = (price - bestBid) / spread;
-                    if (buyWeight > 1) buyWeight = 1;
-                    if (buyWeight < 0) buyWeight = 0;
-                }
-                tapeData.buyShares += Math.round(deltaVolume * buyWeight);
-                tapeData.sellShares += (deltaVolume - Math.round(deltaVolume * buyWeight));
-            } else if (tapeData.lastTotalVolume === 0 && volume > 0 && tapeData.buyShares === 0) {
-                let dayRange = highPrice - lowPrice;
-                let simulatedBuyWeight = 0.3769; // المعايرة الافتراضية
-                if (dayRange > 0) {
-                    simulatedBuyWeight = (price - lowPrice) / dayRange;
-                    if (simulatedBuyWeight > 0.85) simulatedBuyWeight = 0.85;
-                    if (simulatedBuyWeight < 0.15) simulatedBuyWeight = 0.15;
-                }
-                tapeData.buyShares = Math.round(volume * simulatedBuyWeight);
-                tapeData.sellShares = volume - tapeData.buyShares;
-            }
+            // تحديث واجهة ميزان القوة
+            document.getElementById('pressure-pct').innerText = bidPressure.toFixed(1) + "%";
+            document.getElementById('pressure-bid-bar').style.width = bidPressure + "%";
+            document.getElementById('pressure-ask-bar').style.width = (100 - bidPressure) + "%";
             
-            tapeData.lastTotalVolume = volume;
-            localStorage.setItem(STORAGE_KEY_TAPE, JSON.stringify(tapeData));
+            document.getElementById('total-bid-vol').innerText = totalBidVolume.toLocaleString();
+            document.getElementById('total-ask-vol').innerText = totalAskVolume.toLocaleString();
 
-            let checksumTotal = tapeData.buyShares + tapeData.sellShares;
-            let buyPct = checksumTotal > 0 ? ((tapeData.buyShares / checksumTotal) * 100).toFixed(1) : "50.0";
-            let sellPct = checksumTotal > 0 ? (100 - parseFloat(buyPct)).toFixed(1) : "50.0";
-
-            document.getElementById('buy-shares-count').innerText = tapeData.buyShares.toLocaleString();
-            document.getElementById('sell-shares-count').innerText = tapeData.sellShares.toLocaleString();
-            document.getElementById('buy-pct-text').innerText = `(${buyPct}%)`;
-            document.getElementById('sell-pct-text').innerText = `(${sellPct}%)`;
-            document.getElementById('buy-bar-id').style.width = buyPct + "%";
-            document.getElementById('sell-bar-id').style.width = sellPct + "%";
-            document.getElementById('checksum-total').innerText = checksumTotal.toLocaleString();
-
-            document.getElementById('live-price').innerText = price.toFixed(2) + " ج.م";
-            document.getElementById('live-volume').innerText = volume.toLocaleString();
-            
-            let avgVolumePerMinute = globalHistoricalAvg / SESSION_TOTAL_MINUTES;
-            let currentMinutes = minutesElapsed || 1;
-            let targetVolumeNow = Math.floor(currentMinutes * avgVolumePerMinute);
-            document.getElementById('target-volume-now').innerText = targetVolumeNow.toLocaleString();
-
-            let timeRatio = ((volume / targetVolumeNow) * 100).toFixed(1);
-            if (minutesElapsed <= SESSION_TOTAL_MINUTES) {
-                liveDatasetData[minutesElapsed - 1] = volume;
-                for (let k = 0; k < minutesElapsed - 1; k++) {
-                    if (liveDatasetData[k] === null) liveDatasetData[k] = Math.floor((k + 1) * (volume / minutesElapsed));
-                }
-                localStorage.setItem(STORAGE_KEY_DATA, JSON.stringify(liveDatasetData));
-                volumeChart.data.datasets[0].data = liveDatasetData;
-                volumeChart.update('none');
+            // تحديث الأسعار اللحظية العامة من ثندر
+            if(data.lastPrice) {
+                document.getElementById('live-price').innerText = data.lastPrice.toFixed(2) + " ج.م";
+                document.getElementById('live-change').innerText = (data.changePercent || 0).toFixed(2) + "%";
+                document.getElementById('live-change').style.color = data.changePercent >= 0 ? "var(--green)" : "var(--red)";
             }
 
+            // 🚨 تفعيل الفلتر الصارم الخاص بك (58% لتأكيد التجميع الاستباقي)
             const signalDisplay = document.getElementById('signal-display');
-            let biasText = parseFloat(buyPct) > 53 ? "🔥 [اكتساح شرائي واخرتاق عروض]" : (parseFloat(buyPct) < 47 ? "⚠️ [ضغط بيعي وتسييل طلبات]" : "⚖️ [توازن قوى]");
-            
-            if (parseFloat(timeRatio) >= 120) {
-                signalDisplay.innerText = `🚨 تجمع زمني خارق بمعدل ${timeRatio}% | التقييم: ${biasText}`;
-                signalDisplay.className = "signal-box accumulation";
+            if (bidPressure >= 58.0) {
+                signalDisplay.innerText = `🔥 تجميع خماسي استباقي خارق (${bidPressure.toFixed(1)}%)! الحيتان تبني جدران دعم سميكة في عمق الطلبات للاكتساح.`;
+                signalDisplay.className = "signal-box alert-accumulation";
+            } else if (bidPressure <= 42.0) {
+                signalDisplay.innerText = `⚠️ تصريف وضغط بيعي في العمق (${(100 - bidPressure).toFixed(1)}%)! جدران العروض أثقل وتمنع السهم من الصعود.`;
+                signalDisplay.className = "signal-box alert-normal";
+                signalDisplay.style.borderColor = "var(--red)";
             } else {
-                signalDisplay.innerText = `⚪ أداء زمني طبيعي للجلسة بمعدل ${timeRatio}% | التقييم: ${biasText}`;
-                signalDisplay.className = "signal-box normal";
+                signalDisplay.innerText = `⚖️ قوى العمق متوازنة حالياً (${bidPressure.toFixed(1)}% طلب مقابل ${(100 - bidPressure).toFixed(1)}% عرض).`;
+                signalDisplay.className = "signal-box alert-normal";
+                signalDisplay.style.borderColor = "var(--border)";
             }
-        } else {
-            document.getElementById('connection-status').innerText = `⚠️ فشل الجلب مؤقتاً من المصدرين (محاولة إعادة الاتصال تلقائياً...)`;
-            document.getElementById('connection-status').style.color = "#da3633";
+
+        } catch (err) {
+            console.error("Thndr Depth Engine Error:", err);
         }
     }
 
-    fetchMubasherAverage();
-    setInterval(dualEngineDataScanner, 5000);
-    dualEngineDataScanner();
+    // تشغيل وتحديث تلقائي كل 4 ثوانٍ لالتقاط أي أمر ضخم ينزل في العمق فوراً
+    setInterval(updateRadarEngine, 4000);
+    updateRadarEngine();
 </script>
 </body>
 </html>
