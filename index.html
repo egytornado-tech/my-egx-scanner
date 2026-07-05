@@ -41,11 +41,11 @@
     <div class="card">
         <h1>🎯 رادار عمق السوق الخماسي الاستباقي</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🚀 جاري الاتصال بمحرك الـ العمق المباشر...</div>
+        <div id="connection-status" class="status">🚀 جاري تخطي الحماية والربط المباشر...</div>
         
         <div class="pressure-container">
             <div class="pressure-title">
-                <span>⚡ ميزان سيولة عمق السوق التراكمي (5 مستويات كاملة)</span>
+                <span>⚡ ميزان سيولة عمق السوق التراكمي (5 مستويات)</span>
                 <span id="pressure-pct">50%</span>
             </div>
             <div class="pressure-bar-bg">
@@ -68,7 +68,7 @@
                 </tr>
             </thead>
             <tbody id="depth-rows">
-                <tr><td colspan="4" style="color: #8b949e;">جاري سحب مستويات العمق...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">جاري سحب مستويات العمق اللحظية...</td></tr>
             </tbody>
         </table>
 
@@ -84,18 +84,31 @@
 <script>
     const BOT_API_URL = "https://egxbot.com/api/Market/getOrderBook?symbol=ARCC";
     let proxyIndex = 0;
+    
+    // محركات ربط هجينة لتفادي قيود الحماية وحظر المتصفح لـ GitHub Pages
     const PROXIES = [
         url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
 
-    async function fetchFromProxy(url) {
+    async function fetchFromPool(url) {
+        // محاولة أولى سريعة لتخطي جدار الحماية الحظر مباشرة
+        try {
+            const directRes = await fetch(url, { mode: 'cors', headers: { 'Accept': 'application/json' } });
+            if (directRes.ok) return await directRes.json();
+        } catch(e) {}
+
+        // محاولة بديلة عبر البروكسي المشفر إذا فشل الاتصال المباشر
         for (let i = 0; i < PROXIES.length; i++) {
             let idx = (proxyIndex + i) % PROXIES.length;
             try {
                 let fullUrl = PROXIES[idx](url + '&cb=' + Date.now());
                 const response = await fetch(fullUrl);
-                if (response.ok) { proxyIndex = idx; return await response.json(); }
+                if (response.ok) { 
+                    proxyIndex = idx; 
+                    let textData = await response.text();
+                    return JSON.parse(textData); 
+                }
             } catch (e) {}
         }
         return null;
@@ -103,22 +116,26 @@
 
     async function updateRadarEngine() {
         try {
-            const data = await fetchFromProxy(BOT_API_URL);
-            if (!data || !data.bids || !data.asks) return;
+            const data = await fetchFromPool(BOT_API_URL);
+            if (!data) return;
 
             document.getElementById('connection-status').innerText = `🟢 الرادار متصل حياً ومحدث عبر EGXBot Deep Engine`;
             document.getElementById('connection-status').style.color = "#2ea043";
 
-            let bids = data.bids.slice(0, 5);
-            let asks = data.asks.slice(0, 5);
+            // قراءة كتل البيانات مع وضع مصفوفات افتراضية لحمايتها من الانهيار
+            let bids = data.bids || [];
+            let asks = data.asks || [];
 
-            let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || 0), 0);
-            let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || 0), 0);
+            bids = bids.slice(0, 5);
+            asks = asks.slice(0, 5);
+
+            let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || 0), 0);
+            let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || 0), 0);
 
             let totalVolumePool = totalBidVol + totalAskVol;
             let bidPressurePct = totalVolumePool > 0 ? ((totalBidVol / totalVolumePool) * 100) : 50;
 
-            // تحديث المؤشر العلوي والميزان
+            // تحديث المؤشر العلوي والميزان اللحظي
             document.getElementById('pressure-pct').innerText = bidPressurePct.toFixed(1) + "%";
             document.getElementById('pressure-bid-bar').style.width = bidPressurePct + "%";
             document.getElementById('pressure-ask-bar').style.width = (100 - bidPressurePct) + "%";
@@ -126,14 +143,19 @@
             document.getElementById('lbl-total-bids').innerText = totalBidVol.toLocaleString();
             document.getElementById('lbl-total-asks').innerText = totalAskVol.toLocaleString();
 
-            // بناء جدول مستويات العمق الخماسية
+            // بناء جدول مستويات العمق الخماسية ديناميكياً
             let htmlRows = "";
             let maxRows = Math.max(bids.length, asks.length);
+            
+            if(maxRows === 0) {
+                htmlRows = `<tr><td colspan="4" style="color: #8b949e;">في انتظار بدء بث الجلسة وتحديث الأوامر...</td></tr>`;
+            }
+
             for (let i = 0; i < maxRows; i++) {
-                let bVol = bids[i] ? parseInt(bids[i].volume).toLocaleString() : "-";
-                let bPrice = bids[i] ? parseFloat(bids[i].price).toFixed(2) : "-";
-                let aPrice = asks[i] ? parseFloat(asks[i].price).toFixed(2) : "-";
-                let aVol = asks[i] ? parseInt(asks[i].volume).toLocaleString() : "-";
+                let bVol = bids[i] ? parseInt(bids[i].volume || bids[i].Volume || 0).toLocaleString() : "-";
+                let bPrice = bids[i] ? parseFloat(bids[i].price || bids[i].Price || 0).toFixed(2) : "-";
+                let aPrice = asks[i] ? parseFloat(asks[i].price || asks[i].Price || 0).toFixed(2) : "-";
+                let aVol = asks[i] ? parseInt(asks[i].volume || asks[i].Volume || 0).toLocaleString() : "-";
 
                 htmlRows += `<tr>
                     <td style="color: var(--green); font-weight: bold;">${bVol}</td>
@@ -144,19 +166,22 @@
             }
             document.getElementById('depth-rows').innerHTML = htmlRows;
 
-            // تحديث الأسعار والنسب اللحظية العامة للسهم من نفس الـ API
-            if(data.lastPrice) document.getElementById('live-price').innerText = parseFloat(data.lastPrice).toFixed(2) + " ج.م";
-            if(data.changePercent) {
-                let chg = parseFloat(data.changePercent);
+            // تحديث الأسعار الإجمالية للسهم من السيرفر
+            let lastPrice = data.lastPrice || data.LastPrice || data.price || 0;
+            let changePercent = data.changePercent || data.ChangePercent || data.change || 0;
+
+            if(lastPrice) document.getElementById('live-price').innerText = parseFloat(lastPrice).toFixed(2) + " ج.م";
+            if(changePercent) {
+                let chg = parseFloat(changePercent);
                 let el = document.getElementById('live-change');
                 el.innerText = (chg >= 0 ? "+" : "") + chg.toFixed(2) + "%";
                 el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
             }
 
-            // 🚨 الفلترة الاستباقية الصارمة (معيار التجميع الـ 58%)
+            // 🚨 الفلترة الصارمة على عمق الطلبات والعروض (58%)
             const signalBox = document.getElementById('signal-display');
             if (bidPressurePct >= 58.0) {
-                signalBox.innerText = `🔥 تجميع قوي صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات حقيقية تمتص العروض وتستعد للاكتساح لأعلى.`;
+                signalBox.innerText = `🔥 تجميع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات حقيقية تمتص العروض وتستعد للاكتساح لأعلى.`;
                 signalBox.className = "signal-box alert-accumulation";
             } else if (bidPressurePct <= 42.0) {
                 signalBox.innerText = `⚠️ تصريف وضغط سلبي: كتل العروض أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%. يرجى توخي الحذر.`;
@@ -168,10 +193,12 @@
                 signalBox.style.borderColor = "var(--border)";
             }
 
-        } catch (e) { console.error("Error updating depth radar:", e); }
+        } catch (e) { 
+            console.error("Error parsing depth data:", e);
+        }
     }
 
-    setInterval(updateRadarEngine, 4000); // تحديث فائق السرعة كل 4 ثوانٍ
+    setInterval(updateRadarEngine, 5000); // استعلام وتحديث مستمر كل 5 ثوانٍ
     updateRadarEngine();
 </script>
 </body>
