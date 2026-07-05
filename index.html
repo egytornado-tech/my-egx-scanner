@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار عمق السوق والتنفيذات اللحظية V12.5</title>
+    <title>🎯 رادار عمق بورصجي والتنفيذات اللحظية V12.7</title>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 10px; margin: 0; text-align: center; }
@@ -13,7 +13,7 @@
         .stock-title { font-size: 1.2rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
         .status { font-size: 0.8rem; color: var(--blue); margin-bottom: 12px; font-weight: bold; }
 
-        /* 📊 ميزان عمق السوق التراكمي */
+        /* 📊 ميزان السيولة الخماسي */
         .pressure-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 12px; }
         .pressure-title { font-size: 0.8rem; color: #fff; font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between;}
         .pressure-bar-bg { background: #30363d; border-radius: 4px; height: 14px; overflow: hidden; display: flex; }
@@ -22,11 +22,10 @@
 
         /* 📋 الجداول */
         .section-title { font-size: 0.9rem; color: #fff; text-align: right; margin: 10px 5px 5px 0; font-weight: bold; display: flex; align-items: center; gap: 5px; }
-        .radar-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; background: #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
-        .radar-table th { background: #30363d; color: #fff; padding: 6px; font-weight: 600; }
-        .radar-table td { padding: 6px; border-bottom: 1px solid var(--border); color: #fff; }
+        .radar-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+        .radar-table th { background: #30363d; color: #fff; padding: 8px; font-weight: 600; }
+        .radar-table td { padding: 8px; border-bottom: 1px solid var(--border); color: #fff; }
         
-        /* ⚡ الصفقات والتنفيذات الفورية V12 */
         .trade-buy { color: #2ea043 !important; font-weight: bold; }
         .trade-sell { color: #da3633 !important; font-weight: bold; }
         
@@ -38,21 +37,19 @@
         .signal-box { padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--border); margin-top: 12px; }
         .alert-accumulation { background: rgba(46, 160, 67, 0.2); color: #fff; border-color: var(--green); }
         .alert-normal { background: #21262d; color: var(--text); }
-        
-        #debug-log { font-family: monospace; font-size: 10px; color: #8b949e; background: #000; padding: 6px; border-radius: 6px; text-align: left; max-height: 60px; overflow-y: auto; margin-top: 8px; white-space: pre-wrap; direction: ltr; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار عمق السوق والتنفيذات اللحظية V12.5</h1>
+        <h1>🎯 رادار عمق بورصجي والتنفيذات اللحظية V12.7</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">⚡ جاري تشغيل محركات البث المزدوج الحية...</div>
+        <div id="connection-status" class="status">🚀 جاري دمج عمق بورصجي مع صفقات V12...</div>
         
         <div class="pressure-container">
             <div class="pressure-title">
-                <span>📊 ميزان عمق السوق التراكمي (5 مستويات)</span>
+                <span>📊 ميزان سيولة عمق السوق (5 مستويات بورصجي)</span>
                 <span id="pressure-pct">50%</span>
             </div>
             <div class="pressure-bar-bg">
@@ -65,7 +62,7 @@
             </div>
         </div>
 
-        <div class="section-title">🔍 عمق دفتر الأوامر الحالي:</div>
+        <div class="section-title">🔍 دفتر الأوامر الخماسي الاستباقي (EGXBot):</div>
         <table class="radar-table">
             <thead>
                 <tr>
@@ -76,11 +73,11 @@
                 </tr>
             </thead>
             <tbody id="depth-rows">
-                <tr><td colspan="4" style="color: #8b949e;">في انتظار تحديث الأوامر...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">في انتظار جلب مستويات العمق...</td></tr>
             </tbody>
         </table>
 
-        <div class="section-title">⚡ صفقات الماركت المنفذة فوراً (EGS4 Feed):</div>
+        <div class="section-title">⚡ صفقات الماركت المنفذة فوراً (V12 Core):</div>
         <table class="radar-table">
             <thead>
                 <tr>
@@ -91,7 +88,7 @@
                 </tr>
             </thead>
             <tbody id="trade-rows">
-                <tr><td colspan="4" style="color: #8b949e;">في انتظار تنفيذ صفقات جديدة...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">في انتظار بث صفقات الجلسة...</td></tr>
             </tbody>
         </table>
 
@@ -100,136 +97,133 @@
             <div class="metric-box"><span>التغير اللحظي</span><b id="live-change">0.00%</b></div>
         </div>
 
-        <div id="signal-display" class="signal-box alert-normal">بانتظار مطابقة عمق السوق مع الصفقات المنفذة...</div>
-        
-        <div style="text-align:left; font-size:0.7rem; color:#8b949e; margin-top:10px; font-weight:bold;">📟 فحص الـ API اللحظي:</div>
-        <div id="debug-log">جاري الفحص الهجين للحقول...</div>
+        <div id="signal-display" class="signal-box alert-normal">في انتظار تدفق وتحليل الكتل العميقة...</div>
     </div>
 </div>
 
 <script>
-    const ORDERBOOK_API = "https://egxbot.com/api/Market/getOrderBook?symbol=ARCC";
+    // 1. روابط الـ APIs
+    const BORSA_API = "https://egxbot.com/api/Market/getOrderBook?symbol=ARCC";
+    const LOCAL_V12_API = "http://192.168.1.100:5000/api/data?symbol=ARCC"; // ضع رابط سيرفر الصفقات المستقر الخاص بك هنا
+
     let proxyIndex = 0;
     const PROXIES = [
         url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
 
-    function logToScreen(msg) {
-        document.getElementById('debug-log').innerText = msg;
-    }
-
-    async function fetchFromPool(url) {
-        try {
-            const directRes = await fetch(url, { mode: 'cors' });
-            if (directRes.ok) return await directRes.json();
-        } catch(e) {}
-
+    async function fetchFromBorsa(url) {
         for (let i = 0; i < PROXIES.length; i++) {
             let idx = (proxyIndex + i) % PROXIES.length;
             try {
                 let fullUrl = PROXIES[idx](url + '&cb=' + Date.now());
                 const response = await fetch(fullUrl);
-                if (response.ok) { proxyIndex = idx; return JSON.parse(await response.text()); }
+                if (response.ok) { 
+                    proxyIndex = idx; 
+                    return JSON.parse(await response.text()); 
+                }
             } catch (e) {}
         }
         return null;
     }
 
-    // محرك تحديث عمق السوق والتنفيذات معاً
-    async function updateRadarEngine() {
+    async function updateHybridRadar() {
+        // ---- أولاً: جلب عمق السوق من بورصجي ----
         try {
-            const data = await fetchFromPool(ORDERBOOK_API);
-            if (!data) {
-                logToScreen("❌ فشل الاتصال بالسيرفر أو البروكسي حالياً.");
-                return;
+            const borsaData = await fetchFromBorsa(BORSA_API);
+            if (borsaData) {
+                document.getElementById('connection-status').innerText = `🟢 متصل: عمق بورصجي + صفقات V12 تعمل حياً`;
+                document.getElementById('connection-status').style.color = "#2ea043";
+
+                // فحص هجين ومرن لقراءة المصفوفات بأي اسم حقل يرسله خادم بورصجي
+                let bids = borsaData.bids || borsaData.Bids || borsaData.bid || [];
+                let asks = borsaData.asks || borsaData.Asks || borsaData.ask || [];
+                
+                bids = bids.slice(0, 5);
+                asks = asks.slice(0, 5);
+
+                // حساب الأحجام بدعم مرن لأسماء الحقول المتغيرة (volume, Volume, qty, quantity, vol)
+                let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || item.qty || item.quantity || item.vol || 0), 0);
+                let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || item.qty || item.quantity || item.vol || 0), 0);
+                
+                let totalVolumePool = totalBidVol + totalAskVol;
+                let bidPressurePct = totalVolumePool > 0 ? ((totalBidVol / totalVolumePool) * 100) : 50;
+
+                document.getElementById('pressure-pct').innerText = bidPressurePct.toFixed(1) + "%";
+                document.getElementById('pressure-bid-bar').style.width = bidPressurePct + "%";
+                document.getElementById('pressure-ask-bar').style.width = (100 - bidPressurePct) + "%";
+                document.getElementById('lbl-total-bids').innerText = totalBidVol.toLocaleString();
+                document.getElementById('lbl-total-asks').innerText = totalAskVol.toLocaleString();
+
+                let depthHtml = "";
+                let maxRows = Math.max(bids.length, asks.length);
+                
+                for (let i = 0; i < maxRows; i++) {
+                    let bVol = bids[i] ? parseInt(bids[i].volume || bids[i].Volume || bids[i].qty || bids[i].vol || 0).toLocaleString() : "-";
+                    let bPrice = bids[i] ? parseFloat(bids[i].price || bids[i].Price || bids[i].p || 0).toFixed(2) : "-";
+                    let aPrice = asks[i] ? parseFloat(asks[i].price || asks[i].Price || asks[i].p || 0).toFixed(2) : "-";
+                    let aVol = asks[i] ? parseInt(asks[i].volume || asks[i].Volume || asks[i].qty || asks[i].vol || 0).toLocaleString() : "-";
+                    
+                    depthHtml += `<tr><td style="color:var(--green);font-weight:bold;">${bVol}</td><td>${bPrice}</td><td>${aPrice}</td><td style="color:var(--red);font-weight:bold;">${aVol}</td></tr>`;
+                }
+                if(maxRows > 0) document.getElementById('depth-rows').innerHTML = depthHtml;
+
+                // 🚨 معيار اتخاذ القرار (58%) من عمق بورصجي
+                const signalBox = document.getElementById('signal-display');
+                if (bidPressurePct >= 58.0) {
+                    signalBox.innerText = `🔥 تجمع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات بورصجي تمتص العروض وتستعد للاكتساح لأعلى.`;
+                    signalBox.className = "signal-box alert-accumulation";
+                } else if (bidPressurePct <= 42.0) {
+                    signalBox.innerText = `⚠️ ضغط تصريفي: كتل عروض بورصجي أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%. يرجى توخي الحذر.`;
+                    signalBox.className = "signal-box alert-normal";
+                    signalBox.style.borderColor = "var(--red)";
+                } else {
+                    signalBox.innerText = `⚖️ توازن نسبي: السيولة مستقرة وموزعة بالتساوي بين الطلبات والعروض حالياً.`;
+                    signalBox.className = "signal-box alert-normal";
+                    signalBox.style.borderColor = "var(--border)";
+                }
             }
+        } catch (e) { console.error("Error reading Borsa Depth:", e); }
 
-            let keys = Object.keys(data).join(', ');
-            logToScreen(`🟢 متصل! الحقول المستلمة: { ${keys} }`);
+        // ---- ثانياً: جلب الصفقات والأسعار من خادمك المستقر V12 ----
+        try {
+            const localResponse = await fetch(LOCAL_V12_API);
+            if (localResponse.ok) {
+                const localData = await localResponse.json();
 
-            document.getElementById('connection-status').innerText = `🟢 المحرك المزدوج V12.5 يعمل ومحدث حياً`;
-            document.getElementById('connection-status').style.color = "#2ea043";
+                if(localData.lastPrice) document.getElementById('live-price').innerText = parseFloat(localData.lastPrice).toFixed(2) + " ج.م";
+                if(localData.changePercent) {
+                    let chg = parseFloat(localData.changePercent);
+                    let el = document.getElementById('live-change');
+                    el.innerText = (chg >= 0 ? "+" : "") + chg.toFixed(2) + "%";
+                    el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
+                }
 
-            // 1. معالجة وتحديث جدول عمق السوق (الطلبات والعروض)
-            let bids = data.bids || data.Bids || [];
-            let asks = data.asks || data.Asks || [];
-            bids = bids.slice(0, 5);
-            asks = asks.slice(0, 5);
-
-            let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || 0), 0);
-            let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || 0), 0);
-            let totalVolumePool = totalBidVol + totalAskVol;
-            let bidPressurePct = totalVolumePool > 0 ? ((totalBidVol / totalVolumePool) * 100) : 50;
-
-            document.getElementById('pressure-pct').innerText = bidPressurePct.toFixed(1) + "%";
-            document.getElementById('pressure-bid-bar').style.width = bidPressurePct + "%";
-            document.getElementById('pressure-ask-bar').style.width = (100 - bidPressurePct) + "%";
-            document.getElementById('lbl-total-bids').innerText = totalBidVol.toLocaleString();
-            document.getElementById('lbl-total-asks').innerText = totalAskVol.toLocaleString();
-
-            let depthHtml = "";
-            let maxRows = Math.max(bids.length, asks.length);
-            for (let i = 0; i < maxRows; i++) {
-                let bVol = bids[i] ? parseInt(bids[i].volume || bids[i].Volume || 0).toLocaleString() : "-";
-                let bPrice = bids[i] ? parseFloat(bids[i].price || bids[i].Price || 0).toFixed(2) : "-";
-                let aPrice = asks[i] ? parseFloat(asks[i].price || asks[i].Price || 0).toFixed(2) : "-";
-                let aVol = asks[i] ? parseInt(asks[i].volume || asks[i].Volume || 0).toLocaleString() : "-";
-                depthHtml += `<tr><td style="color:var(--green);font-weight:bold;">${bVol}</td><td>${bPrice}</td><td>${aPrice}</td><td style="color:var(--red);font-weight:bold;">${aVol}</td></tr>`;
+                let trades = localData.trades || [];
+                let tradesHtml = "";
+                if (trades.length === 0) {
+                    tradesHtml = `<tr><td colspan="4" style="color: #8b949e;">في انتظار صفقات ماركت جديدة من V12...</td></tr>`;
+                } else {
+                    trades.slice(0, 5).forEach(t => {
+                        let side = (t.side || 'buy').toLowerCase();
+                        let sideText = side === 'buy' ? 'شراء ماركت' : 'بيع ماركت';
+                        let sideClass = side === 'buy' ? 'trade-buy' : 'trade-sell';
+                        tradesHtml += `<tr>
+                            <td>${t.time || '-'}</td>
+                            <td>${parseFloat(t.price || 0).toFixed(2)}</td>
+                            <td>${parseInt(t.volume || t.qty || 0).toLocaleString()}</td>
+                            <td class="${sideClass}">${sideText}</td>
+                        </tr>`;
+                    });
+                }
+                document.getElementById('trade-rows').innerHTML = tradesHtml;
             }
-            if(maxRows > 0) document.getElementById('depth-rows').innerHTML = depthHtml;
-
-            // 2. معالجة وتحديث صفقات الماركت المنفذة حياً (تحديث نسخة V12 السليمة)
-            let trades = data.trades || data.Trades || data.recentTrades || [];
-            let tradesHtml = "";
-            if (trades.length === 0) {
-                tradesHtml = `<tr><td colspan="4" style="color: #8b949e;">في انتظار صفقات ماركت جديدة بالجلسة...</td></tr>`;
-            } else {
-                trades.slice(0, 5).forEach(t => {
-                    let side = (t.side || t.Side || 'buy').toLowerCase();
-                    let sideText = side === 'buy' ? 'شراء ماركت' : 'بيع ماركت';
-                    let sideClass = side === 'buy' ? 'trade-buy' : 'trade-sell';
-                    tradesHtml += `<tr>
-                        <td>${t.time || t.Time || '-'}</td>
-                        <td>${parseFloat(t.price || t.Price || 0).toFixed(2)}</td>
-                        <td>${parseInt(t.volume || t.Volume || t.qty || 0).toLocaleString()}</td>
-                        <td class="${sideClass}">${sideText}</td>
-                    </tr>`;
-                });
-            }
-            document.getElementById('trade-rows').innerHTML = tradesHtml;
-
-            // 3. تحديث الأسعار والمؤشرات العامة
-            let lastPrice = data.lastPrice || data.LastPrice || data.price || 0;
-            let changePercent = data.changePercent || data.ChangePercent || 0;
-            if(lastPrice) document.getElementById('live-price').innerText = parseFloat(lastPrice).toFixed(2) + " ج.م";
-            if(changePercent) {
-                let chg = parseFloat(changePercent);
-                let el = document.getElementById('live-change');
-                el.innerText = (chg >= 0 ? "+" : "") + chg.toFixed(2) + "%";
-                el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
-            }
-
-            // 🚨 معيار اتخاذ القرار الصارم (58%)
-            const signalBox = document.getElementById('signal-display');
-            if (bidPressurePct >= 58.0) {
-                signalBox.innerText = `🔥 تجميع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل الطلبات في العمق تدعم اختراق السعر لأعلى مع التنفيذات.`;
-                signalBox.className = "signal-box alert-accumulation";
-            } else if (bidPressurePct <= 42.0) {
-                signalBox.innerText = `⚠️ ضغط تصريفي: كتل العروض أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%. التنفيذات تواجه جدار مقاومة قاسي.`;
-                signalBox.className = "signal-box alert-normal";
-                signalBox.style.borderColor = "var(--red)";
-            } else {
-                signalBox.innerText = `⚖️ استقرار نسبي: السيولة متوازنة تماماً بين الأوامر الخماسية وحركة الصفقات الحالية.`;
-                signalBox.className = "signal-box alert-normal";
-                signalBox.style.borderColor = "var(--border)";
-            }
-
-        } catch (e) { logToScreen("❌ خطأ في معالجة البيانات: " + e.message); }
+        } catch (e) { console.error("Error reading Local V12 Trades:", e); }
     }
 
-    setInterval(updateRadarEngine, 5000); // تحديث دوري ذكي كل 5 ثوانٍ
-    updateRadarEngine();
+    // التحديث التلقائي كل 4 ثوانٍ لضمان اللحظية الدقيقة
+    setInterval(updateHybridRadar, 4000);
+    updateHybridRadar();
 </script>
 </body>
 </html>
