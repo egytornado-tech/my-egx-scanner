@@ -85,20 +85,17 @@
     const BOT_API_URL = "https://egxbot.com/api/Market/getOrderBook?symbol=ARCC";
     let proxyIndex = 0;
     
-    // محركات ربط هجينة لتفادي قيود الحماية وحظر المتصفح لـ GitHub Pages
     const PROXIES = [
         url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
 
     async function fetchFromPool(url) {
-        // محاولة أولى سريعة لتخطي جدار الحماية الحظر مباشرة
         try {
-            const directRes = await fetch(url, { mode: 'cors', headers: { 'Accept': 'application/json' } });
+            const directRes = await fetch(url, { mode: 'cors' });
             if (directRes.ok) return await directRes.json();
         } catch(e) {}
 
-        // محاولة بديلة عبر البروكسي المشفر إذا فشل الاتصال المباشر
         for (let i = 0; i < PROXIES.length; i++) {
             let idx = (proxyIndex + i) % PROXIES.length;
             try {
@@ -122,9 +119,9 @@
             document.getElementById('connection-status').innerText = `🟢 الرادار متصل حياً ومحدث عبر EGXBot Deep Engine`;
             document.getElementById('connection-status').style.color = "#2ea043";
 
-            // قراءة كتل البيانات مع وضع مصفوفات افتراضية لحمايتها من الانهيار
-            let bids = data.bids || [];
-            let asks = data.asks || [];
+            // فك التشفير بمرونة لحل مشكلة الحروف الكبيرة والصغيرة (Case-Insensitivity)
+            let bids = data.bids || data.Bids || [];
+            let asks = data.asks || data.Asks || [];
 
             bids = bids.slice(0, 5);
             asks = asks.slice(0, 5);
@@ -135,7 +132,6 @@
             let totalVolumePool = totalBidVol + totalAskVol;
             let bidPressurePct = totalVolumePool > 0 ? ((totalBidVol / totalVolumePool) * 100) : 50;
 
-            // تحديث المؤشر العلوي والميزان اللحظي
             document.getElementById('pressure-pct').innerText = bidPressurePct.toFixed(1) + "%";
             document.getElementById('pressure-bid-bar').style.width = bidPressurePct + "%";
             document.getElementById('pressure-ask-bar').style.width = (100 - bidPressurePct) + "%";
@@ -143,7 +139,6 @@
             document.getElementById('lbl-total-bids').innerText = totalBidVol.toLocaleString();
             document.getElementById('lbl-total-asks').innerText = totalAskVol.toLocaleString();
 
-            // بناء جدول مستويات العمق الخماسية ديناميكياً
             let htmlRows = "";
             let maxRows = Math.max(bids.length, asks.length);
             
@@ -166,9 +161,9 @@
             }
             document.getElementById('depth-rows').innerHTML = htmlRows;
 
-            // تحديث الأسعار الإجمالية للسهم من السيرفر
-            let lastPrice = data.lastPrice || data.LastPrice || data.price || 0;
-            let changePercent = data.changePercent || data.ChangePercent || data.change || 0;
+            // تحديث الحقول الإجمالية مع دعم الحروف الكبيرة
+            let lastPrice = data.lastPrice || data.LastPrice || data.price || data.Price || 0;
+            let changePercent = data.changePercent || data.ChangePercent || data.change || data.Change || 0;
 
             if(lastPrice) document.getElementById('live-price').innerText = parseFloat(lastPrice).toFixed(2) + " ج.م";
             if(changePercent) {
@@ -178,10 +173,9 @@
                 el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
             }
 
-            // 🚨 الفلترة الصارمة على عمق الطلبات والعروض (58%)
             const signalBox = document.getElementById('signal-display');
             if (bidPressurePct >= 58.0) {
-                signalBox.innerText = `🔥 تجميع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات حقيقية تمتص العروض وتستعد للاكتساح لأعلى.`;
+                signalBox.innerText = `🔥 تجمع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات حقيقية تمتص العروض وتستعد للاكتساح لأعلى.`;
                 signalBox.className = "signal-box alert-accumulation";
             } else if (bidPressurePct <= 42.0) {
                 signalBox.innerText = `⚠️ تصريف وضغط سلبي: كتل العروض أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%. يرجى توخي الحذر.`;
@@ -198,7 +192,7 @@
         }
     }
 
-    setInterval(updateRadarEngine, 5000); // استعلام وتحديث مستمر كل 5 ثوانٍ
+    setInterval(updateRadarEngine, 5000);
     updateRadarEngine();
 </script>
 </body>
