@@ -3,62 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار عمق السوق الخماسي الاستباقي (EGXBot Feed)</title>
+    <title>🎯 رادار عمق السوق والتنفيذات اللحظية V12.5</title>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 10px; margin: 0; text-align: center; }
         .container { max-width: 500px; margin: auto; }
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        h1 { font-size: 1.2rem; color: #fff; margin-bottom: 2px; }
-        .stock-title { font-size: 1.1rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
-        .status { font-size: 0.85rem; color: var(--blue); margin-bottom: 10px; font-weight: bold; }
+        h1 { font-size: 1.1rem; color: #fff; margin: 0 0 5px 0; }
+        .stock-title { font-size: 1.2rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
+        .status { font-size: 0.8rem; color: var(--blue); margin-bottom: 12px; font-weight: bold; }
 
-        /* 📊 ميزان السيولة التراكمي */
-        .pressure-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 15px; }
-        .pressure-title { font-size: 0.85rem; color: #fff; font-weight: bold; margin-bottom: 8px; display: flex; justify-content: space-between;}
-        .pressure-bar-bg { background: #30363d; border-radius: 4px; height: 16px; overflow: hidden; display: flex; }
+        /* 📊 ميزان عمق السوق التراكمي */
+        .pressure-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 12px; }
+        .pressure-title { font-size: 0.8rem; color: #fff; font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between;}
+        .pressure-bar-bg { background: #30363d; border-radius: 4px; height: 14px; overflow: hidden; display: flex; }
         .pressure-bid { background: var(--green); height: 100%; transition: width 0.4s ease; }
         .pressure-ask { background: var(--red); height: 100%; transition: width 0.4s ease; }
 
-        /* 📋 جدول العمق الخماسي */
-        .depth-table { width: 100%; margin-top: 10px; border-collapse: collapse; font-size: 0.85rem; background: #21262d; border-radius: 8px; overflow: hidden; }
-        .depth-table th { background: #30363d; color: #fff; padding: 8px; font-weight: 600; }
-        .depth-table td { padding: 8px; border-bottom: 1px solid var(--border); color: #fff; }
+        /* 📋 الجداول */
+        .section-title { font-size: 0.9rem; color: #fff; text-align: right; margin: 10px 5px 5px 0; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        .radar-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; background: #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+        .radar-table th { background: #30363d; color: #fff; padding: 6px; font-weight: 600; }
+        .radar-table td { padding: 6px; border-bottom: 1px solid var(--border); color: #fff; }
         
-        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .metric-box { background: #21262d; border: 1px solid var(--border); padding: 10px; border-radius: 8px; }
-        .metric-box span { display: block; font-size: 0.75rem; color: #8b949e; margin-bottom: 4px; }
-        .metric-box b { font-size: 1.15rem; color: #fff; }
+        /* ⚡ الصفقات والتنفيذات الفورية V12 */
+        .trade-buy { color: #2ea043 !important; font-weight: bold; }
+        .trade-sell { color: #da3633 !important; font-weight: bold; }
         
-        .signal-box { padding: 12px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; border: 1px solid var(--border); margin-top: 15px; }
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+        .metric-box { background: #21262d; border: 1px solid var(--border); padding: 8px; border-radius: 8px; }
+        .metric-box span { display: block; font-size: 0.7rem; color: #8b949e; margin-bottom: 2px; }
+        .metric-box b { font-size: 1.1rem; color: #fff; }
+        
+        .signal-box { padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--border); margin-top: 12px; }
         .alert-accumulation { background: rgba(46, 160, 67, 0.2); color: #fff; border-color: var(--green); }
         .alert-normal { background: #21262d; color: var(--text); }
+        
+        #debug-log { font-family: monospace; font-size: 10px; color: #8b949e; background: #000; padding: 6px; border-radius: 6px; text-align: left; max-height: 60px; overflow-y: auto; margin-top: 8px; white-space: pre-wrap; direction: ltr; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار عمق السوق الخماسي الاستباقي</h1>
+        <h1>🎯 رادار عمق السوق والتنفيذات اللحظية V12.5</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🚀 جاري تخطي الحماية والربط المباشر...</div>
+        <div id="connection-status" class="status">⚡ جاري تشغيل محركات البث المزدوج الحية...</div>
         
         <div class="pressure-container">
             <div class="pressure-title">
-                <span>⚡ ميزان سيولة عمق السوق التراكمي (5 مستويات)</span>
+                <span>📊 ميزان عمق السوق التراكمي (5 مستويات)</span>
                 <span id="pressure-pct">50%</span>
             </div>
             <div class="pressure-bar-bg">
                 <div id="pressure-bid-bar" class="pressure-bid" style="width: 50%;"></div>
                 <div id="pressure-ask-bar" class="pressure-ask" style="width: 50%;"></div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #8b949e; margin-top: 6px;">
-                <span>إجمالي الـ 5 طلبات: <b id="lbl-total-bids" style="color:#fff;">0</b></span>
-                <span>إجمالي الـ 5 عروض: <b id="lbl-total-asks" style="color:#fff;">0</b></span>
+            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8b949e; margin-top: 4px;">
+                <span>إجمالي الطلبات: <b id="lbl-total-bids" style="color:#fff;">0</b></span>
+                <span>إجمالي العروض: <b id="lbl-total-asks" style="color:#fff;">0</b></span>
             </div>
         </div>
 
-        <table class="depth-table">
+        <div class="section-title">🔍 عمق دفتر الأوامر الحالي:</div>
+        <table class="radar-table">
             <thead>
                 <tr>
                     <th style="color: var(--green);">حجم الطلب</th>
@@ -68,7 +76,22 @@
                 </tr>
             </thead>
             <tbody id="depth-rows">
-                <tr><td colspan="4" style="color: #8b949e;">جاري سحب مستويات العمق اللحظية...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">في انتظار تحديث الأوامر...</td></tr>
+            </tbody>
+        </table>
+
+        <div class="section-title">⚡ صفقات الماركت المنفذة فوراً (EGS4 Feed):</div>
+        <table class="radar-table">
+            <thead>
+                <tr>
+                    <th>الوقت</th>
+                    <th>السعر</th>
+                    <th>الحجم</th>
+                    <th>الاتجاه</th>
+                </tr>
+            </thead>
+            <tbody id="trade-rows">
+                <tr><td colspan="4" style="color: #8b949e;">في انتظار تنفيذ صفقات جديدة...</td></tr>
             </tbody>
         </table>
 
@@ -77,18 +100,24 @@
             <div class="metric-box"><span>التغير اللحظي</span><b id="live-change">0.00%</b></div>
         </div>
 
-        <div id="signal-display" class="signal-box alert-normal">بانتظار تدفق كتل السيولة المخفية...</div>
+        <div id="signal-display" class="signal-box alert-normal">بانتظار مطابقة عمق السوق مع الصفقات المنفذة...</div>
+        
+        <div style="text-align:left; font-size:0.7rem; color:#8b949e; margin-top:10px; font-weight:bold;">📟 فحص الـ API اللحظي:</div>
+        <div id="debug-log">جاري الفحص الهجين للحقول...</div>
     </div>
 </div>
 
 <script>
-    const BOT_API_URL = "https://egxbot.com/api/Market/getOrderBook?symbol=ARCC";
+    const ORDERBOOK_API = "https://egxbot.com/api/Market/getOrderBook?symbol=ARCC";
     let proxyIndex = 0;
-    
     const PROXIES = [
         url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
+
+    function logToScreen(msg) {
+        document.getElementById('debug-log').innerText = msg;
+    }
 
     async function fetchFromPool(url) {
         try {
@@ -101,70 +130,78 @@
             try {
                 let fullUrl = PROXIES[idx](url + '&cb=' + Date.now());
                 const response = await fetch(fullUrl);
-                if (response.ok) { 
-                    proxyIndex = idx; 
-                    let textData = await response.text();
-                    return JSON.parse(textData); 
-                }
+                if (response.ok) { proxyIndex = idx; return JSON.parse(await response.text()); }
             } catch (e) {}
         }
         return null;
     }
 
+    // محرك تحديث عمق السوق والتنفيذات معاً
     async function updateRadarEngine() {
         try {
-            const data = await fetchFromPool(BOT_API_URL);
-            if (!data) return;
+            const data = await fetchFromPool(ORDERBOOK_API);
+            if (!data) {
+                logToScreen("❌ فشل الاتصال بالسيرفر أو البروكسي حالياً.");
+                return;
+            }
 
-            document.getElementById('connection-status').innerText = `🟢 الرادار متصل حياً ومحدث عبر EGXBot Deep Engine`;
+            let keys = Object.keys(data).join(', ');
+            logToScreen(`🟢 متصل! الحقول المستلمة: { ${keys} }`);
+
+            document.getElementById('connection-status').innerText = `🟢 المحرك المزدوج V12.5 يعمل ومحدث حياً`;
             document.getElementById('connection-status').style.color = "#2ea043";
 
-            // فك التشفير بمرونة لحل مشكلة الحروف الكبيرة والصغيرة (Case-Insensitivity)
+            // 1. معالجة وتحديث جدول عمق السوق (الطلبات والعروض)
             let bids = data.bids || data.Bids || [];
             let asks = data.asks || data.Asks || [];
-
             bids = bids.slice(0, 5);
             asks = asks.slice(0, 5);
 
             let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || 0), 0);
             let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || 0), 0);
-
             let totalVolumePool = totalBidVol + totalAskVol;
             let bidPressurePct = totalVolumePool > 0 ? ((totalBidVol / totalVolumePool) * 100) : 50;
 
             document.getElementById('pressure-pct').innerText = bidPressurePct.toFixed(1) + "%";
             document.getElementById('pressure-bid-bar').style.width = bidPressurePct + "%";
             document.getElementById('pressure-ask-bar').style.width = (100 - bidPressurePct) + "%";
-            
             document.getElementById('lbl-total-bids').innerText = totalBidVol.toLocaleString();
             document.getElementById('lbl-total-asks').innerText = totalAskVol.toLocaleString();
 
-            let htmlRows = "";
+            let depthHtml = "";
             let maxRows = Math.max(bids.length, asks.length);
-            
-            if(maxRows === 0) {
-                htmlRows = `<tr><td colspan="4" style="color: #8b949e;">في انتظار بدء بث الجلسة وتحديث الأوامر...</td></tr>`;
-            }
-
             for (let i = 0; i < maxRows; i++) {
                 let bVol = bids[i] ? parseInt(bids[i].volume || bids[i].Volume || 0).toLocaleString() : "-";
                 let bPrice = bids[i] ? parseFloat(bids[i].price || bids[i].Price || 0).toFixed(2) : "-";
                 let aPrice = asks[i] ? parseFloat(asks[i].price || asks[i].Price || 0).toFixed(2) : "-";
                 let aVol = asks[i] ? parseInt(asks[i].volume || asks[i].Volume || 0).toLocaleString() : "-";
-
-                htmlRows += `<tr>
-                    <td style="color: var(--green); font-weight: bold;">${bVol}</td>
-                    <td>${bPrice}</td>
-                    <td>${aPrice}</td>
-                    <td style="color: var(--red); font-weight: bold;">${aVol}</td>
-                </tr>`;
+                depthHtml += `<tr><td style="color:var(--green);font-weight:bold;">${bVol}</td><td>${bPrice}</td><td>${aPrice}</td><td style="color:var(--red);font-weight:bold;">${aVol}</td></tr>`;
             }
-            document.getElementById('depth-rows').innerHTML = htmlRows;
+            if(maxRows > 0) document.getElementById('depth-rows').innerHTML = depthHtml;
 
-            // تحديث الحقول الإجمالية مع دعم الحروف الكبيرة
-            let lastPrice = data.lastPrice || data.LastPrice || data.price || data.Price || 0;
-            let changePercent = data.changePercent || data.ChangePercent || data.change || data.Change || 0;
+            // 2. معالجة وتحديث صفقات الماركت المنفذة حياً (تحديث نسخة V12 السليمة)
+            let trades = data.trades || data.Trades || data.recentTrades || [];
+            let tradesHtml = "";
+            if (trades.length === 0) {
+                tradesHtml = `<tr><td colspan="4" style="color: #8b949e;">في انتظار صفقات ماركت جديدة بالجلسة...</td></tr>`;
+            } else {
+                trades.slice(0, 5).forEach(t => {
+                    let side = (t.side || t.Side || 'buy').toLowerCase();
+                    let sideText = side === 'buy' ? 'شراء ماركت' : 'بيع ماركت';
+                    let sideClass = side === 'buy' ? 'trade-buy' : 'trade-sell';
+                    tradesHtml += `<tr>
+                        <td>${t.time || t.Time || '-'}</td>
+                        <td>${parseFloat(t.price || t.Price || 0).toFixed(2)}</td>
+                        <td>${parseInt(t.volume || t.Volume || t.qty || 0).toLocaleString()}</td>
+                        <td class="${sideClass}">${sideText}</td>
+                    </tr>`;
+                });
+            }
+            document.getElementById('trade-rows').innerHTML = tradesHtml;
 
+            // 3. تحديث الأسعار والمؤشرات العامة
+            let lastPrice = data.lastPrice || data.LastPrice || data.price || 0;
+            let changePercent = data.changePercent || data.ChangePercent || 0;
             if(lastPrice) document.getElementById('live-price').innerText = parseFloat(lastPrice).toFixed(2) + " ج.م";
             if(changePercent) {
                 let chg = parseFloat(changePercent);
@@ -173,26 +210,25 @@
                 el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
             }
 
+            // 🚨 معيار اتخاذ القرار الصارم (58%)
             const signalBox = document.getElementById('signal-display');
             if (bidPressurePct >= 58.0) {
-                signalBox.innerText = `🔥 تجمع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات حقيقية تمتص العروض وتستعد للاكتساح لأعلى.`;
+                signalBox.innerText = `🔥 تجميع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل الطلبات في العمق تدعم اختراق السعر لأعلى مع التنفيذات.`;
                 signalBox.className = "signal-box alert-accumulation";
             } else if (bidPressurePct <= 42.0) {
-                signalBox.innerText = `⚠️ تصريف وضغط سلبي: كتل العروض أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%. يرجى توخي الحذر.`;
+                signalBox.innerText = `⚠️ ضغط تصريفي: كتل العروض أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%. التنفيذات تواجه جدار مقاومة قاسي.`;
                 signalBox.className = "signal-box alert-normal";
                 signalBox.style.borderColor = "var(--red)";
             } else {
-                signalBox.innerText = `⚖️ توازن نسبي: السيولة مستقرة وموزعة بالتساوي بين الطلبات والعروض حالياً.`;
+                signalBox.innerText = `⚖️ استقرار نسبي: السيولة متوازنة تماماً بين الأوامر الخماسية وحركة الصفقات الحالية.`;
                 signalBox.className = "signal-box alert-normal";
                 signalBox.style.borderColor = "var(--border)";
             }
 
-        } catch (e) { 
-            console.error("Error parsing depth data:", e);
-        }
+        } catch (e) { logToScreen("❌ خطأ في معالجة البيانات: " + e.message); }
     }
 
-    setInterval(updateRadarEngine, 5000);
+    setInterval(updateRadarEngine, 5000); // تحديث دوري ذكي كل 5 ثوانٍ
     updateRadarEngine();
 </script>
 </body>
