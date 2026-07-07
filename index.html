@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار عمق بورصجي والتنفيذات اللحظية V12.7</title>
+    <title>🎯 رادار بورصجي المحمي والتنفيذات اللحظية V12.8</title>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 10px; margin: 0; text-align: center; }
@@ -43,13 +43,13 @@
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار عمق بورصجي والتنفيذات اللحظية V12.7</h1>
+        <h1>🎯 رادار عمق بورصجي المحمي والتنفيذات V12.8</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🚀 جاري دمج عمق بورصجي مع صفقات V12...</div>
+        <div id="connection-status" class="status">🔑 جاري تمرير مفاتيح التشفير وسحب كتل العمق لـ ARCC...</div>
         
         <div class="pressure-container">
             <div class="pressure-title">
-                <span>📊 ميزان سيولة عمق السوق (5 مستويات بورصجي)</span>
+                <span>📊 ميزان سيولة عمق السوق (5 مستويات مصادقة)</span>
                 <span id="pressure-pct">50%</span>
             </div>
             <div class="pressure-bar-bg">
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="section-title">🔍 دفتر الأوامر الخماسي الاستباقي (EGXBot):</div>
+        <div class="section-title">🔍 دفتر الأوامر الخماسي المصادق (EGXBot Verified):</div>
         <table class="radar-table">
             <thead>
                 <tr>
@@ -73,7 +73,7 @@
                 </tr>
             </thead>
             <tbody id="depth-rows">
-                <tr><td colspan="4" style="color: #8b949e;">في انتظار جلب مستويات العمق...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">جاري فك التشفير وعرض الأوامر اللحظية لـ ARCC...</td></tr>
             </tbody>
         </table>
 
@@ -97,14 +97,26 @@
             <div class="metric-box"><span>التغير اللحظي</span><b id="live-change">0.00%</b></div>
         </div>
 
-        <div id="signal-display" class="signal-box alert-normal">في انتظار تدفق وتحليل الكتل العميقة...</div>
+        <div id="signal-display" class="signal-box alert-normal">في انتظار تحليل تدفق سيولة كتل الماركت...</div>
     </div>
 </div>
 
 <script>
-    // 1. روابط الـ APIs
+    // الروابط المحدثة للسهم ARCC
     const BORSA_API = "https://egxbot.com/api/Market/getOrderBook?symbol=ARCC";
-    const LOCAL_V12_API = "http://192.168.1.100:5000/api/data?symbol=ARCC"; // ضع رابط سيرفر الصفقات المستقر الخاص بك هنا
+    const LOCAL_V12_API = "http://192.168.1.100:5000/api/data?symbol=ARCC"; 
+
+    // الـ Headers الآمنة لتخطي فحص السيرفر
+    const SECURE_HEADERS = {
+        "accept": "application/json",
+        "accept-language": "en-US,en;q=0.9,ar;q=0.8,ru;q=0.7",
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5MDg5MDgxMTkiLCJuYW1lIjoiTW9zdGFmYSIsImV4cCI6MTc4NDAyNzUzNX0.OMXE07QPfiBYBAe6ODI-wn1MArWp7MyyrkLjrhcDMq4",
+        "priority": "u=1, i",
+        "sec-ch-ua-mobile": "?0",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin"
+    };
 
     let proxyIndex = 0;
     const PROXIES = [
@@ -112,7 +124,12 @@
         url => `https://corsproxy.io/?${encodeURIComponent(url)}`
     ];
 
-    async function fetchFromBorsa(url) {
+    async function fetchWithAuth(url) {
+        try {
+            const directRes = await fetch(url, { method: "GET", headers: SECURE_HEADERS, mode: 'cors' });
+            if (directRes.ok) return await directRes.json();
+        } catch(e) {}
+
         for (let i = 0; i < PROXIES.length; i++) {
             let idx = (proxyIndex + i) % PROXIES.length;
             try {
@@ -128,23 +145,21 @@
     }
 
     async function updateHybridRadar() {
-        // ---- أولاً: جلب عمق السوق من بورصجي ----
+        // ---- أولاً: جلب وعرض عمق السوق من بورصجي ----
         try {
-            const borsaData = await fetchFromBorsa(BORSA_API);
+            const borsaData = await fetchWithAuth(BORSA_API);
             if (borsaData) {
-                document.getElementById('connection-status').innerText = `🟢 متصل: عمق بورصجي + صفقات V12 تعمل حياً`;
+                document.getElementById('connection-status').innerText = `🟢 تم تمرير الـ Token: عمق ARCC + صفقات V12 حية`;
                 document.getElementById('connection-status').style.color = "#2ea043";
 
-                // فحص هجين ومرن لقراءة المصفوفات بأي اسم حقل يرسله خادم بورصجي
                 let bids = borsaData.bids || borsaData.Bids || borsaData.bid || [];
                 let asks = borsaData.asks || borsaData.Asks || borsaData.ask || [];
                 
                 bids = bids.slice(0, 5);
                 asks = asks.slice(0, 5);
 
-                // حساب الأحجام بدعم مرن لأسماء الحقول المتغيرة (volume, Volume, qty, quantity, vol)
-                let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || item.qty || item.quantity || item.vol || 0), 0);
-                let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || item.qty || item.quantity || item.vol || 0), 0);
+                let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || item.qty || item.vol || 0), 0);
+                let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || item.Volume || item.qty || item.vol || 0), 0);
                 
                 let totalVolumePool = totalBidVol + totalAskVol;
                 let bidPressurePct = totalVolumePool > 0 ? ((totalBidVol / totalVolumePool) * 100) : 50;
@@ -168,10 +183,10 @@
                 }
                 if(maxRows > 0) document.getElementById('depth-rows').innerHTML = depthHtml;
 
-                // 🚨 معيار اتخاذ القرار (58%) من عمق بورصجي
+                // 🚨 معيار الـ 58%
                 const signalBox = document.getElementById('signal-display');
                 if (bidPressurePct >= 58.0) {
-                    signalBox.innerText = `🔥 تجمع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات بورصجي تمتص العروض وتستعد للاكتساح لأعلى.`;
+                    signalBox.innerText = `🔥 تجميع صريح بنسبة ${bidPressurePct.toFixed(1)}%! كتل طلبات بورصجي تمتص العروض وتستعد للاكتساح لأعلى.`;
                     signalBox.className = "signal-box alert-accumulation";
                 } else if (bidPressurePct <= 42.0) {
                     signalBox.innerText = `⚠️ ضغط تصريفي: كتل عروض بورصجي أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%. يرجى توخي الحذر.`;
@@ -183,9 +198,9 @@
                     signalBox.style.borderColor = "var(--border)";
                 }
             }
-        } catch (e) { console.error("Error reading Borsa Depth:", e); }
+        } catch (e) { console.error("Error reading Protected Borsa Depth:", e); }
 
-        // ---- ثانياً: جلب الصفقات والأسعار من خادمك المستقر V12 ----
+        // ---- ثانياً: جلب الصفقات من خادمك المستقر V12 ----
         try {
             const localResponse = await fetch(LOCAL_V12_API);
             if (localResponse.ok) {
@@ -221,7 +236,6 @@
         } catch (e) { console.error("Error reading Local V12 Trades:", e); }
     }
 
-    // التحديث التلقائي كل 4 ثوانٍ لضمان اللحظية الدقيقة
     setInterval(updateHybridRadar, 4000);
     updateHybridRadar();
 </script>
