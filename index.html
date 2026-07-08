@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار عمق السوق السحابي - EGXpilot Intelligence</title>
+    <title>🎯 رادار عمق السوق السحابي - EGXpilot Premium</title>
     <style>
         :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; --purple: #8a2be2; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 10px; margin: 0; text-align: center; }
@@ -30,10 +30,7 @@
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 8px; border-radius: 8px; }
         .metric-box b { font-size: 1.1rem; color: #fff; }
         
-        /* لوحة تلخيص الذكاء الاصطناعي والمؤسسات */
         .ai-box { background: rgba(138, 43, 226, 0.1); border: 1px solid var(--purple); border-radius: 8px; padding: 10px; margin-top: 10px; text-align: right; font-size: 0.8rem; }
-        .ai-box title { display: block; font-weight: bold; color: var(--purple); margin-bottom: 4px; }
-
         .signal-box { padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--border); margin-top: 12px; }
         .alert-accumulation { background: rgba(46, 160, 67, 0.2); color: #fff; border-color: var(--green); }
         .alert-normal { background: #21262d; color: var(--text); }
@@ -43,13 +40,13 @@
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار عمق السوق السحابي - EGXpilot Engine</h1>
+        <h1>🎯 رادار عمق السوق السحابي - EGXpilot Infrastructure</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🔄 جاري قراءة التدفق السحابي لـ EGXpilot...</div>
+        <div id="connection-status" class="status">🔄 جاري قراءة التدفق الرقمي لـ EGXpilot...</div>
         
         <div class="pressure-container">
             <div class="pressure-title">
-                <span>📊 ميزان سيولة عمق السوق التراكمي</span>
+                <span>📊 ميزان سيولة عمق السوق التراكمي (5 مستويات)</span>
                 <span id="pressure-pct">50%</span>
             </div>
             <div class="pressure-bar-bg">
@@ -62,7 +59,7 @@
             </div>
         </div>
 
-        <div class="section-title">🔍 دفتر الأوامر الخماسي المستقر (EGXpilot Stream):</div>
+        <div class="section-title">🔍 دفتر الأوامر الخماسي المستقر (EGXpilot API):</div>
         <table class="radar-table">
             <thead>
                 <tr>
@@ -73,7 +70,7 @@
                 </tr>
             </thead>
             <tbody id="depth-rows">
-                <tr><td colspan="4" style="color: #8b949e;">في انتظار تحميل البيانات السحابية...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">في انتظار تحميل الحزم السحابية...</td></tr>
             </tbody>
         </table>
 
@@ -99,7 +96,7 @@
 
         <div class="ai-box">
             <span style="font-weight:bold; color:var(--purple);">🤖 تحليل Mistral AI وتتبع المؤسسات:</span>
-            <p id="ai-text" style="margin:4px 0 0 0; color:#fff; font-style:italic;">جاري سحب التلخيص السياقي...</p>
+            <p id="ai-text" style="margin:4px 0 0 0; color:#fff; font-style:italic;">جاري سحب التلخيص السياقي من السيرفر...</p>
             <div style="margin-top:5px; font-size:0.75rem;">
                 <span>تتبع الأموال الذكية (Smart Money): <b id="lbl-smart-money" style="color:var(--blue);">-</b></span>
             </div>
@@ -114,11 +111,12 @@
 
     async function loadCloudData() {
         try {
+            // كسر الكاش لضمان جلب البيانات فريش من سيرفرات جيت هاب
             const res = await fetch(DATA_URL + "?t=" + new Date().getTime());
             if (res.ok) {
                 const data = await res.json();
                 
-                document.getElementById('connection-status').innerText = `🟢 متصل سحابياً: البيانات تتدفق حياً وموثقة عبر EGXpilot v2.0`;
+                document.getElementById('connection-status').innerText = `🟢 متصل سحابياً: المنظومة تعمل بالكامل أونلاين عبر EGXpilot v2.0`;
                 document.getElementById('connection-status').style.color = "#2ea043";
 
                 let bids = data.depth?.buy || [];
@@ -158,9 +156,8 @@
                     el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
                 }
 
-                // تحديث لوحة الذكاء الاصطناعي والمؤسسات
                 if(data.ai_summary) document.getElementById('ai-text').innerText = data.ai_summary;
-                document.getElementById('lbl-smart-money').innerText = data.smart_money ? "🔥 نشط وتجميع مؤسسي صريح" : "خامل";
+                document.getElementById('lbl-smart-money').innerText = data.smart_money ? "🔥 نشط وتجميع مؤسسي رصين" : "خامل";
                 document.getElementById('lbl-smart-money').style.color = data.smart_money ? "var(--green)" : "var(--red)";
 
                 let tradesHtml = "";
@@ -172,18 +169,19 @@
 
                 const signalBox = document.getElementById('signal-display');
                 if (bidPressurePct >= 58.0) {
-                    signalBox.innerText = `🔥 سيولة تجمعية صريحة بقوة ${bidPressurePct.toFixed(1)}%! كتل الطلبات تمتص عروض ARCC بدعم من قوى الـ Smart Money.`;
+                    signalBox.innerText = `🔥 سيولة تجمعية صريحة بقوة ${bidPressurePct.toFixed(1)}%! كتل الطلبات تمتص العروض بدعم مؤسسي كامل.`;
                     signalBox.className = "signal-box alert-accumulation";
                 } else {
-                    signalBox.innerText = `⚖️ ميزان السيولة مستقر سحابياً بانتظار إشارات اختراق سعرية جديدة.`;
+                    signalBox.innerText = `⚖️ ميزان السيولة مستقر سحابياً بانتظار إشارات كسر حركية جديدة.`;
                     signalBox.className = "signal-box alert-normal";
                 }
             }
         } catch (e) {
-            console.error(e);
+            console.error("Error loading cloud data:", e);
         }
     }
 
+    // فحص دوري كل 5 ثوانٍ لقراءة التحديث السحابي
     setInterval(loadCloudData, 5000);
     loadCloudData();
 </script>
