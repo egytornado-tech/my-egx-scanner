@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎯 رادار عمق بورصجي والتنفيذات اللحظية V13.0</title>
+    <title>🎯 رادار عمق السوق السحابي - EGXpilot Intelligence</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; }
+        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; --purple: #8a2be2; }
         body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 10px; margin: 0; text-align: center; }
         .container { max-width: 500px; margin: auto; }
         .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
@@ -13,27 +13,27 @@
         .stock-title { font-size: 1.2rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
         .status { font-size: 0.8rem; color: var(--blue); margin-bottom: 12px; font-weight: bold; }
 
-        /* 📊 ميزان السيولة الخماسي */
         .pressure-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 12px; }
         .pressure-title { font-size: 0.8rem; color: #fff; font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between;}
         .pressure-bar-bg { background: #30363d; border-radius: 4px; height: 14px; overflow: hidden; display: flex; }
         .pressure-bid { background: var(--green); height: 100%; transition: width 0.4s ease; }
         .pressure-ask { background: var(--red); height: 100%; transition: width 0.4s ease; }
 
-        /* 📋 الجداول */
-        .section-title { font-size: 0.9rem; color: #fff; text-align: right; margin: 10px 5px 5px 0; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        .section-title { font-size: 0.9rem; color: #fff; text-align: right; margin: 10px 5px 5px 0; font-weight: bold; }
         .radar-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
-        .radar-table th { background: #30363d; color: #fff; padding: 8px; font-weight: 600; }
+        .radar-table th { background: #30363d; color: #fff; padding: 8px; }
         .radar-table td { padding: 8px; border-bottom: 1px solid var(--border); color: #fff; }
         
         .trade-buy { color: #2ea043 !important; font-weight: bold; }
         .trade-sell { color: #da3633 !important; font-weight: bold; }
-        
         .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
         .metric-box { background: #21262d; border: 1px solid var(--border); padding: 8px; border-radius: 8px; }
-        .metric-box span { display: block; font-size: 0.7rem; color: #8b949e; margin-bottom: 2px; }
         .metric-box b { font-size: 1.1rem; color: #fff; }
         
+        /* لوحة تلخيص الذكاء الاصطناعي والمؤسسات */
+        .ai-box { background: rgba(138, 43, 226, 0.1); border: 1px solid var(--purple); border-radius: 8px; padding: 10px; margin-top: 10px; text-align: right; font-size: 0.8rem; }
+        .ai-box title { display: block; font-weight: bold; color: var(--purple); margin-bottom: 4px; }
+
         .signal-box { padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--border); margin-top: 12px; }
         .alert-accumulation { background: rgba(46, 160, 67, 0.2); color: #fff; border-color: var(--green); }
         .alert-normal { background: #21262d; color: var(--text); }
@@ -43,13 +43,13 @@
 
 <div class="container">
     <div class="card">
-        <h1>🎯 رادار عمق بورصجي المحمي والتنفيذات V13.0</h1>
+        <h1>🎯 رادار عمق السوق السحابي - EGXpilot Engine</h1>
         <div class="stock-title">العربية للأسمنت (ARCC)</div>
-        <div id="connection-status" class="status">🔄 جاري الاتصال بالخادم الموحد لتفادي قيود الـ CORS...</div>
+        <div id="connection-status" class="status">🔄 جاري قراءة التدفق السحابي لـ EGXpilot...</div>
         
         <div class="pressure-container">
             <div class="pressure-title">
-                <span>📊 ميزان سيولة عمق السوق (هيكلية خادم الباكيند)</span>
+                <span>📊 ميزان سيولة عمق السوق التراكمي</span>
                 <span id="pressure-pct">50%</span>
             </div>
             <div class="pressure-bar-bg">
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="section-title">🔍 دفتر الأوامر الخماسي الموحد (Backend Tunnel):</div>
+        <div class="section-title">🔍 دفتر الأوامر الخماسي المستقر (EGXpilot Stream):</div>
         <table class="radar-table">
             <thead>
                 <tr>
@@ -73,11 +73,11 @@
                 </tr>
             </thead>
             <tbody id="depth-rows">
-                <tr><td colspan="4" style="color: #8b949e;">في انتظار تدفق البيانات الموحدة عبر خادم الباكيند...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">في انتظار تحميل البيانات السحابية...</td></tr>
             </tbody>
         </table>
 
-        <div class="section-title">⚡ صفقات الماركت المنفذة فوراً (V12 Core):</div>
+        <div class="section-title">⚡ صفقات الماركت المنفذة (V12 Core):</div>
         <table class="radar-table">
             <thead>
                 <tr>
@@ -88,33 +88,39 @@
                 </tr>
             </thead>
             <tbody id="trade-rows">
-                <tr><td colspan="4" style="color: #8b949e;">في انتظار بث صفقات الجلسة...</td></tr>
+                <tr><td colspan="4" style="color: #8b949e;">في انتظار جلب الصفقات...</td></tr>
             </tbody>
         </table>
 
         <div class="metric-grid">
-            <div class="metric-box"><span>آخر سعر تنفيذ</span><b id="live-price">0.00 ج.م</b></div>
-            <div class="metric-box"><span>التغير اللحظي</span><b id="live-change">0.00%</b></div>
+            <div class="metric-box"><span>آخر سعر تنفيذ</span><br><b id="live-price">0.00 ج.م</b></div>
+            <div class="metric-box"><span>التغير اللحظي</span><br><b id="live-change">0.00%</b></div>
         </div>
 
-        <div id="signal-display" class="signal-box alert-normal">في انتظار تحليل تدفق سيولة كتل الماركت...</div>
+        <div class="ai-box">
+            <span style="font-weight:bold; color:var(--purple);">🤖 تحليل Mistral AI وتتبع المؤسسات:</span>
+            <p id="ai-text" style="margin:4px 0 0 0; color:#fff; font-style:italic;">جاري سحب التلخيص السياقي...</p>
+            <div style="margin-top:5px; font-size:0.75rem;">
+                <span>تتبع الأموال الذكية (Smart Money): <b id="lbl-smart-money" style="color:var(--blue);">-</b></span>
+            </div>
+        </div>
+
+        <div id="signal-display" class="signal-box alert-normal">تحليل السيولة التراكمية الاستباقية (58%)...</div>
     </div>
 </div>
 
 <script>
-    // الرابط الموحد الجديد عبر الباكيند لتفادي قيود الـ CORS نهائياً
-    const HYBRID_BACKEND_API = "http://localhost:5000/api/radar"; 
+    const DATA_URL = "data.json"; 
 
-    async function updateHybridRadar() {
+    async function loadCloudData() {
         try {
-            const res = await fetch(HYBRID_BACKEND_API);
+            const res = await fetch(DATA_URL + "?t=" + new Date().getTime());
             if (res.ok) {
                 const data = await res.json();
                 
-                document.getElementById('connection-status').innerText = `🟢 متصل بالباكيند: عمق السوق والصفقات مستقرة وتتدفق حياً`;
+                document.getElementById('connection-status').innerText = `🟢 متصل سحابياً: البيانات تتدفق حياً وموثقة عبر EGXpilot v2.0`;
                 document.getElementById('connection-status').style.color = "#2ea043";
 
-                // استخراج العمق من الباكيند (مطابق لمصفوفات بورصجي buy/sell)
                 let bids = data.depth?.buy || [];
                 let asks = data.depth?.sell || [];
                 
@@ -135,18 +141,15 @@
 
                 let depthHtml = "";
                 let maxRows = Math.max(bids.length, asks.length);
-                
                 for (let i = 0; i < maxRows; i++) {
                     let bVol = bids[i] ? parseInt(bids[i].volume || 0).toLocaleString() : "-";
                     let bPrice = bids[i] ? parseFloat(bids[i].price || 0).toFixed(2) : "-";
                     let aPrice = asks[i] ? parseFloat(asks[i].price || 0).toFixed(2) : "-";
                     let aVol = asks[i] ? parseInt(asks[i].volume || 0).toLocaleString() : "-";
-                    
                     depthHtml += `<tr><td style="color:var(--green);font-weight:bold;">${bVol}</td><td>${bPrice}</td><td>${aPrice}</td><td style="color:var(--red);font-weight:bold;">${aVol}</td></tr>`;
                 }
-                if(maxRows > 0) document.getElementById('depth-rows').innerHTML = depthHtml;
+                document.getElementById('depth-rows').innerHTML = depthHtml;
 
-                // تحديث الأسعار والتغير المنقول من الباكيند
                 if(data.lastPrice) document.getElementById('live-price').innerText = parseFloat(data.lastPrice).toFixed(2) + " ج.م";
                 if(data.changePercent) {
                     let chg = parseFloat(data.changePercent);
@@ -155,54 +158,34 @@
                     el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
                 }
 
-                // عرض صفقات الماركت
-                let trades = data.trades || [];
+                // تحديث لوحة الذكاء الاصطناعي والمؤسسات
+                if(data.ai_summary) document.getElementById('ai-text').innerText = data.ai_summary;
+                document.getElementById('lbl-smart-money').innerText = data.smart_money ? "🔥 نشط وتجميع مؤسسي صريح" : "خامل";
+                document.getElementById('lbl-smart-money').style.color = data.smart_money ? "var(--green)" : "var(--red)";
+
                 let tradesHtml = "";
-                if (trades.length === 0) {
-                    tradesHtml = `<tr><td colspan="4" style="color: #8b949e;">في انتظار صفقات ماركت جديدة...</td></tr>`;
-                } else {
-                    trades.slice(0, 5).forEach(t => {
-                        let side = (t.side || 'buy').toLowerCase();
-                        let sideText = side === 'buy' ? 'شراء ماركت' : 'بيع ماركت';
-                        let sideClass = side === 'buy' ? 'trade-buy' : 'trade-sell';
-                        tradesHtml += `<tr>
-                            <td>${t.time || '-'}</td>
-                            <td>${parseFloat(t.price || 0).toFixed(2)}</td>
-                            <td>${parseInt(t.volume || 0).toLocaleString()}</td>
-                            <td class="${sideClass}">${sideText}</td>
-                        </tr>`;
-                    });
-                }
+                (data.trades || []).forEach(t => {
+                    let sideClass = t.side === 'buy' ? 'trade-buy' : 'trade-sell';
+                    tradesHtml += `<tr><td>${t.time}</td><td>${t.price}</td><td>${t.volume.toLocaleString()}</td><td class="${sideClass}">${t.side === 'buy' ? 'شراء ماركت' : 'بيع ماركت'}</td></tr>`;
+                });
                 document.getElementById('trade-rows').innerHTML = tradesHtml;
 
-                // 🚨 إشارة الاستباق الرقمي والتجميع (58%)
                 const signalBox = document.getElementById('signal-display');
                 if (bidPressurePct >= 58.0) {
-                    signalBox.innerText = `🔥 سيولة تجمعية صريحة بقوة ${bidPressurePct.toFixed(1)}%! كتل الطلبات تمتص عروض ARCC وتستعد للاكتساح.`;
+                    signalBox.innerText = `🔥 سيولة تجمعية صريحة بقوة ${bidPressurePct.toFixed(1)}%! كتل الطلبات تمتص عروض ARCC بدعم من قوى الـ Smart Money.`;
                     signalBox.className = "signal-box alert-accumulation";
-                } else if (bidPressurePct <= 42.0) {
-                    signalBox.innerText = `⚠️ ضغط بيعي وتصريف: عروض الحائط السميكة أثقل بنسبة ${(100 - bidPressurePct).toFixed(1)}%.`;
-                    signalBox.className = "signal-box alert-normal";
-                    signalBox.style.borderColor = "var(--red)";
                 } else {
-                    signalBox.innerText = `⚖️ استقرار نسبي: ميزان السيولة مستقر بانتظار دخول أحجام ماركت استباقية قوية.`;
+                    signalBox.innerText = `⚖️ ميزان السيولة مستقر سحابياً بانتظار إشارات اختراق سعرية جديدة.`;
                     signalBox.className = "signal-box alert-normal";
-                    signalBox.style.borderColor = "var(--border)";
                 }
-            } else {
-                document.getElementById('connection-status').innerText = `❌ فشل الاتصال بالباكيند المحلي (كود الخطأ: ${res.status})`;
-                document.getElementById('connection-status').style.color = "var(--red)";
             }
         } catch (e) {
             console.error(e);
-            document.getElementById('connection-status').innerText = `⚠️ السيرفر المحلي مغلق! قم بتشغيل سكربت الـ Python لتفادي حظر الـ CORS وبدء البث اللحظي الموحد`;
-            document.getElementById('connection-status').style.color = "var(--orange)";
         }
     }
 
-    // دورة تحديث سريعة ومستقرة كل 3 ثوانٍ
-    setInterval(updateHybridRadar, 3000);
-    updateHybridRadar();
+    setInterval(loadCloudData, 5000);
+    loadCloudData();
 </script>
 </body>
 </html>
