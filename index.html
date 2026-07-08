@@ -5,35 +5,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎯 رادار عمق السوق السحابي - EGXpilot Premium</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --blue: #58a6ff; --orange: #f0883e; --red: #da3633; --purple: #8a2be2; }
-        body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 10px; margin: 0; text-align: center; }
-        .container { max-width: 500px; margin: auto; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        h1 { font-size: 1.1rem; color: #fff; margin: 0 0 5px 0; }
-        .stock-title { font-size: 1.2rem; color: var(--orange); font-weight: bold; margin-bottom: 10px; }
-        .status { font-size: 0.8rem; color: var(--blue); margin-bottom: 12px; font-weight: bold; }
+        :root { 
+            --bg: #0d1117; 
+            --card: #161b22; 
+            --border: #30363d; 
+            --text: #c9d1d9; 
+            --green: #2ea043; 
+            --blue: #58a6ff; 
+            --orange: #f0883e; 
+            --red: #da3633; 
+            --purple: #8a2be2; 
+        }
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            padding: 10px; 
+            margin: 0; 
+            text-align: center; 
+        }
+        .container { 
+            max-width: 500px; 
+            margin: auto; 
+        }
+        .card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+        }
+        h1 { 
+            font-size: 1.1rem; 
+            color: #fff; 
+            margin: 0 0 5px 0; 
+        }
+        .stock-title { 
+            font-size: 1.2rem; 
+            color: var(--orange); 
+            font-weight: bold; 
+            margin-bottom: 10px; 
+        }
+        .status { 
+            font-size: 0.8rem; 
+            color: var(--blue); 
+            margin-bottom: 12px; 
+            font-weight: bold; 
+        }
 
-        .pressure-container { background: #21262d; border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 12px; }
-        .pressure-title { font-size: 0.8rem; color: #fff; font-weight: bold; margin-bottom: 6px; display: flex; justify-content: space-between;}
-        .pressure-bar-bg { background: #30363d; border-radius: 4px; height: 14px; overflow: hidden; display: flex; }
-        .pressure-bid { background: var(--green); height: 100%; transition: width 0.4s ease; }
-        .pressure-ask { background: var(--red); height: 100%; transition: width 0.4s ease; }
+        .pressure-container { 
+            background: #21262d; 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            padding: 10px; 
+            margin-bottom: 12px; 
+        }
+        .pressure-title { 
+            font-size: 0.8rem; 
+            color: #fff; 
+            font-weight: bold; 
+            margin-bottom: 6px; 
+            display: flex; 
+            justify-content: space-between;
+        }
+        .pressure-bar-bg { 
+            background: #30363d; 
+            border-radius: 4px; 
+            height: 14px; 
+            overflow: hidden; 
+            display: flex; 
+        }
+        .pressure-bid { 
+            background: var(--green); 
+            height: 100%; 
+            transition: width 0.4s ease; 
+        }
+        .pressure-ask { 
+            background: var(--red); 
+            height: 100%; 
+            transition: width 0.4s ease; 
+        }
 
-        .section-title { font-size: 0.9rem; color: #fff; text-align: right; margin: 10px 5px 5px 0; font-weight: bold; }
-        .radar-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; background: #21262d; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
-        .radar-table th { background: #30363d; color: #fff; padding: 8px; }
-        .radar-table td { padding: 8px; border-bottom: 1px solid var(--border); color: #fff; }
+        .section-title { 
+            font-size: 0.9rem; 
+            color: #fff; 
+            text-align: right; 
+            margin: 10px 5px 5px 0; 
+            font-weight: bold; 
+        }
+        .radar-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 0.85rem; 
+            background: #21262d; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            margin-bottom: 10px; 
+        }
+        .radar-table th { 
+            background: #30363d; 
+            color: #fff; 
+            padding: 8px; 
+        }
+        .radar-table td { 
+            padding: 8px; 
+            border-bottom: 1px solid var(--border); 
+            color: #fff; 
+        }
         
         .trade-buy { color: #2ea043 !important; font-weight: bold; }
         .trade-sell { color: #da3633 !important; font-weight: bold; }
-        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-        .metric-box { background: #21262d; border: 1px solid var(--border); padding: 8px; border-radius: 8px; }
-        .metric-box b { font-size: 1.1rem; color: #fff; }
         
-        .ai-box { background: rgba(138, 43, 226, 0.1); border: 1px solid var(--purple); border-radius: 8px; padding: 10px; margin-top: 10px; text-align: right; font-size: 0.8rem; }
-        .signal-box { padding: 10px; border-radius: 8px; font-weight: bold; font-size: 0.85rem; border: 1px solid var(--border); margin-top: 12px; }
-        .alert-accumulation { background: rgba(46, 160, 67, 0.2); color: #fff; border-color: var(--green); }
-        .alert-normal { background: #21262d; color: var(--text); }
+        .metric-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 8px; 
+            margin-top: 10px; 
+        }
+        .metric-box { 
+            background: #21262d; 
+            border: 1px solid var(--border); 
+            padding: 8px; 
+            border-radius: 8px; 
+        }
+        .metric-box b { 
+            font-size: 1.1rem; 
+            color: #fff; 
+        }
+        
+        /* لوحة تحليل الذكاء الاصطناعي والمؤسسات (Purple Theme) */
+        .ai-box { 
+            background: rgba(138, 43, 226, 0.08); 
+            border: 1px solid var(--purple); 
+            border-radius: 8px; 
+            padding: 12px; 
+            margin-top: 12px; 
+            text-align: right; 
+            font-size: 0.85rem; 
+        }
+
+        .signal-box { 
+            padding: 10px; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 0.85rem; 
+            border: 1px solid var(--border); 
+            margin-top: 12px; 
+        }
+        .alert-accumulation { 
+            background: rgba(46, 160, 67, 0.15); 
+            color: #fff; 
+            border-color: var(--green); 
+        }
+        .alert-normal { 
+            background: #21262d; 
+            color: var(--text); 
+        }
     </style>
 </head>
 <body>
@@ -53,7 +181,7 @@
                 <div id="pressure-bid-bar" class="pressure-bid" style="width: 50%;"></div>
                 <div id="pressure-ask-bar" class="pressure-ask" style="width: 50%;"></div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #8b949e; margin-top: 4px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #8b949e; margin-top: 5px;">
                 <span>إجمالي الطلبات: <b id="lbl-total-bids" style="color:#fff;">0</b></span>
                 <span>إجمالي العروض: <b id="lbl-total-asks" style="color:#fff;">0</b></span>
             </div>
@@ -95,9 +223,9 @@
         </div>
 
         <div class="ai-box">
-            <span style="font-weight:bold; color:var(--purple);">🤖 تحليل Mistral AI وتتبع المؤسسات:</span>
-            <p id="ai-text" style="margin:4px 0 0 0; color:#fff; font-style:italic;">جاري سحب التلخيص السياقي من السيرفر...</p>
-            <div style="margin-top:5px; font-size:0.75rem;">
+            <span style="font-weight:bold; color:var(--purple); display:block; margin-bottom:6px;">🤖 تحليل Mistral AI وتتبع المؤسسات:</span>
+            <p id="ai-text" style="margin:0; color:#fff; font-style:italic; line-height:1.4;">جاري سحب التلخيص السياقي من السيرفر...</p>
+            <div style="margin-top:8px; font-size:0.8rem; border-top: 1px dashed var(--border); padding-top: 6px;">
                 <span>تتبع الأموال الذكية (Smart Money): <b id="lbl-smart-money" style="color:var(--blue);">-</b></span>
             </div>
         </div>
@@ -107,14 +235,15 @@
 </div>
 
 <script>
-    const DATA_URL = "data.json"; 
+    // المسار المباشر لملف الـ data.json الخاص بمستودعك
+    const DATA_URL = "https://egytornado-tech.github.io/my-egx-scanner/data.json"; 
 
     async function loadCloudData() {
         try {
-            // كسر الكاش لضمان جلب البيانات فريش من سيرفرات جيت هاب
-            const res = await fetch(DATA_URL + "?t=" + new Date().getTime());
-            if (res.ok) {
-                const data = await res.json();
+            // كسر كاش المتصفحات في الموبايل باستخدام متغير زمني فريد لكل طلب لضمان تحديث فوري
+            const response = await fetch(DATA_URL + "?nocache=" + new Date().getTime());
+            if (response.ok) {
+                const data = await response.json();
                 
                 document.getElementById('connection-status').innerText = `🟢 متصل سحابياً: المنظومة تعمل بالكامل أونلاين عبر EGXpilot v2.0`;
                 document.getElementById('connection-status').style.color = "#2ea043";
@@ -122,21 +251,25 @@
                 let bids = data.depth?.buy || [];
                 let asks = data.depth?.sell || [];
                 
+                // اقتطاع أول 5 مستويات فقط
                 bids = bids.slice(0, 5);
                 asks = asks.slice(0, 5);
 
+                // حساب إجمالي السيولة في الدفتر الخماسي لمقارنة العرض بالطلب
                 let totalBidVol = bids.reduce((sum, item) => sum + parseInt(item.volume || 0), 0);
                 let totalAskVol = asks.reduce((sum, item) => sum + parseInt(item.volume || 0), 0);
                 
                 let totalVolumePool = totalBidVol + totalAskVol;
                 let bidPressurePct = totalVolumePool > 0 ? ((totalBidVol / totalVolumePool) * 100) : 50;
 
+                // تحديث بار ميزان السيولة
                 document.getElementById('pressure-pct').innerText = bidPressurePct.toFixed(1) + "%";
                 document.getElementById('pressure-bid-bar').style.width = bidPressurePct + "%";
                 document.getElementById('pressure-ask-bar').style.width = (100 - bidPressurePct) + "%";
                 document.getElementById('lbl-total-bids').innerText = totalBidVol.toLocaleString();
                 document.getElementById('lbl-total-asks').innerText = totalAskVol.toLocaleString();
 
+                // بناء جدول دفتر الأوامر الخماسي
                 let depthHtml = "";
                 let maxRows = Math.max(bids.length, asks.length);
                 for (let i = 0; i < maxRows; i++) {
@@ -148,6 +281,7 @@
                 }
                 document.getElementById('depth-rows').innerHTML = depthHtml;
 
+                // تحديث حقول السعر والتغير اللحظي
                 if(data.lastPrice) document.getElementById('live-price').innerText = parseFloat(data.lastPrice).toFixed(2) + " ج.م";
                 if(data.changePercent) {
                     let chg = parseFloat(data.changePercent);
@@ -156,32 +290,35 @@
                     el.style.color = chg >= 0 ? "var(--green)" : "var(--red)";
                 }
 
+                // تحديث لوحة الذكاء الاصطناعي والمؤسسات (Mistral AI Context)
                 if(data.ai_summary) document.getElementById('ai-text').innerText = data.ai_summary;
                 document.getElementById('lbl-smart-money').innerText = data.smart_money ? "🔥 نشط وتجميع مؤسسي رصين" : "خامل";
                 document.getElementById('lbl-smart-money').style.color = data.smart_money ? "var(--green)" : "var(--red)";
 
+                // بناء جدول التنفيذات الفورية للماركت
                 let tradesHtml = "";
                 (data.trades || []).forEach(t => {
                     let sideClass = t.side === 'buy' ? 'trade-buy' : 'trade-sell';
-                    tradesHtml += `<tr><td>${t.time}</td><td>${t.price}</td><td>${t.volume.toLocaleString()}</td><td class="${sideClass}">${t.side === 'buy' ? 'شراء ماركت' : 'بيع ماركت'}</td></tr>`;
+                    tradesHtml += `<tr><td>${t.time}</td><td>${t.price.toFixed(2)}</td><td>${t.volume.toLocaleString()}</td><td class="${sideClass}">${t.side === 'buy' ? 'شراء ماركت' : 'بيع ماركت'}</td></tr>`;
                 });
                 document.getElementById('trade-rows').innerHTML = tradesHtml;
 
+                // فحص شرط الـ 58% لإطلاق إشارة التجميع الصريح
                 const signalBox = document.getElementById('signal-display');
                 if (bidPressurePct >= 58.0) {
-                    signalBox.innerText = `🔥 سيولة تجمعية صريحة بقوة ${bidPressurePct.toFixed(1)}%! كتل الطلبات تمتص العروض بدعم مؤسسي كامل.`;
+                    signalBox.innerText = `🔥 سيولة تجميعية صريحة بقوة ${bidPressurePct.toFixed(1)}%! كتل الطلبات تمتص العروض بدعم من قوى الـ Smart Money.`;
                     signalBox.className = "signal-box alert-accumulation";
                 } else {
-                    signalBox.innerText = `⚖️ ميزان السيولة مستقر سحابياً بانتظار إشارات كسر حركية جديدة.`;
+                    signalBox.innerText = `⚖️ ميزان السيولة مستقر حالياً بانتظار إشارات كسر حركية جديدة.`;
                     signalBox.className = "signal-box alert-normal";
                 }
             }
         } catch (e) {
-            console.error("Error loading cloud data:", e);
+            console.error("خطأ أثناء جلب ملف الحزمة السحابية:", e);
         }
     }
 
-    // فحص دوري كل 5 ثوانٍ لقراءة التحديث السحابي
+    // تعيين الفحص والتحيين التلقائي المستمر كل 5 ثوانٍ لقراءة تحديثات السيرفر
     setInterval(loadCloudData, 5000);
     loadCloudData();
 </script>
