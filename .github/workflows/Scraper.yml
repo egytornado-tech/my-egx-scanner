@@ -1,0 +1,32 @@
+name: 🔄 تحديث رادار السيولة اللحظي أونلاين عبر EGXpilot
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # عمل تلقائي دوري مستمر
+  workflow_dispatch: # تشغيل فوري بنقرة زر يدوية
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📥 سحب الكود الحالي
+      uses: actions/checkout@v4
+
+    - name: 🐍 إعداد بيئة بايثون
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: 📦 تثبيت المكتبات
+      run: pip install requests
+
+    - name: ⚡ تشغيل سكريبت جلب البيانات
+      run: python scraper.py
+
+    - name: 💾 حفظ وتحديث ملف data.json أونلاين
+      run: |
+        git config --global user.name "EGXpilot Bot"
+        git config --global user.email "action@github.com"
+        git add data.json
+        git commit -m "🔄 تحديث تلقائي سحابي: EGXpilot Data Stream" || exit 0
+        git push
