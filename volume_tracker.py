@@ -58,7 +58,7 @@ def track_and_compare_volume():
         current_slot_index = 1
     elif now.time() > END_SESSION:
         current_slot = all_slots[-1]
-        current_slot_index = len(all_slots) # 18
+        current_slot_index = len(all_slots)
     else:
         minutes = (now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
         current_slot = now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
@@ -86,7 +86,11 @@ def track_and_compare_volume():
     if now_str not in history:
         history[now_str] = {}
 
-    realtime_comparison = {}
+    # هيكلة البيانات مضافاً إليها توقيت السكراب الفعلي للحظة الحالية
+    output_data = {
+        "scrape_time": datetime.now().strftime("%H:%M:%S"),
+        "stocks": {}
+    }
 
     for row in rows:
         cols = row.find_all(['td', 'th'])
@@ -127,11 +131,9 @@ def track_and_compare_volume():
             if yesterday_str and symbol in history[yesterday_str]:
                 yesterday_target_volume = history[yesterday_str][symbol].get(current_slot, 0)
             
-            # 🎯 تطبيق منطق التراكمي المثالي لمنع الفروقات الكسرية:
             if yesterday_target_volume == 0:
                 is_fallback = True
                 if current_slot_index >= 18:
-                    # عند إغلاق الجلسة، الحجم التقديري التراكمي لأمس يتطابق كلياً مع اليوم
                     yesterday_target_volume = current_cumulative_volume
                     vol_ratio = 100.0
                 else:
@@ -141,14 +143,13 @@ def track_and_compare_volume():
             else:
                 vol_ratio = (current_cumulative_volume / yesterday_target_volume) * 100 if yesterday_target_volume > 0 else 100.0
 
-            realtime_comparison[symbol] = {
+            output_data["stocks"][symbol] = {
                 "name": symbol,
                 "price": price,
                 "price_change": round(price_change, 2),
                 "current_volume": current_cumulative_volume,
                 "compared_to_time_volume": yesterday_target_volume,
-                "ratio_percentage": round(vol_ratio, 2),
-                "is_fallback_baseline": is_fallback
+                "ratio_percentage": round(vol_ratio, 2)
             }
         except Exception:
             continue
@@ -157,9 +158,9 @@ def track_and_compare_volume():
         json.dump(history, f, ensure_ascii=False, indent=4)
         
     with open(COMP_FILE, "w", encoding="utf-8") as f:
-        json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
+        json.dump(output_data, f, ensure_ascii=False, indent=4)
         
-    print("🟢 تم إصلاح الخلل الكسري، والنسبة الآن ستظهر 100% للتراكمي الافتراضي تماماً.")
+    print("🟢 تم تحديث ملف السكراب وحفظ وقت القشط الفعلي بنجاح الحسابات التراكمية.")
 
 if __name__ == "__main__":
     track_and_compare_volume()
