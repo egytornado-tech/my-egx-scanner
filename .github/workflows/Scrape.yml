@@ -1,0 +1,35 @@
+name: 🔄 رادار سكرابينج أحجام التداول اللحظية
+
+on:
+  schedule:
+    # يعمل كل 15 دقيقة من الأحد للخميس (أوقات الجلسة بتوقيت مصر)
+    - cron: '*/15 7-13 * * 1-5'
+  workflow_dispatch: # زر للتشغيل اليدوي للتجربة في أي وقت
+
+jobs:
+  scrape-and-compare:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📥 سحب الملفات من المستودع
+      uses: actions/checkout@v4
+
+    - name: 🐍 إعداد البيئة (Python)
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: 📦 تثبيت المكتبات المطلوبة
+      run: |
+        pip install requests beautifulsoup4
+
+    - name: 🕵️‍♂️ تشغيل سكريبت السكرابينج والمقارنة
+      run: python volume_tracker.py
+
+    - name: 📤 حفظ وتحديث ملفات الـ JSON في المستودع
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add volume_history.json volume_comparison.json
+        # عمل كوميت فقط إذا حدث تغيير حقيقي في البيانات لمنع فشل الأكشن
+        git diff-index --quiet HEAD || git commit -m "📊 تحديث أحجام التداول اللحظية ربع السنوية [Automated]"
+        git push
