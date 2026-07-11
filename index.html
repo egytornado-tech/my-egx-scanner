@@ -5,42 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📊 رادار أحجام التداول اللحظي</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --red: #da3633; }
-        body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 15px; margin: 0; text-align: center; }
-        .container { max-width: 850px; margin: auto; }
-        .table-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        h2 { font-size: 1.2rem; color: #fff; margin: 0 0 5px 0; }
-        .subtitle { font-size: 0.8rem; color: #8b949e; margin-bottom: 15px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th, td { padding: 10px; text-align: center; border-bottom: 1px solid var(--border); }
-        th { background: #21262d; color: #fff; font-weight: bold; cursor: pointer; user-select: none; }
-        th:hover { background: #30363d; }
-        th::after { content: ' ⇅'; font-size: 0.7rem; color: #8b949e; }
-        td { color: #fff; }
-        .pos { color: var(--green); font-weight: bold; }
-        .neg { color: var(--red); font-weight: bold; }
-        .badge { font-size: 0.65rem; padding: 2px 4px; border-radius: 4px; background: #30363d; color: #8b949e; }
+        :root {
+            --bg: #f4f7f5;           /* خلفية ربيعية عاجية ناعمة */
+            --card: #ffffff;         /* بطاقة بيضاء نقية */
+            --border: #e2ebd5;       /* حدود بلون عشبي فاتح */
+            --text-main: #2d3b32;    /* نص زيتي داكن مريح */
+            --text-sub: #6b7c70;     /* نص فرعي رمادي مخضر */
+            --green-spring: #388e3c; /* أخضر عشبي زاهي للموجب */
+            --red-spring: #d32f2f;   /* أحمر مرجاني ناعم للسالب */
+            --th-bg: #e8f5e9;        /* خلفية رأس الجدول */
+        }
+        body { 
+            background: var(--bg); 
+            color: var(--text-main); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 20px; 
+            margin: 0; 
+        }
+        .container { max-width: 900px; margin: auto; }
+        .table-card { 
+            background: var(--card); 
+            border: 1px solid var(--border); 
+            border-radius: 16px; 
+            padding: 24px; 
+            box-shadow: 0 8px 24px rgba(141, 169, 145, 0.15); 
+        }
+        h2 { font-size: 1.4rem; color: #1b2e22; margin: 0 0 8px 0; font-weight: 700; }
+        .subtitle { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 24px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 12px 14px; text-align: center; border-bottom: 1px solid #f0f4f1; }
+        th { 
+            background: var(--th-bg); 
+            color: #2e4a36; 
+            font-weight: 600; 
+            cursor: pointer; 
+            user-select: none;
+            transition: background 0.2s;
+        }
+        th:hover { background: #c8e6c9; }
+        th::after { content: ' ⇅'; font-size: 0.75rem; color: #81c784; }
+        tr:hover { background-color: #fafdfb; }
+        td { color: var(--text-main); font-weight: 500; }
+        .pos { color: var(--green-spring); font-weight: 600; }
+        .neg { color: var(--red-spring); font-weight: 600; }
+        .badge { 
+            font-size: 0.7rem; 
+            padding: 2px 6px; 
+            border-radius: 6px; 
+            background: #f1f8e9; 
+            color: #689f38; 
+            border: 1px solid #dcedc8;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="table-card">
-        <h2>📊 رادار أحجام التداول اللحظية المحدثة</h2>
-        <div class="subtitle">يتم التحديث تلقائياً وبدقة عالية بناءً على كود الصفحة الحقيقي</div>
+        <h2>📊 رادار أحجام التداول اللحظية</h2>
+        <div class="subtitle">تحديث فوري ذكي يراعي الإجازات الرسمية وأوقات إغلاق الجلسة</div>
         <table>
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">السهم</th>
+                    <th onclick="sortTable(0)" style="text-align: right;">السهم</th>
                     <th onclick="sortTable(1)">السعر الحالي</th>
                     <th onclick="sortTable(2)">تغير السعر</th>
-                    <th onclick="sortTable(3)">حجم اليوم</th>
+                    <th onclick="sortTable(3)">حجم اليوم الحقيقي</th>
                     <th onclick="sortTable(4)">أمس (نفس الوقت)</th>
                     <th onclick="sortTable(5)">النسبة للهدف</th>
                 </tr>
             </thead>
             <tbody id="comparison-rows">
-                <tr><td colspan="6" style="color: #8b949e;">جاري تحميل البيانات الحقيقية...</td></tr>
+                <tr><td colspan="6" style="color: var(--text-sub);">جاري سحب وتحديث البيانات الفورية...</td></tr>
             </tbody>
         </table>
     </div>
@@ -72,14 +109,14 @@
             const changeClass = item.price_change >= 0 ? "pos" : "neg";
             const fallbackTag = item.is_fallback_baseline ? '<span class="badge">تقديري</span>' : '';
             const price = item.price ? item.price.toFixed(2) + " ج.م" : "-";
-            const change = item.price_change !== undefined ? item.price_change + "%" : "-";
+            const change = item.price_change !== undefined ? (item.price_change > 0 ? "+" : "") + item.price_change + "%" : "-";
 
             html += `
                 <tr>
-                    <td style="text-align: right;"><b>${item.symbol}</b> ${fallbackTag}</td>
+                    <td style="text-align: right; font-weight: 600;">${item.symbol} ${fallbackTag}</td>
                     <td>${price}</td>
                     <td class="${changeClass}">${change}</td>
-                    <td>${parseInt(item.current_volume).toLocaleString()}</td>
+                    <td style="color: #1565c0; font-weight: 600;">${parseInt(item.current_volume).toLocaleString()}</td>
                     <td>${parseInt(item.compared_to_time_volume).toLocaleString()}</td>
                     <td class="${ratioClass}">${ratio}%</td>
                 </tr>
