@@ -4,6 +4,7 @@ import json
 import os
 from datetime import datetime, time, timedelta
 
+# الرابط والـ IP الأصلي الصحيح
 BASE_URL = "http://41.33.162.236/egs4/"
 DB_FILE = "volume_history.json"
 COMP_FILE = "volume_comparison.json"
@@ -33,7 +34,6 @@ def load_history():
 def track_and_compare_volume():
     now_str = datetime.now().strftime("%Y-%m-%d")
     
-    # تحديد توقيت الربع ساعة الحالي
     now = datetime.now()
     if now.time() < START_SESSION:
         current_slot = get_session_intervals()[0]
@@ -43,7 +43,7 @@ def track_and_compare_volume():
         minutes = (now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
         current_slot = now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
 
-    print(f"📡 جاري قراءة البيانات الحية من egs4 للفترة [{current_slot}]...")
+    print(f"📡 جاري قراءة البيانات (اليمين خالص هو الحجم) للفترة [{current_slot}]...")
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
@@ -54,7 +54,7 @@ def track_and_compare_volume():
         soup = BeautifulSoup(response.text, 'html.parser')
         table = soup.find('table') 
         if not table:
-            print("❌ لم يتم العثور على جدول في الصفحة.")
+            print("❌ لم يتم العثور على الجدول.")
             return
         rows = table.find_all('tr')[1:]
     except Exception as e:
@@ -73,25 +73,31 @@ def track_and_compare_volume():
 
     for row in rows:
         cols = row.find_all(['td', 'th'])
-        if len(cols) < 3: 
+        if len(cols) < 8: 
             continue
             
         try:
-            # 🎯 تنظيف اسم السهم حتى لو كان داخل وسم <a> أو يحتوي على مسافات غريبة
-            symbol = cols[1].get_text(strip=True)
+            # 🎯 الترتيب الصحيح والمعتمد نهائياً من اليمين إلى اليسار:
             
-            # تنظيف وتحويل الحجم والسعر بأمان
+            # إنديكس 0 (اليمين خالص): حجم التداول اللحظي
             vol_raw = cols[0].get_text(strip=True).replace(',', '')
             current_volume = int(float(vol_raw)) if vol_raw else 0
             
+            # إنديكس 1: الاسم المختصر للسهم
+            symbol = cols[1].get_text(strip=True)
+            
+            # إنديكس 2: آخر سعر
             price_raw = cols[2].get_text(strip=True).replace(',', '')
             price = float(price_raw) if price_raw else 0.0
             
-            # تخطي السطور غير الصالحة أو الفارغة
+            # إنديكس 7: التغير %
+            change_raw = cols[7].get_text(strip=True).replace('%', '').strip()
+            price_change = float(change_raw) if change_raw else 0.0
+            
+            # فلاتر التخطي للسطور التالفة والعناوين
             if not symbol or "حجم" in symbol or "الاسم" in symbol or current_volume == 0:
                 continue
 
-            # تأمين هيكل الـ JSON للسهم
             if symbol not in history[now_str]:
                 history[now_str][symbol] = {}
             history[now_str][symbol][current_slot] = current_volume
@@ -111,23 +117,22 @@ def track_and_compare_volume():
             realtime_comparison[symbol] = {
                 "name": symbol,
                 "price": price,
+                "price_change": round(price_change, 2),
                 "current_volume": current_volume,
                 "compared_to_time_volume": yesterday_vol,
                 "ratio_percentage": round(vol_ratio, 2),
                 "is_fallback_baseline": is_fallback
             }
-        except Exception as row_error:
-            # تخطي أي سهم به مشكلة ومتابعة باقي الجدول لمنع توقف السكريبت
+        except Exception:
             continue
 
-    # 💾 الإجبار على حفظ الملفات مهما كانت الظروف
     with open(DB_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=4)
         
     with open(COMP_FILE, "w", encoding="utf-8") as f:
         json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
         
-    print(f"🟢 تم إنشاء وتحديث ملف {COMP_FILE} بنجاح تام.")
+    print(f"🟢 تم إنشاء ملف {COMP_FILE} بنجاح ومطابقة الترتيب الصحيح.")
 
 if __name__ == "__main__":
     track_and_compare_volume()
