@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>📊 رادار أحجام التداول</title>
+    <title>📊 رادار التداول</title>
     <style>
         :root {
-            --bg: #f4f7f5;           /* لون ربيعي عاجي موحد لكل الصفحة */
-            --text-main: #2d3b32;    /* نص زيتي داكن */
-            --text-sub: #5a6e60;     /* نص فرعي رمادي مخضر */
-            --green-spring: #2e7d32; /* أخضر عشبي مريح للموجب */
-            --red-spring: #c62828;   /* أحمر مرجاني مريح للسالب */
-            --th-bg: #e8f5e9;        /* خلفية رأس الجدول */
-            --border: #e2ebd5;       /* لون الفواصل الخفيفة */
+            --bg: #f4f7f5;
+            --text-main: #2d3b32;
+            --text-sub: #5a6e60;
+            --green-spring: #2e7d32;
+            --red-spring: #c62828;
+            --th-bg: #e8f5e9;
         }
         
         * { box-sizing: border-box; }
@@ -20,58 +19,54 @@
         body { 
             background: var(--bg); 
             color: var(--text-main); 
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            padding: 8px; 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
+            padding: 4px; 
             margin: 0; 
-            -webkit-text-size-adjust: 100%;
+            overflow-x: hidden; /* منع التمرير العرضي تماماً */
         }
         
         .container { 
             width: 100%; 
-            max-width: 480px; /* مقاس مثالي ومدمج لعرض الموبايل بدون زووم */
+            max-width: 100%;
             margin: auto; 
         }
         
         .header-zone {
             text-align: center;
-            margin-bottom: 12px;
-            padding-top: 6px;
+            margin-bottom: 8px;
         }
         
         h2 { 
-            font-size: 1.15rem; 
+            font-size: 1.05rem; 
             color: #1b2e22; 
-            margin: 0 0 4px 0; 
+            margin: 4px 0; 
             font-weight: 700; 
         }
         
         .update-ticker { 
-            font-size: 0.78rem; 
+            font-size: 0.72rem; 
             color: var(--text-sub); 
             background: #e8f5e9;
             display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
+            padding: 2px 8px;
+            border-radius: 12px;
             font-weight: 600;
-            border: 1px solid var(--border);
-        }
-        
-        .update-time {
-            color: var(--green-spring);
         }
         
         table { 
             width: 100%; 
             border-collapse: collapse; 
-            font-size: 0.78rem; /* حجم خط مدمج ومناسب للشاشات الصغيرة */
-            background: var(--bg);
+            font-size: 0.72rem; /* حجم مدمج ومثالي ومقاوم للـ Scroll */
+            table-layout: fixed; /* إجبار الجدول على الالتزام بعرض الشاشة */
         }
         
         th, td { 
-            padding: 8px 4px; /* مسافات مضغوطة لمنع التمدد */
+            padding: 6px 2px; /* تقليص الحواف الداخلية لأقصى درجة */
             text-align: center; 
             border-bottom: 1px solid #eef3ed; 
-            white-space: nowrap; /* منع انقسام أرقام الأسعار والأحجام */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         
         th { 
@@ -79,32 +74,19 @@
             color: #2e4a36; 
             font-weight: 600; 
             cursor: pointer; 
-            user-select: none;
         }
         
-        th::after { content: ' ⇅'; font-size: 0.65rem; color: #a1c1a8; }
+        th::after { content: '⇅'; font-size: 0.6rem; color: #a1c1a8; margin-right: 1px; }
         
         td.symbol-cell { 
             text-align: right; 
             font-weight: 600; 
-            white-space: normal; /* السماح لاسم السهم بالالتفاف لو كان طويلاً */
-            max-width: 110px;    /* حد أقصى لعرض عمود الاسم لضمان ثبات الجدول */
+            white-space: normal; /* السماح لاسم السهم بالنزول لسطر جديد دون مط الجدول عرضياً */
             color: #1b2e22;
         }
         
         .pos { color: var(--green-spring); font-weight: 600; }
         .neg { color: var(--red-spring); font-weight: 600; }
-        
-        .badge { 
-            font-size: 0.6rem; 
-            padding: 1px 3px; 
-            border-radius: 4px; 
-            background: #fff; 
-            color: #689f38; 
-            border: 1px solid #dcedc8;
-            display: inline-block;
-            margin-top: 2px;
-        }
     </style>
 </head>
 <body>
@@ -113,23 +95,24 @@
     <div class="header-zone">
         <h2>📊 رادار أحجام التداول اللحظية</h2>
         <div class="update-ticker">
-            آخر تحديث ناجح: <span id="last-update" class="update-time">جاري الجلب...</span>
+            وقت السكراب الفعلي: <span id="last-update" style="color: var(--green-spring);">جاري الجلب...</span>
         </div>
     </div>
 
     <table>
         <thead>
             <tr>
-                <th onclick="sortTable(0)" style="text-align: right; width: 30%;">السهم</th>
-                <th onclick="sortTable(1)">السعر</th>
-                <th onclick="sortTable(2)">%</th>
-                <th onclick="sortTable(3)">اليوم</th>
-                <th onclick="sortTable(4)">أمس</th>
-                <th onclick="sortTable(5)">النسبة</th>
+                <!-- تقسيم نسب الأعمدة بالملي لتتطابق تماماً مع حجم شاشة أي موبايل -->
+                <th onclick="sortTable(0)" style="text-align: right; width: 32%;">السهم</th>
+                <th onclick="sortTable(1)" style="width: 14%;">السعر</th>
+                <th onclick="sortTable(2)" style="width: 12%;">%</th>
+                <th onclick="sortTable(3)" style="width: 15%;">الحجم</th>
+                <th onclick="sortTable(4)" style="width: 14%;">أمس</th>
+                <th onclick="sortTable(5)" style="width: 13%;">النسبة</th>
             </tr>
         </thead>
         <tbody id="comparison-rows">
-            <tr><td colspan="6" style="color: var(--text-sub); padding: 20px;">جاري جلب البيانات الفورية...</td></tr>
+            <tr><td colspan="6" style="color: var(--text-sub); padding: 15px;">جاري تحميل البيانات...</td></tr>
         </tbody>
     </table>
 </div>
@@ -143,14 +126,15 @@
         try {
             const response = await fetch('volume_comparison.json?t=' + new Date().getTime());
             if (response.ok) {
-                const data = await response.json();
-                rawData = Object.entries(data).map(([symbol, metrics]) => ({ symbol, ...metrics }));
-                renderTable(rawData);
+                const resData = await response.json();
                 
-                // تحديث مؤشر التوقيت اللحظي فور النجاح
-                const now = new Date();
-                const timeString = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                document.getElementById('last-update').innerText = timeString;
+                // عرض وقت السكراب الفعلي القادم من السكريبت
+                if (resData.scrape_time) {
+                    document.getElementById('last-update').innerText = resData.scrape_time;
+                }
+                
+                rawData = Object.entries(resData.stocks).map(([symbol, metrics]) => ({ symbol, ...metrics }));
+                renderTable(rawData);
             }
         } catch (error) {
             console.error("خطأ في جلب البيانات:", error);
@@ -163,13 +147,12 @@
             const ratio = item.ratio_percentage;
             const ratioClass = ratio >= 100 ? "pos" : "neg";
             const changeClass = item.price_change >= 0 ? "pos" : "neg";
-            const fallbackTag = item.is_fallback_baseline ? '<br><span class="badge">تقديري</span>' : '';
-            const price = item.price ? item.price.toFixed(2) : "-";
+            const price = item.price ? item.price.toFixed(1) : "-";
             const change = item.price_change !== undefined ? (item.price_change > 0 ? "+" : "") + item.price_change + "%" : "-";
 
             html += `
                 <tr>
-                    <td class="symbol-cell">${item.symbol} ${fallbackTag}</td>
+                    <td class="symbol-cell">${item.symbol}</td>
                     <td style="font-weight: 600;">${price}</td>
                     <td class="${changeClass}">${change}</td>
                     <td style="color: #1b5e20; font-weight: 600;">${parseInt(item.current_volume).toLocaleString()}</td>
