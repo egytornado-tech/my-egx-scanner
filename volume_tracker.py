@@ -9,7 +9,6 @@ BASE_URL = "http://41.33.162.236/egs4/"
 DB_FILE = "volume_history.json"
 COMP_FILE = "volume_comparison.json"
 
-# مواعيد الجلسة الرسمية للبورصة المصرية
 START_SESSION = time(10, 0)
 END_SESSION = time(14, 30)
 INTERVAL_MINUTES = 15
@@ -42,7 +41,7 @@ def get_last_working_day(history, now_str):
     for date_str in reversed(available_dates):
         try:
             dt = datetime.strptime(date_str, "%Y-%m-%d")
-            if dt.weekday() not in [4, 5]: # تخطي الجمعة والسبت
+            if dt.weekday() not in [4, 5]: 
                 return date_str
         except ValueError:
             continue
@@ -52,9 +51,8 @@ def track_and_compare_volume():
     now = datetime.now()
     now_str = now.strftime("%Y-%m-%d")
     
-    all_slots = get_session_intervals() # الـ 18 سلوت كاملين
+    all_slots = get_session_intervals()
     
-    # تحديد السلوت الحالي ومعرفة ترتيبه (Index) للحساب التراكمي
     if now.time() < START_SESSION:
         current_slot = all_slots[0]
         current_slot_index = 1
@@ -96,18 +94,15 @@ def track_and_compare_volume():
             continue
             
         try:
-            # حجم اليوم التراكمي اللحظي (العمود الأخير من اليمين في الـ HTML)
             vol_raw = cols[-1].get_text(strip=True).replace(',', '')
             current_cumulative_volume = int(float(vol_raw)) if vol_raw else 0
             
-            # السعر الحالي والتغير
             price_raw = cols[2].get_text(strip=True).replace(',', '')
             price = float(price_raw) if price_raw else 0.0
             
             change_raw = cols[5].get_text(strip=True).replace('%', '').strip()
             price_change = float(change_raw) if change_raw else 0.0
             
-            # استخراج اسم السهم
             symbol = ""
             for col in cols:
                 txt = col.get_text(strip=True)
@@ -122,7 +117,6 @@ def track_and_compare_volume():
             if not symbol or "حجم" in symbol or "الاسم" in symbol:
                 continue
 
-            # حفظ الحجم التراكمي الحالي للسلوت الحالي في التاريخ
             if symbol not in history[now_str]:
                 history[now_str][symbol] = {}
             history[now_str][symbol][current_slot] = current_cumulative_volume
@@ -130,28 +124,29 @@ def track_and_compare_volume():
             yesterday_target_volume = 0
             is_fallback = False
 
-            # 1. المحاولة الأولى: لو في داتا حقيقية تراكمية لأمس عند نفس السلوت
             if yesterday_str and symbol in history[yesterday_str]:
                 yesterday_target_volume = history[yesterday_str][symbol].get(current_slot, 0)
             
-            # 2. المحاولة الثانية (الـ Fallback التراكمي الذكي):
-            # لو مفيش داتا، بنعتبر حجم اليوم الكلي هو خط الأساس لأمس، ونحسب المستهدف التراكمي بناءً على ربع الساعة الحالي
+            # 🎯 تطبيق منطق التراكمي المثالي لمنع الفروقات الكسرية:
             if yesterday_target_volume == 0:
                 is_fallback = True
-                # حجم السلوت الواحد التقديري لأمس = الحجم الكلي الحالي / 18
-                single_slot_estimated = current_cumulative_volume / 18
-                # الحجم التراكمي المستهدف لأمس حتى هذه اللحظة من الجلسة
-                yesterday_target_volume = int(single_slot_estimated * current_slot_index)
-
-            # حساب النسبة التراكمية
-            vol_ratio = (current_cumulative_volume / yesterday_target_volume) * 100 if yesterday_target_volume > 0 else 100.0
+                if current_slot_index >= 18:
+                    # عند إغلاق الجلسة، الحجم التقديري التراكمي لأمس يتطابق كلياً مع اليوم
+                    yesterday_target_volume = current_cumulative_volume
+                    vol_ratio = 100.0
+                else:
+                    single_slot_estimated = current_cumulative_volume / 18
+                    yesterday_target_volume = int(single_slot_estimated * current_slot_index)
+                    vol_ratio = (current_cumulative_volume / yesterday_target_volume) * 100 if yesterday_target_volume > 0 else 100.0
+            else:
+                vol_ratio = (current_cumulative_volume / yesterday_target_volume) * 100 if yesterday_target_volume > 0 else 100.0
 
             realtime_comparison[symbol] = {
                 "name": symbol,
                 "price": price,
                 "price_change": round(price_change, 2),
-                "current_volume": current_cumulative_volume, # حجم اليوم التراكمي الفعلي بدون قشط أو قسمة
-                "compared_to_time_volume": yesterday_target_volume, # حجم أمس التراكمي المستهدف لنفس الوقت
+                "current_volume": current_cumulative_volume,
+                "compared_to_time_volume": yesterday_target_volume,
                 "ratio_percentage": round(vol_ratio, 2),
                 "is_fallback_baseline": is_fallback
             }
@@ -164,7 +159,7 @@ def track_and_compare_volume():
     with open(COMP_FILE, "w", encoding="utf-8") as f:
         json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
         
-    print("🟢 تم تحديث الحسابات لتكون تراكمية بالكامل طوال فترة الجلسة.")
+    print("🟢 تم إصلاح الخلل الكسري، والنسبة الآن ستظهر 100% للتراكمي الافتراضي تماماً.")
 
 if __name__ == "__main__":
     track_and_compare_volume()
