@@ -1,35 +1,38 @@
-name: 🔄 رادار سكرابينج أحجام التداول اللحظية
+name: Run Volume Tracker Scraper
 
 on:
   schedule:
-    # يعمل كل 15 دقيقة من الأحد للخميس (أوقات الجلسة بتوقيت مصر)
-    - cron: '*/15 7-13 * * 1-5'
-  workflow_dispatch: # زر للتشغيل اليدوي للتجربة في أي وقت
+    # يعمل كل 15 دقيقة، من الساعة 7:00 صباحاً حتى 11:45 صباحاً بتوقيت جرينتش
+    # وهو ما يوافق (من 10:00 صباحاً إلى 2:45 ظهراً بتوقيت مصر) من الأحد للخميس
+    - cron: '*/15 7-11 * * 1-5'
+  workflow_dispatch: # يتيح لك تشغيل السكريبت يدوياً في أي وقت من تبويب Actions للتجربة
+
+permissions:
+  contents: write # إعطاء صلاحية للأكشن لتحديث ورفع ملفات الـ JSON في الريبو بدون مشاكل الـ Permission
 
 jobs:
-  scrape-and-compare:
+  scrape:
     runs-on: ubuntu-latest
     steps:
-    - name: 📥 سحب الملفات من المستودع
+    - name: Checkout Repo
       uses: actions/checkout@v4
 
-    - name: 🐍 إعداد البيئة (Python)
+    - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
 
-    - name: 📦 تثبيت المكتبات المطلوبة
+    - name: Install Dependencies
       run: |
         pip install requests beautifulsoup4
 
-    - name: 🕵️‍♂️ تشغيل سكريبت السكرابينج والمقارنة
+    - name: Run Scraper
       run: python volume_tracker.py
 
-    - name: 📤 حفظ وتحديث ملفات الـ JSON في المستودع
+    - name: Commit and Push Changes
       run: |
         git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add volume_history.json volume_comparison.json
-        # عمل كوميت فقط إذا حدث تغيير حقيقي في البيانات لمنع فشل الأكشن
-        git diff-index --quiet HEAD || git commit -m "📊 تحديث أحجام التداول اللحظية ربع السنوية [Automated]"
+        git commit -m "تحديث تلقائي لأحجام التداول اللحظية" || echo "لا توجد تغييرات للرفع"
         git push
