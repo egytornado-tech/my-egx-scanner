@@ -1,19 +1,18 @@
 import requests
+from bs4 import BeautifulSoup
 import json
 import os
 from datetime import datetime, time, timedelta
 
-# إعدادات الرادار والـ API
-API_URL = "https://egxpilot.com/api/stocks/all/"
+# الرابط الأصلي المباشر لصفحة الويب الحية
+BASE_URL = "http://41.33.162.236/egs4/"
 DB_FILE = "volume_history.json"
 
-# تحديد أوقات جلسة البورصة المصرية (10:00 ص إلى 2:30 ظهراً)
 START_SESSION = time(10, 0)
 END_SESSION = time(14, 30)
 INTERVAL_MINUTES = 15
 
 def get_session_intervals():
-    """توليد مواقيت الربع ساعة لجلسة التداول الحالية"""
     intervals = []
     current = datetime.combine(datetime.today(), START_SESSION)
     end = datetime.combine(datetime.today(), END_SESSION)
@@ -33,14 +32,12 @@ def save_history(data):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def get_current_interval_slot():
-    """تحديد أقرب ربع ساعة مرت في الجلسة الحالية"""
     now = datetime.now()
     if now.time() < START_SESSION:
         return None
     if now.time() > END_SESSION:
         return get_session_intervals()[-1]
     
-    # التقريب لأقرب ربع ساعة مضت
     minutes = (now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
     return now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
 
@@ -49,31 +46,45 @@ def track_and_compare_volume():
     current_slot = get_current_interval_slot()
     
     if not current_slot:
-        print("⏰ خارج أوقات تتبع الجلسة اللحظية حالياً.")
-        return
+        print("⏰ خارج أوقات الجلسة. يتم عمل سكرابينج لآخر إغلاق معروض بالصفحة.")
+        current_slot = get_session_intervals()[-1]
 
-    print(f"📡 سحب أحجام التداول اللحظية للفترة: [{current_slot}]...")
+    print(f"🕵️‍♂️ بدء عمل سكرابينج لصفحة EGX4 المباشرة: {BASE_URL}...")
     
-    headers = {"User-Agent": "Mozilla/5.0"}
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml"
+    }
+    
     try:
-        response = requests.get(API_URL, headers=headers, timeout=12)
-        if response.status_code != 200:
-            print(f"❌ فشل الاتصال بالـ API: {response.status_code}")
-            return
+        response = requests.get(BASE_URL, headers=headers, timeout=20)
+        print(f"📊 كود استجابة السيرفر: {response.status_code}")
         
-        all_stocks = response.json()
-        stocks_list = all_stocks if isinstance(all_stocks, list) else all_stocks.values()
+        if response.status_code != 200:
+            print("❌ فشل تحميل الصفحة الحية من السيرفر.")
+            return
+            
+        # فك تشفير الصفحة وقراءتها عبر BeautifulSoup
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # البحث عن جدول الأسهم (تعديل الـ selector بناءً على بنية الجدول في egs4)
+        # الكود يبحث عن أول جدول أو جدول يحمل كلاس الأسهم
+        table = soup.find('table') 
+        if not table:
+            print("❌ لم يتم العثور على أي جدول بيانات داخل الصفحة الحية.")
+            return
+            
+        rows = table.find_all('tr')[1:] # تخطي سطر العناوين (Header)
+        print(f"📈 تم العثور على {len(rows)} سطر داخل جدول الأسهم.")
+        
     except Exception as e:
-        print(f"💥 خطأ في الشبكة: {e}")
+        print(f"💥 فشل السكرابينج والاتصال بالسيرفر: {e}")
         return
 
     history = load_history()
-    
-    # استخراج تاريخ اليوم السابق المتاح في التخزين
     available_dates = sorted([d for d in history.keys() if d != now_str])
     yesterday_str = available_dates[-1] if available_dates else None
 
-    # تجهيز هيكل اليوم الحالي في قاعدة البيانات
     if now_str not in history:
         history[now_str] = {}
 
@@ -81,56 +92,63 @@ def track_and_compare_volume():
     all_intervals = get_session_intervals()
     total_slots = len(all_intervals)
 
-    for stock in stocks_list:
-        symbol = stock.get("symbol") or stock.get("code")
+    for row in rows:
+        cols = row.find_all(['td', 'th'])
+        if len(cols) < 3: # التأكد من وجود خلايا كافية (اسم، سعر، حجم)
+            continue
+            
+        # استخراج اسم السهم، السعر، والحجم من الخلايا بناءً على ترتيب الأعمدة
+        # افتراضياً: الاسم العمود 0، السعر 1، الحجم 2 (تعديل الاندكس لو الترتيب مختلف عندك)
+        symbol = cols[0].text.strip()
+        
+        try:
+            price_text = cols[1].text.strip().replace(',', '')
+            price = float(price_text) if price_text else 0.0
+            
+            vol_text = cols[2].text.strip().replace(',', '')
+            current_volume = int(float(vol_text)) if vol_text else 0
+        except ValueError:
+            continue # تخطي السطور التي لا تحتوي على أرقام صافية
+
         if not symbol:
             continue
             
-        # حجم التداول التراكمي الحالي من السيرفر
-        current_volume = int(stock.get("volume", 0))
-        
-        # حفظ الحجم الحالي للفترة الحالية لليوم
-        history[now_str][symbol] = history[now_str].get(symbol, {})
+        if symbol not in history[now_str]:
+            history[now_str][symbol] = {}
         history[now_str][symbol][current_slot] = current_volume
 
-        # حساب المقارنة مع الأمس
         yesterday_vol = 0
         is_fallback = False
 
         if yesterday_str and symbol in history[yesterday_str]:
-            # إذا كانت بيانات الأمس مخزنة بالكامل، نجلب حجم نفس الربع ساعة
             yesterday_vol = history[yesterday_str][symbol].get(current_slot, 0)
         
-        # خطة الطوارئ: أول يوم تشغيل ومفيش بيانات مخزنة للأمس
+        # قاعدة اليوم الأول: التقسيم بالتساوي على 18 فترة لجلسة التداول
         if yesterday_vol == 0:
             is_fallback = True
-            # توزيع الحجم التراكمي الحالي بالتساوي على عدد فترات الجلسة
             yesterday_vol = int(current_volume / total_slots)
 
-        # حساب النسبة المئوية للحجم مقارنة بالأمس في نفس التوقيت
         if yesterday_vol > 0:
             vol_ratio = (current_volume / yesterday_vol) * 100
         else:
             vol_ratio = 100.0
 
         realtime_comparison[symbol] = {
+            "name": symbol,
+            "price": price,
             "current_volume": current_volume,
             "compared_to_time_volume": yesterday_vol,
             "ratio_percentage": round(vol_ratio, 2),
             "is_fallback_baseline": is_fallback
         }
 
-    # حفظ السجلات المحدثة
     save_history(history)
     
-    # طباعة تقرير الأداء اللحظي المقارن في الـ Logs
-    print(f"📊 --- تقرير مقارنة الأحجام لـ {total_slots} فترات (ربع سنوية) ---")
-    for sym, metrics in list(realtime_comparison.items())[:10]:  # عرض أول 10 أسهم كمثال
-        status_tag = "[تقديري]" if metrics["is_fallback_baseline"] else "[حقيقي]"
-        print(f"🔹 السهم: {sym:<8} | اللحظي: {metrics['current_volume']:,} | أمس: {metrics['compared_to_time_volume']:,} {status_tag} | النسبة: {metrics['ratio_percentage']}%")
+    # تصدير ملف المقارنة الصافي لتقرأه واجهة المستخدم الخاصة بك
+    with open("volume_comparison.json", "w", encoding="utf-8") as f:
+        json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
+        
+    print(f"🟢 تم السكرابينج بنجاح ومطابقة أحجام تداول الأسهم مع توقيت ربع الساعة.")
 
 if __name__ == "__main__":
     track_and_compare_volume()
-# حفظ حزمة المقارنة اللحظية لتقرأها واجهة المستخدم فوراً
-with open("volume_comparison.json", "w", encoding="utf-8") as f:
-    json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
