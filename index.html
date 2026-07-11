@@ -3,104 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 تقرير أحجام التداول السكرابينج المقارن</title>
+    <title>📊 رادار أحجام التداول اللحظي</title>
     <style>
-        :root { 
-            --bg: #0d1117; 
-            --card: #161b22; 
-            --border: #30363d; 
-            --text: #c9d1d9; 
-            --green: #2ea043; 
-            --red: #da3633; 
-        }
-        body { 
-            background: var(--bg); 
-            color: var(--text); 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
-            padding: 15px; 
-            margin: 0; 
-            text-align: center; 
-        }
-        .container { max-width: 600px; margin: auto; }
-        .table-card { 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            border-radius: 12px; 
-            padding: 15px; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
-        }
-        h2 { font-size: 1.2rem; color: #fff; margin-top: 0; margin-bottom: 5px; }
+        :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #c9d1d9; --green: #2ea043; --red: #da3633; }
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; padding: 15px; margin: 0; text-align: center; }
+        .container { max-width: 850px; margin: auto; }
+        .table-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        h2 { font-size: 1.2rem; color: #fff; margin: 0 0 5px 0; }
         .subtitle { font-size: 0.8rem; color: #8b949e; margin-bottom: 15px; }
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
         th, td { padding: 10px; text-align: center; border-bottom: 1px solid var(--border); }
-        th { background: #21262d; color: #fff; font-weight: bold; }
+        th { background: #21262d; color: #fff; font-weight: bold; cursor: pointer; user-select: none; }
+        th:hover { background: #30363d; }
+        th::after { content: ' ⇅'; font-size: 0.7rem; color: #8b949e; }
         td { color: #fff; }
         .pos { color: var(--green); font-weight: bold; }
         .neg { color: var(--red); font-weight: bold; }
-        .badge { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: #30363d; color: #8b949e; margin-right: 5px; }
+        .badge { font-size: 0.65rem; padding: 2px 4px; border-radius: 4px; background: #30363d; color: #8b949e; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="table-card">
-        <h2>📊 مقارنة أحجام التداول اللحظية (ساعة بساعة)</h2>
-        <div class="subtitle">يتم التحديث تلقائياً بناءً على فترات السكرابينج الـ 15 دقيقة</div>
+        <h2>📊 رادار أحجام التداول اللحظية المحدثة</h2>
+        <div class="subtitle">يتم التحديث تلقائياً وبدقة عالية بناءً على كود الصفحة الحقيقي</div>
         <table>
             <thead>
                 <tr>
-                    <th>السهم</th>
-                    <th>السعر الحالي</th>
-                    <th>حجم اليوم</th>
-                    <th>حجم أمس (نفس الوقت)</th>
-                    <th>النسبة للهدف</th>
+                    <th onclick="sortTable(0)">السهم</th>
+                    <th onclick="sortTable(1)">السعر الحالي</th>
+                    <th onclick="sortTable(2)">تغير السعر</th>
+                    <th onclick="sortTable(3)">حجم اليوم</th>
+                    <th onclick="sortTable(4)">أمس (نفس الوقت)</th>
+                    <th onclick="sortTable(5)">النسبة للهدف</th>
                 </tr>
             </thead>
             <tbody id="comparison-rows">
-                <tr><td colspan="5" style="color: #8b949e;">جاري قراءة سجلات السكرابينج المحدثة...</td></tr>
+                <tr><td colspan="6" style="color: #8b949e;">جاري تحميل البيانات الحقيقية...</td></tr>
             </tbody>
         </table>
     </div>
 </div>
 
 <script>
+    let rawData = [];
+    let currentSortCol = -1;
+    let sortAscending = true;
+
     async function loadComparisonResults() {
         try {
-            // سحب ملف المقارنة الناتج عن سكريبت البايثون مع كسر الكاش لضمان اللحظية
             const response = await fetch('volume_comparison.json?t=' + new Date().getTime());
             if (response.ok) {
                 const data = await response.json();
-                let html = "";
-                
-                for (const [symbol, metrics] of Object.entries(data)) {
-                    const ratio = metrics.ratio_percentage;
-                    // تلوين النسبة بالأخضر لو تخطت حجم الأمس (100%)، بالأحضر لو أقل
-                    const colorClass = ratio >= 100 ? "pos" : "neg";
-                    // وسم لتوضيح إذا كانت داتا الأمس حقيقية أم تقديرية (أول يوم تشغيل)
-                    const fallbackTag = metrics.is_fallback_baseline ? '<span class="badge">تقديري</span>' : '';
-                    const price = metrics.price ? parseFloat(metrics.price).toFixed(2) + " ج.م" : "-";
-
-                    html += `
-                        <tr>
-                            <td style="text-align: right;"><b>${symbol}</b> ${fallbackTag}</td>
-                            <td>${price}</td>
-                            <td>${parseInt(metrics.current_volume).toLocaleString()}</td>
-                            <td>${parseInt(metrics.compared_to_time_volume).toLocaleString()}</td>
-                            <td class="${colorClass}">${ratio}%</td>
-                        </tr>
-                    `;
-                }
-                document.getElementById('comparison-rows').innerHTML = html;
+                rawData = Object.entries(data).map(([symbol, metrics]) => ({ symbol, ...metrics }));
+                renderTable(rawData);
             }
         } catch (error) {
-            console.error("خطأ أثناء جلب ملف المقارنة اللحظي:", error);
+            console.error("خطأ في جلب البيانات:", error);
         }
     }
 
-    // تشغيل الجلب الفوري عند تحميل الصفحة
+    function renderTable(items) {
+        let html = "";
+        items.forEach(item => {
+            const ratio = item.ratio_percentage;
+            const ratioClass = ratio >= 100 ? "pos" : "neg";
+            const changeClass = item.price_change >= 0 ? "pos" : "neg";
+            const fallbackTag = item.is_fallback_baseline ? '<span class="badge">تقديري</span>' : '';
+            const price = item.price ? item.price.toFixed(2) + " ج.م" : "-";
+            const change = item.price_change !== undefined ? item.price_change + "%" : "-";
+
+            html += `
+                <tr>
+                    <td style="text-align: right;"><b>${item.symbol}</b> ${fallbackTag}</td>
+                    <td>${price}</td>
+                    <td class="${changeClass}">${change}</td>
+                    <td>${parseInt(item.current_volume).toLocaleString()}</td>
+                    <td>${parseInt(item.compared_to_time_volume).toLocaleString()}</td>
+                    <td class="${ratioClass}">${ratio}%</td>
+                </tr>
+            `;
+        });
+        document.getElementById('comparison-rows').innerHTML = html;
+    }
+
+    function sortTable(colIndex) {
+        if (currentSortCol === colIndex) {
+            sortAscending = !sortAscending;
+        } else {
+            currentSortCol = colIndex;
+            sortAscending = true;
+        }
+
+        rawData.sort((a, b) => {
+            let valA, valB;
+            if (colIndex === 0) { valA = a.symbol; valB = b.symbol; }
+            if (colIndex === 1) { valA = a.price; valB = b.price; }
+            if (colIndex === 2) { valA = a.price_change; valB = b.price_change; }
+            if (colIndex === 3) { valA = a.current_volume; valB = b.current_volume; }
+            if (colIndex === 4) { valA = a.compared_to_time_volume; valB = b.compared_to_time_volume; }
+            if (colIndex === 5) { valA = a.ratio_percentage; valB = b.ratio_percentage; }
+
+            if (typeof valA === 'string') {
+                return sortAscending ? valA.localeCompare(valB) : valB.localeCompare(valA);
+            } else {
+                return sortAscending ? valA - valB : valB - valA;
+            }
+        });
+
+        renderTable(rawData);
+    }
+
     loadComparisonResults();
-    
-    // تحديث الواجهة تلقائياً كل دقيقة للتزامن مع أي سحب جديد بدون ريفريش كامة للصفحة
     setInterval(loadComparisonResults, 60000);
 </script>
 </body>
