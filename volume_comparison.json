@@ -1,1 +1,2324 @@
-
+{
+    "1187.5": {
+        "name": "1187.5",
+        "price": 1245.0,
+        "price_change": 1245.0,
+        "current_volume": 1312,
+        "compared_to_time_volume": 69,
+        "ratio_percentage": 1901.45,
+        "is_fallback_baseline": true
+    },
+    "558.73": {
+        "name": "558.73",
+        "price": 700.0,
+        "price_change": 685.15,
+        "current_volume": 838,
+        "compared_to_time_volume": 44,
+        "ratio_percentage": 1904.55,
+        "is_fallback_baseline": true
+    },
+    "418.92": {
+        "name": "418.92",
+        "price": 507.67,
+        "price_change": 505.0,
+        "current_volume": 628,
+        "compared_to_time_volume": 33,
+        "ratio_percentage": 1903.03,
+        "is_fallback_baseline": true
+    },
+    "943.65": {
+        "name": "943.65",
+        "price": 1185.46,
+        "price_change": 1165.11,
+        "current_volume": 1415,
+        "compared_to_time_volume": 74,
+        "ratio_percentage": 1912.16,
+        "is_fallback_baseline": true
+    },
+    "544.03": {
+        "name": "544.03",
+        "price": 691.0,
+        "price_change": 680.1,
+        "current_volume": 816,
+        "compared_to_time_volume": 42,
+        "ratio_percentage": 1942.86,
+        "is_fallback_baseline": true
+    },
+    "266.43": {
+        "name": "266.43",
+        "price": 341.3,
+        "price_change": 332.0,
+        "current_volume": 399,
+        "compared_to_time_volume": 21,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "384.23": {
+        "name": "384.23",
+        "price": 518.06,
+        "price_change": 480.0,
+        "current_volume": 576,
+        "compared_to_time_volume": 30,
+        "ratio_percentage": 1920.0,
+        "is_fallback_baseline": true
+    },
+    "202.4": {
+        "name": "202.4",
+        "price": 257.0,
+        "price_change": 248.0,
+        "current_volume": 303,
+        "compared_to_time_volume": 15,
+        "ratio_percentage": 2020.0,
+        "is_fallback_baseline": true
+    },
+    "13.48": {
+        "name": "13.48",
+        "price": 16.75,
+        "price_change": 16.32,
+        "current_volume": 20,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2000.0,
+        "is_fallback_baseline": true
+    },
+    "70.78": {
+        "name": "70.78",
+        "price": 107.0,
+        "price_change": 107.0,
+        "current_volume": 78,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 1950.0,
+        "is_fallback_baseline": true
+    },
+    "221.06": {
+        "name": "221.06",
+        "price": 291.02,
+        "price_change": 273.5,
+        "current_volume": 331,
+        "compared_to_time_volume": 17,
+        "ratio_percentage": 1947.06,
+        "is_fallback_baseline": true
+    },
+    "107.12": {
+        "name": "107.12",
+        "price": 116.4,
+        "price_change": 107.0,
+        "current_volume": 160,
+        "compared_to_time_volume": 8,
+        "ratio_percentage": 2000.0,
+        "is_fallback_baseline": true
+    },
+    "246.74": {
+        "name": "246.74",
+        "price": 309.75,
+        "price_change": 309.0,
+        "current_volume": 370,
+        "compared_to_time_volume": 19,
+        "ratio_percentage": 1947.37,
+        "is_fallback_baseline": true
+    },
+    "282.07": {
+        "name": "282.07",
+        "price": 356.87,
+        "price_change": 353.0,
+        "current_volume": 423,
+        "compared_to_time_volume": 22,
+        "ratio_percentage": 1922.73,
+        "is_fallback_baseline": true
+    },
+    "57.04": {
+        "name": "57.04",
+        "price": 70.03,
+        "price_change": 69.77,
+        "current_volume": 85,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2125.0,
+        "is_fallback_baseline": true
+    },
+    "140.06": {
+        "name": "140.06",
+        "price": 177.5,
+        "price_change": 175.1,
+        "current_volume": 210,
+        "compared_to_time_volume": 11,
+        "ratio_percentage": 1909.09,
+        "is_fallback_baseline": true
+    },
+    "486.82": {
+        "name": "486.82",
+        "price": 611.13,
+        "price_change": 608.5,
+        "current_volume": 730,
+        "compared_to_time_volume": 38,
+        "ratio_percentage": 1921.05,
+        "is_fallback_baseline": true
+    },
+    "185.6": {
+        "name": "185.6",
+        "price": 232.77,
+        "price_change": 230.0,
+        "current_volume": 278,
+        "compared_to_time_volume": 14,
+        "ratio_percentage": 1985.71,
+        "is_fallback_baseline": true
+    },
+    "37.37": {
+        "name": "37.37",
+        "price": 46.9,
+        "price_change": 46.7,
+        "current_volume": 56,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2800.0,
+        "is_fallback_baseline": true
+    },
+    "106.4": {
+        "name": "106.4",
+        "price": 134.5,
+        "price_change": 133.0,
+        "current_volume": 159,
+        "compared_to_time_volume": 8,
+        "ratio_percentage": 1987.5,
+        "is_fallback_baseline": true
+    },
+    "30": {
+        "name": "30",
+        "price": 36.9,
+        "price_change": 36.73,
+        "current_volume": 45,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2250.0,
+        "is_fallback_baseline": true
+    },
+    "235.2": {
+        "name": "235.2",
+        "price": 293.01,
+        "price_change": 291.32,
+        "current_volume": 352,
+        "compared_to_time_volume": 18,
+        "ratio_percentage": 1955.56,
+        "is_fallback_baseline": true
+    },
+    "205.68": {
+        "name": "205.68",
+        "price": 244.33,
+        "price_change": 244.0,
+        "current_volume": 308,
+        "compared_to_time_volume": 16,
+        "ratio_percentage": 1925.0,
+        "is_fallback_baseline": true
+    },
+    "75.77": {
+        "name": "75.77",
+        "price": 98.04,
+        "price_change": 94.71,
+        "current_volume": 113,
+        "compared_to_time_volume": 5,
+        "ratio_percentage": 2260.0,
+        "is_fallback_baseline": true
+    },
+    "146.27": {
+        "name": "146.27",
+        "price": 181.65,
+        "price_change": 180.07,
+        "current_volume": 219,
+        "compared_to_time_volume": 11,
+        "ratio_percentage": 1990.91,
+        "is_fallback_baseline": true
+    },
+    "190.97": {
+        "name": "190.97",
+        "price": 240.0,
+        "price_change": 238.0,
+        "current_volume": 286,
+        "compared_to_time_volume": 15,
+        "ratio_percentage": 1906.67,
+        "is_fallback_baseline": true
+    },
+    "47.5": {
+        "name": "47.5",
+        "price": 51.0,
+        "price_change": 50.0,
+        "current_volume": 52,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2600.0,
+        "is_fallback_baseline": true
+    },
+    "56.63": {
+        "name": "56.63",
+        "price": 76.0,
+        "price_change": 70.78,
+        "current_volume": 84,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "46.09": {
+        "name": "46.09",
+        "price": 58.04,
+        "price_change": 57.25,
+        "current_volume": 69,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 2300.0,
+        "is_fallback_baseline": true
+    },
+    "317.67": {
+        "name": "317.67",
+        "price": 399.73,
+        "price_change": 395.8,
+        "current_volume": 476,
+        "compared_to_time_volume": 25,
+        "ratio_percentage": 1904.0,
+        "is_fallback_baseline": true
+    },
+    "195": {
+        "name": "195",
+        "price": 245.33,
+        "price_change": 240.61,
+        "current_volume": 292,
+        "compared_to_time_volume": 15,
+        "ratio_percentage": 1946.67,
+        "is_fallback_baseline": true
+    },
+    "175.79": {
+        "name": "175.79",
+        "price": 222.12,
+        "price_change": 220.02,
+        "current_volume": 263,
+        "compared_to_time_volume": 13,
+        "ratio_percentage": 2023.08,
+        "is_fallback_baseline": true
+    },
+    "22.9": {
+        "name": "22.9",
+        "price": 28.87,
+        "price_change": 28.62,
+        "current_volume": 34,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3400.0,
+        "is_fallback_baseline": true
+    },
+    "162.67": {
+        "name": "162.67",
+        "price": 203.34,
+        "price_change": 202.0,
+        "current_volume": 243,
+        "compared_to_time_volume": 12,
+        "ratio_percentage": 2025.0,
+        "is_fallback_baseline": true
+    },
+    "215.64": {
+        "name": "215.64",
+        "price": 271.41,
+        "price_change": 268.6,
+        "current_volume": 323,
+        "compared_to_time_volume": 17,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "9.5": {
+        "name": "9.5",
+        "price": 102.0,
+        "price_change": 87.0,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "81.42": {
+        "name": "81.42",
+        "price": 103.72,
+        "price_change": 101.5,
+        "current_volume": 122,
+        "compared_to_time_volume": 6,
+        "ratio_percentage": 2033.33,
+        "is_fallback_baseline": true
+    },
+    "39.91": {
+        "name": "39.91",
+        "price": 48.99,
+        "price_change": 48.5,
+        "current_volume": 59,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 1966.67,
+        "is_fallback_baseline": true
+    },
+    "138.87": {
+        "name": "138.87",
+        "price": 179.08,
+        "price_change": 174.9,
+        "current_volume": 208,
+        "compared_to_time_volume": 10,
+        "ratio_percentage": 2080.0,
+        "is_fallback_baseline": true
+    },
+    "37.03": {
+        "name": "37.03",
+        "price": 46.62,
+        "price_change": 46.0,
+        "current_volume": 55,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2750.0,
+        "is_fallback_baseline": true
+    },
+    "23.23": {
+        "name": "23.23",
+        "price": 29.29,
+        "price_change": 28.9,
+        "current_volume": 34,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3400.0,
+        "is_fallback_baseline": true
+    },
+    "30.41": {
+        "name": "30.41",
+        "price": 32.62,
+        "price_change": 31.72,
+        "current_volume": 33,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3300.0,
+        "is_fallback_baseline": true
+    },
+    "65.2": {
+        "name": "65.2",
+        "price": 79.5,
+        "price_change": 79.02,
+        "current_volume": 97,
+        "compared_to_time_volume": 5,
+        "ratio_percentage": 1940.0,
+        "is_fallback_baseline": true
+    },
+    "77.36": {
+        "name": "77.36",
+        "price": 97.85,
+        "price_change": 95.5,
+        "current_volume": 116,
+        "compared_to_time_volume": 6,
+        "ratio_percentage": 1933.33,
+        "is_fallback_baseline": true
+    },
+    "69.6": {
+        "name": "69.6",
+        "price": 86.09,
+        "price_change": 86.0,
+        "current_volume": 104,
+        "compared_to_time_volume": 5,
+        "ratio_percentage": 2080.0,
+        "is_fallback_baseline": true
+    },
+    "104": {
+        "name": "104",
+        "price": 134.02,
+        "price_change": 129.05,
+        "current_volume": 156,
+        "compared_to_time_volume": 8,
+        "ratio_percentage": 1950.0,
+        "is_fallback_baseline": true
+    },
+    "165.6": {
+        "name": "165.6",
+        "price": 206.6,
+        "price_change": 202.0,
+        "current_volume": 248,
+        "compared_to_time_volume": 13,
+        "ratio_percentage": 1907.69,
+        "is_fallback_baseline": true
+    },
+    "58.6": {
+        "name": "58.6",
+        "price": 73.6,
+        "price_change": 73.34,
+        "current_volume": 87,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2175.0,
+        "is_fallback_baseline": true
+    },
+    "36.2": {
+        "name": "36.2",
+        "price": 45.91,
+        "price_change": 44.27,
+        "current_volume": 54,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2700.0,
+        "is_fallback_baseline": true
+    },
+    "42.26": {
+        "name": "42.26",
+        "price": 54.05,
+        "price_change": 53.01,
+        "current_volume": 63,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "29.11": {
+        "name": "29.11",
+        "price": 37.01,
+        "price_change": 36.11,
+        "current_volume": 43,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2150.0,
+        "is_fallback_baseline": true
+    },
+    "25.68": {
+        "name": "25.68",
+        "price": 32.44,
+        "price_change": 32.02,
+        "current_volume": 38,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "64.85": {
+        "name": "64.85",
+        "price": 82.72,
+        "price_change": 81.06,
+        "current_volume": 97,
+        "compared_to_time_volume": 5,
+        "ratio_percentage": 1940.0,
+        "is_fallback_baseline": true
+    },
+    "194.74": {
+        "name": "194.74",
+        "price": 253.42,
+        "price_change": 243.5,
+        "current_volume": 292,
+        "compared_to_time_volume": 15,
+        "ratio_percentage": 1946.67,
+        "is_fallback_baseline": true
+    },
+    "22.59": {
+        "name": "22.59",
+        "price": 28.3,
+        "price_change": 28.04,
+        "current_volume": 33,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3300.0,
+        "is_fallback_baseline": true
+    },
+    "29.68": {
+        "name": "29.68",
+        "price": 36.93,
+        "price_change": 36.88,
+        "current_volume": 44,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2200.0,
+        "is_fallback_baseline": true
+    },
+    "56.4": {
+        "name": "56.4",
+        "price": 71.0,
+        "price_change": 70.7,
+        "current_volume": 84,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "291.03": {
+        "name": "291.03",
+        "price": 362.79,
+        "price_change": 360.1,
+        "current_volume": 436,
+        "compared_to_time_volume": 22,
+        "ratio_percentage": 1981.82,
+        "is_fallback_baseline": true
+    },
+    "39.27": {
+        "name": "39.27",
+        "price": 42.2,
+        "price_change": 41.29,
+        "current_volume": 43,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2150.0,
+        "is_fallback_baseline": true
+    },
+    "13.08": {
+        "name": "13.08",
+        "price": 16.26,
+        "price_change": 16.24,
+        "current_volume": 19,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "70": {
+        "name": "70",
+        "price": 89.0,
+        "price_change": 87.5,
+        "current_volume": 105,
+        "compared_to_time_volume": 5,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "12.12": {
+        "name": "12.12",
+        "price": 15.13,
+        "price_change": 15.0,
+        "current_volume": 18,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "37.84": {
+        "name": "37.84",
+        "price": 47.17,
+        "price_change": 46.78,
+        "current_volume": 56,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2800.0,
+        "is_fallback_baseline": true
+    },
+    "47.98": {
+        "name": "47.98",
+        "price": 60.31,
+        "price_change": 58.51,
+        "current_volume": 71,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 2366.67,
+        "is_fallback_baseline": true
+    },
+    "6.1": {
+        "name": "6.1",
+        "price": 69.0,
+        "price_change": 67.5,
+        "current_volume": 7,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "80.56": {
+        "name": "80.56",
+        "price": 114.0,
+        "price_change": 98.02,
+        "current_volume": 120,
+        "compared_to_time_volume": 6,
+        "ratio_percentage": 2000.0,
+        "is_fallback_baseline": true
+    },
+    "78.24": {
+        "name": "78.24",
+        "price": 97.1,
+        "price_change": 96.5,
+        "current_volume": 117,
+        "compared_to_time_volume": 6,
+        "ratio_percentage": 1950.0,
+        "is_fallback_baseline": true
+    },
+    "14.69": {
+        "name": "14.69",
+        "price": 18.61,
+        "price_change": 18.4,
+        "current_volume": 22,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2200.0,
+        "is_fallback_baseline": true
+    },
+    "34.72": {
+        "name": "34.72",
+        "price": 51.83,
+        "price_change": 43.0,
+        "current_volume": 52,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2600.0,
+        "is_fallback_baseline": true
+    },
+    "25.95": {
+        "name": "25.95",
+        "price": 32.54,
+        "price_change": 32.14,
+        "current_volume": 38,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "19.16": {
+        "name": "19.16",
+        "price": 24.12,
+        "price_change": 23.93,
+        "current_volume": 28,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2800.0,
+        "is_fallback_baseline": true
+    },
+    "21.28": {
+        "name": "21.28",
+        "price": 26.7,
+        "price_change": 26.22,
+        "current_volume": 31,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3100.0,
+        "is_fallback_baseline": true
+    },
+    "45.51": {
+        "name": "45.51",
+        "price": 50.0,
+        "price_change": 50.0,
+        "current_volume": 50,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2500.0,
+        "is_fallback_baseline": true
+    },
+    "57.59": {
+        "name": "57.59",
+        "price": 72.19,
+        "price_change": 72.0,
+        "current_volume": 86,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2150.0,
+        "is_fallback_baseline": true
+    },
+    "56.78": {
+        "name": "56.78",
+        "price": 73.0,
+        "price_change": 71.0,
+        "current_volume": 85,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2125.0,
+        "is_fallback_baseline": true
+    },
+    "38.4": {
+        "name": "38.4",
+        "price": 48.09,
+        "price_change": 48.01,
+        "current_volume": 57,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "142.41": {
+        "name": "142.41",
+        "price": 178.59,
+        "price_change": 176.02,
+        "current_volume": 213,
+        "compared_to_time_volume": 11,
+        "ratio_percentage": 1936.36,
+        "is_fallback_baseline": true
+    },
+    "32.54": {
+        "name": "32.54",
+        "price": 42.25,
+        "price_change": 40.7,
+        "current_volume": 48,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2400.0,
+        "is_fallback_baseline": true
+    },
+    "6.69": {
+        "name": "6.69",
+        "price": 19.0,
+        "price_change": 18.15,
+        "current_volume": 8,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "53.56": {
+        "name": "53.56",
+        "price": 67.31,
+        "price_change": 67.01,
+        "current_volume": 80,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2000.0,
+        "is_fallback_baseline": true
+    },
+    "25": {
+        "name": "25",
+        "price": 31.48,
+        "price_change": 30.93,
+        "current_volume": 37,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3700.0,
+        "is_fallback_baseline": true
+    },
+    "19": {
+        "name": "19",
+        "price": 0.0,
+        "price_change": 19.0,
+        "current_volume": 21,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "21.24": {
+        "name": "21.24",
+        "price": 0.0,
+        "price_change": 21.81,
+        "current_volume": 23,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2300.0,
+        "is_fallback_baseline": true
+    },
+    "1.85": {
+        "name": "1.85",
+        "price": 1.95,
+        "price_change": 1.87,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "17.84": {
+        "name": "17.84",
+        "price": 22.2,
+        "price_change": 22.02,
+        "current_volume": 26,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2600.0,
+        "is_fallback_baseline": true
+    },
+    "35.18": {
+        "name": "35.18",
+        "price": 38.81,
+        "price_change": 37.38,
+        "current_volume": 38,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "18.16": {
+        "name": "18.16",
+        "price": 22.81,
+        "price_change": 22.68,
+        "current_volume": 27,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2700.0,
+        "is_fallback_baseline": true
+    },
+    "21.36": {
+        "name": "21.36",
+        "price": 26.71,
+        "price_change": 26.53,
+        "current_volume": 32,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3200.0,
+        "is_fallback_baseline": true
+    },
+    "24.8": {
+        "name": "24.8",
+        "price": 30.86,
+        "price_change": 30.76,
+        "current_volume": 37,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3700.0,
+        "is_fallback_baseline": true
+    },
+    "15.41": {
+        "name": "15.41",
+        "price": 19.57,
+        "price_change": 19.24,
+        "current_volume": 23,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2300.0,
+        "is_fallback_baseline": true
+    },
+    "11.68": {
+        "name": "11.68",
+        "price": 14.51,
+        "price_change": 14.46,
+        "current_volume": 17,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "30.8": {
+        "name": "30.8",
+        "price": 38.81,
+        "price_change": 37.41,
+        "current_volume": 46,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2300.0,
+        "is_fallback_baseline": true
+    },
+    "18.4": {
+        "name": "18.4",
+        "price": 22.95,
+        "price_change": 22.08,
+        "current_volume": 27,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2700.0,
+        "is_fallback_baseline": true
+    },
+    "21.71": {
+        "name": "21.71",
+        "price": 27.8,
+        "price_change": 26.54,
+        "current_volume": 32,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3200.0,
+        "is_fallback_baseline": true
+    },
+    "29.45": {
+        "name": "29.45",
+        "price": 33.0,
+        "price_change": 31.0,
+        "current_volume": 32,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3200.0,
+        "is_fallback_baseline": true
+    },
+    "28.9": {
+        "name": "28.9",
+        "price": 36.88,
+        "price_change": 36.02,
+        "current_volume": 43,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2150.0,
+        "is_fallback_baseline": true
+    },
+    "10.43": {
+        "name": "10.43",
+        "price": 13.0,
+        "price_change": 12.94,
+        "current_volume": 15,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "28.88": {
+        "name": "28.88",
+        "price": 36.49,
+        "price_change": 35.7,
+        "current_volume": 43,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2150.0,
+        "is_fallback_baseline": true
+    },
+    "16.93": {
+        "name": "16.93",
+        "price": 21.74,
+        "price_change": 21.03,
+        "current_volume": 25,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2500.0,
+        "is_fallback_baseline": true
+    },
+    "22.96": {
+        "name": "22.96",
+        "price": 28.96,
+        "price_change": 28.44,
+        "current_volume": 34,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3400.0,
+        "is_fallback_baseline": true
+    },
+    "28.16": {
+        "name": "28.16",
+        "price": 35.97,
+        "price_change": 35.17,
+        "current_volume": 42,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "49.72": {
+        "name": "49.72",
+        "price": 62.61,
+        "price_change": 62.16,
+        "current_volume": 74,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 2466.67,
+        "is_fallback_baseline": true
+    },
+    "30.95": {
+        "name": "30.95",
+        "price": 39.11,
+        "price_change": 38.53,
+        "current_volume": 46,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2300.0,
+        "is_fallback_baseline": true
+    },
+    "21.4": {
+        "name": "21.4",
+        "price": 26.93,
+        "price_change": 26.66,
+        "current_volume": 32,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3200.0,
+        "is_fallback_baseline": true
+    },
+    "18.24": {
+        "name": "18.24",
+        "price": 22.9,
+        "price_change": 22.53,
+        "current_volume": 27,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2700.0,
+        "is_fallback_baseline": true
+    },
+    "5.47": {
+        "name": "5.47",
+        "price": 7.32,
+        "price_change": 6.83,
+        "current_volume": 8,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "44.24": {
+        "name": "44.24",
+        "price": 55.99,
+        "price_change": 55.05,
+        "current_volume": 66,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 2200.0,
+        "is_fallback_baseline": true
+    },
+    "10.85": {
+        "name": "10.85",
+        "price": 0.0,
+        "price_change": 13.18,
+        "current_volume": 16,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "11.95": {
+        "name": "11.95",
+        "price": 14.2,
+        "price_change": 14.12,
+        "current_volume": 17,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "6.51": {
+        "name": "6.51",
+        "price": 7.95,
+        "price_change": 7.95,
+        "current_volume": 9,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.49": {
+        "name": "2.49",
+        "price": 2.62,
+        "price_change": 2.57,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "31.6": {
+        "name": "31.6",
+        "price": 39.49,
+        "price_change": 39.02,
+        "current_volume": 47,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2350.0,
+        "is_fallback_baseline": true
+    },
+    "5.4": {
+        "name": "5.4",
+        "price": 19.0,
+        "price_change": 18.0,
+        "current_volume": 6,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "24.3": {
+        "name": "24.3",
+        "price": 30.72,
+        "price_change": 30.37,
+        "current_volume": 36,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 3600.0,
+        "is_fallback_baseline": true
+    },
+    "10.64": {
+        "name": "10.64",
+        "price": 14.1,
+        "price_change": 13.38,
+        "current_volume": 15,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "6.78": {
+        "name": "6.78",
+        "price": 8.42,
+        "price_change": 8.37,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "14.08": {
+        "name": "14.08",
+        "price": 17.45,
+        "price_change": 17.4,
+        "current_volume": 21,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "39.71": {
+        "name": "39.71",
+        "price": 49.23,
+        "price_change": 48.01,
+        "current_volume": 59,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 1966.67,
+        "is_fallback_baseline": true
+    },
+    "13.61": {
+        "name": "13.61",
+        "price": 14.11,
+        "price_change": 13.64,
+        "current_volume": 15,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.32": {
+        "name": "5.32",
+        "price": 6.85,
+        "price_change": 6.65,
+        "current_volume": 7,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.32": {
+        "name": "7.32",
+        "price": 9.4,
+        "price_change": 9.11,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.6": {
+        "name": "7.6",
+        "price": 9.5,
+        "price_change": 9.42,
+        "current_volume": 11,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.59": {
+        "name": "5.59",
+        "price": 7.04,
+        "price_change": 6.92,
+        "current_volume": 8,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.1": {
+        "name": "7.1",
+        "price": 9.08,
+        "price_change": 8.88,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "10.32": {
+        "name": "10.32",
+        "price": 13.03,
+        "price_change": 12.85,
+        "current_volume": 15,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8.07": {
+        "name": "8.07",
+        "price": 8.46,
+        "price_change": 8.41,
+        "current_volume": 8,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "13.4": {
+        "name": "13.4",
+        "price": 20.1,
+        "price_change": 16.64,
+        "current_volume": 20,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2000.0,
+        "is_fallback_baseline": true
+    },
+    "7.96": {
+        "name": "7.96",
+        "price": 10.01,
+        "price_change": 9.87,
+        "current_volume": 11,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "15.52": {
+        "name": "15.52",
+        "price": 19.36,
+        "price_change": 19.05,
+        "current_volume": 23,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2300.0,
+        "is_fallback_baseline": true
+    },
+    "12.32": {
+        "name": "12.32",
+        "price": 15.42,
+        "price_change": 15.4,
+        "current_volume": 18,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4.15": {
+        "name": "4.15",
+        "price": 5.17,
+        "price_change": 5.12,
+        "current_volume": 6,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.13": {
+        "name": "7.13",
+        "price": 9.02,
+        "price_change": 8.91,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "9.52": {
+        "name": "9.52",
+        "price": 11.66,
+        "price_change": 11.6,
+        "current_volume": 14,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.24": {
+        "name": "5.24",
+        "price": 0.0,
+        "price_change": 5.78,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "13.04": {
+        "name": "13.04",
+        "price": 16.37,
+        "price_change": 16.25,
+        "current_volume": 19,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "3.58": {
+        "name": "3.58",
+        "price": 3.79,
+        "price_change": 3.7,
+        "current_volume": 3,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "11.64": {
+        "name": "11.64",
+        "price": 14.55,
+        "price_change": 14.51,
+        "current_volume": 17,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.69": {
+        "name": "5.69",
+        "price": 8.01,
+        "price_change": 8.01,
+        "current_volume": 6,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "12.89": {
+        "name": "12.89",
+        "price": 19.33,
+        "price_change": 16.39,
+        "current_volume": 19,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "6.08": {
+        "name": "6.08",
+        "price": 8.03,
+        "price_change": 7.6,
+        "current_volume": 9,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "14.76": {
+        "name": "14.76",
+        "price": 18.46,
+        "price_change": 18.2,
+        "current_volume": 22,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2200.0,
+        "is_fallback_baseline": true
+    },
+    "6.12": {
+        "name": "6.12",
+        "price": 7.73,
+        "price_change": 7.59,
+        "current_volume": 9,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.61": {
+        "name": "7.61",
+        "price": 9.54,
+        "price_change": 9.52,
+        "current_volume": 11,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4.85": {
+        "name": "4.85",
+        "price": 6.14,
+        "price_change": 6.05,
+        "current_volume": 7,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "9.27": {
+        "name": "9.27",
+        "price": 11.9,
+        "price_change": 11.5,
+        "current_volume": 13,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8.57": {
+        "name": "8.57",
+        "price": 11.04,
+        "price_change": 10.61,
+        "current_volume": 12,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "6.24": {
+        "name": "6.24",
+        "price": 8.0,
+        "price_change": 7.68,
+        "current_volume": 9,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.84": {
+        "name": "3.84",
+        "price": 4.82,
+        "price_change": 4.77,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.84": {
+        "name": "7.84",
+        "price": 9.65,
+        "price_change": 9.65,
+        "current_volume": 11,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.84": {
+        "name": "1.84",
+        "price": 2.35,
+        "price_change": 2.3,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.44": {
+        "name": "2.44",
+        "price": 3.05,
+        "price_change": 3.04,
+        "current_volume": 3,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "11.83": {
+        "name": "11.83",
+        "price": 14.93,
+        "price_change": 14.6,
+        "current_volume": 17,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.92": {
+        "name": "5.92",
+        "price": 7.4,
+        "price_change": 7.35,
+        "current_volume": 8,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "9.12": {
+        "name": "9.12",
+        "price": 11.59,
+        "price_change": 11.33,
+        "current_volume": 13,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8.84": {
+        "name": "8.84",
+        "price": 11.1,
+        "price_change": 10.94,
+        "current_volume": 13,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "0.99": {
+        "name": "0.99",
+        "price": 1.25,
+        "price_change": 1.23,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.61": {
+        "name": "2.61",
+        "price": 0.0,
+        "price_change": 2.75,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4.18": {
+        "name": "4.18",
+        "price": 5.2,
+        "price_change": 5.17,
+        "current_volume": 6,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4.29": {
+        "name": "4.29",
+        "price": 5.49,
+        "price_change": 5.35,
+        "current_volume": 6,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "6.64": {
+        "name": "6.64",
+        "price": 8.58,
+        "price_change": 8.24,
+        "current_volume": 9,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.15": {
+        "name": "1.15",
+        "price": 1.21,
+        "price_change": 1.17,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "11.07": {
+        "name": "11.07",
+        "price": 12.17,
+        "price_change": 12.1,
+        "current_volume": 13,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.15": {
+        "name": "7.15",
+        "price": 8.88,
+        "price_change": 8.82,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.36": {
+        "name": "3.36",
+        "price": 0.0,
+        "price_change": 3.7,
+        "current_volume": 3,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8.66": {
+        "name": "8.66",
+        "price": 10.84,
+        "price_change": 10.81,
+        "current_volume": 12,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.29": {
+        "name": "7.29",
+        "price": 9.49,
+        "price_change": 9.15,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.81": {
+        "name": "2.81",
+        "price": 3.72,
+        "price_change": 3.51,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "6.36": {
+        "name": "6.36",
+        "price": 8.15,
+        "price_change": 8.02,
+        "current_volume": 9,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4.58": {
+        "name": "4.58",
+        "price": 3.6,
+        "price_change": 3.46,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.99": {
+        "name": "3.99",
+        "price": 4.99,
+        "price_change": 4.97,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4.8": {
+        "name": "4.8",
+        "price": 5.16,
+        "price_change": 4.83,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.68": {
+        "name": "1.68",
+        "price": 2.1,
+        "price_change": 2.09,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.14": {
+        "name": "1.14",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.64": {
+        "name": "5.64",
+        "price": 7.09,
+        "price_change": 7.0,
+        "current_volume": 8,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.19": {
+        "name": "2.19",
+        "price": 2.79,
+        "price_change": 2.73,
+        "current_volume": 3,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "11.86": {
+        "name": "11.86",
+        "price": 13.02,
+        "price_change": 12.56,
+        "current_volume": 14,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.61": {
+        "name": "1.61",
+        "price": 1.76,
+        "price_change": 1.69,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "9.88": {
+        "name": "9.88",
+        "price": 10.94,
+        "price_change": 10.82,
+        "current_volume": 12,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "12.03": {
+        "name": "12.03",
+        "price": 13.4,
+        "price_change": 13.2,
+        "current_volume": 14,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "17.01": {
+        "name": "17.01",
+        "price": 10.95,
+        "price_change": 10.95,
+        "current_volume": 18,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.08": {
+        "name": "2.08",
+        "price": 2.08,
+        "price_change": 2.08,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.66": {
+        "name": "2.66",
+        "price": 2.92,
+        "price_change": 2.8,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.67": {
+        "name": "2.67",
+        "price": 2.77,
+        "price_change": 2.73,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.41": {
+        "name": "1.41",
+        "price": 0.0,
+        "price_change": 1.53,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.44": {
+        "name": "1.44",
+        "price": 1.91,
+        "price_change": 1.8,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.01": {
+        "name": "3.01",
+        "price": 3.76,
+        "price_change": 3.73,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.48": {
+        "name": "1.48",
+        "price": 1.62,
+        "price_change": 1.54,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "6.5": {
+        "name": "6.5",
+        "price": 7.24,
+        "price_change": 7.22,
+        "current_volume": 7,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.31": {
+        "name": "1.31",
+        "price": 1.65,
+        "price_change": 1.62,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.88": {
+        "name": "1.88",
+        "price": 2.35,
+        "price_change": 2.28,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "0.794": {
+        "name": "0.794",
+        "price": 0.0,
+        "price_change": 0.98,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.02": {
+        "name": "1.02",
+        "price": 1.33,
+        "price_change": 1.27,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.17": {
+        "name": "7.17",
+        "price": 7.94,
+        "price_change": 7.9,
+        "current_volume": 8,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.74": {
+        "name": "2.74",
+        "price": 3.49,
+        "price_change": 3.42,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.38": {
+        "name": "1.38",
+        "price": 1.77,
+        "price_change": 1.7,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "9.2": {
+        "name": "9.2",
+        "price": 12.36,
+        "price_change": 11.28,
+        "current_volume": 13,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.04": {
+        "name": "2.04",
+        "price": 2.58,
+        "price_change": 2.52,
+        "current_volume": 3,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.24": {
+        "name": "2.24",
+        "price": 2.88,
+        "price_change": 2.77,
+        "current_volume": 3,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "0.88": {
+        "name": "0.88",
+        "price": 1.1,
+        "price_change": 1.08,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "7.06": {
+        "name": "7.06",
+        "price": 8.68,
+        "price_change": 8.65,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.64": {
+        "name": "1.64",
+        "price": 2.08,
+        "price_change": 2.03,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.13": {
+        "name": "1.13",
+        "price": 1.42,
+        "price_change": 1.41,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.55": {
+        "name": "1.55",
+        "price": 1.93,
+        "price_change": 1.88,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.05": {
+        "name": "2.05",
+        "price": 2.68,
+        "price_change": 2.56,
+        "current_volume": 3,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.28": {
+        "name": "1.28",
+        "price": 1.62,
+        "price_change": 1.58,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.1": {
+        "name": "1.1",
+        "price": 1.45,
+        "price_change": 1.36,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "55.53": {
+        "name": "55.53",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 67,
+        "compared_to_time_volume": 3,
+        "ratio_percentage": 2233.33,
+        "is_fallback_baseline": true
+    },
+    "61.06": {
+        "name": "61.06",
+        "price": 75.93,
+        "price_change": 75.6,
+        "current_volume": 91,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2275.0,
+        "is_fallback_baseline": true
+    },
+    "1.6": {
+        "name": "1.6",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "39.46": {
+        "name": "39.46",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 43,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2150.0,
+        "is_fallback_baseline": true
+    },
+    "14.4": {
+        "name": "14.4",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 17,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "0.8": {
+        "name": "0.8",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4.59": {
+        "name": "4.59",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "23.41": {
+        "name": "23.41",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 28,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2800.0,
+        "is_fallback_baseline": true
+    },
+    "12.61": {
+        "name": "12.61",
+        "price": 0.0,
+        "price_change": 17.0,
+        "current_volume": 18,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8.93": {
+        "name": "8.93",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "0.76": {
+        "name": "0.76",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "13.96": {
+        "name": "13.96",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 17,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "10.55": {
+        "name": "10.55",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 12,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.69": {
+        "name": "1.69",
+        "price": 0.0,
+        "price_change": 2.53,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8.67": {
+        "name": "8.67",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 10,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8": {
+        "name": "8",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 12,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "12.26": {
+        "name": "12.26",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 14,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "0.95": {
+        "name": "0.95",
+        "price": 15.0,
+        "price_change": 0.25,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "9.11": {
+        "name": "9.11",
+        "price": 0.0,
+        "price_change": 13.65,
+        "current_volume": 13,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "18.05": {
+        "name": "18.05",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 19,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "16.64": {
+        "name": "16.64",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 18,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "40.39": {
+        "name": "40.39",
+        "price": 45.74,
+        "price_change": 42.51,
+        "current_volume": 44,
+        "compared_to_time_volume": 2,
+        "ratio_percentage": 2200.0,
+        "is_fallback_baseline": true
+    },
+    "6.17": {
+        "name": "6.17",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 7,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.76": {
+        "name": "3.76",
+        "price": 0.0,
+        "price_change": 5.62,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "95": {
+        "name": "95",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 105,
+        "compared_to_time_volume": 5,
+        "ratio_percentage": 2100.0,
+        "is_fallback_baseline": true
+    },
+    "4.5": {
+        "name": "4.5",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "4": {
+        "name": "4",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 6,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "72.24": {
+        "name": "72.24",
+        "price": 81.19,
+        "price_change": 79.3,
+        "current_volume": 88,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 2200.0,
+        "is_fallback_baseline": true
+    },
+    "327.07": {
+        "name": "327.07",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 361,
+        "compared_to_time_volume": 19,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "1.33": {
+        "name": "1.33",
+        "price": 0.0,
+        "price_change": 1.33,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.42": {
+        "name": "3.42",
+        "price": 24.0,
+        "price_change": 24.0,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "69.54": {
+        "name": "69.54",
+        "price": 77.0,
+        "price_change": 77.0,
+        "current_volume": 76,
+        "compared_to_time_volume": 4,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "15.57": {
+        "name": "15.57",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 19,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 1900.0,
+        "is_fallback_baseline": true
+    },
+    "3.61": {
+        "name": "3.61",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "107.25": {
+        "name": "107.25",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 131,
+        "compared_to_time_volume": 6,
+        "ratio_percentage": 2183.33,
+        "is_fallback_baseline": true
+    },
+    "2.31": {
+        "name": "2.31",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.53": {
+        "name": "1.53",
+        "price": 0.0,
+        "price_change": 1.54,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.25": {
+        "name": "2.25",
+        "price": 0.0,
+        "price_change": 2.42,
+        "current_volume": 2,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "8.75": {
+        "name": "8.75",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 9,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "10.04": {
+        "name": "10.04",
+        "price": 0.0,
+        "price_change": 0.0,
+        "current_volume": 15,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "18.97": {
+        "name": "18.97",
+        "price": 23.57,
+        "price_change": 23.5,
+        "current_volume": 28,
+        "compared_to_time_volume": 1,
+        "ratio_percentage": 2800.0,
+        "is_fallback_baseline": true
+    },
+    "3.03": {
+        "name": "3.03",
+        "price": 3.83,
+        "price_change": 3.77,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "10.74": {
+        "name": "10.74",
+        "price": 13.44,
+        "price_change": 13.4,
+        "current_volume": 16,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "1.16": {
+        "name": "1.16",
+        "price": 1.46,
+        "price_change": 1.43,
+        "current_volume": 1,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "11.74": {
+        "name": "11.74",
+        "price": 13.31,
+        "price_change": 12.72,
+        "current_volume": 14,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "10.01": {
+        "name": "10.01",
+        "price": 12.66,
+        "price_change": 12.5,
+        "current_volume": 15,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.08": {
+        "name": "3.08",
+        "price": 3.83,
+        "price_change": 3.82,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.33": {
+        "name": "5.33",
+        "price": 6.86,
+        "price_change": 6.51,
+        "current_volume": 7,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "3.77": {
+        "name": "3.77",
+        "price": 4.81,
+        "price_change": 4.68,
+        "current_volume": 5,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "11.84": {
+        "name": "11.84",
+        "price": 14.62,
+        "price_change": 14.48,
+        "current_volume": 17,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "2.69": {
+        "name": "2.69",
+        "price": 3.41,
+        "price_change": 3.36,
+        "current_volume": 4,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    },
+    "5.56": {
+        "name": "5.56",
+        "price": 5.52,
+        "price_change": 5.52,
+        "current_volume": 6,
+        "compared_to_time_volume": 0,
+        "ratio_percentage": 100.0,
+        "is_fallback_baseline": true
+    }
+}
