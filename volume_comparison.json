@@ -1,5 +1,84 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+import os
+from datetime import datetime, time, timedelta
+
+# الرابط والـ IP الأصلي الصحيح 100%
+BASE_URL = "http://41.33.162.236/egs4/"
+DB_FILE = "volume_history.json"
+COMP_FILE = "volume_comparison.json"
+
+START_SESSION = time(10, 0)
+END_SESSION = time(14, 30)
+INTERVAL_MINUTES = 15
+
+def get_session_intervals():
+    intervals = []
+    current = datetime.combine(datetime.today(), START_SESSION)
+    end = datetime.combine(datetime.today(), END_SESSION)
+    while current <= end:
+        intervals.append(current.strftime("%H:%M"))
+        current += timedelta(minutes=INTERVAL_MINUTES)
+    return intervals
+
+def load_history():
+    if os.path.exists(DB_FILE):
+        with open(DB_FILE, "r", encoding="utf-8") as f:
+            try:
+                return json.load(f)
+            except Exception:
+                return {}
+    return {}
+
+def track_and_compare_volume():
+    now_str = datetime.now().strftime("%Y-%m-%d")
+    
+    # تحديد توقيت الربع ساعة الحالي
+    now = datetime.now()
+    if now.time() < START_SESSION:
+        current_slot = get_session_intervals()[0]
+    elif now.time() > END_SESSION:
+        current_slot = get_session_intervals()[-1]
+    else:
+        minutes = (now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
+        current_slot = now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
+
+    print(f"📡 جاري قراءة البيانات الحية من egs4 للفترة [{current_slot}]...")
+    
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
+    
+    try:
+        response = requests.get(BASE_URL, headers=headers, timeout=25)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        table = soup.find('table') 
+        if not table:
+            print("❌ لم يتم العثور على جدول في الصفحة.")
+            return
+        rows = table.find_all('tr')[1:]
+    except Exception as e:
+        print(f"💥 خطأ أثناء جلب الصفحة: {e}")
+        return
+
+    history = load_history()
+    available_dates = sorted([d for d in history.keys() if d != now_str])
+    yesterday_str = available_dates[-1] if available_dates else None
+
+    if now_str not in history:
+        history[now_str] = {}
+
+    realtime_comparison = {}
+    total_slots = len(get_session_intervals())
+
+    for row in rows:
+        cols = row.find_all(['td', 'th'])
+        if len(cols) < 8: # تأكيد وجود 8 أعمدة على الأقل للوصول لإنديكس 7 بأمان
+            continue
+            
         try:
-            # 🎯 الانديكسات المعتمدة والمصححة بناءً على هيكل الجدول الصارم:
+            # 🎯 الانديكسات المعتمدة والمصححة بناءً على هيكل الجدول الفعلي:
             symbol = cols[2].get_text(strip=True) # الاسم المختصر (انديكس 2)
             
             vol_raw = cols[1].get_text(strip=True).replace(',', '') # حجم التداول (انديكس 1)
@@ -12,9 +91,11 @@
             change_raw = cols[7].get_text(strip=True).replace('%', '').strip()
             price_change = float(change_raw) if change_raw else 0.0
             
+            # تخطي السطور غير الصالحة أو الفارغة أو تكرار العناوين
             if not symbol or "حجم" in symbol or "الاسم" in symbol or current_volume == 0:
                 continue
 
+            # تأمين هيكل الـ JSON للسهم
             if symbol not in history[now_str]:
                 history[now_str][symbol] = {}
             history[now_str][symbol][current_slot] = current_volume
@@ -34,11 +115,24 @@
             realtime_comparison[symbol] = {
                 "name": symbol,
                 "price": price,
-                "price_change": round(price_change, 2), # النسبة مظبوطة من انديكس 7
+                "price_change": round(price_change, 2), # التغير % من إنديكس 7
                 "current_volume": current_volume,
                 "compared_to_time_volume": yesterday_vol,
                 "ratio_percentage": round(vol_ratio, 2),
                 "is_fallback_baseline": is_fallback
             }
         except Exception:
+            # تخطي أي سهم به مشكلة ومتابعة باقي الجدول لمنع توقف السكريبت
             continue
+
+    # 💾 حفظ الملفات وضمان الكتابة
+    with open(DB_FILE, "w", encoding="utf-8") as f:
+        json.dump(history, f, ensure_ascii=False, indent=4)
+        
+    with open(COMP_FILE, "w", encoding="utf-8") as f:
+        json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
+        
+    print(f"🟢 تم إنشاء وتحديث ملف {COMP_FILE} بنجاح تام وبأعمدة دقيقة.")
+
+if __name__ == "__main__":
+    track_and_compare_volume()
