@@ -48,20 +48,22 @@ def get_last_working_day(history, now_str):
     return available_dates[-1] if available_dates else None
 
 def track_and_compare_volume():
-    now = datetime.now()
-    now_str = now.strftime("%Y-%m-%d")
+    # 🎯 حساب توقيت مصر (تعديل فرق التوقيت لو السيرفر UTC)
+    utc_now = datetime.utcnow()
+    egypt_now = utc_now + timedelta(hours=3) # توقيت مصر المعتمد (GMT+3)
     
+    now_str = egypt_now.strftime("%Y-%m-%d")
     all_slots = get_session_intervals()
     
-    if now.time() < START_SESSION:
+    if egypt_now.time() < START_SESSION:
         current_slot = all_slots[0]
         current_slot_index = 1
-    elif now.time() > END_SESSION:
+    elif egypt_now.time() > END_SESSION:
         current_slot = all_slots[-1]
         current_slot_index = len(all_slots)
     else:
-        minutes = (now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
-        current_slot = now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
+        minutes = (egypt_now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
+        current_slot = egypt_now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
         current_slot_index = all_slots.index(current_slot) + 1
 
     headers = {
@@ -86,9 +88,9 @@ def track_and_compare_volume():
     if now_str not in history:
         history[now_str] = {}
 
-    # هيكلة البيانات مضافاً إليها توقيت السكراب الفعلي للحظة الحالية
+    # 🎯 حفظ وقت السكراب الفعلي بتوقيت مصر تماماً
     output_data = {
-        "scrape_time": datetime.now().strftime("%H:%M:%S"),
+        "scrape_time": egypt_now.strftime("%H:%M:%S"),
         "stocks": {}
     }
 
@@ -160,7 +162,7 @@ def track_and_compare_volume():
     with open(COMP_FILE, "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=4)
         
-    print("🟢 تم تحديث ملف السكراب وحفظ وقت القشط الفعلي بنجاح الحسابات التراكمية.")
+    print(f"🟢 تم السحب وحفظ وقت التحديث بتوقيت القاهرة الفعلي: {output_data['scrape_time']}")
 
 if __name__ == "__main__":
     track_and_compare_volume()
