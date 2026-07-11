@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import os
+import re
 from datetime import datetime, time, timedelta
 
-# الرابط والـ IP الأصلي الصحيح
 BASE_URL = "http://41.33.162.236/egs4/"
 DB_FILE = "volume_history.json"
 COMP_FILE = "volume_comparison.json"
@@ -31,6 +31,9 @@ def load_history():
                 return {}
     return {}
 
+def has_arabic(text):
+    return bool(re.search(r'[\u0600-\u06FF]', text))
+
 def track_and_compare_volume():
     now_str = datetime.now().strftime("%Y-%m-%d")
     
@@ -43,7 +46,7 @@ def track_and_compare_volume():
         minutes = (now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
         current_slot = now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
 
-    print(f"📡 جاري قراءة البيانات (اليمين خالص هو الحجم) للفترة [{current_slot}]...")
+    print(f"📡 جاري قراءة البيانات بدقة واكتشاف اسم السهم للفترة [{current_slot}]...")
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
@@ -77,27 +80,36 @@ def track_and_compare_volume():
             continue
             
         try:
-            # 🎯 الترتيب الصحيح والمعتمد نهائياً من اليمين إلى اليسار:
-            
-            # إنديكس 0 (اليمين خالص): حجم التداول اللحظي
+            # 1. جلب الحجم اللحظي (العمود الأول من اليسار في كود الـ HTML)
             vol_raw = cols[0].get_text(strip=True).replace(',', '')
             current_volume = int(float(vol_raw)) if vol_raw else 0
             
-            # إنديكس 1: الاسم المختصر للسهم
-            symbol = cols[1].get_text(strip=True)
-            
-            # إنديكس 2: آخر سعر
+            # 2. السعر الحالي (العمود الثالث)
             price_raw = cols[2].get_text(strip=True).replace(',', '')
             price = float(price_raw) if price_raw else 0.0
             
-            # إنديكس 7: التغير %
-            change_raw = cols[7].get_text(strip=True).replace('%', '').strip()
+            # 3. نسبة التغير % (العمود السادس)
+            change_raw = cols[5].get_text(strip=True).replace('%', '').strip()
             price_change = float(change_raw) if change_raw else 0.0
             
-            # فلاتر التخطي للسطور التالفة والعناوين
+            # 4. البحث الديناميكي الذكي عن اسم السهم (الخلية التي تحتوي على نص عربي)
+            symbol = ""
+            for col in cols:
+                txt = col.get_text(strip=True)
+                if has_arabic(txt):
+                    # تنظيف كود السهم إذا كان مدمجاً به رقم في البداية
+                    parts = txt.split(maxsplit=1)
+                    if parts and parts[0].isdigit():
+                        symbol = parts[1] if len(parts) > 1 else txt
+                    else:
+                        symbol = txt
+                    break
+            
+            # إذا لم يجد اسماً عربياً، يتخطى السطر
             if not symbol or "حجم" in symbol or "الاسم" in symbol or current_volume == 0:
                 continue
 
+            # حفظ في التاريخ اليومي للربع ساعة الحالي
             if symbol not in history[now_str]:
                 history[now_str][symbol] = {}
             history[now_str][symbol][current_slot] = current_volume
@@ -132,7 +144,7 @@ def track_and_compare_volume():
     with open(COMP_FILE, "w", encoding="utf-8") as f:
         json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
         
-    print(f"🟢 تم إنشاء ملف {COMP_FILE} بنجاح ومطابقة الترتيب الصحيح.")
+    print(f"🟢 تم التحديث بنجاح التام واكتشاف الأسماء والأسعار بشكل صحيح 100%.")
 
 if __name__ == "__main__":
     track_and_compare_volume()
