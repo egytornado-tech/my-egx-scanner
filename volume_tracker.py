@@ -131,3 +131,6 @@ def track_and_compare_volume():
 
 if __name__ == "__main__":
     track_and_compare_volume()
+# حفظ حزمة المقارنة اللحظية لتقرأها واجهة المستخدم فوراً
+with open("volume_comparison.json", "w", encoding="utf-8") as f:
+    json.dump(realtime_comparison, f, ensure_ascii=False, indent=4)
