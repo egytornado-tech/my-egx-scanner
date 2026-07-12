@@ -48,119 +48,123 @@ def get_last_working_day(history, now_str):
     return available_dates[-1] if available_dates else None
 
 def track_and_compare_volume():
-    utc_now = datetime.utcnow()
-    egypt_now = utc_now + timedelta(hours=3) # توقيت مصر (GMT+3)
-    
-    now_str = egypt_now.strftime("%Y-%m-%d")
-    all_slots = get_session_intervals()
-    
-    if egypt_now.time() < START_SESSION:
-        current_slot = all_slots[0]
-        current_slot_index = 1
-    elif egypt_now.time() > END_SESSION:
-        current_slot = all_slots[-1]
-        current_slot_index = len(all_slots)
-    else:
-        minutes = (egypt_now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
-        current_slot = egypt_now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
-        current_slot_index = all_slots.index(current_slot) + 1
-
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    }
-    
     try:
-        response = requests.get(BASE_URL, headers=headers, timeout=25)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        table = soup.find('table') 
-        if not table:
-            print("❌ لم يتم العثور على الجدول.")
-            return
-        rows = table.find_all('tr')[1:]
-    except Exception as e:
-        print(f"💥 خطأ أثناء جلب الصفحة: {e}")
-        return
+        utc_now = datetime.utcnow()
+        egypt_now = utc_now + timedelta(hours=3) # توقيت مصر (GMT+3)
+        
+        now_str = egypt_now.strftime("%Y-%m-%d")
+        all_slots = get_session_intervals()
+        total_slots_count = len(all_slots) # إجمالي المحطات = 19 سلوت
+        
+        if egypt_now.time() < START_SESSION:
+            current_slot = all_slots[0]
+            current_slot_index = 1
+        elif egypt_now.time() > END_SESSION:
+            current_slot = all_slots[-1]
+            current_slot_index = total_slots_count
+        else:
+            minutes = (egypt_now.minute // INTERVAL_MINUTES) * INTERVAL_MINUTES
+            current_slot = egypt_now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
+            current_slot_index = all_slots.index(current_slot) + 1
 
-    history = load_history()
-    yesterday_str = get_last_working_day(history, now_str)
-
-    if now_str not in history:
-        history[now_str] = {}
-
-    output_data = {
-        "scrape_time": egypt_now.strftime("%H:%M:%S"),
-        "stocks": {}
-    }
-
-    for row in rows:
-        cols = row.find_all(['td', 'th'])
-        if len(cols) < 8: 
-            continue
-            
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        }
+        
         try:
-            vol_raw = cols[-1].get_text(strip=True).replace(',', '')
-            current_cumulative_volume = int(float(vol_raw)) if vol_raw else 0
-            
-            # 🎯 الاحتفاظ بالسعر الأصلي كاملاً كـ String لمنع التلاعب بالقروش والمليمات
-            price_raw = cols[2].get_text(strip=True).replace(',', '').strip()
-            
-            change_raw = cols[5].get_text(strip=True).replace('%', '').strip()
-            price_change = float(change_raw) if change_raw else 0.0
-            
-            symbol = ""
-            for col in cols:
-                txt = col.get_text(strip=True)
-                if has_arabic(txt):
-                    parts = txt.split(maxsplit=1)
-                    if parts and parts[0].isdigit():
-                        symbol = parts[1] if len(parts) > 1 else txt
-                    else:
-                        symbol = txt
-                    break
-            
-            if not symbol or "حجم" in symbol or "الاسم" in symbol:
+            response = requests.get(BASE_URL, headers=headers, timeout=25)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            table = soup.find('table') 
+            if not table:
+                print("❌ لم يتم العثور على الجدول في الصفحة الحالية.")
+                return
+            rows = table.find_all('tr')[1:]
+        except Exception as e:
+            print(f"💥 خطأ أثناء الاتصال بالموقع أو قشط الجدول: {e}")
+            return
+
+        history = load_history()
+        yesterday_str = get_last_working_day(history, now_str)
+
+        if now_str not in history:
+            history[now_str] = {}
+
+        output_data = {
+            "scrape_time": egypt_now.strftime("%H:%M:%S"),
+            "stocks": {}
+        }
+
+        for row in rows:
+            cols = row.find_all(['td', 'th'])
+            if len(cols) < 8: 
                 continue
+                
+            try:
+                vol_raw = cols[-1].get_text(strip=True).replace(',', '')
+                current_cumulative_volume = int(float(vol_raw)) if vol_raw else 0
+                
+                price_raw = cols[2].get_text(strip=True).replace(',', '').strip()
+                if not price_raw:
+                    price_raw = "0.0"
+                
+                change_raw = cols[5].get_text(strip=True).replace('%', '').strip()
+                price_change = float(change_raw) if change_raw else 0.0
+                
+                symbol = ""
+                for col in cols:
+                    txt = col.get_text(strip=True)
+                    if has_arabic(txt):
+                        parts = txt.split(maxsplit=1)
+                        if parts and parts[0].isdigit():
+                            symbol = parts[1] if len(parts) > 1 else txt
+                        else:
+                            symbol = txt
+                        break
+                
+                if not symbol or "حجم" in symbol or "الاسم" in symbol:
+                    continue
 
-            if symbol not in history[now_str]:
-                history[now_str][symbol] = {}
-            history[now_str][symbol][current_slot] = current_cumulative_volume
+                if symbol not in history[now_str]:
+                    history[now_str][symbol] = {}
+                history[now_str][symbol][current_slot] = current_cumulative_volume
 
-            yesterday_target_volume = 0
-            is_fallback = False
+                yesterday_target_volume = 0
 
-            if yesterday_str and symbol in history[yesterday_str]:
-                yesterday_target_volume = history[yesterday_str][symbol].get(current_slot, 0)
-            
-            if yesterday_target_volume == 0:
-                is_fallback = True
-                if current_slot_index >= 18:
-                    yesterday_target_volume = current_cumulative_volume
-                    vol_ratio = 100.0
-                else:
-                    single_slot_estimated = current_cumulative_volume / 18
-                    yesterday_target_volume = int(single_slot_estimated * current_slot_index)
-                    vol_ratio = (current_cumulative_volume / yesterday_target_volume) * 100 if yesterday_target_volume > 0 else 100.0
-            else:
+                if yesterday_str and symbol in history[yesterday_str]:
+                    yesterday_target_volume = history[yesterday_str][symbol].get(current_slot, 0)
+                
+                # تطبيق معادلة التوزيع التراكمي العادل لأول يوم تشغيل
+                if yesterday_target_volume == 0:
+                    if current_slot_index >= total_slots_count:
+                        yesterday_target_volume = current_cumulative_volume
+                    else:
+                        # تقسيم الحجم التراكمي الإجمالي على إجمالي السلوتات (19) وضربه في ترتيب السلوت الحالي
+                        single_slot_estimated = current_cumulative_volume / total_slots_count
+                        yesterday_target_volume = int(single_slot_estimated * current_slot_index)
+                
                 vol_ratio = (current_cumulative_volume / yesterday_target_volume) * 100 if yesterday_target_volume > 0 else 100.0
 
-            output_data["stocks"][symbol] = {
-                "name": symbol,
-                "price": price_raw, # تمرير النص الخام للسعر بالمليم
-                "price_change": round(price_change, 2),
-                "current_volume": current_cumulative_volume,
-                "compared_to_time_volume": yesterday_target_volume,
-                "ratio_percentage": round(vol_ratio, 2)
-            }
-        except Exception:
-            continue
+                output_data["stocks"][symbol] = {
+                    "name": symbol,
+                    "price": price_raw, 
+                    "price_change": round(price_change, 2),
+                    "current_volume": current_cumulative_volume,
+                    "compared_to_time_volume": yesterday_target_volume,
+                    "ratio_percentage": round(vol_ratio, 2)
+                }
+            except Exception as row_err:
+                continue
 
-    with open(DB_FILE, "w", encoding="utf-8") as f:
-        json.dump(history, f, ensure_ascii=False, indent=4)
+        with open(DB_FILE, "w", encoding="utf-8") as f:
+            json.dump(history, f, ensure_ascii=False, indent=4)
+            
+        with open(COMP_FILE, "w", encoding="utf-8") as f:
+            json.dump(output_data, f, ensure_ascii=False, indent=4)
+            
+        print(f"🟢 تم التحديث بنجاح. السلوت الحالي: {current_slot} ({current_slot_index}/{total_slots_count})")
         
-    with open(COMP_FILE, "w", encoding="utf-8") as f:
-        json.dump(output_data, f, ensure_ascii=False, indent=4)
-        
-    print(f"🟢 تم التحديث بنجاح.")
+    except Exception as main_err:
+        print(f"❌ خطأ حرج رئيسي داخل السكريبت: {main_err}")
 
 if __name__ == "__main__":
     track_and_compare_volume()
