@@ -68,22 +68,19 @@ def track_and_compare_volume():
             current_slot_index = all_slots.index(current_slot) + 1
 
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
         
-        print(f"🔄 جاري الاتصال بالموقع: {BASE_URL}")
         try:
             response = requests.get(BASE_URL, headers=headers, timeout=25)
-            print(f"📡 حالة الاستجابة: {response.status_code}")
             soup = BeautifulSoup(response.text, 'html.parser')
             table = soup.find('table') 
             if not table:
-                print("❌ خطأ: لم يتم العثور على أي جدول <table/> في الصفحة الحالية!")
+                print("❌ لم يتم العثور على الجدول.")
                 return
             rows = table.find_all('tr')[1:]
-            print(f"📊 تم العثور على الجدول ويحتوي على {len(rows)} سطر.")
         except Exception as e:
-            print(f"💥 خطأ حرج أثناء جلب الصفحة: {e}")
+            print(f"💥 خطأ في جلب الصفحة: {e}")
             return
 
         history = load_history()
@@ -97,43 +94,37 @@ def track_and_compare_volume():
             "stocks": {}
         }
 
-        success_count = 0
         for row in rows:
             cols = [c.get_text(strip=True) for c in row.find_all(['td', 'th'])]
             if len(cols) < 7: 
                 continue
                 
             try:
+                # 1. جلب اسم السهم بالتأكيد من أول خانة عربية
                 symbol = ""
-                for idx, text in enumerate(cols):
-                    if has_arabic(text) and "حجم" not in text and "الاسم" not in text and "السعر" not in text:
-                        parts = text.split(maxsplit=1)
+                for txt in cols:
+                    if has_arabic(txt) and "حجم" not in txt and "الاسم" not in txt:
+                        parts = txt.split(maxsplit=1)
                         if parts and parts[0].isdigit():
-                            symbol = parts[1] if len(parts) > 1 else text
+                            symbol = parts[1] if len(parts) > 1 else txt
                         else:
-                            symbol = text
+                            symbol = txt
                         break
                 
                 if not symbol:
                     continue
 
+                # 2. جلب الحجم الحالي (العمود الأخير دائماً)
                 vol_raw = cols[-1].replace(',', '')
                 current_cumulative_volume = int(float(vol_raw)) if vol_raw.replace('.','',1).isdigit() else 0
                 
-                price_raw = "0.0"
-                for idx in range(1, len(cols) - 1):
-                    val = cols[idx].replace(',', '')
-                    if '%' in cols[idx] or '+' in cols[idx]:
-                        continue
-                    if val.replace('.','',1).isdigit() and float(val) > 0 and idx != len(cols)-1:
-                        price_raw = cols[idx]
-                        break
-
-                change_raw = "0.0"
-                for c_val in cols:
-                    if '%' in c_val:
-                        change_raw = c_val.replace('%', '').strip()
-                        break
+                # 3. إرجاع جلب السعر بناءً على موقعه الصحيح (العمود الثالث - إندكس 2) وننظفه من أي رغوة نصية
+                price_raw = cols[2].replace(',', '').strip()
+                if not price_raw or not price_raw.replace('.','',1).isdigit():
+                    price_raw = "0.0"
+                
+                # 4. جلب نسبة التغير السعري بدقة (العمود السادس - إندكس 5) وحذف الـ % لو جيت هاب قراها
+                change_raw = cols[5].replace('%', '').replace('+', '').strip()
                 try:
                     price_change = float(change_raw)
                 except:
@@ -147,9 +138,11 @@ def track_and_compare_volume():
 
                 yesterday_target_volume = 0
 
+                # جلب حجم نفس السلوت من داتا أمس
                 if yesterday_str and symbol in history[yesterday_str]:
                     yesterday_target_volume = history[yesterday_str][symbol].get(current_slot, 0)
                 
+                # حساب الوزن النسبي لو مفيش سلوت حقيقي مسجل لأمس
                 if yesterday_target_volume == 0 and yesterday_str and symbol in history[yesterday_str]:
                     yesterday_slots = history[yesterday_str][symbol]
                     if yesterday_slots:
@@ -173,7 +166,6 @@ def track_and_compare_volume():
                     "compared_to_time_volume": yesterday_target_volume,
                     "ratio_percentage": round(vol_ratio, 2)
                 }
-                success_count += 1
             except Exception:
                 continue
 
@@ -183,7 +175,7 @@ def track_and_compare_volume():
         with open(COMP_FILE, "w", encoding="utf-8") as f:
             json.dump(output_data, f, ensure_ascii=False, indent=4)
             
-        print(f"🟢 تم معالجة وتحديث {success_count} سهم بنجاح وحفظ الملفات локально.")
+        print(f"🟢 تم ضبط نسبة التغير والسعر بنجاح تام.")
         
     except Exception as main_err:
         print(f"❌ خطأ حرج: {main_err}")
