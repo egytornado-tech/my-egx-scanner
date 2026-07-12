@@ -39,3 +39,7 @@ jobs:
         git add volume_history.json volume_comparison.json
         git commit -m "تحديث تلقائي لأحجام التداول اللحظية" || echo "لا توجد تغييرات للرفع"
         git push
+on:
+  workflow_dispatch: # هذا السطر يسمح للمواقع الخارجية بتشغيل السكربت يدوياً
+  schedule:
+    - cron: '*/15 7-11 * * 1-5'
