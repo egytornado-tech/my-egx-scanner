@@ -22,7 +22,7 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; 
             padding: 4px; 
             margin: 0; 
-            overflow-x: hidden; /* منع التمرير العرضي تماماً */
+            overflow-x: hidden;
         }
         
         .container { 
@@ -56,17 +56,13 @@
         table { 
             width: 100%; 
             border-collapse: collapse; 
-            font-size: 0.72rem; /* حجم مدمج ومثالي ومقاوم للـ Scroll */
-            table-layout: fixed; /* إجبار الجدول على الالتزام بعرض الشاشة */
+            font-size: 0.7rem; /* حجم خط متناسق ومحكم لمنع السكرول */
         }
         
         th, td { 
-            padding: 6px 2px; /* تقليص الحواف الداخلية لأقصى درجة */
+            padding: 7px 3px; 
             text-align: center; 
-            border-bottom: 1px solid #eef3ed; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            border-bottom: 1px solid #e2ebd5; 
         }
         
         th { 
@@ -76,13 +72,28 @@
             cursor: pointer; 
         }
         
-        th::after { content: '⇅'; font-size: 0.6rem; color: #a1c1a8; margin-right: 1px; }
+        th::after { content: '⇅'; font-size: 0.58rem; color: #a1c1a8; margin-right: 1px; }
+        
+        /* 🎯 تلوين الأسطر الزوجية والفردية بشكل متبادل مريح جداً للعين */
+        tr:nth-child(even) {
+            background-color: #f9fbf9; /* سطر أغمق قليلاً بدرجة ربيعية */
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff; /* سطر أبيض نقّي */
+        }
         
         td.symbol-cell { 
             text-align: right; 
             font-weight: 600; 
-            white-space: normal; /* السماح لاسم السهم بالنزول لسطر جديد دون مط الجدول عرضياً */
             color: #1b2e22;
+            word-break: break-word; /* تفادي تمدد العمود في الأسماء المركبة */
+        }
+        
+        /* تقليص حجم أرقام الأحجام الكبيرة أوتوماتيكياً لتظهر بالكامل دون اختفاء */
+        .vol-text {
+            font-size: 0.68rem;
+            font-weight: 600;
+            white-space: nowrap;
         }
         
         .pos { color: var(--green-spring); font-weight: 600; }
@@ -102,10 +113,9 @@
     <table>
         <thead>
             <tr>
-                <!-- تقسيم نسب الأعمدة بالملي لتتطابق تماماً مع حجم شاشة أي موبايل -->
                 <th onclick="sortTable(0)" style="text-align: right; width: 32%;">السهم</th>
-                <th onclick="sortTable(1)" style="width: 14%;">السعر</th>
-                <th onclick="sortTable(2)" style="width: 12%;">%</th>
+                <th onclick="sortTable(1)" style="width: 15%;">السعر</th>
+                <th onclick="sortTable(2)" style="width: 11%;">%</th>
                 <th onclick="sortTable(3)" style="width: 15%;">الحجم</th>
                 <th onclick="sortTable(4)" style="width: 14%;">أمس</th>
                 <th onclick="sortTable(5)" style="width: 13%;">النسبة</th>
@@ -128,7 +138,6 @@
             if (response.ok) {
                 const resData = await response.json();
                 
-                // عرض وقت السكراب الفعلي القادم من السكريبت
                 if (resData.scrape_time) {
                     document.getElementById('last-update').innerText = resData.scrape_time;
                 }
@@ -147,17 +156,19 @@
             const ratio = item.ratio_percentage;
             const ratioClass = ratio >= 100 ? "pos" : "neg";
             const changeClass = item.price_change >= 0 ? "pos" : "neg";
-            const price = item.price ? item.price.toFixed(1) : "-";
+            
+            // 🎯 السعر يعرض كما هو نصياً من الـ JSON للحفاظ على القروش والمليمات بالكامل
+            const price = item.price ? item.price : "-";
             const change = item.price_change !== undefined ? (item.price_change > 0 ? "+" : "") + item.price_change + "%" : "-";
 
             html += `
                 <tr>
                     <td class="symbol-cell">${item.symbol}</td>
-                    <td style="font-weight: 600;">${price}</td>
+                    <td style="font-weight: 600; color: #1b2e22;">${price}</td>
                     <td class="${changeClass}">${change}</td>
-                    <td style="color: #1b5e20; font-weight: 600;">${parseInt(item.current_volume).toLocaleString()}</td>
-                    <td style="color: #555;">${parseInt(item.compared_to_time_volume).toLocaleString()}</td>
-                    <td class="${ratioClass}">${ratio}%</td>
+                    <td class="vol-text" style="color: #1b5e20;">${parseInt(item.current_volume).toLocaleString()}</td>
+                    <td class="vol-text" style="color: #555;">${parseInt(item.compared_to_time_volume).toLocaleString()}</td>
+                    <td class="${ratioClass}" style="font-weight: 600;">${ratio}%</td>
                 </tr>
             `;
         });
@@ -175,13 +186,13 @@
         rawData.sort((a, b) => {
             let valA, valB;
             if (colIndex === 0) { valA = a.symbol; valB = b.symbol; }
-            if (colIndex === 1) { valA = a.price; valB = b.price; }
+            if (colIndex === 1) { valA = parseFloat(a.price) || 0; valB = parseFloat(b.price) || 0; }
             if (colIndex === 2) { valA = a.price_change; valB = b.price_change; }
             if (colIndex === 3) { valA = a.current_volume; valB = b.current_volume; }
             if (colIndex === 4) { valA = a.compared_to_time_volume; valB = b.compared_to_time_volume; }
             if (colIndex === 5) { valA = a.ratio_percentage; valB = b.ratio_percentage; }
 
-            if (typeof valA === 'string') {
+            if (colIndex === 0) {
                 return sortAscending ? valA.localeCompare(valB) : valB.localeCompare(valA);
             } else {
                 return sortAscending ? valA - valB : valB - valA;
