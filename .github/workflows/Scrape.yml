@@ -3,12 +3,15 @@ name: Run Volume Tracker Scraper
 on:
   schedule:
     # يعمل كل 15 دقيقة، من الساعة 7:00 صباحاً حتى 11:45 صباحاً بتوقيت جرينتش
-    # وهو ما يوافق (من 10:00 صباحاً إلى 2:45 ظهراً بتوقيت مصر) من الأحد للخميس
+    # (يعادل من 10:00 صباحاً إلى 2:45 ظهراً بتوقيت مصر الصيفي والشتوي GMT+3) من الأحد للخميس
     - cron: '*/15 7-11 * * 1-5'
-  workflow_dispatch: # يتيح لك تشغيل السكريبت يدوياً في أي وقت من تبويب Actions للتجربة
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
-  contents: write # إعطاء صلاحية للأكشن لتحديث ورفع ملفات الـ JSON في الريبو بدون مشاكل الـ Permission
+  contents: write
 
 jobs:
   scrape:
