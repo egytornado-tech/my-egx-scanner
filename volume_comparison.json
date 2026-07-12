@@ -1,185 +1,185 @@
 {
-    "scrape_time": "13:36:25",
+    "scrape_time": "13:45:45",
     "stocks": {
         "العز الدخيلة للصلب": {
             "name": "العز الدخيلة للصلب",
-            "price": "1187.5",
-            "price_change": 0.0,
+            "price": "1245",
+            "price_change": -0.4,
             "current_volume": 1,
             "compared_to_time_volume": 1,
             "ratio_percentage": 100.0
         },
         "مينا فارم للأدوية": {
             "name": "مينا فارم للأدوية",
-            "price": "560",
+            "price": "698.69",
             "price_change": 0.0,
             "current_volume": 1555,
-            "compared_to_time_volume": 2686,
-            "ratio_percentage": 57.89
+            "compared_to_time_volume": 2865,
+            "ratio_percentage": 54.28
         },
         "مطاحن وسط وغرب الدلتا": {
             "name": "مطاحن وسط وغرب الدلتا",
-            "price": "406.14",
-            "price_change": 0.0,
+            "price": "516.16",
+            "price_change": 3.02,
             "current_volume": 1462,
-            "compared_to_time_volume": 1331,
-            "ratio_percentage": 109.84
+            "compared_to_time_volume": 1419,
+            "ratio_percentage": 103.03
         },
         "الاسكندرية للادوية": {
             "name": "الاسكندرية للادوية",
-            "price": "948.37",
-            "price_change": 0.0,
-            "current_volume": 421,
-            "compared_to_time_volume": 1506,
-            "ratio_percentage": 27.95
+            "price": "1198.22",
+            "price_change": 1.23,
+            "current_volume": 472,
+            "compared_to_time_volume": 1606,
+            "ratio_percentage": 29.39
         },
         "أوراسكوم للإنشاء": {
             "name": "أوراسكوم للإنشاء",
-            "price": "552.8",
-            "price_change": 0.0,
-            "current_volume": 112830,
-            "compared_to_time_volume": 194546,
-            "ratio_percentage": 58.0
+            "price": "683.13",
+            "price_change": -1.16,
+            "current_volume": 120012,
+            "compared_to_time_volume": 207516,
+            "ratio_percentage": 57.83
         },
         "مطاحن شرق الدلتا": {
             "name": "مطاحن شرق الدلتا",
-            "price": "273.04",
-            "price_change": 0.0,
-            "current_volume": 1834,
-            "compared_to_time_volume": 6044,
-            "ratio_percentage": 30.34
+            "price": "345.3",
+            "price_change": 0.21,
+            "current_volume": 2677,
+            "compared_to_time_volume": 6447,
+            "ratio_percentage": 41.52
         },
         "مطاحن مصر العليا": {
             "name": "مطاحن مصر العليا",
-            "price": "414.45",
-            "price_change": 0.0,
-            "current_volume": 1440,
-            "compared_to_time_volume": 15171,
-            "ratio_percentage": 9.49
+            "price": "508.15",
+            "price_change": -1.56,
+            "current_volume": 1453,
+            "compared_to_time_volume": 16182,
+            "ratio_percentage": 8.98
         },
         "العامة للصوامع والتخزين": {
             "name": "العامة للصوامع والتخزين",
-            "price": "205.6",
-            "price_change": 0.0,
-            "current_volume": 10214,
-            "compared_to_time_volume": 49544,
-            "ratio_percentage": 20.62
+            "price": "258.85",
+            "price_change": 0.76,
+            "current_volume": 10325,
+            "compared_to_time_volume": 52847,
+            "ratio_percentage": 19.54
         },
         "هيلتون": {
             "name": "هيلتون",
-            "price": "13.4",
-            "price_change": 0.0,
-            "current_volume": 431070,
-            "compared_to_time_volume": 884670,
-            "ratio_percentage": 48.73
+            "price": "16.5",
+            "price_change": -1.49,
+            "current_volume": 489976,
+            "compared_to_time_volume": 943648,
+            "ratio_percentage": 51.92
         },
         "الشروق الحديثة للطباعة والتغليف": {
             "name": "الشروق الحديثة للطباعة والتغليف",
-            "price": "70.78",
-            "price_change": 0.0,
+            "price": "107",
+            "price_change": -10.83,
             "current_volume": 69,
-            "compared_to_time_volume": 54,
-            "ratio_percentage": 127.78
+            "compared_to_time_volume": 58,
+            "ratio_percentage": 118.97
         },
         "بيراميزا": {
             "name": "بيراميزا",
-            "price": "232.82",
-            "price_change": 0.0,
+            "price": "300.05",
+            "price_change": 4.08,
             "current_volume": 23856,
-            "compared_to_time_volume": 69400,
-            "ratio_percentage": 34.37
+            "compared_to_time_volume": 74026,
+            "ratio_percentage": 32.23
         },
         "حديد عز": {
             "name": "حديد عز",
-            "price": "107.12",
-            "price_change": 0.0,
+            "price": "116.4",
+            "price_change": -10.45,
             "current_volume": 490,
-            "compared_to_time_volume": 386,
-            "ratio_percentage": 126.94
+            "compared_to_time_volume": 412,
+            "ratio_percentage": 118.93
         },
         "وادي كوم إمبو": {
             "name": "وادي كوم إمبو",
-            "price": "247.8",
-            "price_change": 0.0,
-            "current_volume": 24469,
-            "compared_to_time_volume": 17937,
-            "ratio_percentage": 136.42
+            "price": "321.3",
+            "price_change": 2.05,
+            "current_volume": 24697,
+            "compared_to_time_volume": 19133,
+            "ratio_percentage": 129.08
         },
         "اكتوبر فارما": {
             "name": "اكتوبر فارما",
-            "price": "285.5",
-            "price_change": 0.0,
-            "current_volume": 7906,
-            "compared_to_time_volume": 8096,
-            "ratio_percentage": 97.65
+            "price": "356.8",
+            "price_change": -0.24,
+            "current_volume": 7916,
+            "compared_to_time_volume": 8635,
+            "ratio_percentage": 91.67
         },
         "ابوقير للاسمدة": {
             "name": "ابوقير للاسمدة",
-            "price": "56.03",
-            "price_change": 0.0,
-            "current_volume": 957421,
-            "compared_to_time_volume": 1736272,
-            "ratio_percentage": 55.14
+            "price": "69.76",
+            "price_change": -0.4,
+            "current_volume": 989589,
+            "compared_to_time_volume": 1852023,
+            "ratio_percentage": 53.43
         },
         "النيل للادوية": {
             "name": "النيل للادوية",
-            "price": "142",
-            "price_change": 0.0,
-            "current_volume": 161108,
-            "compared_to_time_volume": 472258,
-            "ratio_percentage": 34.11
+            "price": "176.44",
+            "price_change": -0.29,
+            "current_volume": 163828,
+            "compared_to_time_volume": 503742,
+            "ratio_percentage": 32.52
         },
         "قناة السويس لتوطين التكنولوجيا": {
             "name": "قناة السويس لتوطين التكنولوجيا",
-            "price": "488.91",
-            "price_change": 0.0,
+            "price": "620.01",
+            "price_change": 1.21,
             "current_volume": 11608,
-            "compared_to_time_volume": 5282,
-            "ratio_percentage": 219.77
+            "compared_to_time_volume": 5634,
+            "ratio_percentage": 206.03
         },
         "أدكو": {
             "name": "أدكو",
-            "price": "186.22",
-            "price_change": 0.0,
-            "current_volume": 6884,
-            "compared_to_time_volume": 12114,
-            "ratio_percentage": 56.83
+            "price": "232.67",
+            "price_change": -0.2,
+            "current_volume": 7147,
+            "compared_to_time_volume": 12922,
+            "ratio_percentage": 55.31
         },
         "الدلتا للسكر": {
             "name": "الدلتا للسكر",
-            "price": "37.52",
-            "price_change": 0.0,
-            "current_volume": 70128,
-            "compared_to_time_volume": 52733,
-            "ratio_percentage": 132.99
+            "price": "46.87",
+            "price_change": -0.41,
+            "current_volume": 74203,
+            "compared_to_time_volume": 56249,
+            "ratio_percentage": 131.92
         },
         "البنك التجاري الدولي": {
             "name": "البنك التجاري الدولي",
-            "price": "107.6",
-            "price_change": 0.0,
-            "current_volume": 721660,
-            "compared_to_time_volume": 1435072,
-            "ratio_percentage": 50.29
+            "price": "134.77",
+            "price_change": 0.28,
+            "current_volume": 768237,
+            "compared_to_time_volume": 1530743,
+            "ratio_percentage": 50.19
         },
         "موبكو": {
             "name": "موبكو",
-            "price": "29.52",
-            "price_change": 0.0,
-            "current_volume": 1069486,
-            "compared_to_time_volume": 2523180,
-            "ratio_percentage": 42.39
+            "price": "37.1",
+            "price_change": 0.51,
+            "current_volume": 1129606,
+            "compared_to_time_volume": 2691392,
+            "ratio_percentage": 41.97
         },
         "مصر للالومنيوم": {
             "name": "مصر للالومنيوم",
-            "price": "234.41",
-            "price_change": 0.0,
-            "current_volume": 52203,
-            "compared_to_time_volume": 58777,
-            "ratio_percentage": 88.82
+            "price": "293.42",
+            "price_change": 0.33,
+            "current_volume": 52925,
+            "compared_to_time_volume": 62696,
+            "ratio_percentage": 84.42
         },
         "السعودية المصرية للاستثمار والتمويل": {
             "name": "السعودية المصرية للاستثمار والتمويل",
-            "price": "0.76",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -187,1095 +187,1095 @@
         },
         "فوديكو": {
             "name": "فوديكو",
-            "price": "78.44",
-            "price_change": 0.0,
-            "current_volume": 465296,
-            "compared_to_time_volume": 264961,
-            "ratio_percentage": 175.61
+            "price": "104.31",
+            "price_change": 6.09,
+            "current_volume": 479217,
+            "compared_to_time_volume": 282625,
+            "ratio_percentage": 169.56
         },
         "المالية والصناعية المصرية": {
             "name": "المالية والصناعية المصرية",
-            "price": "145.32",
-            "price_change": 0.0,
-            "current_volume": 12562,
-            "compared_to_time_volume": 7567,
-            "ratio_percentage": 166.01
+            "price": "183",
+            "price_change": 0.74,
+            "current_volume": 12918,
+            "compared_to_time_volume": 8071,
+            "ratio_percentage": 160.05
         },
         "ممفيس للادوية": {
             "name": "ممفيس للادوية",
-            "price": "192",
+            "price": "239.57",
             "price_change": 0.0,
-            "current_volume": 44476,
-            "compared_to_time_volume": 111661,
-            "ratio_percentage": 39.83
+            "current_volume": 46905,
+            "compared_to_time_volume": 119105,
+            "ratio_percentage": 39.38
         },
         "النيل لحليج الاقطان": {
             "name": "النيل لحليج الاقطان",
-            "price": "47.5",
-            "price_change": 0.0,
+            "price": "51",
+            "price_change": 2.0,
             "current_volume": 201,
-            "compared_to_time_volume": 158,
-            "ratio_percentage": 127.22
+            "compared_to_time_volume": 169,
+            "ratio_percentage": 118.93
         },
         "المركز الطبي الجديد - الإسكندرية": {
             "name": "المركز الطبي الجديد - الإسكندرية",
-            "price": "60.8",
-            "price_change": 0.0,
-            "current_volume": 1563143,
-            "compared_to_time_volume": 1773747,
-            "ratio_percentage": 88.13
+            "price": "83.07",
+            "price_change": 9.47,
+            "current_volume": 1579410,
+            "compared_to_time_volume": 1891997,
+            "ratio_percentage": 83.48
         },
         "اسيك للتعدين": {
             "name": "اسيك للتعدين",
-            "price": "46.44",
-            "price_change": 0.0,
-            "current_volume": 2686495,
-            "compared_to_time_volume": 351830,
-            "ratio_percentage": 763.58
+            "price": "62.99",
+            "price_change": 8.48,
+            "current_volume": 2702197,
+            "compared_to_time_volume": 375285,
+            "ratio_percentage": 720.04
         },
         "القاهرة للادوية": {
             "name": "القاهرة للادوية",
-            "price": "319.79",
-            "price_change": 0.0,
-            "current_volume": 1372,
-            "compared_to_time_volume": 1150,
-            "ratio_percentage": 119.3
+            "price": "402.43",
+            "price_change": 0.82,
+            "current_volume": 1509,
+            "compared_to_time_volume": 1226,
+            "ratio_percentage": 123.08
         },
         "مصر بنى سويف للاسمنت": {
             "name": "مصر بنى سويف للاسمنت",
-            "price": "196.27",
-            "price_change": 0.0,
-            "current_volume": 63295,
-            "compared_to_time_volume": 55781,
-            "ratio_percentage": 113.47
+            "price": "241.23",
+            "price_change": -1.07,
+            "current_volume": 64533,
+            "compared_to_time_volume": 59499,
+            "ratio_percentage": 108.46
         },
         "العامة لاستصلاح الأراضي": {
             "name": "العامة لاستصلاح الأراضي",
-            "price": "177.7",
-            "price_change": 0.0,
-            "current_volume": 57827,
-            "compared_to_time_volume": 50226,
-            "ratio_percentage": 115.13
+            "price": "229.59",
+            "price_change": 3.43,
+            "current_volume": 58254,
+            "compared_to_time_volume": 53574,
+            "ratio_percentage": 108.74
         },
         "الاسكندرية لتداول الحاويات": {
             "name": "الاسكندرية لتداول الحاويات",
-            "price": "23.1",
-            "price_change": 0.0,
-            "current_volume": 3111274,
-            "compared_to_time_volume": 487983,
-            "ratio_percentage": 637.58
+            "price": "29.93",
+            "price_change": 3.91,
+            "current_volume": 3176736,
+            "compared_to_time_volume": 520515,
+            "ratio_percentage": 610.31
         },
         "ايجيفرت": {
             "name": "ايجيفرت",
-            "price": "162.68",
-            "price_change": 0.0,
-            "current_volume": 3226,
-            "compared_to_time_volume": 1672,
-            "ratio_percentage": 192.94
+            "price": "204.53",
+            "price_change": 0.13,
+            "current_volume": 3506,
+            "compared_to_time_volume": 1784,
+            "ratio_percentage": 196.52
         },
         "مصر للزيوت والصابون": {
             "name": "مصر للزيوت والصابون",
-            "price": "217.13",
-            "price_change": 0.0,
-            "current_volume": 19997,
-            "compared_to_time_volume": 4863,
-            "ratio_percentage": 411.21
+            "price": "275.25",
+            "price_change": 0.44,
+            "current_volume": 20434,
+            "compared_to_time_volume": 5187,
+            "ratio_percentage": 393.95
         },
         "اكرو مصر": {
             "name": "اكرو مصر",
-            "price": "9.5",
-            "price_change": 0.0,
+            "price": "102",
+            "price_change": -1.92,
             "current_volume": 3454,
-            "compared_to_time_volume": 2726,
-            "ratio_percentage": 126.71
+            "compared_to_time_volume": 2908,
+            "ratio_percentage": 118.78
         },
         "مطاحن مصر الوسطي": {
             "name": "مطاحن مصر الوسطي",
-            "price": "82.98",
-            "price_change": 0.0,
-            "current_volume": 15678,
-            "compared_to_time_volume": 70976,
-            "ratio_percentage": 22.09
+            "price": "105.14",
+            "price_change": 0.75,
+            "current_volume": 16678,
+            "compared_to_time_volume": 75707,
+            "ratio_percentage": 22.03
         },
         "غاز مصر": {
             "name": "غاز مصر",
-            "price": "39.2",
-            "price_change": 0.0,
-            "current_volume": 66953,
-            "compared_to_time_volume": 174968,
-            "ratio_percentage": 38.27
+            "price": "50.02",
+            "price_change": 1.16,
+            "current_volume": 70757,
+            "compared_to_time_volume": 186633,
+            "ratio_percentage": 37.91
         },
         "اجواء": {
             "name": "اجواء",
-            "price": "143.27",
-            "price_change": 0.0,
-            "current_volume": 68518,
-            "compared_to_time_volume": 33150,
-            "ratio_percentage": 206.69
+            "price": "180",
+            "price_change": 0.79,
+            "current_volume": 77033,
+            "compared_to_time_volume": 35360,
+            "ratio_percentage": 217.85
         },
         "مصرف أبو ظبي الإسلامي": {
             "name": "مصرف أبو ظبي الإسلامي",
-            "price": "37.86",
-            "price_change": 0.0,
-            "current_volume": 943226,
-            "compared_to_time_volume": 2344622,
-            "ratio_percentage": 40.23
+            "price": "47",
+            "price_change": -0.68,
+            "current_volume": 1237804,
+            "compared_to_time_volume": 2500930,
+            "ratio_percentage": 49.49
         },
         "القابضة المصرية الكويتية بالجنية": {
             "name": "القابضة المصرية الكويتية بالجنية",
-            "price": "23.44",
-            "price_change": 0.0,
+            "price": "28.98",
+            "price_change": -0.99,
             "current_volume": 755568,
-            "compared_to_time_volume": 500676,
-            "ratio_percentage": 150.91
+            "compared_to_time_volume": 534054,
+            "ratio_percentage": 141.48
         },
         "مصر لصناعة الكيماويات": {
             "name": "مصر لصناعة الكيماويات",
-            "price": "30.24",
-            "price_change": 0.0,
-            "current_volume": 140170,
-            "compared_to_time_volume": 272238,
-            "ratio_percentage": 51.49
+            "price": "37.79",
+            "price_change": -0.4,
+            "current_volume": 143248,
+            "compared_to_time_volume": 290388,
+            "ratio_percentage": 49.33
         },
         "بنك التعمير والاسكان": {
             "name": "بنك التعمير والاسكان",
-            "price": "63.6",
-            "price_change": 0.0,
-            "current_volume": 225698,
-            "compared_to_time_volume": 254689,
-            "ratio_percentage": 88.62
+            "price": "79.05",
+            "price_change": -0.38,
+            "current_volume": 234951,
+            "compared_to_time_volume": 271669,
+            "ratio_percentage": 86.48
         },
         "المصرية للاتصالات": {
             "name": "المصرية للاتصالات",
-            "price": "78.28",
-            "price_change": 0.0,
-            "current_volume": 273205,
-            "compared_to_time_volume": 283995,
-            "ratio_percentage": 96.2
+            "price": "98.6",
+            "price_change": 0.77,
+            "current_volume": 292157,
+            "compared_to_time_volume": 302928,
+            "ratio_percentage": 96.44
         },
         "ايبكو": {
             "name": "ايبكو",
-            "price": "68.88",
-            "price_change": 0.0,
-            "current_volume": 45577,
-            "compared_to_time_volume": 78585,
-            "ratio_percentage": 58.0
+            "price": "86.16",
+            "price_change": 0.48,
+            "current_volume": 50797,
+            "compared_to_time_volume": 83824,
+            "ratio_percentage": 60.6
         },
         "مطاحن شمال القاهرة": {
             "name": "مطاحن شمال القاهرة",
-            "price": "107.22",
-            "price_change": 0.0,
-            "current_volume": 102727,
-            "compared_to_time_volume": 295253,
-            "ratio_percentage": 34.79
+            "price": "135.51",
+            "price_change": 0.99,
+            "current_volume": 103494,
+            "compared_to_time_volume": 314937,
+            "ratio_percentage": 32.86
         },
         "دلتا للطباعة والتغليف": {
             "name": "دلتا للطباعة والتغليف",
-            "price": "165.28",
-            "price_change": 0.0,
-            "current_volume": 254636,
-            "compared_to_time_volume": 212493,
-            "ratio_percentage": 119.83
+            "price": "211",
+            "price_change": 1.65,
+            "current_volume": 257064,
+            "compared_to_time_volume": 226659,
+            "ratio_percentage": 113.41
         },
         "جلاكسو سميثكلاين": {
             "name": "جلاكسو سميثكلاين",
-            "price": "58.88",
-            "price_change": 0.0,
-            "current_volume": 7941,
-            "compared_to_time_volume": 42294,
-            "ratio_percentage": 18.78
+            "price": "74.02",
+            "price_change": 1.09,
+            "current_volume": 9874,
+            "compared_to_time_volume": 45114,
+            "ratio_percentage": 21.89
         },
         "الاهلي للتنمية والاستثمار": {
             "name": "الاهلي للتنمية والاستثمار",
-            "price": "36.73",
-            "price_change": 0.0,
-            "current_volume": 623937,
-            "compared_to_time_volume": 325994,
-            "ratio_percentage": 191.4
+            "price": "47.24",
+            "price_change": 3.33,
+            "current_volume": 633837,
+            "compared_to_time_volume": 347727,
+            "ratio_percentage": 182.28
         },
         "بنك قطر الوطني الاهلي": {
             "name": "بنك قطر الوطني الاهلي",
-            "price": "43.24",
-            "price_change": 0.0,
-            "current_volume": 275027,
-            "compared_to_time_volume": 512763,
-            "ratio_percentage": 53.64
+            "price": "54.99",
+            "price_change": 1.72,
+            "current_volume": 283974,
+            "compared_to_time_volume": 546948,
+            "ratio_percentage": 51.92
         },
         "بنك فيصل الإسلامي المصري": {
             "name": "بنك فيصل الإسلامي المصري",
-            "price": "0.794",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": -0.6,
             "current_volume": 1181,
-            "compared_to_time_volume": 710,
-            "ratio_percentage": 166.34
+            "compared_to_time_volume": 757,
+            "ratio_percentage": 156.01
         },
         "القناة للتوكيلات الملاحية": {
             "name": "القناة للتوكيلات الملاحية",
-            "price": "25.96",
-            "price_change": 0.0,
-            "current_volume": 226395,
-            "compared_to_time_volume": 200145,
-            "ratio_percentage": 113.12
+            "price": "32.58",
+            "price_change": 0.62,
+            "current_volume": 234998,
+            "compared_to_time_volume": 213488,
+            "ratio_percentage": 110.08
         },
         "التعمير والاستشارات الهندسية": {
             "name": "التعمير والاستشارات الهندسية",
-            "price": "66.18",
-            "price_change": 0.0,
-            "current_volume": 73751,
-            "compared_to_time_volume": 66263,
-            "ratio_percentage": 111.3
+            "price": "84.04",
+            "price_change": 1.91,
+            "current_volume": 75747,
+            "compared_to_time_volume": 70681,
+            "ratio_percentage": 107.17
         },
         "مطاحن جنوب القاهرة والجيزة": {
             "name": "مطاحن جنوب القاهرة والجيزة",
-            "price": "203.05",
-            "price_change": 0.0,
-            "current_volume": 18762,
-            "compared_to_time_volume": 93056,
-            "ratio_percentage": 20.16
+            "price": "255.54",
+            "price_change": 0.67,
+            "current_volume": 19210,
+            "compared_to_time_volume": 99260,
+            "ratio_percentage": 19.35
         },
         "ايديتا": {
             "name": "ايديتا",
-            "price": "22.64",
-            "price_change": 0.0,
-            "current_volume": 473368,
-            "compared_to_time_volume": 1394488,
-            "ratio_percentage": 33.95
+            "price": "28.25",
+            "price_change": -0.14,
+            "current_volume": 487652,
+            "compared_to_time_volume": 1487454,
+            "ratio_percentage": 32.78
         },
         "ايسترن كومباني": {
             "name": "ايسترن كومباني",
-            "price": "29.55",
-            "price_change": 0.0,
-            "current_volume": 350389,
-            "compared_to_time_volume": 1654734,
-            "ratio_percentage": 21.17
+            "price": "36.76",
+            "price_change": -0.35,
+            "current_volume": 375290,
+            "compared_to_time_volume": 1765050,
+            "ratio_percentage": 21.26
         },
         "الوطنية للاسكان": {
             "name": "الوطنية للاسكان",
-            "price": "56.8",
-            "price_change": 0.0,
-            "current_volume": 2300260,
-            "compared_to_time_volume": 1105169,
-            "ratio_percentage": 208.14
+            "price": "81.29",
+            "price_change": 14.65,
+            "current_volume": 2362750,
+            "compared_to_time_volume": 1178847,
+            "ratio_percentage": 200.43
         },
         "العربية لاستصلاح الاراضي": {
             "name": "العربية لاستصلاح الاراضي",
-            "price": "290.24",
-            "price_change": 0.0,
-            "current_volume": 38279,
-            "compared_to_time_volume": 39189,
-            "ratio_percentage": 97.68
+            "price": "366.93",
+            "price_change": 0.88,
+            "current_volume": 38479,
+            "compared_to_time_volume": 41802,
+            "ratio_percentage": 92.05
         },
         "الرواد": {
             "name": "الرواد",
-            "price": "40.09",
-            "price_change": 0.0,
-            "current_volume": 430927,
-            "compared_to_time_volume": 416707,
-            "ratio_percentage": 103.41
+            "price": "43.31",
+            "price_change": 2.82,
+            "current_volume": 438628,
+            "compared_to_time_volume": 444487,
+            "ratio_percentage": 98.68
         },
         "سيدى كرير للبتروكيماويات": {
             "name": "سيدى كرير للبتروكيماويات",
-            "price": "13.01",
-            "price_change": 0.0,
-            "current_volume": 666303,
-            "compared_to_time_volume": 2450242,
-            "ratio_percentage": 27.19
+            "price": "16.4",
+            "price_change": 0.86,
+            "current_volume": 803669,
+            "compared_to_time_volume": 2613592,
+            "ratio_percentage": 30.75
         },
         "السويدى اليكتريك": {
             "name": "السويدى اليكتريك",
-            "price": "71.2",
-            "price_change": 0.0,
-            "current_volume": 96895,
-            "compared_to_time_volume": 72071,
-            "ratio_percentage": 134.44
+            "price": "88.48",
+            "price_change": -0.16,
+            "current_volume": 97782,
+            "compared_to_time_volume": 76875,
+            "ratio_percentage": 127.2
         },
         "الدولية للأسمدة": {
             "name": "الدولية للأسمدة",
-            "price": "12.11",
-            "price_change": 0.0,
-            "current_volume": 571057,
-            "compared_to_time_volume": 287798,
-            "ratio_percentage": 198.42
+            "price": "14.99",
+            "price_change": -0.4,
+            "current_volume": 607562,
+            "compared_to_time_volume": 306985,
+            "ratio_percentage": 197.91
         },
         "مصر للأسواق الحرة": {
             "name": "مصر للأسواق الحرة",
-            "price": "37.74",
-            "price_change": 0.0,
-            "current_volume": 196730,
-            "compared_to_time_volume": 80237,
-            "ratio_percentage": 245.19
+            "price": "45.22",
+            "price_change": -2.57,
+            "current_volume": 245313,
+            "compared_to_time_volume": 85586,
+            "ratio_percentage": 286.63
         },
         "وثائق إستثمار صندوق مؤشر إي جي إكس 30": {
             "name": "وثائق إستثمار صندوق مؤشر إي جي إكس 30",
-            "price": "48.22",
-            "price_change": 0.0,
-            "current_volume": 41602,
-            "compared_to_time_volume": 36158,
-            "ratio_percentage": 115.06
+            "price": "60.68",
+            "price_change": 0.85,
+            "current_volume": 41746,
+            "compared_to_time_volume": 38569,
+            "ratio_percentage": 108.24
         },
         "اسمنت طرة": {
             "name": "اسمنت طرة",
-            "price": "6.1",
-            "price_change": 0.0,
+            "price": "69",
+            "price_change": -1.29,
             "current_volume": 4510,
-            "compared_to_time_volume": 3560,
-            "ratio_percentage": 126.69
+            "compared_to_time_volume": 3797,
+            "ratio_percentage": 118.78
         },
         "جولدن تكس": {
             "name": "جولدن تكس",
-            "price": "91.2",
-            "price_change": 0.0,
-            "current_volume": 767739,
-            "compared_to_time_volume": 2134080,
-            "ratio_percentage": 35.98
+            "price": "110.12",
+            "price_change": -3.08,
+            "current_volume": 831012,
+            "compared_to_time_volume": 2276352,
+            "ratio_percentage": 36.51
         },
         "طلعت مصطفى": {
             "name": "طلعت مصطفى",
-            "price": "77.68",
-            "price_change": 0.0,
-            "current_volume": 699186,
-            "compared_to_time_volume": 1605967,
-            "ratio_percentage": 43.54
+            "price": "96.47",
+            "price_change": -0.72,
+            "current_volume": 741102,
+            "compared_to_time_volume": 1713032,
+            "ratio_percentage": 43.26
         },
         "البنك المصري لتنمية الصادرات": {
             "name": "البنك المصري لتنمية الصادرات",
-            "price": "14.89",
-            "price_change": 0.0,
-            "current_volume": 1505607,
-            "compared_to_time_volume": 1462207,
-            "ratio_percentage": 102.97
+            "price": "18.69",
+            "price_change": 0.32,
+            "current_volume": 1531856,
+            "compared_to_time_volume": 1559688,
+            "ratio_percentage": 98.22
         },
         "الغربية الاسلامية للتنمية العمرانية": {
             "name": "الغربية الاسلامية للتنمية العمرانية",
-            "price": "41.36",
-            "price_change": 0.0,
-            "current_volume": 1456092,
-            "compared_to_time_volume": 2637344,
-            "ratio_percentage": 55.21
+            "price": "49.81",
+            "price_change": -3.48,
+            "current_volume": 1475296,
+            "compared_to_time_volume": 2813167,
+            "ratio_percentage": 52.44
         },
         "الجوهرة": {
             "name": "الجوهرة",
-            "price": "26.04",
-            "price_change": 0.0,
+            "price": "32.4",
+            "price_change": -0.12,
             "current_volume": 117457,
-            "compared_to_time_volume": 45709,
-            "ratio_percentage": 256.97
+            "compared_to_time_volume": 48757,
+            "ratio_percentage": 240.9
         },
         "كريدي أجريكول": {
             "name": "كريدي أجريكول",
-            "price": "19.3",
-            "price_change": 0.0,
-            "current_volume": 295210,
-            "compared_to_time_volume": 86422,
-            "ratio_percentage": 341.59
+            "price": "24.19",
+            "price_change": 0.17,
+            "current_volume": 300034,
+            "compared_to_time_volume": 92183,
+            "ratio_percentage": 325.48
         },
         "سوديك": {
             "name": "سوديك",
-            "price": "21.36",
-            "price_change": 0.0,
-            "current_volume": 880989,
-            "compared_to_time_volume": 1658216,
-            "ratio_percentage": 53.13
+            "price": "27.03",
+            "price_change": 1.69,
+            "current_volume": 918808,
+            "compared_to_time_volume": 1768763,
+            "ratio_percentage": 51.95
         },
         "دلتا للانشاء والتعمير": {
             "name": "دلتا للانشاء والتعمير",
-            "price": "45.51",
-            "price_change": 0.0,
+            "price": "50",
+            "price_change": 4.38,
             "current_volume": 2000,
-            "compared_to_time_volume": 1578,
-            "ratio_percentage": 126.74
+            "compared_to_time_volume": 1684,
+            "ratio_percentage": 118.76
         },
         "القاهرة للخدمات التعليمية": {
             "name": "القاهرة للخدمات التعليمية",
-            "price": "57.76",
-            "price_change": 0.0,
-            "current_volume": 248314,
-            "compared_to_time_volume": 87645,
-            "ratio_percentage": 283.32
+            "price": "76.16",
+            "price_change": 5.28,
+            "current_volume": 276406,
+            "compared_to_time_volume": 93488,
+            "ratio_percentage": 295.66
         },
         "مطاحن ومخابز الإسكندرية": {
             "name": "مطاحن ومخابز الإسكندرية",
-            "price": "58.4",
-            "price_change": 0.0,
-            "current_volume": 82518,
-            "compared_to_time_volume": 206923,
-            "ratio_percentage": 39.88
+            "price": "73.65",
+            "price_change": 1.21,
+            "current_volume": 84565,
+            "compared_to_time_volume": 220718,
+            "ratio_percentage": 38.31
         },
         "بي إنفستمنتس القابضة": {
             "name": "بي إنفستمنتس القابضة",
-            "price": "38.48",
-            "price_change": 0.0,
-            "current_volume": 61263,
-            "compared_to_time_volume": 38426,
-            "ratio_percentage": 159.43
+            "price": "48.32",
+            "price_change": 1.89,
+            "current_volume": 87024,
+            "compared_to_time_volume": 40987,
+            "ratio_percentage": 212.32
         },
         "مصر للأسمنت - قنا": {
             "name": "مصر للأسمنت - قنا",
-            "price": "142.88",
-            "price_change": 0.0,
-            "current_volume": 44539,
-            "compared_to_time_volume": 44952,
-            "ratio_percentage": 99.08
+            "price": "176.99",
+            "price_change": -0.89,
+            "current_volume": 46498,
+            "compared_to_time_volume": 47949,
+            "ratio_percentage": 96.97
         },
         "مدينة الانتاج الاعلامى": {
             "name": "مدينة الانتاج الاعلامى",
-            "price": "33.8",
-            "price_change": 0.0,
-            "current_volume": 278419,
-            "compared_to_time_volume": 1278531,
-            "ratio_percentage": 21.78
+            "price": "42.43",
+            "price_change": 0.69,
+            "current_volume": 324896,
+            "compared_to_time_volume": 1363766,
+            "ratio_percentage": 23.82
         },
         "السويس للاسمنت": {
             "name": "السويس للاسمنت",
-            "price": "6.69",
-            "price_change": 0.0,
+            "price": "19",
+            "price_change": -3.06,
             "current_volume": 196397,
-            "compared_to_time_volume": 155050,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 165386,
+            "ratio_percentage": 118.75
         },
         "شارم دريمز": {
             "name": "شارم دريمز",
-            "price": "37.3",
-            "price_change": 0.0,
-            "current_volume": 254967,
-            "compared_to_time_volume": 46353,
-            "ratio_percentage": 550.06
+            "price": "47.5",
+            "price_change": 1.89,
+            "current_volume": 259361,
+            "compared_to_time_volume": 49443,
+            "ratio_percentage": 524.57
         },
         "القاهرة الوطنية للاستثمار والاوراق المالية": {
             "name": "القاهرة الوطنية للاستثمار والاوراق المالية",
-            "price": "53.85",
-            "price_change": 0.0,
-            "current_volume": 93086,
-            "compared_to_time_volume": 74909,
-            "ratio_percentage": 124.27
+            "price": "67.82",
+            "price_change": 0.58,
+            "current_volume": 103327,
+            "compared_to_time_volume": 79903,
+            "ratio_percentage": 129.32
         },
         "ليسيكو مصر": {
             "name": "ليسيكو مصر",
-            "price": "25.24",
-            "price_change": 0.0,
-            "current_volume": 1718616,
-            "compared_to_time_volume": 1471128,
-            "ratio_percentage": 116.82
+            "price": "31.82",
+            "price_change": 1.11,
+            "current_volume": 1741477,
+            "compared_to_time_volume": 1569204,
+            "ratio_percentage": 110.98
         },
         "انتجريتيد دياجنوستكس هولدينجز بى ال سى": {
             "name": "انتجريتيد دياجنوستكس هولدينجز بى ال سى",
-            "price": "19",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": -0.7,
             "current_volume": 32,
-            "compared_to_time_volume": 25,
-            "ratio_percentage": 128.0
+            "compared_to_time_volume": 26,
+            "ratio_percentage": 123.08
         },
         "راكتا": {
             "name": "راكتا",
-            "price": "21.24",
-            "price_change": 0.0,
+            "price": "23.1",
+            "price_change": 4.65,
             "current_volume": 15242,
-            "compared_to_time_volume": 2172,
-            "ratio_percentage": 701.75
+            "compared_to_time_volume": 2317,
+            "ratio_percentage": 657.83
         },
         "الخليجية الكندية للاستثمار العقاري العربي": {
             "name": "الخليجية الكندية للاستثمار العقاري العربي",
-            "price": "1.88",
-            "price_change": 0.0,
-            "current_volume": 3613464,
-            "compared_to_time_volume": 4424751,
-            "ratio_percentage": 81.66
+            "price": "2.38",
+            "price_change": 1.28,
+            "current_volume": 3855235,
+            "compared_to_time_volume": 4719734,
+            "ratio_percentage": 81.68
         },
         "اى فاينانس": {
             "name": "اى فاينانس",
-            "price": "17.76",
-            "price_change": 0.0,
-            "current_volume": 1532400,
-            "compared_to_time_volume": 1339309,
-            "ratio_percentage": 114.42
+            "price": "22.3",
+            "price_change": 0.45,
+            "current_volume": 1639777,
+            "compared_to_time_volume": 1428597,
+            "ratio_percentage": 114.78
         },
         "النصر لتصنيع الحاصلات الزراعية": {
             "name": "النصر لتصنيع الحاصلات الزراعية",
-            "price": "36.87",
-            "price_change": 0.0,
-            "current_volume": 4808,
-            "compared_to_time_volume": 43172,
-            "ratio_percentage": 11.14
+            "price": "0",
+            "price_change": 0.93,
+            "current_volume": 5118,
+            "compared_to_time_volume": 46050,
+            "ratio_percentage": 11.11
         },
         "النساجون الشرقيون": {
             "name": "النساجون الشرقيون",
-            "price": "18.25",
-            "price_change": 0.0,
-            "current_volume": 715465,
-            "compared_to_time_volume": 324645,
-            "ratio_percentage": 220.38
+            "price": "22.7",
+            "price_change": -0.57,
+            "current_volume": 755985,
+            "compared_to_time_volume": 346288,
+            "ratio_percentage": 218.31
         },
         "مجموعة اي اف جي القابضة": {
             "name": "مجموعة اي اف جي القابضة",
-            "price": "21.37",
-            "price_change": 0.0,
-            "current_volume": 2144952,
-            "compared_to_time_volume": 2311932,
-            "ratio_percentage": 92.78
+            "price": "26.6",
+            "price_change": -0.56,
+            "current_volume": 2246487,
+            "compared_to_time_volume": 2466061,
+            "ratio_percentage": 91.1
         },
         "جهينة": {
             "name": "جهينة",
-            "price": "24.72",
-            "price_change": 0.0,
-            "current_volume": 265378,
-            "compared_to_time_volume": 281942,
-            "ratio_percentage": 94.13
+            "price": "30.53",
+            "price_change": -1.29,
+            "current_volume": 294258,
+            "compared_to_time_volume": 300738,
+            "ratio_percentage": 97.85
         },
         "الدولية للمحاصيل الزراعية": {
             "name": "الدولية للمحاصيل الزراعية",
-            "price": "15.68",
-            "price_change": 0.0,
-            "current_volume": 90094,
-            "compared_to_time_volume": 286545,
-            "ratio_percentage": 31.44
+            "price": "19.56",
+            "price_change": -0.26,
+            "current_volume": 99503,
+            "compared_to_time_volume": 305648,
+            "ratio_percentage": 32.55
         },
         "طاقة عربية": {
             "name": "طاقة عربية",
-            "price": "11.61",
-            "price_change": 0.0,
-            "current_volume": 1365398,
-            "compared_to_time_volume": 1768222,
-            "ratio_percentage": 77.22
+            "price": "14.6",
+            "price_change": 0.9,
+            "current_volume": 1493700,
+            "compared_to_time_volume": 1886103,
+            "ratio_percentage": 79.2
         },
         "ايكون": {
             "name": "ايكون",
-            "price": "31.05",
-            "price_change": 0.0,
-            "current_volume": 3028602,
-            "compared_to_time_volume": 805250,
+            "price": "43.35",
+            "price_change": 11.47,
+            "current_volume": 3230562,
+            "compared_to_time_volume": 858933,
             "ratio_percentage": 376.11
         },
         "الالومنيوم العربية": {
             "name": "الالومنيوم العربية",
-            "price": "18.36",
-            "price_change": 0.0,
-            "current_volume": 162079,
-            "compared_to_time_volume": 236605,
-            "ratio_percentage": 68.5
+            "price": "22.88",
+            "price_change": -0.26,
+            "current_volume": 162972,
+            "compared_to_time_volume": 252378,
+            "ratio_percentage": 64.57
         },
         "الوطني": {
             "name": "الوطني",
-            "price": "29.45",
-            "price_change": 0.0,
+            "price": "33",
+            "price_change": 6.45,
             "current_volume": 3174,
-            "compared_to_time_volume": 2505,
-            "ratio_percentage": 126.71
+            "compared_to_time_volume": 2672,
+            "ratio_percentage": 118.79
         },
         "بنك قناة السويس": {
             "name": "بنك قناة السويس",
-            "price": "29.51",
-            "price_change": 0.0,
-            "current_volume": 95881,
-            "compared_to_time_volume": 330157,
-            "ratio_percentage": 29.04
+            "price": "36.55",
+            "price_change": -0.62,
+            "current_volume": 96633,
+            "compared_to_time_volume": 352168,
+            "ratio_percentage": 27.44
         },
         "كيما": {
             "name": "كيما",
-            "price": "10.4",
-            "price_change": 0.0,
-            "current_volume": 3479466,
-            "compared_to_time_volume": 5850875,
-            "ratio_percentage": 59.47
+            "price": "13.09",
+            "price_change": 0.77,
+            "current_volume": 3889755,
+            "compared_to_time_volume": 6240933,
+            "ratio_percentage": 62.33
         },
         "شينى": {
             "name": "شينى",
-            "price": "29.2",
-            "price_change": 0.0,
-            "current_volume": 1029374,
-            "compared_to_time_volume": 606216,
-            "ratio_percentage": 169.8
+            "price": "35.58",
+            "price_change": -2.19,
+            "current_volume": 1033490,
+            "compared_to_time_volume": 646630,
+            "ratio_percentage": 159.83
         },
         "بنك البركة": {
             "name": "بنك البركة",
-            "price": "17.4",
-            "price_change": 0.0,
-            "current_volume": 155609,
-            "compared_to_time_volume": 188406,
-            "ratio_percentage": 82.59
+            "price": "21.76",
+            "price_change": -0.32,
+            "current_volume": 161175,
+            "compared_to_time_volume": 200966,
+            "ratio_percentage": 80.2
         },
         "القاهرة للإستثمار والتنمية العقارية": {
             "name": "القاهرة للإستثمار والتنمية العقارية",
-            "price": "23.17",
-            "price_change": 0.0,
-            "current_volume": 1214130,
-            "compared_to_time_volume": 501405,
-            "ratio_percentage": 242.15
+            "price": "31.18",
+            "price_change": 7.63,
+            "current_volume": 1551797,
+            "compared_to_time_volume": 534832,
+            "ratio_percentage": 290.15
         },
         "العبور للاستثمار العقارى": {
             "name": "العبور للاستثمار العقارى",
-            "price": "28.78",
-            "price_change": 0.0,
-            "current_volume": 1449223,
-            "compared_to_time_volume": 1699821,
-            "ratio_percentage": 85.26
+            "price": "37.16",
+            "price_change": 3.0,
+            "current_volume": 1461762,
+            "compared_to_time_volume": 1813142,
+            "ratio_percentage": 80.62
         },
         "اسمنت سيناء": {
             "name": "اسمنت سيناء",
-            "price": "50.09",
-            "price_change": 0.0,
-            "current_volume": 105230,
-            "compared_to_time_volume": 157563,
-            "ratio_percentage": 66.79
+            "price": "62.6",
+            "price_change": 0.14,
+            "current_volume": 106346,
+            "compared_to_time_volume": 168068,
+            "ratio_percentage": 63.28
         },
         "اوراسكوم للفنادق والتنمية": {
             "name": "اوراسكوم للفنادق والتنمية",
-            "price": "31.29",
-            "price_change": 0.0,
-            "current_volume": 1070998,
-            "compared_to_time_volume": 2056030,
-            "ratio_percentage": 52.09
+            "price": "39.02",
+            "price_change": -0.26,
+            "current_volume": 1153715,
+            "compared_to_time_volume": 2193098,
+            "ratio_percentage": 52.61
         },
         "دومتي": {
             "name": "دومتي",
-            "price": "21.55",
-            "price_change": 0.0,
+            "price": "26.96",
+            "price_change": 0.26,
             "current_volume": 86858,
-            "compared_to_time_volume": 102109,
-            "ratio_percentage": 85.06
+            "compared_to_time_volume": 108917,
+            "ratio_percentage": 79.75
         },
         "عبور لاند للصناعات الغذائية": {
             "name": "عبور لاند للصناعات الغذائية",
-            "price": "18.32",
-            "price_change": 0.0,
-            "current_volume": 3158026,
-            "compared_to_time_volume": 913471,
-            "ratio_percentage": 345.72
+            "price": "23",
+            "price_change": 0.44,
+            "current_volume": 3191631,
+            "compared_to_time_volume": 974369,
+            "ratio_percentage": 327.56
         },
         "مصر الجديدة للاسكان": {
             "name": "مصر الجديدة للاسكان",
-            "price": "5.87",
-            "price_change": 0.0,
-            "current_volume": 22471140,
-            "compared_to_time_volume": 67211186,
-            "ratio_percentage": 33.43
+            "price": "7.47",
+            "price_change": 1.77,
+            "current_volume": 22872259,
+            "compared_to_time_volume": 71691932,
+            "ratio_percentage": 31.9
         },
         "العربية للأسمنت": {
             "name": "العربية للأسمنت",
-            "price": "44.8",
-            "price_change": 0.0,
-            "current_volume": 112924,
-            "compared_to_time_volume": 211293,
-            "ratio_percentage": 53.44
+            "price": "55.31",
+            "price_change": -0.96,
+            "current_volume": 115913,
+            "compared_to_time_volume": 225380,
+            "ratio_percentage": 51.43
         },
         "وثائق شركة صندوق استثمار المصريين للاستثمار العقارى": {
             "name": "وثائق شركة صندوق استثمار المصريين للاستثمار العقارى",
-            "price": "10.85",
-            "price_change": 0.0,
+            "price": "13.85",
+            "price_change": 2.51,
             "current_volume": 28336,
-            "compared_to_time_volume": 7251,
-            "ratio_percentage": 390.79
+            "compared_to_time_volume": 7734,
+            "ratio_percentage": 366.38
         },
         "الاسكندرية الوطنية للاستثمارات المالية": {
             "name": "الاسكندرية الوطنية للاستثمارات المالية",
-            "price": "11.95",
-            "price_change": 0.0,
+            "price": "14.2",
+            "price_change": -4.89,
             "current_volume": 2095773,
-            "compared_to_time_volume": 1654557,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 1764861,
+            "ratio_percentage": 118.75
         },
         "أموك": {
             "name": "أموك",
-            "price": "6.36",
-            "price_change": 0.0,
-            "current_volume": 4433673,
-            "compared_to_time_volume": 8965563,
-            "ratio_percentage": 49.45
+            "price": "8",
+            "price_change": 0.63,
+            "current_volume": 4557397,
+            "compared_to_time_volume": 9563268,
+            "ratio_percentage": 47.66
         },
         "ديجيتايز للاستثمار والتقنية": {
             "name": "ديجيتايز للاستثمار والتقنية",
-            "price": "2.49",
-            "price_change": 0.0,
-            "current_volume": 1055150,
-            "compared_to_time_volume": 527545,
-            "ratio_percentage": 200.01
+            "price": "2.67",
+            "price_change": 1.15,
+            "current_volume": 1060150,
+            "compared_to_time_volume": 562714,
+            "ratio_percentage": 188.4
         },
         "القاهرة للدواجن": {
             "name": "القاهرة للدواجن",
-            "price": "31.6",
-            "price_change": 0.0,
-            "current_volume": 1162948,
-            "compared_to_time_volume": 828840,
-            "ratio_percentage": 140.31
+            "price": "40.2",
+            "price_change": 1.8,
+            "current_volume": 1203997,
+            "compared_to_time_volume": 884096,
+            "ratio_percentage": 136.18
         },
         "الإسكندرية للأسمنت": {
             "name": "الإسكندرية للأسمنت",
-            "price": "5.4",
-            "price_change": 0.0,
+            "price": "19",
+            "price_change": 0.32,
             "current_volume": 7208,
-            "compared_to_time_volume": 5690,
-            "ratio_percentage": 126.68
+            "compared_to_time_volume": 6069,
+            "ratio_percentage": 118.77
         },
         "جي بي كورب": {
             "name": "جي بي كورب",
-            "price": "24.58",
-            "price_change": 0.0,
-            "current_volume": 568364,
-            "compared_to_time_volume": 592238,
-            "ratio_percentage": 95.97
+            "price": "31.29",
+            "price_change": 1.73,
+            "current_volume": 597616,
+            "compared_to_time_volume": 631721,
+            "ratio_percentage": 94.6
         },
         "الشمس للاسكان": {
             "name": "الشمس للاسكان",
-            "price": "11.28",
-            "price_change": 0.0,
-            "current_volume": 22617827,
-            "compared_to_time_volume": 11219276,
-            "ratio_percentage": 201.6
+            "price": "14.81",
+            "price_change": 5.04,
+            "current_volume": 22862113,
+            "compared_to_time_volume": 11967227,
+            "ratio_percentage": 191.04
         },
         "كفر الزيات للمبيدات والكيماويات": {
             "name": "كفر الزيات للمبيدات والكيماويات",
-            "price": "6.76",
-            "price_change": 0.0,
-            "current_volume": 542605,
-            "compared_to_time_volume": 401435,
-            "ratio_percentage": 135.17
+            "price": "8.44",
+            "price_change": 0.47,
+            "current_volume": 553084,
+            "compared_to_time_volume": 428197,
+            "ratio_percentage": 129.17
         },
         "مستشفى النزهة": {
             "name": "مستشفى النزهة",
-            "price": "13.96",
-            "price_change": 0.0,
-            "current_volume": 244669,
-            "compared_to_time_volume": 438523,
-            "ratio_percentage": 55.79
+            "price": "17.61",
+            "price_change": 0.86,
+            "current_volume": 247371,
+            "compared_to_time_volume": 467758,
+            "ratio_percentage": 52.88
         },
         "جراند انفستمنت للاستثمارات المالية": {
             "name": "جراند انفستمنت للاستثمارات المالية",
-            "price": "39.39",
-            "price_change": 0.0,
+            "price": "48.09",
+            "price_change": -1.1,
             "current_volume": 44427,
-            "compared_to_time_volume": 39428,
-            "ratio_percentage": 112.68
+            "compared_to_time_volume": 42057,
+            "ratio_percentage": 105.64
         },
         "الاهرام للطباعة والتغليف": {
             "name": "الاهرام للطباعة والتغليف",
-            "price": "13.41",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 1.56,
             "current_volume": 16802,
-            "compared_to_time_volume": 27889,
-            "ratio_percentage": 60.25
+            "compared_to_time_volume": 29749,
+            "ratio_percentage": 56.48
         },
         "زهراء المعادي": {
             "name": "زهراء المعادي",
-            "price": "5.48",
-            "price_change": 0.0,
-            "current_volume": 67573944,
-            "compared_to_time_volume": 21538767,
-            "ratio_percentage": 313.73
+            "price": "7.07",
+            "price_change": 3.36,
+            "current_volume": 67889861,
+            "compared_to_time_volume": 22974685,
+            "ratio_percentage": 295.5
         },
         "إم تي أي": {
             "name": "إم تي أي",
-            "price": "7.52",
-            "price_change": 0.0,
-            "current_volume": 737480,
-            "compared_to_time_volume": 1120565,
-            "ratio_percentage": 65.81
+            "price": "9.36",
+            "price_change": -0.11,
+            "current_volume": 847409,
+            "compared_to_time_volume": 1195269,
+            "ratio_percentage": 70.9
         },
         "العربية لحليج الأقطان": {
             "name": "العربية لحليج الأقطان",
-            "price": "7.6",
-            "price_change": 0.0,
-            "current_volume": 2792531,
-            "compared_to_time_volume": 604394,
-            "ratio_percentage": 462.04
+            "price": "9.8",
+            "price_change": 3.16,
+            "current_volume": 2999334,
+            "compared_to_time_volume": 644687,
+            "ratio_percentage": 465.24
         },
         "ثمار": {
             "name": "ثمار",
-            "price": "5.64",
-            "price_change": 0.0,
-            "current_volume": 1024622,
-            "compared_to_time_volume": 2444312,
-            "ratio_percentage": 41.92
+            "price": "7.23",
+            "price_change": 2.55,
+            "current_volume": 1036786,
+            "compared_to_time_volume": 2607266,
+            "ratio_percentage": 39.77
         },
         "نايل سات": {
             "name": "نايل سات",
-            "price": "7.27",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": -0.44,
             "current_volume": 5,
-            "compared_to_time_volume": 2120,
-            "ratio_percentage": 0.24
+            "compared_to_time_volume": 2261,
+            "ratio_percentage": 0.22
         },
         "روبكس": {
             "name": "روبكس",
-            "price": "10.43",
-            "price_change": 0.0,
-            "current_volume": 2774403,
-            "compared_to_time_volume": 1891673,
-            "ratio_percentage": 146.66
+            "price": "13.26",
+            "price_change": 1.69,
+            "current_volume": 2809840,
+            "compared_to_time_volume": 2017785,
+            "ratio_percentage": 139.25
         },
         "العربية وبولفارا": {
             "name": "العربية وبولفارا",
-            "price": "8.04",
-            "price_change": 0.0,
+            "price": "8.5",
+            "price_change": 0.95,
             "current_volume": 82288,
-            "compared_to_time_volume": 33792,
-            "ratio_percentage": 243.51
+            "compared_to_time_volume": 36045,
+            "ratio_percentage": 228.29
         },
         "المتحدة للاسكان": {
             "name": "المتحدة للاسكان",
-            "price": "16.08",
-            "price_change": 0.0,
-            "current_volume": 2691504,
-            "compared_to_time_volume": 6588779,
-            "ratio_percentage": 40.85
+            "price": "19.19",
+            "price_change": -3.83,
+            "current_volume": 2747502,
+            "compared_to_time_volume": 7028031,
+            "ratio_percentage": 39.09
         },
         "راية لخدمات مراكز الاتصالات": {
             "name": "راية لخدمات مراكز الاتصالات",
-            "price": "8.01",
-            "price_change": 0.0,
-            "current_volume": 570913,
-            "compared_to_time_volume": 469548,
-            "ratio_percentage": 121.59
+            "price": "10.11",
+            "price_change": 1.3,
+            "current_volume": 664401,
+            "compared_to_time_volume": 500851,
+            "ratio_percentage": 132.65
         },
         "فوري": {
             "name": "فوري",
-            "price": "15.49",
-            "price_change": 0.0,
-            "current_volume": 1877755,
-            "compared_to_time_volume": 3355635,
-            "ratio_percentage": 55.96
+            "price": "19.25",
+            "price_change": -0.57,
+            "current_volume": 2116625,
+            "compared_to_time_volume": 3579344,
+            "ratio_percentage": 59.13
         },
         "تعليم لخدمات الإدارة": {
             "name": "تعليم لخدمات الإدارة",
-            "price": "12.34",
-            "price_change": 0.0,
-            "current_volume": 312543,
-            "compared_to_time_volume": 370443,
-            "ratio_percentage": 84.37
+            "price": "15.49",
+            "price_change": 0.84,
+            "current_volume": 342475,
+            "compared_to_time_volume": 395139,
+            "ratio_percentage": 86.67
         },
         "سوهاج الوطنية": {
             "name": "سوهاج الوطنية",
             "price": "10.87",
-            "price_change": 0.0,
+            "price_change": 3.52,
             "current_volume": 3520,
-            "compared_to_time_volume": 2778,
-            "ratio_percentage": 126.71
+            "compared_to_time_volume": 2964,
+            "ratio_percentage": 118.76
         },
         "ايه تي ليس": {
             "name": "ايه تي ليس",
-            "price": "4.14",
-            "price_change": 0.0,
+            "price": "5.19",
+            "price_change": 1.16,
             "current_volume": 446179,
-            "compared_to_time_volume": 405457,
-            "ratio_percentage": 110.04
+            "compared_to_time_volume": 432488,
+            "ratio_percentage": 103.17
         },
         "المصرية للدواجن": {
             "name": "المصرية للدواجن",
-            "price": "7.22",
-            "price_change": 0.0,
-            "current_volume": 930420,
-            "compared_to_time_volume": 526871,
-            "ratio_percentage": 176.59
+            "price": "9.26",
+            "price_change": 2.88,
+            "current_volume": 1053541,
+            "compared_to_time_volume": 561995,
+            "ratio_percentage": 187.46
         },
         "سي اي كابيتال القابضة": {
             "name": "سي اي كابيتال القابضة",
-            "price": "9.33",
-            "price_change": 0.0,
-            "current_volume": 274375,
-            "compared_to_time_volume": 432715,
-            "ratio_percentage": 63.41
+            "price": "11.67",
+            "price_change": -0.09,
+            "current_volume": 287104,
+            "compared_to_time_volume": 461562,
+            "ratio_percentage": 62.2
         },
         "ايجى ستون": {
             "name": "ايجى ستون",
-            "price": "5.24",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 4.9,
             "current_volume": 5,
-            "compared_to_time_volume": 3,
-            "ratio_percentage": 166.67
+            "compared_to_time_volume": 4,
+            "ratio_percentage": 125.0
         },
         "مستشفي كليوباترا": {
             "name": "مستشفي كليوباترا",
-            "price": "13.1",
-            "price_change": 0.0,
-            "current_volume": 374763,
-            "compared_to_time_volume": 493858,
-            "ratio_percentage": 75.88
+            "price": "16.36",
+            "price_change": -0.24,
+            "current_volume": 381419,
+            "compared_to_time_volume": 526782,
+            "ratio_percentage": 72.41
         },
         "رمكو": {
             "name": "رمكو",
-            "price": "3.61",
-            "price_change": 0.0,
-            "current_volume": 904182,
-            "compared_to_time_volume": 343300,
-            "ratio_percentage": 263.38
+            "price": "3.84",
+            "price_change": 1.85,
+            "current_volume": 911361,
+            "compared_to_time_volume": 366186,
+            "ratio_percentage": 248.88
         },
         "سبينالكس": {
             "name": "سبينالكس",
-            "price": "11.64",
-            "price_change": 0.0,
+            "price": "14.59",
+            "price_change": 0.27,
             "current_volume": 96016,
-            "compared_to_time_volume": 153047,
-            "ratio_percentage": 62.74
+            "compared_to_time_volume": 163250,
+            "ratio_percentage": 58.82
         },
         "المصرية للمشروعات السياحية العالمية": {
             "name": "المصرية للمشروعات السياحية العالمية",
-            "price": "5.69",
-            "price_change": 0.0,
+            "price": "8.01",
+            "price_change": -7.93,
             "current_volume": 9,
             "compared_to_time_volume": 7,
             "ratio_percentage": 128.57
         },
         "ريكاب": {
             "name": "ريكاب",
-            "price": "15.47",
-            "price_change": 0.0,
-            "current_volume": 7351049,
-            "compared_to_time_volume": 4763111,
-            "ratio_percentage": 154.33
+            "price": "20.59",
+            "price_change": 6.98,
+            "current_volume": 7424054,
+            "compared_to_time_volume": 5080652,
+            "ratio_percentage": 146.12
         },
         "العالمية للاستثمار والتنمية": {
             "name": "العالمية للاستثمار والتنمية",
-            "price": "6.43",
-            "price_change": 0.0,
-            "current_volume": 1618931,
-            "compared_to_time_volume": 870655,
-            "ratio_percentage": 185.94
+            "price": "8.2",
+            "price_change": 2.12,
+            "current_volume": 1746220,
+            "compared_to_time_volume": 928698,
+            "ratio_percentage": 188.03
         },
         "المصرية للمنتجعات السياحية": {
             "name": "المصرية للمنتجعات السياحية",
-            "price": "14.77",
-            "price_change": 0.0,
-            "current_volume": 1158330,
-            "compared_to_time_volume": 4180252,
-            "ratio_percentage": 27.71
+            "price": "18.49",
+            "price_change": 0.65,
+            "current_volume": 1267039,
+            "compared_to_time_volume": 4458935,
+            "ratio_percentage": 28.42
         },
         "مدينة مصر": {
             "name": "مدينة مصر",
-            "price": "6.19",
-            "price_change": 0.0,
-            "current_volume": 8861449,
-            "compared_to_time_volume": 8838764,
-            "ratio_percentage": 100.26
+            "price": "7.92",
+            "price_change": 2.59,
+            "current_volume": 9401669,
+            "compared_to_time_volume": 9428015,
+            "ratio_percentage": 99.72
         },
         "عتاقة": {
             "name": "عتاقة",
-            "price": "7.64",
-            "price_change": 0.0,
-            "current_volume": 1512441,
-            "compared_to_time_volume": 925449,
-            "ratio_percentage": 163.43
+            "price": "9.56",
+            "price_change": 0.1,
+            "current_volume": 1587001,
+            "compared_to_time_volume": 987146,
+            "ratio_percentage": 160.77
         },
         "النصر للأعمال المدنية": {
             "name": "النصر للأعمال المدنية",
-            "price": "4.92",
-            "price_change": 0.0,
-            "current_volume": 4589840,
-            "compared_to_time_volume": 1984893,
-            "ratio_percentage": 231.24
+            "price": "6.43",
+            "price_change": 4.72,
+            "current_volume": 4691981,
+            "compared_to_time_volume": 2117220,
+            "ratio_percentage": 221.61
         },
         "إعمار مصر": {
             "name": "إعمار مصر",
-            "price": "9.52",
-            "price_change": 0.0,
-            "current_volume": 3609522,
-            "compared_to_time_volume": 4693376,
-            "ratio_percentage": 76.91
+            "price": "11.76",
+            "price_change": -1.18,
+            "current_volume": 3689659,
+            "compared_to_time_volume": 5006267,
+            "ratio_percentage": 73.7
         },
         "ايجيترانس": {
             "name": "ايجيترانس",
-            "price": "8.84",
-            "price_change": 0.0,
-            "current_volume": 1174933,
-            "compared_to_time_volume": 7430369,
+            "price": "10.96",
+            "price_change": -0.72,
+            "current_volume": 1252778,
+            "compared_to_time_volume": 7925727,
             "ratio_percentage": 15.81
         },
         "راية": {
             "name": "راية",
-            "price": "6.4",
-            "price_change": 0.0,
-            "current_volume": 13299039,
-            "compared_to_time_volume": 14566266,
-            "ratio_percentage": 91.3
+            "price": "8.21",
+            "price_change": 2.63,
+            "current_volume": 14882786,
+            "compared_to_time_volume": 15537350,
+            "ratio_percentage": 95.79
         },
         "جدوى للتنمية الصناعة": {
             "name": "جدوى للتنمية الصناعة",
-            "price": "0.623",
-            "price_change": 0.0,
-            "current_volume": 81181195,
-            "compared_to_time_volume": 4641669,
-            "ratio_percentage": 1748.97
+            "price": "0.815",
+            "price_change": 5.14,
+            "current_volume": 83209563,
+            "compared_to_time_volume": 4951114,
+            "ratio_percentage": 1680.62
         },
         "كونتكت المالية القابضة": {
             "name": "كونتكت المالية القابضة",
-            "price": "3.86",
-            "price_change": 0.0,
-            "current_volume": 1679035,
-            "compared_to_time_volume": 1845442,
-            "ratio_percentage": 90.98
+            "price": "4.82",
+            "price_change": 0.21,
+            "current_volume": 2057470,
+            "compared_to_time_volume": 1968471,
+            "ratio_percentage": 104.52
         },
         "الحديد والصلب للمناجم والمحاجر": {
             "name": "الحديد والصلب للمناجم والمحاجر",
-            "price": "7.72",
-            "price_change": 0.0,
-            "current_volume": 6949028,
-            "compared_to_time_volume": 6076848,
-            "ratio_percentage": 114.35
+            "price": "9.79",
+            "price_change": 1.55,
+            "current_volume": 7036524,
+            "compared_to_time_volume": 6481972,
+            "ratio_percentage": 108.56
         },
         "أودن للاستثمارات المالية": {
             "name": "أودن للاستثمارات المالية",
-            "price": "1.88",
-            "price_change": 0.0,
-            "current_volume": 3550569,
-            "compared_to_time_volume": 3766374,
-            "ratio_percentage": 94.27
+            "price": "2.37",
+            "price_change": 0.85,
+            "current_volume": 3776192,
+            "compared_to_time_volume": 4017466,
+            "ratio_percentage": 93.99
         },
         "بلتون المالية القابضة": {
             "name": "بلتون المالية القابضة",
-            "price": "2.45",
-            "price_change": 0.0,
-            "current_volume": 41738729,
-            "compared_to_time_volume": 18723127,
-            "ratio_percentage": 222.93
+            "price": "3.07",
+            "price_change": 0.65,
+            "current_volume": 42687084,
+            "compared_to_time_volume": 19971335,
+            "ratio_percentage": 213.74
         },
         "بالم هيلز": {
             "name": "بالم هيلز",
-            "price": "11.94",
-            "price_change": 0.0,
-            "current_volume": 15645761,
-            "compared_to_time_volume": 11480889,
-            "ratio_percentage": 136.28
+            "price": "15.01",
+            "price_change": 0.4,
+            "current_volume": 16773142,
+            "compared_to_time_volume": 12246282,
+            "ratio_percentage": 136.97
         },
         "كابو": {
             "name": "كابو",
-            "price": "5.92",
-            "price_change": 0.0,
-            "current_volume": 6929676,
-            "compared_to_time_volume": 2880170,
-            "ratio_percentage": 240.6
+            "price": "7.57",
+            "price_change": 2.43,
+            "current_volume": 7156768,
+            "compared_to_time_volume": 3072181,
+            "ratio_percentage": 232.95
         },
         "ابن سينا فارما": {
             "name": "ابن سينا فارما",
-            "price": "9.28",
-            "price_change": 0.0,
-            "current_volume": 1572631,
-            "compared_to_time_volume": 3059575,
-            "ratio_percentage": 51.4
+            "price": "11.45",
+            "price_change": -1.29,
+            "current_volume": 1669492,
+            "compared_to_time_volume": 3263546,
+            "ratio_percentage": 51.16
         },
         "الزيوت المستخلصة": {
             "name": "الزيوت المستخلصة",
-            "price": "8.88",
-            "price_change": 0.0,
-            "current_volume": 918740,
-            "compared_to_time_volume": 737797,
-            "ratio_percentage": 124.52
+            "price": "11.14",
+            "price_change": 0.54,
+            "current_volume": 936201,
+            "compared_to_time_volume": 786983,
+            "ratio_percentage": 118.96
         },
         "ماكرو جروب للمستحضرات الطبية - ماكرو كابيتال": {
             "name": "ماكرو جروب للمستحضرات الطبية - ماكرو كابيتال",
-            "price": "1",
-            "price_change": 0.0,
-            "current_volume": 31242655,
-            "compared_to_time_volume": 19785758,
-            "ratio_percentage": 157.9
+            "price": "1.28",
+            "price_change": 2.4,
+            "current_volume": 42681510,
+            "compared_to_time_volume": 21104809,
+            "ratio_percentage": 202.24
         },
         "نيوداب": {
             "name": "نيوداب",
-            "price": "2.61",
-            "price_change": 0.0,
+            "price": "2.8",
+            "price_change": 2.92,
             "current_volume": 137938,
-            "compared_to_time_volume": 39566,
-            "ratio_percentage": 348.63
+            "compared_to_time_volume": 42203,
+            "ratio_percentage": 326.84
         },
         "القلعة": {
             "name": "القلعة",
-            "price": "4",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1283,255 +1283,255 @@
         },
         "تنمية للاستثمار العقاري": {
             "name": "تنمية للاستثمار العقاري",
-            "price": "4.4",
-            "price_change": 0.0,
-            "current_volume": 4584227,
-            "compared_to_time_volume": 380926,
-            "ratio_percentage": 1203.44
+            "price": "5.67",
+            "price_change": 3.46,
+            "current_volume": 4618323,
+            "compared_to_time_volume": 406321,
+            "ratio_percentage": 1136.62
         },
         "بايونيرز بروبرتيز للتنمية العمرانية": {
             "name": "بايونيرز بروبرتيز للتنمية العمرانية",
-            "price": "6.88",
-            "price_change": 0.0,
-            "current_volume": 4523910,
-            "compared_to_time_volume": 3566168,
-            "ratio_percentage": 126.86
+            "price": "8.74",
+            "price_change": 1.74,
+            "current_volume": 4636198,
+            "compared_to_time_volume": 3803913,
+            "ratio_percentage": 121.88
         },
         "فتنس برايم للاندية الصحية": {
             "name": "فتنس برايم للاندية الصحية",
-            "price": "1.15",
-            "price_change": 0.0,
+            "price": "1.18",
+            "price_change": -3.31,
             "current_volume": 1432317,
-            "compared_to_time_volume": 991234,
-            "ratio_percentage": 144.5
+            "compared_to_time_volume": 1057317,
+            "ratio_percentage": 135.47
         },
         "الفنار للمقاولات": {
             "name": "الفنار للمقاولات",
-            "price": "10.98",
-            "price_change": 0.0,
+            "price": "12.25",
+            "price_change": 0.41,
             "current_volume": 94667,
-            "compared_to_time_volume": 80813,
-            "ratio_percentage": 117.14
+            "compared_to_time_volume": 86201,
+            "ratio_percentage": 109.82
         },
         "الملتقي العربي للاستثمارات": {
             "name": "الملتقي العربي للاستثمارات",
-            "price": "7.12",
-            "price_change": 0.0,
-            "current_volume": 335850,
-            "compared_to_time_volume": 500448,
-            "ratio_percentage": 67.11
+            "price": "8.95",
+            "price_change": 1.01,
+            "current_volume": 377670,
+            "compared_to_time_volume": 533812,
+            "ratio_percentage": 70.75
         },
         "مرسى مرسى علم": {
             "name": "مرسى مرسى علم",
-            "price": "3.36",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 4.82,
             "current_volume": 100,
-            "compared_to_time_volume": 78,
-            "ratio_percentage": 128.21
+            "compared_to_time_volume": 84,
+            "ratio_percentage": 119.05
         },
         "العربية للمحابس": {
             "name": "العربية للمحابس",
-            "price": "8.68",
-            "price_change": 0.0,
-            "current_volume": 752185,
-            "compared_to_time_volume": 270230,
-            "ratio_percentage": 278.35
+            "price": "10.85",
+            "price_change": 0.09,
+            "current_volume": 764685,
+            "compared_to_time_volume": 288245,
+            "ratio_percentage": 265.29
         },
         "جنوب الوادى للاسمنت": {
             "name": "جنوب الوادى للاسمنت",
-            "price": "7.6",
-            "price_change": 0.0,
-            "current_volume": 2836044,
-            "compared_to_time_volume": 3635347,
-            "ratio_percentage": 78.01
+            "price": "9.4",
+            "price_change": -0.84,
+            "current_volume": 2895546,
+            "compared_to_time_volume": 3877704,
+            "ratio_percentage": 74.67
         },
         "آراب ديري": {
             "name": "آراب ديري",
-            "price": "2.99",
-            "price_change": 0.0,
-            "current_volume": 6343194,
-            "compared_to_time_volume": 9035197,
-            "ratio_percentage": 70.21
+            "price": "3.71",
+            "price_change": -0.54,
+            "current_volume": 7444920,
+            "compared_to_time_volume": 9637544,
+            "ratio_percentage": 77.25
         },
         "لكح جروب": {
             "name": "لكح جروب",
             "price": "3.5",
-            "price_change": 0.0,
+            "price_change": -0.85,
             "current_volume": 86617,
-            "compared_to_time_volume": 68381,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 72940,
+            "ratio_percentage": 118.75
         },
         "مرسيليا": {
             "name": "مرسيليا",
-            "price": "6.52",
+            "price": "8.16",
             "price_change": 0.0,
-            "current_volume": 838531,
-            "compared_to_time_volume": 2858523,
-            "ratio_percentage": 29.33
+            "current_volume": 889615,
+            "compared_to_time_volume": 3049092,
+            "ratio_percentage": 29.18
         },
         "جلوبال تيلكوم": {
             "name": "جلوبال تيلكوم",
-            "price": "4.58",
-            "price_change": 0.0,
+            "price": "3.6",
+            "price_change": 8.43,
             "current_volume": 12280,
-            "compared_to_time_volume": 9694,
-            "ratio_percentage": 126.68
+            "compared_to_time_volume": 10341,
+            "ratio_percentage": 118.75
         },
         "راميدا": {
             "name": "راميدا",
-            "price": "4",
-            "price_change": 0.0,
-            "current_volume": 1492111,
-            "compared_to_time_volume": 1523163,
-            "ratio_percentage": 97.96
+            "price": "5",
+            "price_change": 0.4,
+            "current_volume": 1518385,
+            "compared_to_time_volume": 1624708,
+            "ratio_percentage": 93.46
         },
         "الأولى للاستثمار": {
             "name": "الأولى للاستثمار",
-            "price": "4.91",
-            "price_change": 0.0,
-            "current_volume": 273006,
-            "compared_to_time_volume": 265398,
-            "ratio_percentage": 102.87
+            "price": "5.23",
+            "price_change": 1.55,
+            "current_volume": 282710,
+            "compared_to_time_volume": 283091,
+            "ratio_percentage": 99.87
         },
         "الكابلات الكهربائية المصرية": {
             "name": "الكابلات الكهربائية المصرية",
-            "price": "1.68",
-            "price_change": 0.0,
-            "current_volume": 39517075,
-            "compared_to_time_volume": 2866635,
-            "ratio_percentage": 1378.52
+            "price": "2.15",
+            "price_change": 2.38,
+            "current_volume": 40354598,
+            "compared_to_time_volume": 3057744,
+            "ratio_percentage": 1319.75
         },
         "القاهرة للاسكان": {
             "name": "القاهرة للاسكان",
-            "price": "1.26",
-            "price_change": 0.0,
-            "current_volume": 63247474,
-            "compared_to_time_volume": 59816617,
-            "ratio_percentage": 105.74
+            "price": "1.64",
+            "price_change": 5.1,
+            "current_volume": 64311897,
+            "compared_to_time_volume": 63804391,
+            "ratio_percentage": 100.8
         },
         "مينا للاستثمار السياحي": {
             "name": "مينا للاستثمار السياحي",
-            "price": "5.68",
-            "price_change": 0.0,
-            "current_volume": 1040691,
-            "compared_to_time_volume": 315769,
-            "ratio_percentage": 329.57
+            "price": "7.16",
+            "price_change": 0.56,
+            "current_volume": 1040719,
+            "compared_to_time_volume": 336821,
+            "ratio_percentage": 308.98
         },
         "العربية للصناعات الهندسية": {
             "name": "العربية للصناعات الهندسية",
-            "price": "2.24",
-            "price_change": 0.0,
-            "current_volume": 4056544,
-            "compared_to_time_volume": 7762051,
-            "ratio_percentage": 52.26
+            "price": "2.84",
+            "price_change": 1.43,
+            "current_volume": 4056601,
+            "compared_to_time_volume": 8279521,
+            "ratio_percentage": 49.0
         },
         "الاتحاد الصيدلي": {
             "name": "الاتحاد الصيدلي",
-            "price": "11.73",
-            "price_change": 0.0,
+            "price": "12.96",
+            "price_change": -0.31,
             "current_volume": 79510,
-            "compared_to_time_volume": 46281,
-            "ratio_percentage": 171.8
+            "compared_to_time_volume": 49366,
+            "ratio_percentage": 161.06
         },
         "بي اي دي – البدر للاستثمار والتنمية": {
             "name": "بي اي دي – البدر للاستثمار والتنمية",
-            "price": "1.61",
-            "price_change": 0.0,
+            "price": "1.76",
+            "price_change": 4.73,
             "current_volume": 486571,
-            "compared_to_time_volume": 384135,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 409744,
+            "ratio_percentage": 118.75
         },
         "نهر الخير للتنمية والأستثمار الزراعى والخدمات البيئية": {
             "name": "نهر الخير للتنمية والأستثمار الزراعى والخدمات البيئية",
-            "price": "0.283",
-            "price_change": 0.0,
-            "current_volume": 47888137,
-            "compared_to_time_volume": 30466807,
-            "ratio_percentage": 157.18
+            "price": "0.352",
+            "price_change": -0.28,
+            "current_volume": 50133216,
+            "compared_to_time_volume": 32497927,
+            "ratio_percentage": 154.27
         },
         "إيكمى": {
             "name": "إيكمى",
-            "price": "9.88",
-            "price_change": 0.0,
+            "price": "10.94",
+            "price_change": -0.27,
             "current_volume": 197991,
-            "compared_to_time_volume": 156308,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 166729,
+            "ratio_percentage": 118.75
         },
         "انترناشيونال بزنيس كوربوريشن": {
             "name": "انترناشيونال بزنيس كوربوريشن",
-            "price": "12.06",
-            "price_change": 0.0,
-            "current_volume": 78625,
-            "compared_to_time_volume": 150591,
-            "ratio_percentage": 52.21
+            "price": "13.39",
+            "price_change": -0.37,
+            "current_volume": 89800,
+            "compared_to_time_volume": 160630,
+            "ratio_percentage": 55.9
         },
         "ديفكو": {
             "name": "ديفكو",
-            "price": "17.01",
-            "price_change": 0.0,
+            "price": "10.95",
+            "price_change": 0.18,
             "current_volume": 102,
-            "compared_to_time_volume": 80,
-            "ratio_percentage": 127.5
+            "compared_to_time_volume": 85,
+            "ratio_percentage": 120.0
         },
         "جى إم سى": {
             "name": "جى إم سى",
-            "price": "1.98",
-            "price_change": 0.0,
-            "current_volume": 617059,
-            "compared_to_time_volume": 1077500,
-            "ratio_percentage": 57.27
+            "price": "2.07",
+            "price_change": -0.48,
+            "current_volume": 619402,
+            "compared_to_time_volume": 1149333,
+            "ratio_percentage": 53.89
         },
         "المؤشر": {
             "name": "المؤشر",
-            "price": "2.78",
-            "price_change": 0.0,
-            "current_volume": 773810,
-            "compared_to_time_volume": 910973,
-            "ratio_percentage": 84.94
+            "price": "2.83",
+            "price_change": -2.74,
+            "current_volume": 793669,
+            "compared_to_time_volume": 971705,
+            "ratio_percentage": 81.68
         },
         "المصرية الكويتية للأستثمار": {
             "name": "المصرية الكويتية للأستثمار",
-            "price": "2.64",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": -0.36,
             "current_volume": 19459,
-            "compared_to_time_volume": 58080,
-            "ratio_percentage": 33.5
+            "compared_to_time_volume": 61952,
+            "ratio_percentage": 31.41
         },
         "العروبة للسمسرة في الأوراق المالية": {
             "name": "العروبة للسمسرة في الأوراق المالية",
-            "price": "1.41",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 4.73,
             "current_volume": 7626,
-            "compared_to_time_volume": 6020,
-            "ratio_percentage": 126.68
+            "compared_to_time_volume": 6421,
+            "ratio_percentage": 118.77
         },
         "دايس": {
             "name": "دايس",
-            "price": "1.43",
-            "price_change": 0.0,
-            "current_volume": 6217304,
-            "compared_to_time_volume": 5434083,
-            "ratio_percentage": 114.41
+            "price": "1.79",
+            "price_change": 0.56,
+            "current_volume": 7286861,
+            "compared_to_time_volume": 5796356,
+            "ratio_percentage": 125.71
         },
         "المطورون العرب القابضة": {
             "name": "المطورون العرب القابضة",
-            "price": "0.183",
-            "price_change": 0.0,
-            "current_volume": 809230153,
-            "compared_to_time_volume": 566201358,
-            "ratio_percentage": 142.92
+            "price": "0.242",
+            "price_change": 6.14,
+            "current_volume": 862802478,
+            "compared_to_time_volume": 603948115,
+            "ratio_percentage": 142.86
         },
         "اليكو": {
             "name": "اليكو",
-            "price": "3.01",
-            "price_change": 0.0,
+            "price": "3.82",
+            "price_change": 1.6,
             "current_volume": 9782046,
-            "compared_to_time_volume": 6327439,
-            "ratio_percentage": 154.6
+            "compared_to_time_volume": 6749269,
+            "ratio_percentage": 144.93
         },
         "المجموعة المصرية العقارية": {
             "name": "المجموعة المصرية العقارية",
-            "price": "10.55",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1539,343 +1539,343 @@
         },
         "المنصورة للدواجن": {
             "name": "المنصورة للدواجن",
-            "price": "1.53",
-            "price_change": 0.0,
-            "current_volume": 21109715,
-            "compared_to_time_volume": 34388584,
-            "ratio_percentage": 61.39
+            "price": "1.9",
+            "price_change": -0.52,
+            "current_volume": 21690689,
+            "compared_to_time_volume": 36681157,
+            "ratio_percentage": 59.13
         },
         "أراب للتنمية والاستثمار العقاري": {
             "name": "أراب للتنمية والاستثمار العقاري",
-            "price": "6.52",
-            "price_change": 0.0,
-            "current_volume": 817813,
-            "compared_to_time_volume": 83487,
-            "ratio_percentage": 979.57
+            "price": "7.37",
+            "price_change": 0.69,
+            "current_volume": 817870,
+            "compared_to_time_volume": 89053,
+            "ratio_percentage": 918.41
         },
         "العبوات الطبية": {
             "name": "العبوات الطبية",
-            "price": "1.32",
-            "price_change": 0.0,
-            "current_volume": 5835414,
-            "compared_to_time_volume": 6296733,
-            "ratio_percentage": 92.67
+            "price": "1.65",
+            "price_change": 0.61,
+            "current_volume": 5996314,
+            "compared_to_time_volume": 6716516,
+            "ratio_percentage": 89.28
         },
         "الشركة العربية لادارة وتطوير الاصول": {
             "name": "الشركة العربية لادارة وتطوير الاصول",
-            "price": "1.88",
-            "price_change": 0.0,
-            "current_volume": 9351874,
-            "compared_to_time_volume": 30229886,
-            "ratio_percentage": 30.94
+            "price": "2.33",
+            "price_change": -0.85,
+            "current_volume": 10143207,
+            "compared_to_time_volume": 32245211,
+            "ratio_percentage": 31.46
         },
         "العبوات الدوائية المتطورة": {
             "name": "العبوات الدوائية المتطورة",
             "price": "1.36",
-            "price_change": 0.0,
+            "price_change": 4.62,
             "current_volume": 10304,
-            "compared_to_time_volume": 8134,
-            "ratio_percentage": 126.68
+            "compared_to_time_volume": 8677,
+            "ratio_percentage": 118.75
         },
         "اراسمكو": {
             "name": "اراسمكو",
-            "price": "1.07",
+            "price": "1.32",
             "price_change": 0.0,
-            "current_volume": 16582722,
-            "compared_to_time_volume": 33944866,
-            "ratio_percentage": 48.85
+            "current_volume": 16727646,
+            "compared_to_time_volume": 36207857,
+            "ratio_percentage": 46.2
         },
         "فرتيكا للبرمجيات": {
             "name": "فرتيكا للبرمجيات",
-            "price": "7.15",
-            "price_change": 0.0,
-            "current_volume": 146100,
-            "compared_to_time_volume": 237162,
-            "ratio_percentage": 61.6
+            "price": "8.04",
+            "price_change": 2.01,
+            "current_volume": 148653,
+            "compared_to_time_volume": 252973,
+            "ratio_percentage": 58.76
         },
         "سبأ": {
             "name": "سبأ",
-            "price": "2.8",
-            "price_change": 0.0,
-            "current_volume": 948699,
-            "compared_to_time_volume": 738617,
-            "ratio_percentage": 128.44
+            "price": "3.49",
+            "price_change": 0.29,
+            "current_volume": 1067245,
+            "compared_to_time_volume": 787858,
+            "ratio_percentage": 135.46
         },
         "القابضة المصرية الكويتية": {
             "name": "القابضة المصرية الكويتية",
-            "price": "0.531",
-            "price_change": 0.0,
-            "current_volume": 233244,
-            "compared_to_time_volume": 95580,
-            "ratio_percentage": 244.03
+            "price": "0.66",
+            "price_change": -0.45,
+            "current_volume": 248844,
+            "compared_to_time_volume": 101952,
+            "ratio_percentage": 244.08
         },
         "الصعيد للمقاولات": {
             "name": "الصعيد للمقاولات",
-            "price": "1.42",
-            "price_change": 0.0,
-            "current_volume": 16150775,
-            "compared_to_time_volume": 13463318,
-            "ratio_percentage": 119.96
+            "price": "1.84",
+            "price_change": 4.52,
+            "current_volume": 17574391,
+            "compared_to_time_volume": 14360873,
+            "ratio_percentage": 122.38
         },
         "الشرقية الوطنية للامن الغذائي": {
             "name": "الشرقية الوطنية للامن الغذائي",
-            "price": "9.89",
-            "price_change": 0.0,
-            "current_volume": 646133,
-            "compared_to_time_volume": 1068806,
-            "ratio_percentage": 60.45
+            "price": "11.8",
+            "price_change": -4.53,
+            "current_volume": 677157,
+            "compared_to_time_volume": 1140059,
+            "ratio_percentage": 59.4
         },
         "برايم القابضة": {
             "name": "برايم القابضة",
-            "price": "2.07",
-            "price_change": 0.0,
-            "current_volume": 32542341,
-            "compared_to_time_volume": 1930134,
-            "ratio_percentage": 1686.01
+            "price": "2.8",
+            "price_change": 8.53,
+            "current_volume": 32836165,
+            "compared_to_time_volume": 2058810,
+            "ratio_percentage": 1594.91
         },
         "العربية المتحدة للشحن والتفريغ": {
             "name": "العربية المتحدة للشحن والتفريغ",
             "price": "0.4",
-            "price_change": 0.0,
+            "price_change": -4.76,
             "current_volume": 429852,
-            "compared_to_time_volume": 339356,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 361980,
+            "ratio_percentage": 118.75
         },
         "لوتس للتنمية والاستثمار الزراعي": {
             "name": "لوتس للتنمية والاستثمار الزراعي",
-            "price": "0.585",
-            "price_change": 0.0,
-            "current_volume": 33805043,
-            "compared_to_time_volume": 34790418,
-            "ratio_percentage": 97.17
+            "price": "0.745",
+            "price_change": 2.33,
+            "current_volume": 34162709,
+            "compared_to_time_volume": 37109780,
+            "ratio_percentage": 92.06
         },
         "الوادى": {
             "name": "الوادى",
-            "price": "1.86",
-            "price_change": 0.0,
+            "price": "2.04",
+            "price_change": 4.62,
             "current_volume": 754930,
-            "compared_to_time_volume": 270495,
-            "ratio_percentage": 279.09
+            "compared_to_time_volume": 288528,
+            "ratio_percentage": 261.65
         },
         "الصخور العربية": {
             "name": "الصخور العربية",
-            "price": "0.11",
-            "price_change": 0.0,
+            "price": "0.08",
+            "price_change": -27.27,
             "current_volume": 7601545,
-            "compared_to_time_volume": 6001219,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 6401301,
+            "ratio_percentage": 118.75
         },
         "عامر جروب": {
             "name": "عامر جروب",
-            "price": "2.43",
-            "price_change": 0.0,
-            "current_volume": 40324952,
-            "compared_to_time_volume": 59146244,
-            "ratio_percentage": 68.18
+            "price": "3.19",
+            "price_change": 4.95,
+            "current_volume": 40549840,
+            "compared_to_time_volume": 63089327,
+            "ratio_percentage": 64.27
         },
         "يونيفرسال": {
             "name": "يونيفرسال",
-            "price": "0.268",
-            "price_change": 0.0,
-            "current_volume": 39899345,
-            "compared_to_time_volume": 44774962,
-            "ratio_percentage": 89.11
+            "price": "0.34",
+            "price_change": 1.49,
+            "current_volume": 40232757,
+            "compared_to_time_volume": 47759960,
+            "ratio_percentage": 84.24
         },
         "المصريين للاستثمار": {
             "name": "المصريين للاستثمار",
-            "price": "0.88",
-            "price_change": 0.0,
-            "current_volume": 7849905,
-            "compared_to_time_volume": 8641252,
-            "ratio_percentage": 90.84
+            "price": "1.11",
+            "price_change": 1.82,
+            "current_volume": 8661297,
+            "compared_to_time_volume": 9217336,
+            "ratio_percentage": 93.97
         },
         "ايه كابيتال القابضة": {
             "name": "ايه كابيتال القابضة",
-            "price": "6.95",
-            "price_change": 0.0,
-            "current_volume": 1020568,
-            "compared_to_time_volume": 834497,
-            "ratio_percentage": 122.3
+            "price": "8.77",
+            "price_change": 0.81,
+            "current_volume": 1051668,
+            "compared_to_time_volume": 890130,
+            "ratio_percentage": 118.15
         },
         "جولدن كوست": {
             "name": "جولدن كوست",
-            "price": "0.38",
-            "price_change": 0.0,
+            "price": "0.8",
+            "price_change": -19.19,
             "current_volume": 1051142,
-            "compared_to_time_volume": 829848,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 885172,
+            "ratio_percentage": 118.75
         },
         "أطلس": {
             "name": "أطلس",
-            "price": "1.67",
-            "price_change": 0.0,
-            "current_volume": 3330869,
-            "compared_to_time_volume": 4480093,
-            "ratio_percentage": 74.35
+            "price": "2.07",
+            "price_change": -0.48,
+            "current_volume": 3345339,
+            "compared_to_time_volume": 4778766,
+            "ratio_percentage": 70.0
         },
         "سبيد ميديكال": {
             "name": "سبيد ميديكال",
-            "price": "0.358",
-            "price_change": 0.0,
-            "current_volume": 19183648,
-            "compared_to_time_volume": 31076671,
-            "ratio_percentage": 61.73
+            "price": "0.449",
+            "price_change": 0.22,
+            "current_volume": 20215371,
+            "compared_to_time_volume": 33148449,
+            "ratio_percentage": 60.98
         },
         "المصرية لنظم التعليم الحديثة": {
             "name": "المصرية لنظم التعليم الحديثة",
-            "price": "0.56",
-            "price_change": 0.0,
-            "current_volume": 22964816,
-            "compared_to_time_volume": 9708776,
-            "ratio_percentage": 236.54
+            "price": "0.72",
+            "price_change": 2.72,
+            "current_volume": 31510544,
+            "compared_to_time_volume": 10356027,
+            "ratio_percentage": 304.27
         },
         "الجيزة العامة للمقاولات": {
             "name": "الجيزة العامة للمقاولات",
-            "price": "0.452",
-            "price_change": 0.0,
-            "current_volume": 43679629,
-            "compared_to_time_volume": 28589051,
-            "ratio_percentage": 152.78
+            "price": "0.58",
+            "price_change": 3.19,
+            "current_volume": 44296862,
+            "compared_to_time_volume": 30494988,
+            "ratio_percentage": 145.26
         },
         "أوراسكوم للاستثمار القابضة": {
             "name": "أوراسكوم للاستثمار القابضة",
-            "price": "1.14",
-            "price_change": 0.0,
-            "current_volume": 14792659,
-            "compared_to_time_volume": 19938974,
-            "ratio_percentage": 74.19
+            "price": "1.41",
+            "price_change": -0.7,
+            "current_volume": 15178375,
+            "compared_to_time_volume": 21268239,
+            "ratio_percentage": 71.37
         },
         "أوراسكوم المالية القابضة": {
             "name": "أوراسكوم المالية القابضة",
-            "price": "0.512",
-            "price_change": 0.0,
-            "current_volume": 25130702,
-            "compared_to_time_volume": 27682680,
-            "ratio_percentage": 90.78
+            "price": "0.633",
+            "price_change": -0.78,
+            "current_volume": 25544640,
+            "compared_to_time_volume": 29528192,
+            "ratio_percentage": 86.51
         },
         "شركة كوبر للاستثمار التجاري و التطوير العقاري": {
             "name": "شركة كوبر للاستثمار التجاري و التطوير العقاري",
-            "price": "0.288",
-            "price_change": 0.0,
-            "current_volume": 20006476,
-            "compared_to_time_volume": 23197811,
-            "ratio_percentage": 86.24
+            "price": "0.359",
+            "price_change": -0.28,
+            "current_volume": 20083862,
+            "compared_to_time_volume": 24744331,
+            "ratio_percentage": 81.17
         },
         "أصول للوساطة": {
             "name": "أصول للوساطة",
-            "price": "1.55",
-            "price_change": 0.0,
+            "price": "1.97",
+            "price_change": 3.11,
             "current_volume": 6480927,
-            "compared_to_time_volume": 1811969,
-            "ratio_percentage": 357.67
+            "compared_to_time_volume": 1932767,
+            "ratio_percentage": 335.32
         },
         "اسباير كابيتال": {
             "name": "اسباير كابيتال",
-            "price": "0.254",
-            "price_change": 0.0,
-            "current_volume": 45223767,
-            "compared_to_time_volume": 48205241,
-            "ratio_percentage": 93.82
+            "price": "0.316",
+            "price_change": -0.32,
+            "current_volume": 46021832,
+            "compared_to_time_volume": 51418923,
+            "ratio_percentage": 89.5
         },
         "المصريين للاسكان": {
             "name": "المصريين للاسكان",
-            "price": "2.15",
-            "price_change": 0.0,
-            "current_volume": 13336346,
-            "compared_to_time_volume": 13750391,
-            "ratio_percentage": 96.99
+            "price": "2.73",
+            "price_change": 2.24,
+            "current_volume": 13787207,
+            "compared_to_time_volume": 14667083,
+            "ratio_percentage": 94.0
         },
         "البنك المصري الخليجي": {
             "name": "البنك المصري الخليجي",
-            "price": "0.368",
-            "price_change": 0.0,
-            "current_volume": 161261,
-            "compared_to_time_volume": 80351,
-            "ratio_percentage": 200.7
+            "price": "0.46",
+            "price_change": -0.43,
+            "current_volume": 164225,
+            "compared_to_time_volume": 85708,
+            "ratio_percentage": 191.61
         },
         "القاهرة للزيوت والصابون": {
             "name": "القاهرة للزيوت والصابون",
-            "price": "1.31",
+            "price": "1.63",
             "price_change": 0.0,
-            "current_volume": 19192657,
-            "compared_to_time_volume": 16600071,
-            "ratio_percentage": 115.62
+            "current_volume": 19963853,
+            "compared_to_time_volume": 17706742,
+            "ratio_percentage": 112.75
         },
         "المشروعات الصناعية والهندسية": {
             "name": "المشروعات الصناعية والهندسية",
-            "price": "0.456",
-            "price_change": 0.0,
-            "current_volume": 33107050,
-            "compared_to_time_volume": 124235338,
-            "ratio_percentage": 26.65
+            "price": "0.563",
+            "price_change": -0.88,
+            "current_volume": 33368935,
+            "compared_to_time_volume": 132517694,
+            "ratio_percentage": 25.18
         },
         "كريستمارك للمقاولات": {
             "name": "كريستمارك للمقاولات",
-            "price": "1.16",
-            "price_change": 0.0,
-            "current_volume": 75936716,
-            "compared_to_time_volume": 74326652,
-            "ratio_percentage": 102.17
+            "price": "1.48",
+            "price_change": 2.07,
+            "current_volume": 76247953,
+            "compared_to_time_volume": 79281762,
+            "ratio_percentage": 96.17
         },
         "المجموعة المتكاملة للاعمال الهندسية": {
             "name": "المجموعة المتكاملة للاعمال الهندسية",
-            "price": "0.392",
-            "price_change": 0.0,
-            "current_volume": 46345854,
-            "compared_to_time_volume": 8516650,
-            "ratio_percentage": 544.18
+            "price": "0.447",
+            "price_change": 3.45,
+            "current_volume": 47389020,
+            "compared_to_time_volume": 9084426,
+            "ratio_percentage": 521.65
         },
         "بى اى جى للتجارة والاستثمار": {
             "name": "بى اى جى للتجارة والاستثمار",
-            "price": "0.264",
-            "price_change": 0.0,
+            "price": "0.322",
+            "price_change": 9.9,
             "current_volume": 9815230,
-            "compared_to_time_volume": 6830446,
-            "ratio_percentage": 143.7
+            "compared_to_time_volume": 7285809,
+            "ratio_percentage": 134.72
         },
         "ماريديف": {
             "name": "ماريديف",
-            "price": "0.416",
-            "price_change": 0.0,
+            "price": "0.515",
+            "price_change": -0.96,
             "current_volume": 150601,
-            "compared_to_time_volume": 184844,
-            "ratio_percentage": 81.47
+            "compared_to_time_volume": 197167,
+            "ratio_percentage": 76.38
         },
         "النعيم القابضة": {
             "name": "النعيم القابضة",
-            "price": "0.083",
+            "price": "0.103",
             "price_change": 0.0,
             "current_volume": 200317,
-            "compared_to_time_volume": 241481,
-            "ratio_percentage": 82.95
+            "compared_to_time_volume": 257579,
+            "ratio_percentage": 77.77
         },
         "مصر جنوب افريقيا للاتصالات": {
             "name": "مصر جنوب افريقيا للاتصالات",
-            "price": "0.14",
-            "price_change": 0.0,
+            "price": "0.12",
+            "price_change": 9.09,
             "current_volume": 413889,
-            "compared_to_time_volume": 326754,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 348538,
+            "ratio_percentage": 118.75
         },
         "العرفة القابضة": {
             "name": "العرفة القابضة",
-            "price": "0.08",
-            "price_change": 0.0,
+            "price": "0.103",
+            "price_change": 4.0,
             "current_volume": 59470,
-            "compared_to_time_volume": 24146,
-            "ratio_percentage": 246.29
+            "compared_to_time_volume": 25755,
+            "ratio_percentage": 230.91
         },
         "عبر المحيطات للسياحة": {
             "name": "عبر المحيطات للسياحة",
-            "price": "0.028",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": -2.94,
             "current_volume": 12095,
-            "compared_to_time_volume": 7642,
-            "ratio_percentage": 158.27
+            "compared_to_time_volume": 8151,
+            "ratio_percentage": 148.39
         },
         "الوطنية لمنتجات الذرة": {
             "name": "الوطنية لمنتجات الذرة",
-            "price": "55.53",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1883,15 +1883,15 @@
         },
         "فيركيم": {
             "name": "فيركيم",
-            "price": "60.75",
-            "price_change": 0.0,
-            "current_volume": 35600,
-            "compared_to_time_volume": 68843,
-            "ratio_percentage": 51.71
+            "price": "75.41",
+            "price_change": -0.79,
+            "current_volume": 35753,
+            "compared_to_time_volume": 73433,
+            "ratio_percentage": 48.69
         },
         "بنك القاهرة": {
             "name": "بنك القاهرة",
-            "price": "1.6",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1899,15 +1899,15 @@
         },
         "الحديد والصلب المصرية": {
             "name": "الحديد والصلب المصرية",
-            "price": "30.99",
-            "price_change": 0.0,
-            "current_volume": 115677,
-            "compared_to_time_volume": 139382,
-            "ratio_percentage": 82.99
+            "price": "32.39",
+            "price_change": -1.04,
+            "current_volume": 115832,
+            "compared_to_time_volume": 148674,
+            "ratio_percentage": 77.91
         },
         "العروبة للتجارة والتعدين والتوريدات": {
             "name": "العروبة للتجارة والتعدين والتوريدات",
-            "price": "39.46",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1915,7 +1915,7 @@
         },
         "النصر لصناعة المحولات": {
             "name": "النصر لصناعة المحولات",
-            "price": "14.4",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1923,7 +1923,7 @@
         },
         "سكاى لايت للتنمية السياحية": {
             "name": "سكاى لايت للتنمية السياحية",
-            "price": "0.8",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1931,7 +1931,7 @@
         },
         "أوراسكوم القابضة للتنمية ايه جي": {
             "name": "أوراسكوم القابضة للتنمية ايه جي",
-            "price": "4.59",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1939,7 +1939,7 @@
         },
         "سيتى تريد": {
             "name": "سيتى تريد",
-            "price": "0.09",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1947,7 +1947,7 @@
         },
         "حق اكتتاب شركة المؤشر للبرمجيات ونشر المعلومات -2": {
             "name": "حق اكتتاب شركة المؤشر للبرمجيات ونشر المعلومات -2",
-            "price": "0.091",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1955,7 +1955,7 @@
         },
         "السويس للاكياس": {
             "name": "السويس للاكياس",
-            "price": "23.41",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1963,7 +1963,7 @@
         },
         "ريفا فارما": {
             "name": "ريفا فارما",
-            "price": "1.14",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1971,15 +1971,15 @@
         },
         "إنكوليس": {
             "name": "إنكوليس",
-            "price": "12.61",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 19.99,
             "current_volume": 904,
-            "compared_to_time_volume": 713,
-            "ratio_percentage": 126.79
+            "compared_to_time_volume": 761,
+            "ratio_percentage": 118.79
         },
         "بنك الاتحاد الوطنى": {
             "name": "بنك الاتحاد الوطنى",
-            "price": "8.93",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1987,7 +1987,7 @@
         },
         "القومية للاسمنت": {
             "name": "القومية للاسمنت",
-            "price": "13.96",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -1995,7 +1995,7 @@
         },
         "يونيفرت - مصر": {
             "name": "يونيفرت - مصر",
-            "price": "0.31",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2003,15 +2003,15 @@
         },
         "بنك الشركة المصرفية العربية الدولية": {
             "name": "بنك الشركة المصرفية العربية الدولية",
-            "price": "1.69",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 19.91,
             "current_volume": 100,
-            "compared_to_time_volume": 78,
-            "ratio_percentage": 128.21
+            "compared_to_time_volume": 84,
+            "ratio_percentage": 119.05
         },
         "المصرية لصناعة النشا والجلوكوز": {
             "name": "المصرية لصناعة النشا والجلوكوز",
-            "price": "8.67",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2019,7 +2019,7 @@
         },
         "دمياط لتداول الحاويات": {
             "name": "دمياط لتداول الحاويات",
-            "price": "8",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2027,7 +2027,7 @@
         },
         "سامكريت مصر": {
             "name": "سامكريت مصر",
-            "price": "12.26",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2035,23 +2035,23 @@
         },
         "جينيال تورز": {
             "name": "جينيال تورز",
-            "price": "0.95",
-            "price_change": 0.0,
+            "price": "15",
+            "price_change": 1400.0,
             "current_volume": 782553,
-            "compared_to_time_volume": 617805,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 658992,
+            "ratio_percentage": 118.75
         },
         "الدلتا للتامين": {
             "name": "الدلتا للتامين",
-            "price": "9.11",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 19.95,
             "current_volume": 482,
-            "compared_to_time_volume": 380,
-            "ratio_percentage": 126.84
+            "compared_to_time_volume": 405,
+            "ratio_percentage": 119.01
         },
         "فاروتك": {
             "name": "فاروتك",
-            "price": "18.05",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2059,7 +2059,7 @@
         },
         "اميكو ميديكال": {
             "name": "اميكو ميديكال",
-            "price": "16.64",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2067,7 +2067,7 @@
         },
         "التعمير للتوريق": {
             "name": "التعمير للتوريق",
-            "price": "0.0",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2075,7 +2075,7 @@
         },
         "التعمير السياحي": {
             "name": "التعمير السياحي",
-            "price": "6.17",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2083,7 +2083,7 @@
         },
         "الخليج للاستثمارات العربية": {
             "name": "الخليج للاستثمارات العربية",
-            "price": "0.0",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2091,23 +2091,23 @@
         },
         "الحفر الوطنية": {
             "name": "الحفر الوطنية",
-            "price": "3.76",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": 19.83,
             "current_volume": 100,
-            "compared_to_time_volume": 78,
-            "ratio_percentage": 128.21
+            "compared_to_time_volume": 84,
+            "ratio_percentage": 119.05
         },
         "ثقة لإدارة الأعمال والتنمية": {
             "name": "ثقة لإدارة الأعمال والتنمية",
-            "price": "0.1",
-            "price_change": 0.0,
+            "price": "0.06",
+            "price_change": -40.0,
             "current_volume": 251993,
-            "compared_to_time_volume": 198941,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 212204,
+            "ratio_percentage": 118.75
         },
         "رواد مصر": {
             "name": "رواد مصر",
-            "price": "95",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2115,7 +2115,7 @@
         },
         "المستودعات المصرية": {
             "name": "المستودعات المصرية",
-            "price": "4.5",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2123,7 +2123,7 @@
         },
         "بورسعيد لتداول الحاويات والبضائع": {
             "name": "بورسعيد لتداول الحاويات والبضائع",
-            "price": "4",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2131,15 +2131,15 @@
         },
         "يوتوبيا": {
             "name": "يوتوبيا",
-            "price": "73.08",
-            "price_change": 0.0,
+            "price": "80.41",
+            "price_change": -1.26,
             "current_volume": 5588,
-            "compared_to_time_volume": 4562,
-            "ratio_percentage": 122.49
+            "compared_to_time_volume": 4866,
+            "ratio_percentage": 114.84
         },
         "نايل سيتي للاستثمار": {
             "name": "نايل سيتي للاستثمار",
-            "price": "327.07",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2147,31 +2147,31 @@
         },
         "جولدن بيراميدز بلازا": {
             "name": "جولدن بيراميدز بلازا",
-            "price": "1.33",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": -5.0,
             "current_volume": 96,
-            "compared_to_time_volume": 75,
-            "ratio_percentage": 128.0
+            "compared_to_time_volume": 80,
+            "ratio_percentage": 120.0
         },
         "بيتومود": {
             "name": "بيتومود",
-            "price": "3.42",
-            "price_change": 0.0,
+            "price": "24",
+            "price_change": -4.0,
             "current_volume": 1298,
-            "compared_to_time_volume": 1024,
-            "ratio_percentage": 126.76
+            "compared_to_time_volume": 1093,
+            "ratio_percentage": 118.76
         },
         "باكين": {
             "name": "باكين",
-            "price": "69.54",
-            "price_change": 0.0,
+            "price": "77",
+            "price_change": 5.19,
             "current_volume": 21,
-            "compared_to_time_volume": 16,
-            "ratio_percentage": 131.25
+            "compared_to_time_volume": 17,
+            "ratio_percentage": 123.53
         },
         "أورانج": {
             "name": "أورانج",
-            "price": "15.57",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2179,7 +2179,7 @@
         },
         "القاهرة للاستثمارات والتنمية": {
             "name": "القاهرة للاستثمارات والتنمية",
-            "price": "3.61",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2187,7 +2187,7 @@
         },
         "ميراكو": {
             "name": "ميراكو",
-            "price": "107.25",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2195,7 +2195,7 @@
         },
         "سندات التنمية الوطنية بالدولار الأمريكى يونيو 2015-2017": {
             "name": "سندات التنمية الوطنية بالدولار الأمريكى يونيو 2015-2017",
-            "price": "0.0",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2203,7 +2203,7 @@
         },
         "اسيوط الاسلامية للتجارة": {
             "name": "اسيوط الاسلامية للتجارة",
-            "price": "2.31",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2211,15 +2211,15 @@
         },
         "الشمس بيراميدز": {
             "name": "الشمس بيراميدز",
-            "price": "1.53",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 750,
-            "compared_to_time_volume": 592,
-            "ratio_percentage": 126.69
+            "compared_to_time_volume": 631,
+            "ratio_percentage": 118.86
         },
         "فودافون": {
             "name": "فودافون",
-            "price": "0.0",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2227,15 +2227,15 @@
         },
         "ركاز القابضة للاستشارات المالية": {
             "name": "ركاز القابضة للاستشارات المالية",
-            "price": "2.25",
-            "price_change": 0.0,
+            "price": "0",
+            "price_change": -2.81,
             "current_volume": 7994,
-            "compared_to_time_volume": 6311,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 6731,
+            "ratio_percentage": 118.76
         },
         "سيمو": {
             "name": "سيمو",
-            "price": "8.75",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2243,7 +2243,7 @@
         },
         "الشرق الأوسط لصناعة الزجاج": {
             "name": "الشرق الأوسط لصناعة الزجاج",
-            "price": "10.04",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2251,15 +2251,15 @@
         },
         "المهنس للتأمين": {
             "name": "المهنس للتأمين",
-            "price": "18.86",
-            "price_change": 0.0,
+            "price": "23.96",
+            "price_change": 0.47,
             "current_volume": 16492,
-            "compared_to_time_volume": 83932,
-            "ratio_percentage": 19.65
+            "compared_to_time_volume": 89528,
+            "ratio_percentage": 18.42
         },
         "جالينا": {
             "name": "جالينا",
-            "price": "0.09",
+            "price": "0",
             "price_change": 0.0,
             "current_volume": 0,
             "compared_to_time_volume": 1,
@@ -2267,147 +2267,147 @@
         },
         "سيتي للتحاليل الطبية": {
             "name": "سيتي للتحاليل الطبية",
-            "price": "0.085",
-            "price_change": 0.0,
+            "price": "0.088",
+            "price_change": -1.12,
             "current_volume": 66562231,
-            "compared_to_time_volume": 142221262,
-            "ratio_percentage": 46.8
+            "compared_to_time_volume": 151702680,
+            "ratio_percentage": 43.88
         },
         "أكت فاينانشال للاستشارات ش م م": {
             "name": "أكت فاينانشال للاستشارات ش م م",
-            "price": "2.31",
-            "price_change": 0.0,
-            "current_volume": 22739885,
-            "compared_to_time_volume": 16402101,
-            "ratio_percentage": 138.64
+            "price": "2.8",
+            "price_change": -2.78,
+            "current_volume": 23267729,
+            "compared_to_time_volume": 17495574,
+            "ratio_percentage": 132.99
         },
         "ام بي": {
             "name": "ام بي",
-            "price": "3.07",
-            "price_change": 0.0,
-            "current_volume": 8153126,
-            "compared_to_time_volume": 705660,
-            "ratio_percentage": 1155.39
+            "price": "4.02",
+            "price_change": 5.22,
+            "current_volume": 8454364,
+            "compared_to_time_volume": 752704,
+            "ratio_percentage": 1123.2
         },
         "المصرف المتحد": {
             "name": "المصرف المتحد",
-            "price": "10.76",
-            "price_change": 0.0,
-            "current_volume": 328898,
-            "compared_to_time_volume": 71413,
-            "ratio_percentage": 460.56
+            "price": "13.38",
+            "price_change": -0.45,
+            "current_volume": 328901,
+            "compared_to_time_volume": 76174,
+            "ratio_percentage": 431.78
         },
         "جو جرين للاستثمار الزراعى والتنمية": {
             "name": "جو جرين للاستثمار الزراعى والتنمية",
-            "price": "1.17",
+            "price": "1.46",
             "price_change": 0.0,
-            "current_volume": 6670984,
-            "compared_to_time_volume": 2766663,
-            "ratio_percentage": 241.12
+            "current_volume": 6798656,
+            "compared_to_time_volume": 2951108,
+            "ratio_percentage": 230.38
         },
         "حق اكتتاب شركة المطورون العرب القابضة -1": {
             "name": "حق اكتتاب شركة المطورون العرب القابضة -1",
-            "price": "0.084",
-            "price_change": 0.0,
+            "price": "0.121",
+            "price_change": 14.29,
             "current_volume": 117952756,
-            "compared_to_time_volume": 93120596,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 99328636,
+            "ratio_percentage": 118.75
         },
         "هيبكو للاستثمارات التجارية والتنمية العقارية": {
             "name": "هيبكو للاستثمارات التجارية والتنمية العقارية",
-            "price": "11.98",
-            "price_change": 0.0,
-            "current_volume": 312228,
-            "compared_to_time_volume": 356171,
-            "ratio_percentage": 87.66
+            "price": "13.52",
+            "price_change": 1.43,
+            "current_volume": 315096,
+            "compared_to_time_volume": 379915,
+            "ratio_percentage": 82.94
         },
         "يو للتمويل الاستهلاكي": {
             "name": "يو للتمويل الاستهلاكي",
-            "price": "10.12",
-            "price_change": 0.0,
-            "current_volume": 5812813,
-            "compared_to_time_volume": 1682445,
-            "ratio_percentage": 345.5
+            "price": "12.85",
+            "price_change": 1.58,
+            "current_volume": 5847989,
+            "compared_to_time_volume": 1794608,
+            "ratio_percentage": 325.86
         },
         "وثائق صندوق استثمار أودن للاستثمار في الاسهم المصرية -كسب": {
             "name": "وثائق صندوق استثمار أودن للاستثمار في الاسهم المصرية -كسب",
-            "price": "3.08",
-            "price_change": 0.0,
+            "price": "3.83",
+            "price_change": -0.52,
             "current_volume": 251825,
-            "compared_to_time_volume": 198809,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 212063,
+            "ratio_percentage": 118.75
         },
         "ارابيا انفستمنتس هولدنج": {
             "name": "ارابيا انفستمنتس هولدنج",
-            "price": "0.382",
-            "price_change": 0.0,
-            "current_volume": 29851610,
-            "compared_to_time_volume": 32118232,
-            "ratio_percentage": 92.94
+            "price": "0.482",
+            "price_change": 1.05,
+            "current_volume": 30944123,
+            "compared_to_time_volume": 34259448,
+            "ratio_percentage": 90.32
         },
         "ارابيا للاستثمار والتنمية": {
             "name": "ارابيا للاستثمار والتنمية",
-            "price": "0.545",
-            "price_change": 0.0,
-            "current_volume": 21507729,
-            "compared_to_time_volume": 12744360,
-            "ratio_percentage": 168.76
+            "price": "0.71",
+            "price_change": 4.55,
+            "current_volume": 21756782,
+            "compared_to_time_volume": 13593984,
+            "ratio_percentage": 160.05
         },
         "حق اكتتاب شركة كرستمارك للمقاولات والتطوير العقارى -5": {
             "name": "حق اكتتاب شركة كرستمارك للمقاولات والتطوير العقارى -5",
-            "price": "0.151",
-            "price_change": 0.0,
+            "price": "0.171",
+            "price_change": -9.04,
             "current_volume": 61614348,
-            "compared_to_time_volume": 48642906,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 51885766,
+            "ratio_percentage": 118.75
         },
         "توسع للتخصيم": {
             "name": "توسع للتخصيم",
-            "price": "5.49",
+            "price": "6.87",
             "price_change": 0.0,
-            "current_volume": 1007701,
-            "compared_to_time_volume": 2690906,
-            "ratio_percentage": 37.45
+            "current_volume": 1007706,
+            "compared_to_time_volume": 2870299,
+            "ratio_percentage": 35.11
         },
         "بنيان للتنمية والتجارة": {
             "name": "بنيان للتنمية والتجارة",
-            "price": "3.84",
-            "price_change": 0.0,
-            "current_volume": 5874625,
-            "compared_to_time_volume": 4459288,
-            "ratio_percentage": 131.74
+            "price": "4.86",
+            "price_change": 1.25,
+            "current_volume": 7822510,
+            "compared_to_time_volume": 4756574,
+            "ratio_percentage": 164.46
         },
         "حق اكتتاب شركة نهر الخير للتنمية والاستثمار الزراعى والخدمات البيئية -1": {
             "name": "حق اكتتاب شركة نهر الخير للتنمية والاستثمار الزراعى والخدمات البيئية -1",
-            "price": "0.17",
-            "price_change": 0.0,
+            "price": "0.219",
+            "price_change": 3.3,
             "current_volume": 121608397,
-            "compared_to_time_volume": 96006629,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 102407071,
+            "ratio_percentage": 118.75
         },
         "جورميه ايجيبت": {
             "name": "جورميه ايجيبت",
-            "price": "11.7",
-            "price_change": 0.0,
-            "current_volume": 882030,
-            "compared_to_time_volume": 1652060,
-            "ratio_percentage": 53.39
+            "price": "14.2",
+            "price_change": -2.8,
+            "current_volume": 887383,
+            "compared_to_time_volume": 1762197,
+            "ratio_percentage": 50.36
         },
         "قرة لمشروعات الطاقة والاستثمار": {
             "name": "قرة لمشروعات الطاقة والاستثمار",
-            "price": "2.73",
-            "price_change": 0.0,
-            "current_volume": 127782853,
-            "compared_to_time_volume": 91736389,
-            "ratio_percentage": 139.29
+            "price": "3.4",
+            "price_change": -0.29,
+            "current_volume": 128343432,
+            "compared_to_time_volume": 97852149,
+            "ratio_percentage": 131.16
         },
         "حق اكتتاب شركة فيوتشر كير للصناعات الطبية -3": {
             "name": "حق اكتتاب شركة فيوتشر كير للصناعات الطبية -3",
-            "price": "5.56",
-            "price_change": 0.0,
+            "price": "5.52",
+            "price_change": -10.53,
             "current_volume": 24426,
-            "compared_to_time_volume": 19283,
-            "ratio_percentage": 126.67
+            "compared_to_time_volume": 20569,
+            "ratio_percentage": 118.75
         }
     }
 }
