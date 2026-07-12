@@ -1,45 +1,38 @@
-name: Run Volume Tracker Scraper
+name: Stock Market Scanner Automation
 
+# 1. إعدادات وقت التشغيل التلقائي (الكرون جوب الذي قمنا بتعديله)
 on:
   schedule:
-    # يعمل كل 15 دقيقة، من الساعة 7:00 صباحاً حتى 11:45 صباحاً بتوقيت جرينتش
-    # (يعادل من 10:00 صباحاً إلى 2:45 ظهراً بتوقيت مصر الصيفي والشتوي GMT+3) من الأحد للخميس
-    - cron: '*/15 7-11 * * 1-5'
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+    # من الساعة 10:05 صباحاً إلى 10:55 صباحاً بتوقيت مصر (7:05 إلى 7:55 بتوقيت UTC)
+    - cron: '5-55/5 7 * * 0-4'
+    
+    # من الساعة 11:00 صباحاً إلى 1:55 مساءً بتوقيت مصر (8:00 إلى 10:55 بتوقيت UTC)
+    - cron: '*/5 8-10 * * 0-4'
+    
+    # من الساعة 2:00 مساءً إلى 2:35 مساءً بتوقيت مصر (11:00 إلى 11:35 بتوقيت UTC)
+    - cron: '0-35/5 11 * * 0-4'
+    
+  # يتيح لك هذا الخيار تشغيل السكريبت يدوياً في أي وقت من موقع GitHub للتجربة
+  workflow_dispatch: 
 
-permissions:
-  contents: write
-
+# 2. الخطوات التي يقوم بها السيرفر الافتراضي لتشغيل تطبيقك
 jobs:
-  scrape:
+  run-scanner-job:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v4
+      # سحب الكود من المستودع
+      - name: Checkout repository code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      # إعداد البيئة (مثال إذا كان تطبيقك يعمل بـ Node.js أو Python)
+      - name: Set up Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Install Dependencies
-      run: |
-        pip install requests beautifulsoup4
-
-    - name: Run Scraper
-      run: python volume_tracker.py
-
-    - name: Commit and Push Changes
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git add volume_history.json volume_comparison.json
-        git commit -m "تحديث تلقائي لأحجام التداول اللحظية" || echo "لا توجد تغييرات للرفع"
-        git push
-on:
-  workflow_dispatch: # هذا السطر يسمح للمواقع الخارجية بتشغيل السكربت يدوياً
-  schedule:
-    - cron: '*/15 7-11 * * 1-5'
+      # تثبيت الحزم وتشغيل السكريبت لجلب البيانات من السيرفر المحلي
+      - name: Install Dependencies and Run Scanner
+        run: |
+          npm install
+          npm run start
