@@ -48,9 +48,8 @@ def get_last_working_day(history, now_str):
     return available_dates[-1] if available_dates else None
 
 def track_and_compare_volume():
-    # 🎯 حساب توقيت مصر (تعديل فرق التوقيت لو السيرفر UTC)
     utc_now = datetime.utcnow()
-    egypt_now = utc_now + timedelta(hours=3) # توقيت مصر المعتمد (GMT+3)
+    egypt_now = utc_now + timedelta(hours=3) # توقيت مصر (GMT+3)
     
     now_str = egypt_now.strftime("%Y-%m-%d")
     all_slots = get_session_intervals()
@@ -88,7 +87,6 @@ def track_and_compare_volume():
     if now_str not in history:
         history[now_str] = {}
 
-    # 🎯 حفظ وقت السكراب الفعلي بتوقيت مصر تماماً
     output_data = {
         "scrape_time": egypt_now.strftime("%H:%M:%S"),
         "stocks": {}
@@ -103,8 +101,8 @@ def track_and_compare_volume():
             vol_raw = cols[-1].get_text(strip=True).replace(',', '')
             current_cumulative_volume = int(float(vol_raw)) if vol_raw else 0
             
-            price_raw = cols[2].get_text(strip=True).replace(',', '')
-            price = float(price_raw) if price_raw else 0.0
+            # 🎯 الاحتفاظ بالسعر الأصلي كاملاً كـ String لمنع التلاعب بالقروش والمليمات
+            price_raw = cols[2].get_text(strip=True).replace(',', '').strip()
             
             change_raw = cols[5].get_text(strip=True).replace('%', '').strip()
             price_change = float(change_raw) if change_raw else 0.0
@@ -147,7 +145,7 @@ def track_and_compare_volume():
 
             output_data["stocks"][symbol] = {
                 "name": symbol,
-                "price": price,
+                "price": price_raw, # تمرير النص الخام للسعر بالمليم
                 "price_change": round(price_change, 2),
                 "current_volume": current_cumulative_volume,
                 "compared_to_time_volume": yesterday_target_volume,
@@ -162,7 +160,7 @@ def track_and_compare_volume():
     with open(COMP_FILE, "w", encoding="utf-8") as f:
         json.dump(output_data, f, ensure_ascii=False, indent=4)
         
-    print(f"🟢 تم السحب وحفظ وقت التحديث بتوقيت القاهرة الفعلي: {output_data['scrape_time']}")
+    print(f"🟢 تم التحديث بنجاح.")
 
 if __name__ == "__main__":
     track_and_compare_volume()
