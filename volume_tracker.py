@@ -50,11 +50,11 @@ def get_last_working_day(history, now_str):
 def track_and_compare_volume():
     try:
         utc_now = datetime.utcnow()
-        egypt_now = utc_now + timedelta(hours=3) # توقيت مصر (GMT+3)
+        egypt_now = utc_now + timedelta(hours=3) 
         
         now_str = egypt_now.strftime("%Y-%m-%d")
         all_slots = get_session_intervals()
-        total_slots_count = len(all_slots) # إجمالي المحطات = 19 سلوت
+        total_slots_count = len(all_slots) 
         
         if egypt_now.time() < START_SESSION:
             current_slot = all_slots[0]
@@ -76,11 +76,11 @@ def track_and_compare_volume():
             soup = BeautifulSoup(response.text, 'html.parser')
             table = soup.find('table') 
             if not table:
-                print("❌ لم يتم العثور على الجدول في الصفحة الحالية.")
+                print("❌ لم يتم العثور على الجدول.")
                 return
             rows = table.find_all('tr')[1:]
         except Exception as e:
-            print(f"💥 خطأ أثناء الاتصال بالموقع أو قشط الجدول: {e}")
+            print(f"💥 خطأ في جلب الصفحة: {e}")
             return
 
         history = load_history()
@@ -104,8 +104,7 @@ def track_and_compare_volume():
                 current_cumulative_volume = int(float(vol_raw)) if vol_raw else 0
                 
                 price_raw = cols[2].get_text(strip=True).replace(',', '').strip()
-                if not price_raw:
-                    price_raw = "0.0"
+                if not price_raw: price_raw = "0.0"
                 
                 change_raw = cols[5].get_text(strip=True).replace('%', '').strip()
                 price_change = float(change_raw) if change_raw else 0.0
@@ -124,23 +123,33 @@ def track_and_compare_volume():
                 if not symbol or "حجم" in symbol or "الاسم" in symbol:
                     continue
 
+                # حفظ حجم اليوم الحالي في السلوت المناسب له
                 if symbol not in history[now_str]:
                     history[now_str][symbol] = {}
                 history[now_str][symbol][current_slot] = current_cumulative_volume
 
                 yesterday_target_volume = 0
 
+                # المحاولة الأولى: جلب حجم نفس السلوت الزمني من داتا أمس (الخيار الأدق)
                 if yesterday_str and symbol in history[yesterday_str]:
                     yesterday_target_volume = history[yesterday_str][symbol].get(current_slot, 0)
                 
-                # تطبيق معادلة التوزيع التراكمي العادل لأول يوم تشغيل
+                # المحاولة الثانية (تصحيح الغباء): لو مفيش سلوت لليوم ده، روح هات الحجم الكلي الفعلي لأمس واشتق منه بناءً على الوقت الحالي
+                if yesterday_target_volume == 0 and yesterday_str and symbol in history[yesterday_str]:
+                    yesterday_slots = history[yesterday_str][symbol]
+                    if yesterday_slots:
+                        # أعلى حجم تم تسجيله أمس (الحجم الإجمالي النهائي المسجل للسهم)
+                        yesterday_total_volume = max(yesterday_slots.values())
+                        if current_slot_index >= total_slots_count:
+                            yesterday_target_volume = yesterday_total_volume
+                        else:
+                            # 🎯 الحسبة الصح: اشتقاق ربع ساعة تقديري بناءً على الحجم الكلي لأمس وليس اليوم!
+                            yesterday_target_volume = int((yesterday_total_volume / total_slots_count) * current_slot_index)
+
+                # الـ Fallback الأخير: لو أول مرة في حياته يشوف السهم خالص ومفيش أي داتا تاريخية
                 if yesterday_target_volume == 0:
-                    if current_slot_index >= total_slots_count:
-                        yesterday_target_volume = current_cumulative_volume
-                    else:
-                        # تقسيم الحجم التراكمي الإجمالي على إجمالي السلوتات (19) وضربه في ترتيب السلوت الحالي
-                        single_slot_estimated = current_cumulative_volume / total_slots_count
-                        yesterday_target_volume = int(single_slot_estimated * current_slot_index)
+                    single_slot_estimated = current_cumulative_volume / total_slots_count
+                    yesterday_target_volume = int(single_slot_estimated * current_slot_index) if current_slot_index < total_slots_count else current_cumulative_volume
                 
                 vol_ratio = (current_cumulative_volume / yesterday_target_volume) * 100 if yesterday_target_volume > 0 else 100.0
 
@@ -152,7 +161,7 @@ def track_and_compare_volume():
                     "compared_to_time_volume": yesterday_target_volume,
                     "ratio_percentage": round(vol_ratio, 2)
                 }
-            except Exception as row_err:
+            except Exception:
                 continue
 
         with open(DB_FILE, "w", encoding="utf-8") as f:
@@ -161,10 +170,10 @@ def track_and_compare_volume():
         with open(COMP_FILE, "w", encoding="utf-8") as f:
             json.dump(output_data, f, ensure_ascii=False, indent=4)
             
-        print(f"🟢 تم التحديث بنجاح. السلوت الحالي: {current_slot} ({current_slot_index}/{total_slots_count})")
+        print(f"🟢 تم التحديث بالحسبة الذكية المعدلة.")
         
     except Exception as main_err:
-        print(f"❌ خطأ حرج رئيسي داخل السكريبت: {main_err}")
+        print(f"❌ خطأ: {main_err}")
 
 if __name__ == "__main__":
     track_and_compare_volume()
